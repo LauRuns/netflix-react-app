@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 
 import './Logo.css';
 import NetflixLogo from '../../assets/netflix_hexagon.png';
@@ -6,7 +8,11 @@ import NetflixLogo from '../../assets/netflix_hexagon.png';
 const logo = (props) => {
     return (
         <div className="Logo">
-            <img src={NetflixLogo} alt="Netflix-logo" />
+            <NavLink
+                to="/"
+                exact>
+                <img src={NetflixLogo} alt="Netflix-logo" />
+            </NavLink>
         </div>
     );
 };

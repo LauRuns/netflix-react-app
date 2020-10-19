@@ -9,3 +9,7 @@
 .Logo img {
     height: 100%;
 }
+
+.Logo:hover {
+    cursor: pointer;
+}
