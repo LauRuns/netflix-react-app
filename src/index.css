@@ -1,10 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --netflix-primary-red: #db0000;
+  --netflix-primary-black: #000000;
+  --netflix-text: #efefef;
+  --netflix-secondary-red: #831010;
+  --netflix-secondary-black: #4c4c4c;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: var(--netflix-secondary-black);
+  color: var(--netflix-text);
 }
 
 code {
