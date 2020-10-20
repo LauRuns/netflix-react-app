@@ -23,13 +23,14 @@
 
 .button--inverse {
     background: transparent;
-    color: #ff0055;
+    color: var(--netflix-text);
+
 }
 
 .button--inverse:hover,
 .button--inverse:active {
-    color: white;
-    background: #ff0055;
+    color: var(--netflix-text);
+    background: var(--netflix-secondary-red);
 }
 
 .button--danger {
@@ -39,15 +40,15 @@
 
 .button--danger:hover,
 .button--danger:active {
-    background: #f34343;
-    border-color: #f34343;
+    background: var(--netflix-primary-red);
+    border-color: var(--netflix-primary-red);
 }
 
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {
     background: #ccc;
-    color: #979797;
+    color: var(--netflix-text);
     border-color: #ccc;
     cursor: not-allowed;
 }
