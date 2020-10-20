@@ -7,7 +7,7 @@ const country = (props) => {
     return (
         <li>
             <Card>
-                <h3>This is the country page working</h3>
+                <h3>Available country: {props.country}</h3>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, modi.</p>
             </Card>
         </li>
