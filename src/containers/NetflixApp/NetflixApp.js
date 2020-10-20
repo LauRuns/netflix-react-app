@@ -4,6 +4,7 @@ import CountryList from '../../components/Countries/CountryList';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
+import Search from '../../components/Search/Search';
 
 const NetflixApp = (props) => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -30,6 +31,7 @@ const NetflixApp = (props) => {
                     <LoadingSpinner />
                 </div>
             )}
+            <Search />
             {loadedCountries && <CountryList items={loadedCountries} />}
         </React.Fragment>
     );
