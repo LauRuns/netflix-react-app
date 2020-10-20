@@ -5,21 +5,33 @@ import {
   Switch
 } from 'react-router-dom';
 
+import Auth from './containers/Auth/Auth';
 import NetflixApp from './containers/NetflixApp/NetflixApp';
 import Account from './containers/Account/Account';
 import Layout from './containers/layouts/Layout';
+import { AuthContext } from './shared/context/auth-context';
+import { useAuth } from './shared/hooks/auth-hook';
 
 import './App.css';
 
 const App = () => {
-  // const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, userId } = useAuth();
+
+  if (token) {
+    console.log('THIS IS THE TOKEN_____', token);
+  } else {
+    console.log('_________NO TOKEN________');
+  }
+
+
 
   let routes;
 
   // use this with token verification
-  if (true) {
+  if (token) {
     routes = (
       <Switch>
+        <Route path="/auth" exact component={Auth} />
         <Route path="/" exact component={NetflixApp} />
         <Route path="/account" exact component={Account} />
       </Switch>
@@ -27,16 +39,26 @@ const App = () => {
   } else {
     routes = (
       <Switch>
-        <Route path="/" exact component={NetflixApp} />
+        <Route path="/auth" exact component={Auth} />
       </Switch>
     )
   }
 
 
   return (
-    <Layout>
-      {routes}
-    </Layout>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        uderId: userId,
+        login: login,
+        logout: logout
+      }}>
+      <Layout>
+        {routes}
+      </Layout>
+    </AuthContext.Provider>
+
   );
 }
 
