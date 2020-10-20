@@ -5,10 +5,9 @@ import './Country.css';
 
 const country = (props) => {
     return (
-        <li>
-            <Card>
-                <h3>Available country: {props.country}</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla, modi.</p>
+        <li className="Country-item">
+            <Card className="Country-item__content">
+                <h3>{props.country}</h3>
             </Card>
         </li>
     );
