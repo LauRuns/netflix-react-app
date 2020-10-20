@@ -5,12 +5,14 @@ import './NavItem.css';
 
 
 const navItem = (props) => {
+
     return (
         <li className="NavItem">
             <NavLink
                 to={props.link}
                 exact
-                activeClassName="active">{props.children}</NavLink>
+                activeClassName="active"
+            >{props.children}</NavLink>
         </li>
     );
 };
@@ -18,3 +20,4 @@ const navItem = (props) => {
 
 
 export default navItem;
+
