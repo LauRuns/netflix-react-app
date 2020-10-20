@@ -2,7 +2,6 @@ import React from 'react';
 
 import Logo from '../../../../components/Logo/Logo';
 import NavItems from '../NavItems/NavItems';
-// import Backdrop from '../../UIElements/Backdrop/Backdrop';
 
 import './SideDrawer.css';
 
@@ -16,13 +15,12 @@ const sideDrawer = (props) => {
 
     return (
         <React.Fragment>
-            {/* <Backdrop show={props.open} clicked={props.closed} /> */}
             <div className={attachClasses.join(' ')}>
                 <div className="Sidedrawerlogo">
                     <Logo />
                 </div>
                 <nav onClick={props.navItemClicked}>
-                    <NavItems />
+                    <NavItems drawerIsOpen={props.open} />
                 </nav>
             </div>
         </React.Fragment>
