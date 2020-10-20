@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import CountryList from '../../components/Countries/CountryList';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 
 const NetflixApp = (props) => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -22,6 +23,11 @@ const NetflixApp = (props) => {
 
     return (
         <React.Fragment>
+            {isLoading && (
+                <div className="center">
+                    <LoadingSpinner />
+                </div>
+            )}
             {loadedCountries && <CountryList items={loadedCountries} />}
         </React.Fragment>
     );
