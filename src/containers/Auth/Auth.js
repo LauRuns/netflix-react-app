@@ -110,28 +110,40 @@ const Auth = () => {
         }
     };
 
+    let loginCardStyles = {
+        backgroundColor: '#000000',
+        opacity: 0.8,
+        borderRadius: '3px',
+        paddingBottom: '3rem'
+    };
+
+
 
     return (
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
+            <div className="backgroundContainer">
+                <div className="loginBG">
+                </div>
+            </div>
 
             <div className="authentication">
-                <Card>
+                <Card cardStyles={loginCardStyles}>
                     {isLoading && <LoadingSpinner asOverlay />}
                     <div className="authentication__header">
                         <h1>Login</h1>
                     </div>
-                    <hr />
                     <form onSubmit={authSubmitHandler}>
                         {!isLoginMode && (
                             <Input
                                 element="input"
                                 id="name"
                                 type="text"
-                                label="Your name"
                                 validators={[VALIDATOR_REQUIRE()]}
                                 errorText="Please enter a name"
                                 onInput={inputHandler}
+                                placeholder="Username"
+
                             />
                         )}
                         {/* {!isLoginMode && (
@@ -141,7 +153,6 @@ const Auth = () => {
                             element="input"
                             id="email"
                             type="email"
-                            label="E-Mail"
                             validators={[VALIDATOR_EMAIL()]}
                             errorText="Please enter a valid email address."
                             onInput={inputHandler}
@@ -151,14 +162,13 @@ const Auth = () => {
                             element="input"
                             id="password"
                             type="password"
-                            label="Password"
                             validators={[VALIDATOR_MINLENGTH(5)]}
                             errorText="Please enter a valid password, min 5 characters."
                             onInput={inputHandler}
                             placeholder="Password"
 
                         />
-                        <Button type="submit" disabled={!formState.isValid}>
+                        <Button id="loginButton" type="submit" disabled={!formState.isValid}>
                             {isLoginMode ? 'LOGIN' : 'SIGNUP'}
                         </Button>
                     </form>
@@ -166,8 +176,8 @@ const Auth = () => {
                         SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIIN'}
                     </Button>
                 </Card>
-
             </div>
+
         </React.Fragment>
     );
 };

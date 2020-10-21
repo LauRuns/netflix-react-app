@@ -1,21 +1,49 @@
-.authentication__header {
-    color: var(--netflix-secondary-red);
-    text-align: center;
+.backgroundContainer {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: -3;
+    /* background: tomato; */
+    margin-top: -100px;
 }
+
+.loginBG {
+    background-image: url('../../assets/netflix-image.jpg');
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+    background-size: 220% 120%;
+    background-position: top 50px left -80px;
+    z-index: -2;
+    position: absolute;
+}
+
+
 
 .authentication {
     padding: 1rem;
     width: 100%;
-    max-width: 25rem;
+    width: 25rem;
     margin: 7rem auto;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.authentication__header {
+    color: var(--netflix-text);
     text-align: center;
 }
 
 .authentication form {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    margin: 0 1rem 1rem 1rem;
 }
 
-@media (min-width: 500px) {
+#loginButton {
+    margin-top: 3rem;
+}
+
+/* @media (min-width: 500px) {
     .authentication {
         padding: 1rem;
         width: 60%;
@@ -24,4 +52,33 @@
         text-align: center;
     }
 
+    body {
+        background-size: 100% 200%;
+        background-position: top 50px left;
+    }
+
+} */
+
+/* iPad */
+/* @media screen and (max-width: 1024px) and (min-width: 768px) {
+    body {
+        background-size: 100% 200%;
+        background-position: top 50px center;
+    }
+} */
+
+/* iPad pro */
+/* @media screen and (max-width: 1200px) and (min-width: 1024px) {
+    body {
+        background-size: 200% 250%;
+        background-position: top 50px center;
+    }
+}
+*/
+
+@media (min-width: 2024px) {
+    .loginBG {
+        background-size: 100% 100%;
+        background-position: top 50px left;
+    }
 }
