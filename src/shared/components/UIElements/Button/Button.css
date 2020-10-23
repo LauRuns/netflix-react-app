@@ -2,7 +2,7 @@
     font: inherit;
     padding: 0.5rem 1.5rem;
     border: 1px solid var(--netflix-primary-red);
-    /* border-radius: 4px; */
+    border-radius: 4px;
     background: var(--netflix-primary-red);
     color: var(--netflix-text);
     cursor: pointer;
@@ -34,8 +34,8 @@
 }
 
 .button--danger {
-    background: #830000;
-    border-color: #830000;
+    background: var(--netflix-button-danger);
+    border-color: var(--netflix-button-danger);
 }
 
 .button--danger:hover,
@@ -47,9 +47,9 @@
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {
-    background: #ccc;
+    background: var(--netflix-button-disabled);
     color: var(--netflix-text);
-    border-color: #ccc;
+    border-color: var(--netflix-button-disabled);
     cursor: not-allowed;
 }
 
