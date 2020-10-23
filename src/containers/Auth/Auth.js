@@ -112,11 +112,11 @@ const Auth = () => {
 
     let loginCardStyles = {
         backgroundColor: '#000000',
-        opacity: 0.8,
-        borderRadius: '3px',
-        paddingBottom: '3rem'
+        opacity: .9,
+        borderRadius: '4px',
+        // paddingBottom: '3rem',
+        padding: '3rem 2rem 3rem 2rem'
     };
-
 
 
     return (
@@ -126,10 +126,11 @@ const Auth = () => {
                 <div className="loginBG">
                 </div>
             </div>
+            {isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage={'Logging in...'} />}
+
 
             <div className="authentication">
                 <Card cardStyles={loginCardStyles}>
-                    {isLoading && <LoadingSpinner asOverlay />}
                     <div className="authentication__header">
                         <h1>Login</h1>
                     </div>
@@ -149,6 +150,7 @@ const Auth = () => {
                         {/* {!isLoginMode && (
                         <ImageUpload center id="image" onInput={inputHandler} errorText="Please provide an image." />
                     )} */}
+
                         <Input
                             element="input"
                             id="email"
