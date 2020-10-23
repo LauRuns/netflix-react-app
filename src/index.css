@@ -15,6 +15,11 @@
   --netflix-button-disabled: #ccc;
   --netflix-button-danger: #831010;
   --netflix-button-inverse: #4c4c4c;
+  /* Tooltip styling */
+  --tooltip-text-color: white;
+  --tooltip-background-color: black;
+  --tooltip-margin: 30px;
+  --tooltip-arrow-size: 6px;
 }
 
 
