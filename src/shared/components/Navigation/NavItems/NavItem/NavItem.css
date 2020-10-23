@@ -17,8 +17,8 @@
 .NavItem a:active,
 .NavItem a.active {
     color: var(--netflix-text);
-    border-left: 3px solid var(--netflix-primary-red);
-    padding-left: 1rem;
+    /* border-left: 3px solid var(--netflix-primary-red); */
+    /* padding-left: 1rem; */
 }
 
 
