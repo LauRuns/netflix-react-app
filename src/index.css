@@ -5,11 +5,16 @@
 }
 
 :root {
+  /* Color settings */
   --netflix-primary-red: #db0000;
   --netflix-primary-black: #000000;
   --netflix-text: #efefef;
   --netflix-secondary-red: #831010;
   --netflix-secondary-black: #4c4c4c;
+  /* Button styling */
+  --netflix-button-disabled: #ccc;
+  --netflix-button-danger: #831010;
+  --netflix-button-inverse: #4c4c4c;
 }
 
 
