@@ -112,6 +112,7 @@ const Auth = () => {
 
     let loginCardStyles = {
         backgroundColor: '#000000',
+        // backgroundColor: 'green',
         opacity: .9,
         borderRadius: '4px',
         padding: '3rem 2rem'

@@ -2,8 +2,8 @@
     position: fixed;
     height: 100vh;
     width: 100vw;
-    z-index: -3;
-    margin-top: -100px;
+    z-index: -1;
+    margin-top: -50px;
 }
 
 .loginBG {
@@ -11,21 +11,17 @@
     background-repeat: no-repeat;
     height: 100vh;
     width: 100vw;
-    background-size: 220% 120%;
-    background-position: top 50px left -80px;
-    z-index: -2;
+    background-size: 250% 150%;
+    background-position: bottom left;
+    z-index: 2;
     position: absolute;
 }
 
 
-
 .authentication {
-    padding: 1rem;
     width: 100%;
-    width: 25rem;
-    margin: 7rem auto;
     text-align: center;
-    margin-top: 100px;
+    z-index: 5;
 }
 
 .authentication__header {
@@ -42,49 +38,32 @@
     margin-top: 3rem;
 }
 
-/* @media (min-width: 500px) {
+
+@media screen and (min-width: 500px) {
     .authentication {
-        padding: 1rem;
-        width: 60%;
-        max-width: 25rem;
-        margin: 7rem auto;
+        width: 80%;
+        max-width: 35rem;
+        margin: 5rem auto;
         text-align: center;
     }
-
-    body {
-        background-size: 100% 200%;
-        background-position: top 50px left;
-    }
-
-} */
+}
 
 /* iPad */
-/* @media screen and (max-width: 1024px) and (min-width: 768px) {
-    body {
-        background-size: 100% 200%;
-        background-position: top 50px center;
-    }
-} */
+@media screen and (max-width: 1024px) and (min-width: 768px) {}
 
 /* iPad pro */
-/* @media screen and (max-width: 1200px) and (min-width: 1024px) {
-    body {
-        background-size: 200% 250%;
-        background-position: top 50px center;
-    }
-}
-*/
+@media screen and (max-width: 1200px) and (min-width: 1024px) {}
+
 
 @media (min-width: 1024px) {
     .loginBG {
         background-size: 100% 100%;
-        background-position: top 50px left;
+        background-position: top 20px left;
     }
 }
 
 @media (min-width: 2024px) {
     .loginBG {
         background-size: 100% 100%;
-        background-position: top 50px left;
     }
 }
