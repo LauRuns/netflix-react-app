@@ -114,8 +114,7 @@ const Auth = () => {
         backgroundColor: '#000000',
         opacity: .9,
         borderRadius: '4px',
-        // paddingBottom: '3rem',
-        padding: '3rem 2rem 3rem 2rem'
+        padding: '3rem 2rem'
     };
 
 
