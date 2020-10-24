@@ -54,9 +54,12 @@ const App = () => {
         login: login,
         logout: logout
       }}>
-      <Layout>
+
+      <Layout />
+      <div className="content">
         {routes}
-      </Layout>
+      </div>
+      {/* </Layout> */}
     </AuthContext.Provider>
 
   );
