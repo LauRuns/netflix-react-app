@@ -23,7 +23,7 @@ const Layout = props => {
             {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
             <Navbar drawerToggleClicked={openDrawerHandler} />
             <SideDrawer open={drawerIsOpen} navItemClicked={closeDrawerHandler} />
-            {<main className="Content">{props.children}</main>}
+            {/* {<main className="Content">{props.children}</main>} */}
         </React.Fragment>
     );
 };
