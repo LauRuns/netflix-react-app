@@ -82,8 +82,11 @@ const Auth = () => {
                         'Content-Type': 'application/json'
                     }
                 );
+
+                console.log('responseData.email', responseData.email);
+
                 auth.login(responseData.userId, responseData.token);
-                history.push('/');
+                history.push('/account');
 
             } catch (error) {
                 console.log(error);
