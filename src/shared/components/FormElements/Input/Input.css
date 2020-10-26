@@ -19,24 +19,24 @@
     font: inherit;
     border: 1px solid #4c4c4c;
     border-radius: 3px;
-    background: #4c4c4c;
+    background: var(--netflix-shades-gray-20);
     padding: 0.15rem 0.25rem;
 }
 
 .form-control input:focus,
 .form-control textarea:focus {
     outline: none;
-    background: #ebebeb;
-    border-color: #510077;
+    background: var(--netflix-shades-gray-20);
+    border-color: var(--netflix-shades-red-80);
 }
 
 .form-control--invalid label,
 .form-control--invalid p {
-    color: red;
+    color: var(--netflix-error-primary);
 }
 
 .form-control--invalid input,
 .form-control--invalid textarea {
-    border-color: red;
-    background: #ffd1d1;
+    border-color: var(--netflix-error-primary);
+    background: var(--netflix-shades-red-40);
 }
