@@ -17,11 +17,12 @@ import './App.css';
 const App = () => {
   const { token, login, logout, userId } = useAuth();
 
-  if (token) {
-    console.log('THIS IS THE TOKEN_____', token);
-  } else {
-    console.log('_________NO TOKEN________');
-  }
+
+  // if (token) {
+  //   console.log('THIS IS THE TOKEN_____', token);
+  // } else {
+  //   console.log('_________NO TOKEN________');
+  // }
 
 
 
@@ -50,7 +51,7 @@ const App = () => {
       value={{
         isLoggedIn: !!token,
         token: token,
-        uderId: userId,
+        userId: userId,
         login: login,
         logout: logout
       }}>
