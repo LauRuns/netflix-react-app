@@ -1,0 +1,4 @@
+.profile-info-container {
+    flex-direction: column;
+    background-color: var(--netflix-shades-gray-40);
+}
