@@ -7,11 +7,14 @@ export const useAuth = () => {
     const [token, setToken] = useState(false);
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
     const [userId, setUserId] = useState(false);
+    // const [email, setEmail] = useState(null);
 
     const history = useHistory();
 
 
     const login = useCallback((uid, token, expirationDate) => {
+
+        // console.log('SETTING EMAIL', email);
 
         setToken(token);
         setUserId(uid);
@@ -23,7 +26,7 @@ export const useAuth = () => {
             JSON.stringify({
                 userId: uid,
                 token: token,
-                expiration: tokenExpirationDate.toISOString()
+                expiration: tokenExpirationDate.toISOString(),
             })
         );
     }, []);
