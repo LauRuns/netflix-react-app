@@ -1,7 +1,7 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es2017": true
     },
     "extends": [
         "eslint:recommended",
@@ -20,6 +20,40 @@
     //     "react"
     // ],
     "rules": {
+        // "no-tabs": [
+        //     0,
+        //     {"allowIndentationTabs": true}
+        // ],
+        // "indent": [
+        //     "warn",
+        //     4
+        // ],
+        // "indent": [
+        //     "error",
+        //     4,
+        //     {
+        //         "ignoredNodes": [
+        //             "JSXElement *"
+        //         ]
+        //     }
+        // ],
+        "indent": [
+            2,
+            "tab",
+            {
+                "SwitchCase": 1,
+                "VariableDeclarator": 1
+            }
+        ],
+        "no-tabs": 0,
+        "react/jsx-indent": [
+            2,
+            "tab"
+        ],
+        "react/jsx-indent-props": [
+            2,
+            "tab"
+        ],
         "react/jsx-fragments": [
             "off"
         ],
