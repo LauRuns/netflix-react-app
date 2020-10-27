@@ -5,28 +5,25 @@ import SideDrawer from '../../shared/components/Navigation/SideDrawer/SideDrawer
 import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
 import './Layout.css';
 
+const Layout = (props) => {
+	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
-const Layout = props => {
+	const openDrawerHandler = () => {
+		setDrawerIsOpen(true);
+	};
 
-    const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+	const closeDrawerHandler = () => {
+		setDrawerIsOpen(!drawerIsOpen);
+	};
 
-    const openDrawerHandler = () => {
-        setDrawerIsOpen(true);
-    };
-
-    const closeDrawerHandler = () => {
-        setDrawerIsOpen(!drawerIsOpen);
-    };
-
-    return (
-        <React.Fragment>
-            {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
-            <Navbar drawerToggleClicked={openDrawerHandler} />
-            <SideDrawer open={drawerIsOpen} navItemClicked={closeDrawerHandler} />
-            {/* {<main className="Content">{props.children}</main>} */}
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			{drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
+			<Navbar drawerToggleClicked={openDrawerHandler} />
+			<SideDrawer open={drawerIsOpen} navItemClicked={closeDrawerHandler} />
+			{/* {<main className="Content">{props.children}</main>} */}
+		</React.Fragment>
+	);
 };
-
 
 export default Layout;

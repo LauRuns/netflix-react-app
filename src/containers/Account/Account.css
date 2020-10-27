@@ -1,148 +1,138 @@
 .container {
-    display: grid;
-    margin: 1rem;
+	display: grid;
+	margin: 1rem;
 
-    grid-template-columns: 1fr;
-    grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
+	grid-template-columns: 1fr;
+	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
 
-    row-gap: 16px;
-    column-gap: 16px;
+	row-gap: 16px;
+	column-gap: 16px;
 
-    grid-template-areas:
-        "section-a"
-        "section-b"
-        "section-c"
-        "div-1"
-        "div-2"
-        "div-3"
-        "div-4"
-    ;
+	grid-template-areas:
+		'section-a'
+		'section-b'
+		'section-c'
+		'div-1'
+		'div-2'
+		'div-3'
+		'div-4';
 }
 
 .item {
-    display: flex;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    transition: all .35s ease-in-out;
-    height: auto;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: var(--netflix-shades-gray-60);
+	display: flex;
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	transition: all 0.35s ease-in-out;
+	height: auto;
+	flex-direction: column;
+	overflow: hidden;
+	background-color: var(--netflix-shades-gray-60);
 }
 
-
-
-.item>div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1rem;
+.item > div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 1rem;
 }
 
-.item>div:nth-child(1)>h3 {
-    border-bottom: 2px solid var(--netflix-primary-red);
-    transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+.item > div:nth-child(1) > h3 {
+	border-bottom: 2px solid var(--netflix-primary-red);
+	transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
 }
 
-.item>div>:nth-child(2) {
-    cursor: pointer;
+.item > div > :nth-child(2) {
+	cursor: pointer;
 }
 
-.item>div>h3:hover {
-    margin-left: 20px;
-    font-weight: 600;
-    color: var(--netflix-primary-red);
-    cursor: pointer;
+.item > div > h3:hover {
+	margin-left: 20px;
+	font-weight: 600;
+	color: var(--netflix-primary-red);
+	cursor: pointer;
 }
 
 #account_header {
-    grid-area: section-a;
-    justify-content: center;
-    align-items: center;
+	grid-area: section-a;
+	justify-content: center;
+	align-items: center;
 }
 
 #actions {
-    grid-area: section-b;
-    /* flex-direction: column;
-    justify-content: flex-start; */
-    /* background: url('../../assets/netflix_logo_circle.png') no-repeat; */
+	grid-area: section-b;
+	/* flex-direction: column;
+justify-content: flex-start; */
+	/* background: url('../../assets/netflix_logo_circle.png') no-repeat; */
 }
 
 .user-item__image {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
-
 #actions ul {
-    list-style: none;
-    width: 200px;
-    height: auto;
+	list-style: none;
+	width: 200px;
+	height: auto;
 }
 
 #actions ul li {
-    padding: 10px 0;
-    border-bottom: 2px solid var(--netflix-primary-red);
-    transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-    -ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	padding: 10px 0;
+	border-bottom: 2px solid var(--netflix-primary-red);
+	transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+	-ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
 }
-
 
 #actions ul li:hover {
-    margin-left: 20px;
-    font-weight: 600;
-    color: var(--netflix-primary-red);
-    cursor: pointer;
+	margin-left: 20px;
+	font-weight: 600;
+	color: var(--netflix-primary-red);
+	cursor: pointer;
 }
 
-
 #item-3 {
-    grid-area: section-c;
-    padding: 1rem;
-    flex-direction: column;
+	grid-area: section-c;
+	padding: 1rem;
+	flex-direction: column;
 }
 
 #item-4 {
-    grid-area: div-1;
+	grid-area: div-1;
 }
 
 #item-5 {
-    grid-area: div-2;
+	grid-area: div-2;
 }
 
 #item-6 {
-    grid-area: div-3;
+	grid-area: div-3;
 }
 
 #item-7 {
-    grid-area: div-4;
+	grid-area: div-4;
 }
 
-
 @media only screen and (min-width: 576px) {
-    .container {
-        margin: 3rem;
-        max-width: 80rem;
+	.container {
+		margin: 3rem;
+		max-width: 80rem;
 
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
 
-        grid-template-areas:
-            "section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a"
-            "section-b section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c section-c"
-            "div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1"
-            "div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2"
-            "div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3"
-            "div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4"
-        ;
-    }
-
-
+		grid-template-areas:
+			'section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a'
+			'section-b section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c section-c'
+			'div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1'
+			'div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2'
+			'div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3'
+			'div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4';
+	}
 }

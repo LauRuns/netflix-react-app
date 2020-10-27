@@ -3,58 +3,57 @@ import { useHistory } from 'react-router-dom';
 
 let logoutTimer;
 
-export const useAuth = () => {
-    const [token, setToken] = useState(false);
-    const [tokenExpirationDate, setTokenExpirationDate] = useState();
-    const [userId, setUserId] = useState(false);
-    // const [email, setEmail] = useState(null);
+const useAuth = () => {
+	const [token, setToken] = useState(false);
+	const [tokenExpirationDate, setTokenExpirationDate] = useState();
+	const [userId, setUserId] = useState(false);
+	// const [email, setEmail] = useState(null);
 
-    const history = useHistory();
+	const history = useHistory();
 
+	const login = useCallback((uid, token, expirationDate) => {
+		// console.log('SETTING EMAIL', email);
 
-    const login = useCallback((uid, token, expirationDate) => {
+		setToken(token);
+		setUserId(uid);
+		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
 
-        // console.log('SETTING EMAIL', email);
+		setTokenExpirationDate(tokenExpirationDate);
+		localStorage.setItem(
+			'userData',
+			JSON.stringify({
+				userId: uid,
+				token: token,
+				expiration: tokenExpirationDate.toISOString()
+			})
+		);
+	}, []);
 
-        setToken(token);
-        setUserId(uid);
-        const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
+	const logout = useCallback(() => {
+		setToken(null);
+		setTokenExpirationDate(null);
+		setUserId(null);
+		localStorage.removeItem('userData');
+		history.push('/auth');
+	}, [history]);
 
-        setTokenExpirationDate(tokenExpirationDate);
-        localStorage.setItem(
-            'userData',
-            JSON.stringify({
-                userId: uid,
-                token: token,
-                expiration: tokenExpirationDate.toISOString(),
-            })
-        );
-    }, []);
+	useEffect(() => {
+		if (token && tokenExpirationDate) {
+			const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+			logoutTimer = setTimeout(logout, remainingTime);
+		} else {
+			clearTimeout(logoutTimer);
+		}
+	}, [token, logout, tokenExpirationDate]);
 
-    const logout = useCallback(() => {
-        setToken(null);
-        setTokenExpirationDate(null);
-        setUserId(null);
-        localStorage.removeItem('userData');
-        history.push('/auth');
-    }, [history]);
+	useEffect(() => {
+		const storedData = JSON.parse(localStorage.getItem('userData'));
+		if (storedData && storedData.token && new Date(storedData.expiration) > new Date()) {
+			login(storedData.userId, storedData.token, new Date(storedData.expiration));
+		}
+	}, [login]);
 
-    useEffect(() => {
-        if (token && tokenExpirationDate) {
-            const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
-            logoutTimer = setTimeout(logout, remainingTime);
-        } else {
-            clearTimeout(logoutTimer);
-        }
-    }, [token, logout, tokenExpirationDate]);
-
-    useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('userData'));
-        if (storedData && storedData.token && new Date(storedData.expiration) > new Date()) {
-            login(storedData.userId, storedData.token, new Date(storedData.expiration));
-        }
-    }, [login]);
-
-
-    return { token, login, logout, userId };
+	return { token, login, logout, userId };
 };
+
+export default useAuth;
