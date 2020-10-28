@@ -64,9 +64,9 @@
 
 #actions {
 	grid-area: section-b;
-	/* flex-direction: column;
-justify-content: flex-start; */
-	/* background: url('../../assets/netflix_logo_circle.png') no-repeat; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .user-item__image {
@@ -101,6 +101,13 @@ justify-content: flex-start; */
 	grid-area: section-c;
 	padding: 1rem;
 	flex-direction: column;
+	justify-content: space-between;
+}
+
+#item-3 > div {
+	display: flex;
+	flex-direction: column;
+	line-height: 1.5rem;
 }
 
 #item-4 {

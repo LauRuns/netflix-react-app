@@ -96,26 +96,22 @@ const UserAccount = (props) => {
 
 						<div id="actions">
 							<Avatar
-								image={
-									loadedUser.image
-									  ? loadedUser.image
-									  : '../../assets/melania-trump.jpg'
-								}
+								image={loadedUser.image}
 								alt={loadedUser.name || 'Default img'}
 								style={{ width: '200px', height: '200px' }}
-								width="100px"
-								height="100px"
+								width="200px"
+								height="200px"
 								className="user-item__image"
 							/>
-
-							{/* <img height="20px" src="../../assets/netflix_hexagon.png" alt="test" /> */}
 						</div>
 
 						<div className="item" id="item-3">
-							<p>NAME: {loadedUser.name}</p>
-							<p>EMAIL: {loadedUser.email}</p>
-							<p>ID: {loadedUser.id}</p>
-							<p>LAST UPDATED AT: {new Date(loadedUser.updatedAt).toDateString()}</p>
+							<div>
+								<p>NAME: {loadedUser.name}</p>
+								<p>EMAIL: {loadedUser.email}</p>
+								<p>ID: {loadedUser.id}</p>
+								<p>LAST UPDATED AT: {new Date(loadedUser.updatedAt).toDateString()}</p>
+							</div>
 							<Button type="button" inverse onClick={displayInfoHandler}>
 								{' '}
 								{openedDivs ? 'CLOSE ALL INFO' : 'OPEN ALL INFO'}
