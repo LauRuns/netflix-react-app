@@ -149,6 +149,13 @@
             {
                 "includeExports": false
             }
+        ],
+        "react/button-has-type": ["warn",
+            {
+                "button": true,
+                "submit": true,
+                "reset": true
+            }
         ]
 
     }
