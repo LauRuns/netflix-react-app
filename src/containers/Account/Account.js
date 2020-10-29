@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import useAuth from '../../shared/hooks/auth-hook';
-import { useHttpClient } from '../../shared/hooks/http-hook';
+import useHttpClient from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import Button from '../../shared/components/UIElements/Button/Button';
 import ProfileInformation from '../../components/AccountComponents/Profile/ProfileInfo';
@@ -23,6 +23,8 @@ const UserAccount = (props) => {
 	const [showChangePassword, setShowChangePassword] = useState(false);
 	const [openedDivs, setOpenedDivs] = useState(false);
 
+	const [loadedCountries, setLoadedCountries] = useState();
+
 	useEffect(() => {
 		if (!userId) {
 			return;
@@ -40,6 +42,20 @@ const UserAccount = (props) => {
 		};
 		fetchUser();
 	}, [sendRequest, userId]);
+
+	useEffect(() => {
+		const fetchCountries = async () => {
+			try {
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+				);
+				setLoadedCountries(responseData.results);
+			} catch (error) {
+				// Error is handled by useHttpClient
+			}
+		};
+		fetchCountries();
+	}, [sendRequest]);
 
 	const showProfileInfoHandler = () => {
 		setShowProfileInfo(!showProfileInfo);
@@ -121,7 +137,9 @@ const UserAccount = (props) => {
 						<div className="item" id="item-4">
 							<div onClick={showProfileInfoHandler}>
 								<h3>Update profile information</h3>
-								<h4>{showProfileInfo ? 'CLOSE' : 'EDIT'}</h4>
+								<Button noborder size="small" type="button">
+									{showProfileInfo ? 'CLOSE' : 'EDIT'}
+								</Button>
 							</div>
 							{showProfileInfo && (
 								<ProfileInformation
@@ -134,16 +152,24 @@ const UserAccount = (props) => {
 
 						<div className="item" id="item-5">
 							<div onClick={showCountrySet}>
-								<h3>Set your country</h3>
-								<h4>{showCountrySetter ? 'CLOSE' : 'EDIT'}</h4>
+								<h3>
+									{loadedUser.country
+										? `Your current selected country: ${loadedUser.country}`
+										: 'Set your country'}
+								</h3>
+								<Button noborder size="small" type="button">
+									{showCountrySetter ? 'CLOSE' : 'EDIT'}
+								</Button>
 							</div>
-							{showCountrySetter && <CountrySet />}
+							{showCountrySetter && <CountrySet countryData={loadedCountries} />}
 						</div>
 
 						<div className="item" id="item-6">
 							<div onClick={showImageUploader}>
 								<h3>Upload profile image</h3>
-								<h4>{showUploadImage ? 'CLOSE' : 'EDIT'}</h4>
+								<Button noborder size="small" type="button">
+									{showUploadImage ? 'CLOSE' : 'EDIT'}
+								</Button>
 							</div>
 							{showUploadImage && <ImageUploader />}
 						</div>
@@ -151,7 +177,9 @@ const UserAccount = (props) => {
 						<div className="item" id="item-7">
 							<div onClick={showPasswordChange}>
 								<h3>Change password</h3>
-								<h4>{showChangePassword ? 'CLOSE' : 'EDIT'}</h4>
+								<Button noborder size="small" type="button">
+									{showChangePassword ? 'CLOSE' : 'EDIT'}
+								</Button>
 							</div>
 							{showChangePassword && <PasswordChange />}
 						</div>

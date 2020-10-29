@@ -29,7 +29,7 @@
 	background-color: var(--netflix-shades-gray-60);
 }
 
-.item > div {
+.item > div:nth-child(1) {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
