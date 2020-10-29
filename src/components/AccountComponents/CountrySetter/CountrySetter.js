@@ -5,7 +5,16 @@ import './CountrySetter.css';
 
 const CountrySetter = (props) => {
 	const [selectedCountry, setSelectedCountry] = useState(undefined);
-	const countryList = props.countryData.map((country) => country.country);
+
+	if (!props.countryData) {
+		return (
+			<div>
+				<h2>Loading country data...</h2>
+			</div>
+		);
+	}
+
+	const countryList = props.countryData;
 
 	const countrySelectHandler = (e) => {
 		setSelectedCountry(e.target.value);
@@ -13,8 +22,8 @@ const CountrySetter = (props) => {
 
 	const selectList = (
 		<select id="countrySelector" onChange={countrySelectHandler}>
-			{countryList.map((countryName) => (
-				<option key={countryName}>{countryName}</option>
+			{countryList.map((country) => (
+				<option key={country.countryId}>{country.country}</option>
 			))}
 		</select>
 	);
