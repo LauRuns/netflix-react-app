@@ -1,4 +1,9 @@
 .profile-info-container {
-    flex-direction: column;
-    background-color: var(--netflix-shades-gray-40);
+	flex-direction: column;
+	background-color: var(--netflix-shades-gray-40);
+	padding: 1rem;
+}
+
+.profile-form {
+	width: 50%;
 }
