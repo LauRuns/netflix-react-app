@@ -1,162 +1,115 @@
 {
-    "env": {
-        "browser": true,
-        "es2017": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb",
-        "react-app"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 8,
-        "sourceType": "module"
-    },
-    // "plugins": [
-    //     "react"
-    // ],
-    "rules": {
-        // "no-tabs": [
-        //     0,
-        //     {"allowIndentationTabs": true}
-        // ],
-        // "indent": [
-        //     "warn",
-        //     4
-        // ],
-        // "indent": [
-        //     "error",
-        //     4,
-        //     {
-        //         "ignoredNodes": [
-        //             "JSXElement *"
-        //         ]
-        //     }
-        // ],
-        "indent": [
-            2,
-            "tab",
-            {
-                "SwitchCase": 1,
-                "VariableDeclarator": 1
-            }
-        ],
-        "no-tabs": 0,
-        "react/jsx-indent": [
-            2,
-            "tab"
-        ],
-        "react/jsx-indent-props": [
-            2,
-            "tab"
-        ],
-        "react/jsx-fragments": [
-            "off"
-        ],
-        "no-unused-vars": "warn",
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".js",
-                    ".jsx"
-                ]
-            }
-        ],
-        "arrow-body-style": [
-            "off",
-            "never"
-        ],
-        "padded-blocks": [
-            "error",
-            "never",
-            { "allowSingleLineBlocks": true}
-        ],
-        "no-console": "warn",
-        "react/destructuring-assignment": [0,
-            "always",
-            {
-                "ignoreClassFields": true
-            }
-        ],
-        "react/prop-types": 0,
-        "object-shorthand": "off",
-        "object-curly-newline": [
-            "off",
-            {
-                "ObjectExpression": "always",
-                "ObjectPattern": {
-                    "multiline": true
-                },
-                "ImportDeclaration": "never",
-                "ExportDeclaration": {
-                    "multiline": true,
-                    "minProperties": 3
-                }
-            }
-        ],
-        "operator-linebreak": [
-            "error",
-            "after",
-            {
-                "overrides": {
-                    "?": "before",
-                    ":": "before"
-                }
-            }
-        ],
-        "no-shadow": "off",
-        "react/jsx-one-expression-per-line": "off",
-        "jsx-a11y/click-events-have-key-events": "off",
-        "react/jsx-props-no-spreading": ["off",
-            {
-                "html": "ignore",
-                "custom": "ignore",
-                "explicitSpread": "ignore"
-
-            }
-        ],
-        "jsx-a11y/interactive-supports-focus": [
-            "error",
-            {
-                "tabbable": [
-                    "button",
-                    "checkbox",
-                    "link",
-                    "searchbox",
-                    "spinbutton",
-                    "switch",
-                    "textbox"
-                ]
-            }
-        ],
-        "comma-dangle": [
-            "error",
-            {
-                "arrays": "never",
-                "objects": "never",
-                "imports": "never",
-                "exports": "never",
-                "functions": "never"
-            }
-        ],
-        "no-duplicate-imports": [
-            "warn",
-            {
-                "includeExports": false
-            }
-        ],
-        "react/button-has-type": ["warn",
-            {
-                "button": true,
-                "submit": true,
-                "reset": true
-            }
-        ]
-
-    }
+	"env": {
+		"browser": true,
+		"es2017": true
+	},
+	"extends": ["eslint:recommended", "plugin:react/recommended", "airbnb", "react-app"],
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 8,
+		"sourceType": "module"
+	},
+	"plugins": ["react", "jsx-a11y", "import"],
+	"rules": {
+		"import/prefer-default-export": 0,
+		"no-unused-expressions": ["warn"],
+		"no-console": 1,
+		"no-unused-vars": "warn",
+		"no-tabs": 0,
+		"no-shadow": 1,
+		"no-duplicate-imports": [
+			"error",
+			{
+				"includeExports": false
+			}
+		],
+		"comma-dangle": [
+			"error",
+			{
+				"arrays": "never",
+				"objects": "never",
+				"imports": "never",
+				"exports": "never",
+				"functions": "never"
+			}
+		],
+		"indent": [
+			2,
+			"tab",
+			{
+				"SwitchCase": 1,
+				"VariableDeclarator": 1
+			}
+		],
+		"arrow-body-style": ["off", "never"],
+		"padded-blocks": ["error", "never", { "allowSingleLineBlocks": true }],
+		"object-shorthand": "off",
+		"object-curly-newline": [
+			"off",
+			{
+				"ObjectExpression": "always",
+				"ObjectPattern": {
+					"multiline": true
+				},
+				"ImportDeclaration": "never",
+				"ExportDeclaration": {
+					"multiline": true,
+					"minProperties": 3
+				}
+			}
+		],
+		"operator-linebreak": [
+			"error",
+			"after",
+			{
+				"overrides": {
+					"?": "before",
+					":": "before"
+				}
+			}
+		],
+		"react/jsx-indent": [2, "tab"],
+		"react/jsx-indent-props": [2, "tab"],
+		"react/jsx-fragments": ["off"],
+		"react/jsx-filename-extension": [
+			1,
+			{
+				"extensions": [".js", ".jsx"]
+			}
+		],
+		"react/destructuring-assignment": [
+			0,
+			"always",
+			{
+				"ignoreClassFields": true
+			}
+		],
+		"react/prop-types": 0,
+		"react/jsx-one-expression-per-line": "off",
+		"jsx-a11y/click-events-have-key-events": "off",
+		"react/jsx-props-no-spreading": [
+			"off",
+			{
+				"html": "ignore",
+				"custom": "ignore",
+				"explicitSpread": "ignore"
+			}
+		],
+		"jsx-a11y/interactive-supports-focus": [
+			"error",
+			{
+				"tabbable": ["button", "checkbox", "link", "searchbox", "spinbutton", "switch", "textbox"]
+			}
+		],
+		"react/button-has-type": [
+			"warn",
+			{
+				"button": true,
+				"submit": true,
+				"reset": true
+			}
+		]
+	}
 }
