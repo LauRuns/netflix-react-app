@@ -12,8 +12,6 @@ const useAuth = () => {
 	const history = useHistory();
 
 	const login = useCallback((uid, token, expirationDate) => {
-		// console.log('SETTING EMAIL', email);
-
 		setToken(token);
 		setUserId(uid);
 		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
