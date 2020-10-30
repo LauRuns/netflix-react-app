@@ -6,36 +6,39 @@ export const useHttpClient = () => {
 
 	const activeHttpRequests = useRef([]);
 
-	const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
-		setIsLoading(true);
-		const httpAbortController = new AbortController();
-		activeHttpRequests.current.push(httpAbortController);
+	const sendRequest = useCallback(
+		async (url, method = 'GET', body = null, headers = {}) => {
+			setIsLoading(true);
+			const httpAbortController = new AbortController();
+			activeHttpRequests.current.push(httpAbortController);
 
-		try {
-			const response = await fetch(url, {
-				method,
-				body,
-				headers,
-				signal: httpAbortController.signal
-			});
+			try {
+				const response = await fetch(url, {
+					method,
+					body,
+					headers,
+					signal: httpAbortController.signal
+				});
 
-			const responseData = await response.json();
+				const responseData = await response.json();
 
-			activeHttpRequests.current = activeHttpRequests.current.filter(
-				(reqCtrl) => reqCtrl !== httpAbortController
-			);
+				activeHttpRequests.current = activeHttpRequests.current.filter(
+					(reqCtrl) => reqCtrl !== httpAbortController
+				);
 
-			if (!response.ok) {
-				throw new Error(responseData.message);
+				if (!response.ok) {
+					throw new Error(responseData.message);
+				}
+				setIsLoading(false);
+				return responseData;
+			} catch (err) {
+				setError(err.message);
+				setIsLoading(false);
+				throw error;
 			}
-			setIsLoading(false);
-			return responseData;
-		} catch (err) {
-			setError(err.message);
-			setIsLoading(false);
-			throw error;
-		}
-	}, []);
+		},
+		[error]
+	);
 
 	const clearError = () => {
 		setError(null);
