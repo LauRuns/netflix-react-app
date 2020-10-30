@@ -46,6 +46,16 @@
 		],
 		"arrow-body-style": ["off", "never"],
 		"padded-blocks": ["error", "never", { "allowSingleLineBlocks": true }],
+		"prefer-destructuring": [
+			"error",
+			{
+				"array": false,
+				"object": true
+			},
+			{
+				"enforceForRenamedProperties": false
+			}
+		],
 		"object-shorthand": "off",
 		"object-curly-newline": [
 			"off",
