@@ -19,6 +19,7 @@
 		"no-unused-vars": "warn",
 		"no-tabs": 0,
 		"no-shadow": 1,
+		"no-continue": 1,
 		"no-duplicate-imports": [
 			"error",
 			{
