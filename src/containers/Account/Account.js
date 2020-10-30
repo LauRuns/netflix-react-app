@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 import useAuth from '../../shared/hooks/auth-hook';
-import useHttpClient from '../../shared/hooks/http-hook';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import Button from '../../shared/components/UIElements/Button/Button';
 import ProfileInformation from '../../components/AccountComponents/Profile/ProfileInfo';
@@ -35,8 +35,7 @@ const UserAccount = (props) => {
 					`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
 				);
 				setLoadedUser(responseData.result);
-				console.log(responseData.result);
-			} catch (error) {
+			} catch (err) {
 				// Error is handled by useHttpClient
 			}
 		};
@@ -50,7 +49,7 @@ const UserAccount = (props) => {
 					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
 				);
 				setLoadedCountries(responseData.results);
-			} catch (error) {
+			} catch (err) {
 				// Error is handled by useHttpClient
 			}
 		};
@@ -73,9 +72,16 @@ const UserAccount = (props) => {
 		setShowChangePassword(!showChangePassword);
 	};
 
+	const closeAllInfoTabs = () => {
+		setShowProfileInfo(false);
+		setShowCountrySetter(false);
+		setShowUploadImage(false);
+		setShowChangePassword(false);
+	};
+
 	const reloadUserData = (newProfileData) => {
 		setLoadedUser(newProfileData);
-		setShowProfileInfo(false);
+		closeAllInfoTabs();
 	};
 
 	const displayInfoHandler = () => {
@@ -126,6 +132,7 @@ const UserAccount = (props) => {
 								<p>NAME: {loadedUser.name}</p>
 								<p>EMAIL: {loadedUser.email}</p>
 								<p>ID: {loadedUser.id}</p>
+								<p>SET COUNTRY: {loadedUser.country}</p>
 								<p>LAST UPDATED AT: {new Date(loadedUser.updatedAt).toDateString()}</p>
 							</div>
 							<Button type="button" inverse onClick={displayInfoHandler}>
@@ -145,6 +152,7 @@ const UserAccount = (props) => {
 								<ProfileInformation
 									username={loadedUser.name}
 									email={loadedUser.email}
+									country={loadedUser.country}
 									setUpdatedUserData={reloadUserData}
 								/>
 							)}
@@ -161,7 +169,15 @@ const UserAccount = (props) => {
 									{showCountrySetter ? 'CLOSE' : 'EDIT'}
 								</Button>
 							</div>
-							{showCountrySetter && <CountrySet countryData={loadedCountries} />}
+							{showCountrySetter && (
+								<CountrySet
+									username={loadedUser.name}
+									email={loadedUser.email}
+									userCountry={loadedUser.country || null}
+									setNewSelectedCountry={reloadUserData}
+									countryData={loadedCountries}
+								/>
+							)}
 						</div>
 
 						<div className="item" id="item-6">

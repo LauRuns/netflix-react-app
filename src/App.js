@@ -9,7 +9,7 @@ import Auth from './containers/Auth/Auth';
 import NetflixApp from './containers/NetflixApp/NetflixApp';
 import Account from './containers/Account/Account';
 import Layout from './containers/layouts/Layout';
-import AuthContext from './shared/context/auth-context';
+import { AuthContext } from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
 
 import './App.css';

@@ -2,7 +2,7 @@
 // /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useContext } from 'react';
 
-import AuthContext from '../../../context/auth-context';
+import { AuthContext } from '../../../context/auth-context';
 import NavItem from './NavItem/NavItem';
 // import Icon from '.././../../../components/Icon/Icon';
 // import Tooltip from '../../UIElements/Tooltip/Tooltip';

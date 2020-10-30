@@ -6,10 +6,10 @@ import {
 	VALIDATOR_MINLENGTH,
 	VALIDATOR_EMAIL
 } from '../../../shared/util/validators';
-import useForm from '../../../shared/hooks/form-hook';
+import { useForm } from '../../../shared/hooks/form-hook';
 import Button from '../../../shared/components/UIElements/Button/Button';
-import useHttpClient from '../../../shared/hooks/http-hook';
-import AuthContext from '../../../shared/context/auth-context';
+import { useHttpClient } from '../../../shared/hooks/http-hook';
+import { AuthContext } from '../../../shared/context/auth-context';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
 
@@ -57,7 +57,8 @@ const ProfileInfo = (props) => {
 				'PATCH',
 				JSON.stringify({
 					username: formState.inputs.username.value,
-					email: formState.inputs.email.value
+					email: formState.inputs.email.value,
+					country: props.country
 				}),
 				{
 					'Content-Type': 'application/json',
@@ -65,7 +66,7 @@ const ProfileInfo = (props) => {
 				}
 			);
 			onUpdate(responseData.updatedUser);
-		} catch (error) {
+		} catch (err) {
 			// Error is handled by the useHttpClient
 		}
 	};
