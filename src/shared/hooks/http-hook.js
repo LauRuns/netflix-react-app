@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 
-const useHttpClient = () => {
+export const useHttpClient = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
 
@@ -30,8 +30,8 @@ const useHttpClient = () => {
 			}
 			setIsLoading(false);
 			return responseData;
-		} catch (error) {
-			setError(error.message);
+		} catch (err) {
+			setError(err.message);
 			setIsLoading(false);
 			throw error;
 		}
@@ -49,5 +49,3 @@ const useHttpClient = () => {
 
 	return { isLoading, error, sendRequest, clearError };
 };
-
-export default useHttpClient;
