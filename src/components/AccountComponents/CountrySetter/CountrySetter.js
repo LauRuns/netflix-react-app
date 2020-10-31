@@ -15,8 +15,8 @@ const CountrySetter = (props) => {
 
 	if (!props.countryData) {
 		return (
-			<div>
-				<h2>Loading country data...</h2>
+			<div className="center loading-countries">
+				<LoadingSpinner loadingSpinnerMessage="Loading country data..." />
 			</div>
 		);
 	}
