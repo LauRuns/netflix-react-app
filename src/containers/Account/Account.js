@@ -7,7 +7,7 @@ import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSp
 import Button from '../../shared/components/UIElements/Button/Button';
 import ProfileInformation from '../../components/AccountComponents/Profile/ProfileInfo';
 import PasswordChange from '../../components/AccountComponents/PasswordChanger/PasswordChange';
-import ImageUploader from '../../components/AccountComponents/UploadImage/UploadImage';
+import ImageUpload from '../../components/AccountComponents/UploadImage/UploadImage';
 import CountrySet from '../../components/AccountComponents/CountrySetter/CountrySetter';
 import Avatar from '../../shared/components/UIElements/Avatar/Avatar';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
@@ -45,10 +45,11 @@ const UserAccount = (props) => {
 	useEffect(() => {
 		const fetchCountries = async () => {
 			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
-				setLoadedCountries(responseData.results);
+				// const responseData = await sendRequest(
+				// 	`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+				// );
+				// setLoadedCountries(responseData.results);
+				setLoadedCountries(null);
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
@@ -117,14 +118,19 @@ const UserAccount = (props) => {
 						</div>
 
 						<div id="actions">
-							<Avatar
-								image={loadedUser.image}
-								alt={loadedUser.name || 'Default img'}
-								style={{ width: '200px', height: '200px' }}
-								width="200px"
-								height="200px"
-								className="user-item__image"
-							/>
+							{loadedUser.image ? (
+								<Avatar
+									image={loadedUser.image}
+									// image={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
+									alt={loadedUser.name || 'Default img'}
+									style={{ width: '200px', height: '200px' }}
+									width="200px"
+									height="200px"
+									className="user-item__image"
+								/>
+							) : (
+								<p>No image data</p>
+							)}
 						</div>
 
 						<div className="item" id="item-3">
@@ -187,7 +193,9 @@ const UserAccount = (props) => {
 									{showUploadImage ? 'CLOSE' : 'EDIT'}
 								</Button>
 							</div>
-							{showUploadImage && <ImageUploader />}
+							{showUploadImage && (
+								<ImageUpload username={loadedUser.name} email={loadedUser.email} />
+							)}
 						</div>
 
 						<div className="item" id="item-7">
