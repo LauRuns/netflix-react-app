@@ -11,7 +11,8 @@ const Avatar = (props) => {
 		<div className={`avatar ${props.className}`} style={props.style}>
 			<img
 				onError={onImgErrorHandler}
-				src={props.image ? props.image : './no-profile-picture.jpg'}
+				// src={props.image ? props.image : './no-profile-picture.jpg'}
+				src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
 				alt={props.alt}
 				style={{ width: props.width, height: props.height }}
 			/>
