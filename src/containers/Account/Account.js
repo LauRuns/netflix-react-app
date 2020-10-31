@@ -205,7 +205,9 @@ const UserAccount = (props) => {
 									{showChangePassword ? 'CLOSE' : 'EDIT'}
 								</Button>
 							</div>
-							{showChangePassword && <PasswordChange />}
+							{showChangePassword && (
+								<PasswordChange username={loadedUser.name} email={loadedUser.email} />
+							)}
 						</div>
 					</div>
 				)}
