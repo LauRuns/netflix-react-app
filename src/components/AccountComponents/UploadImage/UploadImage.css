@@ -1,0 +1,11 @@
+.img-upload-container {
+	background-color: var(--netflix-shades-gray-20);
+	padding: 1rem;
+}
+
+.img-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
