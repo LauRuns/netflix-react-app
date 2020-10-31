@@ -85,12 +85,10 @@ const Auth = () => {
 					}
 				);
 
-				console.log('responseData.email', responseData.email);
-
 				auth.login(responseData.userId, responseData.token);
 				history.push('/account');
-			} catch (error) {
-				console.log(error);
+			} catch (err) {
+				// Error is handled by the useHttpClient hook
 			}
 		} else {
 			try {
@@ -107,15 +105,14 @@ const Auth = () => {
 				);
 
 				auth.login(responseData.userId, responseData.token);
-			} catch (error) {
-				console.log(error);
+			} catch (err) {
+				// Error is handled by the useHttpClient hook
 			}
 		}
 	};
 
 	const loginCardStyles = {
 		backgroundColor: '#000000',
-		// backgroundColor: 'green',
 		opacity: 0.9,
 		borderRadius: '4px',
 		padding: '3rem 2rem'
@@ -146,14 +143,6 @@ const Auth = () => {
 								placeholder="Username"
 							/>
 						)}
-						{/* {!isLoginMode && (
-                    <ImageUpload
-                    center id="image"
-                    onInput={inputHandler}
-                    errorText="Please provide an image."
-                    />
-                )} */}
-
 						<Input
 							element="input"
 							id="email"
