@@ -10,6 +10,7 @@ import PasswordChange from '../../components/AccountComponents/PasswordChanger/P
 import ImageUpload from '../../components/AccountComponents/UploadImage/UploadImage';
 import CountrySet from '../../components/AccountComponents/CountrySetter/CountrySetter';
 import Avatar from '../../shared/components/UIElements/Avatar/Avatar';
+import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import './Account.css';
 
@@ -24,6 +25,7 @@ const UserAccount = (props) => {
 	const [openedDivs, setOpenedDivs] = useState(false);
 
 	const [loadedCountries, setLoadedCountries] = useState();
+	const [displayMessage, setDisplayMessage] = useState(false);
 
 	useEffect(() => {
 		if (!userId) {
@@ -101,10 +103,27 @@ const UserAccount = (props) => {
 		}
 	};
 
+	const openModal = () => {
+		showPasswordChange();
+		setDisplayMessage(true);
+	};
+	const closeModal = () => {
+		setDisplayMessage(false);
+	};
+
 	if (userId) {
 		return (
 			<React.Fragment>
 				<ErrorModal error={error} onClear={clearError} />
+				<Modal
+					show={displayMessage}
+					header="Password updated!"
+					footer={
+						<Button type="button" inverse onClick={closeModal}>
+							OK
+						</Button>
+					}
+				/>
 				{isLoading && (
 					<div className="center">
 						<LoadingSpinner loadingSpinnerMessage="Loading userdata..." />
@@ -194,7 +213,11 @@ const UserAccount = (props) => {
 								</Button>
 							</div>
 							{showUploadImage && (
-								<ImageUpload username={loadedUser.name} email={loadedUser.email} />
+								<ImageUpload
+									username={loadedUser.name}
+									email={loadedUser.email}
+									setUpdatedUserAvatar={reloadUserData}
+								/>
 							)}
 						</div>
 
@@ -206,7 +229,11 @@ const UserAccount = (props) => {
 								</Button>
 							</div>
 							{showChangePassword && (
-								<PasswordChange username={loadedUser.name} email={loadedUser.email} />
+								<PasswordChange
+									username={loadedUser.name}
+									email={loadedUser.email}
+									closeSection={openModal}
+								/>
 							)}
 						</div>
 					</div>
