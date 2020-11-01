@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import CountryList from '../../components/Countries/CountryList';
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -26,6 +26,15 @@ const CountriesPageContainer = (props) => {
 		fetchCountries();
 	}, [sendRequest]);
 
+	const filteredCountriesHandler = (filteredCountries) => {
+		// dispatch({ type: 'SET', ingredients: filteredIngredients });
+
+		if (filteredCountries.length !== 0) {
+			console.log('filteredCountriesHandler', filteredCountries);
+			setLoadedCountries(filteredCountries);
+		}
+	};
+
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
@@ -40,9 +49,17 @@ const CountriesPageContainer = (props) => {
 						<h3>There is Netflix data for {loadedCountries.length} countries available!</h3>
 					</div>
 				)}
-				<div id="search-item">
-					<Search />
-				</div>
+				{loadedCountries ? (
+					<div id="search-item">
+						<Search
+							countryList={loadedCountries}
+							// onLoadCountryFilter={() => filteredCountriesHandler()}
+							setUpdatedCountryData={filteredCountriesHandler}
+						/>
+					</div>
+				) : (
+					<h2 id="alt-search">Loading data...</h2>
+				)}
 				<div id="cntry-list-item">{loadedCountries && <CountryList items={loadedCountries} />}</div>
 			</div>
 		</React.Fragment>
