@@ -1,4 +1,4 @@
-.container {
+.account-container {
 	display: grid;
 	margin: 1rem;
 
@@ -27,6 +27,7 @@
 	flex-direction: column;
 	overflow: hidden;
 	background-color: var(--netflix-shades-gray-60);
+	margin: 0.1rem;
 }
 
 .item > div:nth-child(1) {
@@ -56,13 +57,13 @@
 	cursor: pointer;
 }
 
-#account_header {
+#item-1 {
 	grid-area: section-a;
 	justify-content: center;
 	align-items: center;
 }
 
-#actions {
+#item-2 {
 	grid-area: section-b;
 	display: flex;
 	justify-content: center;
@@ -74,13 +75,13 @@
 	height: 100%;
 }
 
-#actions ul {
+/* #item-2 ul {
 	list-style: none;
 	width: 200px;
 	height: auto;
 }
 
-#actions ul li {
+#item-2 ul li {
 	padding: 10px 0;
 	border-bottom: 2px solid var(--netflix-primary-red);
 	transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
@@ -90,12 +91,12 @@
 	-ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
 }
 
-#actions ul li:hover {
+#item-2 ul li:hover {
 	margin-left: 20px;
 	font-weight: 600;
 	color: var(--netflix-primary-red);
 	cursor: pointer;
-}
+} */
 
 #item-3 {
 	grid-area: section-c;
@@ -127,7 +128,7 @@
 }
 
 @media only screen and (min-width: 576px) {
-	.container {
+	.account-container {
 		margin: 3rem;
 		max-width: 80rem;
 

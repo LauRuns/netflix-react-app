@@ -131,12 +131,12 @@ const UserAccount = (props) => {
 				)}
 
 				{!isLoading && loadedUser && (
-					<div className="container">
-						<div className="item" id="account_header">
+					<div className="account-container">
+						<div className="item" id="item-1">
 							<h2>Useraccount for {loadedUser.name.toUpperCase()}</h2>
 						</div>
 
-						<div id="actions">
+						<div id="item-2">
 							{loadedUser.image ? (
 								<Avatar
 									image={loadedUser.image}
