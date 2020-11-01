@@ -6,7 +6,9 @@ import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSp
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import Search from '../../components/Search/Search';
 
-const NetflixApp = (props) => {
+import './CountriesPageContainer.css';
+
+const CountriesPageContainer = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedCountries, setLoadedCountries] = useState();
 
@@ -17,7 +19,7 @@ const NetflixApp = (props) => {
 					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
 				);
 				setLoadedCountries(responseData.results);
-			} catch (error) {
+			} catch (err) {
 				// Error is handled by useHttpClient
 			}
 		};
@@ -32,10 +34,19 @@ const NetflixApp = (props) => {
 					<LoadingSpinner />
 				</div>
 			)}
-			<Search />
-			{loadedCountries && <CountryList items={loadedCountries} />}
+			<div className="cntry-pages-container">
+				{loadedCountries && (
+					<div id="title-item">
+						<h3>There is Netflix data for {loadedCountries.length} countries available!</h3>
+					</div>
+				)}
+				<div id="search-item">
+					<Search />
+				</div>
+				<div id="cntry-list-item">{loadedCountries && <CountryList items={loadedCountries} />}</div>
+			</div>
 		</React.Fragment>
 	);
 };
 
-export default NetflixApp;
+export default CountriesPageContainer;
