@@ -2,6 +2,7 @@ import React from 'react';
 
 import Country from './Country/Country';
 import Card from '../../shared/components/UIElements/Card/Card';
+import Chip from '../../shared/components/UIElements/Chip/Chip';
 import './CountryList.css';
 
 const CountryList = (props) => {
@@ -17,14 +18,13 @@ const CountryList = (props) => {
 
 	return (
 		<React.Fragment>
-			<h2 className="CountryList-title">This app has Netflix data available for {props.items.length} countries.</h2>
 			<ul className="CountryList">
 				{props.items.map((country) => {
-					return <Country key={country.countryId} country={country.country} />;
+					// return <Country key={country.countryId} country={country.country} />;
+					return <Chip key={country.countryId} name={country.country} />;
 				})}
 			</ul>
 		</React.Fragment>
-
 	);
 };
 
