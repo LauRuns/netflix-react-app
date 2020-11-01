@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import Auth from './containers/Auth/Auth';
-import NetflixApp from './containers/NetflixApp/NetflixApp';
+import CountriesPageContainer from './containers/CountriesPage/CountriesPageContainer';
 import Account from './containers/Account/Account';
 import Layout from './containers/layouts/Layout';
 import { AuthContext } from './shared/context/auth-context';
@@ -30,7 +30,7 @@ const App = () => {
 		routes = (
 			<Switch>
 				<Route path="/auth" exact component={Auth} />
-				<Route path="/" exact component={NetflixApp} />
+				<Route path="/" exact component={CountriesPageContainer} />
 				<Route path="/account" exact component={Account} />
 			</Switch>
 		);
