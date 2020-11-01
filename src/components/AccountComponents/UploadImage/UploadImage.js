@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../shared/context/auth-context';
@@ -23,8 +22,6 @@ const UploadImage = (props) => {
 		},
 		false
 	);
-
-	const history = useHistory();
 
 	const userUploadImgHandler = async (event) => {
 		event.preventDefault();
