@@ -7,7 +7,6 @@ import Button from '../../../shared/components/UIElements/Button/Button';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../shared/context/auth-context';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import Modal from '../../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
 import './PasswordChange.css';
 
@@ -41,7 +40,7 @@ const PasswordChange = (props) => {
 		}
 
 		try {
-			const responeData = await sendRequest(
+			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/auth/update/${auth.userId}`,
 				'PATCH',
 				JSON.stringify({
@@ -56,20 +55,19 @@ const PasswordChange = (props) => {
 				}
 			);
 
-			console.log(responeData);
+			if (responseData) {
+				props.closeSection();
+			}
 		} catch (err) {
 			// Error is handled by useHttpClient
-			console.log(err);
 		}
 	};
 
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			{/* <Modal show={}/> */}
 
 			<div className="pwd-change-container">
-				<h3>Password change section works</h3>
 				{isLoading && <LoadingSpinner center loadingSpinnerMessage="Updating password..." />}
 				{!isLoading && (
 					<form className="pwd-update-form" onSubmit={updatePwdHandler}>

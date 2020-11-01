@@ -34,7 +34,7 @@ const UploadImage = (props) => {
 			formData.append('email', props.email);
 			formData.append('image', formState.inputs.image.value);
 
-			await sendRequest(
+			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`,
 				'PATCH',
 				formData,
@@ -42,7 +42,11 @@ const UploadImage = (props) => {
 					Authorization: `Bearer ${auth.token}`
 				}
 			);
-			history.push('/account');
+			// history.push('/account');
+			if (responseData) {
+				console.log(responseData);
+				props.setUpdatedUserAvatar(responseData.updatedUser);
+			}
 		} catch (err) {
 			// Errors are handled by the useHttpClient method
 		}
