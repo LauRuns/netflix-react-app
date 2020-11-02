@@ -7,14 +7,15 @@ const Search = React.memo((props) => {
 	const [enteredFilter, setEnteredFilter] = useState('');
 	const inputRef = useRef();
 
-	let searchedCountry;
-
 	useEffect(() => {
+		let searchedCountry;
+		const onUpdate = (event) => {
+			props.setUpdatedCountryData(event);
+		};
+
 		const timer = setTimeout(() => {
 			if (enteredFilter === inputRef.current.value) {
 				const newEnteredFilter = enteredFilter.toLowerCase();
-				console.log('enteredFilter', enteredFilter);
-				console.log('newEnteredFilter', newEnteredFilter);
 
 				try {
 					const countriesAdjusted = countryList.map((item) => {
@@ -26,56 +27,25 @@ const Search = React.memo((props) => {
 					});
 
 					searchedCountry = countriesAdjusted.filter((el) => el.country === newEnteredFilter);
-					console.log('FIND result___::', searchedCountry);
 				} catch (err) {
-					console.log('ERROR filter in search___::', err);
+					return err;
 				}
-
-				onUpdate(searchedCountry);
-
-				// const fetchIngredients = async () => {
-				// 	try {
-				// 		const query =
-				// 			enteredFilter.length === 0 ? '' : `?orderBy="title"&equalTo="${enteredFilter}"`;
-				// 		const response = await fetch(
-				// 			`https://react-hooks-416c0.firebaseio.com/ingredients.json${query}`
-				// 		);
-				// 		const responseData = await response.json();
-				// 		const loadedIngredients = [];
-
-				// 		for (const key in responseData) {
-				// 			loadedIngredients.push({
-				// 				id: key,
-				// 				title: responseData[key].title,
-				// 				amount: responseData[key].amount
-				// 			});
-				// 		}
-
-				// 		onloadIngredients(loadedIngredients);
-				// 	} catch (error) {
-				// 		console.log(error);
-				// 	}
-				// };
-				// fetchIngredients();
 			}
-		}, 1000);
+			return onUpdate(searchedCountry);
+		}, 500);
 
 		// cleaning up effect
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [enteredFilter, onLoadCountryFilter, inputRef]);
-
-	const onUpdate = (event) => {
-		props.setUpdatedCountryData(event);
-	};
+	}, [enteredFilter, onLoadCountryFilter, inputRef, countryList]);
 
 	return (
 		<section className="search">
 			<div className="search-input">
-				<label>Search country</label>
+				<h3>Search country</h3>
 				<input
-					placeholder="Enter country..."
+					placeholder="Enter country name..."
 					ref={inputRef}
 					type="text"
 					value={enteredFilter}
