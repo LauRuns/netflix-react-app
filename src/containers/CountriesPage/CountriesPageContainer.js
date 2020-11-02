@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CountryList from '../../components/Countries/CountryList';
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -11,6 +11,7 @@ import './CountriesPageContainer.css';
 const CountriesPageContainer = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedCountries, setLoadedCountries] = useState();
+	const [countryListData, setCountryListData] = useState();
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -19,6 +20,7 @@ const CountriesPageContainer = (props) => {
 					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
 				);
 				setLoadedCountries(responseData.results);
+				setCountryListData(responseData.results);
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
@@ -27,11 +29,10 @@ const CountriesPageContainer = (props) => {
 	}, [sendRequest]);
 
 	const filteredCountriesHandler = (filteredCountries) => {
-		// dispatch({ type: 'SET', ingredients: filteredIngredients });
-
-		if (filteredCountries.length !== 0) {
-			console.log('filteredCountriesHandler', filteredCountries);
-			setLoadedCountries(filteredCountries);
+		if (filteredCountries && filteredCountries.length !== 0) {
+			setCountryListData(filteredCountries);
+		} else {
+			setCountryListData(loadedCountries);
 		}
 	};
 
@@ -53,14 +54,15 @@ const CountriesPageContainer = (props) => {
 					<div id="search-item">
 						<Search
 							countryList={loadedCountries}
-							// onLoadCountryFilter={() => filteredCountriesHandler()}
 							setUpdatedCountryData={filteredCountriesHandler}
 						/>
 					</div>
 				) : (
 					<h2 id="alt-search">Loading data...</h2>
 				)}
-				<div id="cntry-list-item">{loadedCountries && <CountryList items={loadedCountries} />}</div>
+				<div id="cntry-list-item">
+					{loadedCountries && countryListData && <CountryList items={countryListData} />}
+				</div>
 			</div>
 		</React.Fragment>
 	);
