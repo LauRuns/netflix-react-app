@@ -5,5 +5,17 @@
 }
 
 .profile-form {
-	width: 50%;
+	width: 100%;
+}
+
+@media screen and (min-width: 567px) {
+	.profile-info-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+
+	.profile-form {
+		width: 80%;
+	}
 }

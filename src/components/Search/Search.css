@@ -29,13 +29,17 @@
 	width: 100%;
 }
 
-@media screen and (min-width: 500px) {
+@media only screen and (min-width: 500px) {
 	.search-input {
 		flex-direction: row;
 		justify-content: flex-start;
 		align-items: center;
 		border-radius: 5px;
 		padding: 2rem;
+		height: 5rem;
+		/* background-image: linear-gradient(30deg, red, #1a1a1a); */
+		/* background-image: radial-gradient(300px at top, red, #1a1a1a); */
+		/* filter: opacity(25%); */
 	}
 
 	.search-input input {
