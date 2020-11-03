@@ -17,12 +17,6 @@ import './App.css';
 const App = () => {
 	const { token, login, logout, userId } = useAuth();
 
-	// if (token) {
-	//   console.log('THIS IS THE TOKEN_____', token);
-	// } else {
-	//   console.log('_________NO TOKEN________');
-	// }
-
 	let routes;
 
 	// use this with token verification
@@ -53,7 +47,7 @@ const App = () => {
 			}}
 		>
 			<Layout />
-			<div className="content">{routes}</div>
+			<div className="content center-route-content">{routes}</div>
 			{/* </Layout> */}
 		</AuthContext.Provider>
 	);
