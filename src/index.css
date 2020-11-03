@@ -13,6 +13,7 @@
 	--netflix-text: #efefef;
 	--netflix-secondary-red: #831010;
 	--netflix-secondary-black: #4c4c4c;
+	--netflix-gradient-black: #1a1a1a;
 	/* Color shades gray*/
 	--netflix-shades-gray-80: #333333;
 	--netflix-shades-gray-60: #555555;
@@ -35,6 +36,26 @@
 	--tooltip-background-color: black;
 	--tooltip-margin: 30px;
 	--tooltip-arrow-size: 6px;
+	/* Breakpoints */
+	--breakpoint-xs: 0;
+	--breakpoint-sm: 576px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 992px;
+	--breakpoint-xl: 1200px;
+}
+html {
+	background-image: radial-gradient(
+		500px at top,
+		var(--netflix-primary-red),
+		var(--netflix-gradient-black)
+	);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
 }
 
 body {
@@ -43,7 +64,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Roboto Condensed', sans-serif;
-	background-color: var(--netflix-secondary-black);
 	color: var(--netflix-text);
 }
 
