@@ -7,6 +7,15 @@ const Search = React.memo((props) => {
 	const [enteredFilter, setEnteredFilter] = useState('');
 	const inputRef = useRef();
 
+	const firstLetterTpUppercase = (cntryName) => {
+		let updatedName;
+		if (cntryName) {
+			updatedName = cntryName.charAt(0).toUpperCase() + cntryName.slice(1);
+		}
+		console.log(updatedName);
+		return updatedName;
+	};
+
 	useEffect(() => {
 		let searchedCountry;
 		const onUpdate = (event) => {
@@ -31,6 +40,11 @@ const Search = React.memo((props) => {
 					return err;
 				}
 			}
+
+			if (searchedCountry.length !== 0) {
+				searchedCountry[0].country = firstLetterTpUppercase(searchedCountry[0].country);
+			}
+
 			return onUpdate(searchedCountry);
 		}, 500);
 
@@ -41,18 +55,16 @@ const Search = React.memo((props) => {
 	}, [enteredFilter, onLoadCountryFilter, inputRef, countryList]);
 
 	return (
-		<section className="search">
-			<div className="search-input">
-				<h3>Search country</h3>
-				<input
-					placeholder="Enter country name..."
-					ref={inputRef}
-					type="text"
-					value={enteredFilter}
-					onChange={(event) => setEnteredFilter(event.target.value)}
-				/>
-			</div>
-		</section>
+		<div className="search-input">
+			<h3>Search country</h3>
+			<input
+				placeholder="Enter country name..."
+				ref={inputRef}
+				type="text"
+				value={enteredFilter}
+				onChange={(event) => setEnteredFilter(event.target.value)}
+			/>
+		</div>
 	);
 });
 
