@@ -121,9 +121,8 @@ const Auth = () => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			<div className="backgroundContainer">
-				<div className="loginBG" />
-			</div>
+			<div className="backgroundContainer" />
+
 			{isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Logging in..." />}
 
 			<div className="authentication">

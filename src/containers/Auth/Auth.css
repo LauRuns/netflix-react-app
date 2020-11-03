@@ -1,69 +1,87 @@
 .backgroundContainer {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    z-index: -1;
-    margin-top: -50px;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	z-index: -1;
+	background: url('../../assets/netflix-image.jpg') no-repeat center center fixed;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: auto;
+	transform: scale(1.4);
 }
-
-.loginBG {
-    background-image: url('../../assets/netflix-image.jpg');
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
-    background-size: 250% 150%;
-    background-position: bottom left;
-    z-index: 2;
-    position: absolute;
-}
-
 
 .authentication {
-    width: 100%;
-    text-align: center;
-    z-index: 5;
+	width: 100%;
+	text-align: center;
+	z-index: 5;
 }
 
 .authentication__header {
-    color: var(--netflix-text);
-    text-align: center;
-    margin-bottom: 2rem;
+	color: var(--netflix-text);
+	text-align: center;
+	margin-bottom: 2rem;
 }
 
 .authentication form {
-    margin: 0 1rem 1rem 1rem;
+	margin: 0 1rem 1rem 1rem;
 }
 
 #loginButton {
-    margin-top: 3rem;
+	margin-top: 3rem;
 }
 
+@media screen and (min-width: 768px) {
+	.backgroundContainer {
+		position: fixed;
+		height: 100vh;
+		width: 100vw;
+		z-index: -1;
+		background: url('../../assets/netflix-image.jpg') no-repeat center center fixed;
+		background-size: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: auto;
+		transform: scale(1.4);
+	}
 
-@media screen and (min-width: 500px) {
-    .authentication {
-        width: 80%;
-        max-width: 35rem;
-        margin: 5rem auto;
-        text-align: center;
-    }
+	.authentication {
+		width: 80%;
+		max-width: 35rem;
+		text-align: center;
+	}
 }
 
 /* iPad */
-@media screen and (max-width: 1024px) and (min-width: 768px) {}
-
-/* iPad pro */
-@media screen and (max-width: 1200px) and (min-width: 1024px) {}
-
-
-@media (min-width: 1024px) {
-    .loginBG {
-        background-size: 100% 100%;
-        background-position: top 20px left;
-    }
+@media screen and (max-width: 1024px) and (min-width: 768px) {
 }
 
-@media (min-width: 2024px) {
-    .loginBG {
-        background-size: 100% 100%;
-    }
+/* iPad pro */
+@media screen and (min-width: 992px) {
+	.backgroundContainer {
+		transform: scale(1.6);
+	}
+}
+
+@media (min-width: 1200px) {
+	.backgroundContainer {
+		transform: scale(1.8);
+	}
+
+	.authentication {
+		width: 100%;
+		max-width: 35rem;
+		margin-top: 9rem;
+		text-align: center;
+		opacity: 1;
+	}
+
+	.authentication__header {
+		color: var(--netflix-text);
+		font-size: x-large;
+		text-align: center;
+		margin-bottom: 2rem;
+	}
 }
