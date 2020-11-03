@@ -1,10 +1,5 @@
-.cntry-page-search {
-	padding: 0.5rem;
-}
-
 .cntry-pages-container {
 	display: grid;
-	margin: 0.1rem;
 
 	grid-template-columns: 1fr;
 	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
@@ -21,6 +16,8 @@
 #search-item {
 	grid-area: a-sec;
 	padding: 0.1rem;
+	margin: 1rem auto;
+	width: 80%;
 }
 
 /* DRY ?? */
@@ -56,5 +53,20 @@
 			'. b b b b b b b b b b .'
 			'. a-sec a-sec a-sec a-sec a-sec a-sec a-sec a-sec a-sec a-sec .'
 			'. c c c c c c c c c c .';
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.cntry-pages-container {
+		margin: 3rem;
+		max-width: 80rem;
+
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
+
+		grid-template-areas:
+			'. . b b b b b b b b . .'
+			'. . a-sec a-sec a-sec a-sec a-sec a-sec a-sec a-sec . .'
+			'. . c c c c c c c c . .';
 	}
 }
