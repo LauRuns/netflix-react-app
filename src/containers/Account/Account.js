@@ -187,7 +187,7 @@ const UserAccount = (props) => {
 							<div onClick={showCountrySet}>
 								<h3>
 									{loadedUser.country
-										? `Your current selected country: ${loadedUser.country}`
+										? `Current country: ${loadedUser.country}`
 										: 'Set your country'}
 								</h3>
 								<Button noborder size="small" type="button">

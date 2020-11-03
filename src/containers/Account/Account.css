@@ -1,6 +1,7 @@
 .account-container {
 	display: grid;
 	margin: 1rem;
+	width: 90%;
 
 	grid-template-columns: 1fr;
 	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
@@ -75,29 +76,6 @@
 	height: 100%;
 }
 
-/* #item-2 ul {
-	list-style: none;
-	width: 200px;
-	height: auto;
-}
-
-#item-2 ul li {
-	padding: 10px 0;
-	border-bottom: 2px solid var(--netflix-primary-red);
-	transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-}
-
-#item-2 ul li:hover {
-	margin-left: 20px;
-	font-weight: 600;
-	color: var(--netflix-primary-red);
-	cursor: pointer;
-} */
-
 #item-3 {
 	grid-area: section-c;
 	padding: 1rem;
@@ -108,7 +86,13 @@
 #item-3 > div {
 	display: flex;
 	flex-direction: column;
-	line-height: 1.5rem;
+	justify-content: flex-start;
+	align-self: start;
+	line-height: 1.6rem;
+}
+#item-3 > div > p {
+	display: flex;
+	justify-content: flex-start;
 }
 
 #item-4 {
@@ -129,18 +113,75 @@
 
 @media only screen and (min-width: 576px) {
 	.account-container {
-		margin: 3rem;
-		max-width: 80rem;
+		/* margin: 3rem;
+		width: 100%; */
 
 		grid-template-columns: repeat(12, 1fr);
 		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
 
 		grid-template-areas:
-			'section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a'
-			'section-b section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c section-c'
-			'div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1'
-			'div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2'
-			'div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3'
-			'div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4';
+			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
+			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
+			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
+			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
+			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
+			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.account-container {
+		/* margin: 3rem; */
+		width: 80%;
+
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
+
+		grid-template-areas:
+			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
+			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
+			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
+			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
+			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
+			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.account-container {
+		margin: 3rem;
+		width: 100%;
+
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
+
+		grid-template-areas:
+			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
+			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
+			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
+			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
+			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
+			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.account-container {
+		margin: 3rem;
+		width: 70%;
+
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
+
+		row-gap: 16px;
+		column-gap: 32px;
+
+		grid-template-areas:
+			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
+			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
+			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
+			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
+			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
+			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
 	}
 }
