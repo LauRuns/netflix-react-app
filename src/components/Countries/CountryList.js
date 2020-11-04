@@ -15,11 +15,25 @@ const CountryList = (props) => {
 		);
 	}
 
+	const registerClickHandler = (e) => {
+		// const clickEvent = e.target.value;
+		console.log('_____:', e);
+		props.onItemClicked(e);
+	};
+
 	return (
 		<React.Fragment>
 			<ul className="CountryList">
 				{props.items.map((country) => {
-					return <Chip key={country.countryId} name={country.country} />;
+					return (
+						<Chip
+							onClick={() =>
+								registerClickHandler({ countryId: country.countryId, name: country.country })
+							}
+							key={country.countryId}
+							name={country.country}
+						/>
+					);
 				})}
 			</ul>
 		</React.Fragment>

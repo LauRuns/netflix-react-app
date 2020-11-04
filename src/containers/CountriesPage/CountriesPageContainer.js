@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import CountryList from '../../components/Countries/CountryList';
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -12,6 +13,8 @@ const CountriesPageContainer = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
+
+	const history = useHistory();
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -34,6 +37,12 @@ const CountriesPageContainer = (props) => {
 		} else {
 			setCountryListData(loadedCountries);
 		}
+	};
+
+	const clickContainerHandler = (e) => {
+		const { name, countryId } = e;
+		console.log('clickContainerHandler', e);
+		history.push('/countryinfo', { name, countryId });
 	};
 
 	return (
@@ -60,7 +69,9 @@ const CountriesPageContainer = (props) => {
 						</div>
 					) : null}
 					<div id="cntry-list-item">
-						{loadedCountries && countryListData && <CountryList items={countryListData} />}
+						{loadedCountries && countryListData && (
+							<CountryList onItemClicked={clickContainerHandler} items={countryListData} />
+						)}
 					</div>
 				</div>
 			</div>
