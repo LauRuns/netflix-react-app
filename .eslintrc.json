@@ -121,6 +121,10 @@
 				"submit": true,
 				"reset": true
 			}
-		]
+		],
+		// setting {} in JSX ?
+		"implicit-arrow-linebreak": ["error", "below"],
+		"multiline": "consistent",
+		"singleline": "consistent"
 	}
 }
