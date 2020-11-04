@@ -124,51 +124,49 @@ const Auth = () => {
 			<div className="backgroundContainer" />
 
 			{isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Logging in..." />}
-			<div className="auth-container">
-				<div className="authentication">
-					<Card cardStyles={loginCardStyles}>
-						<div className="authentication__header">
-							<h1>Login</h1>
-						</div>
-						<form onSubmit={authSubmitHandler}>
-							{!isLoginMode && (
-								<Input
-									element="input"
-									id="name"
-									type="text"
-									validators={[VALIDATOR_REQUIRE()]}
-									errorText="Please enter a name"
-									onInput={inputHandler}
-									placeholder="Username"
-								/>
-							)}
+			<div className="authentication">
+				<Card cardStyles={loginCardStyles}>
+					<div className="authentication__header">
+						<h1>Login</h1>
+					</div>
+					<form onSubmit={authSubmitHandler}>
+						{!isLoginMode && (
 							<Input
 								element="input"
-								id="email"
-								type="email"
-								validators={[VALIDATOR_EMAIL()]}
-								errorText="Please enter a valid email address."
+								id="name"
+								type="text"
+								validators={[VALIDATOR_REQUIRE()]}
+								errorText="Please enter a name"
 								onInput={inputHandler}
-								placeholder="Email"
+								placeholder="Username"
 							/>
-							<Input
-								element="input"
-								id="password"
-								type="password"
-								validators={[VALIDATOR_MINLENGTH(5)]}
-								errorText="Please enter a valid password, min 5 characters."
-								onInput={inputHandler}
-								placeholder="Password"
-							/>
-							<Button id="loginButton" type="submit" disabled={!formState.isValid}>
-								{isLoginMode ? 'LOGIN' : 'SIGNUP'}
-							</Button>
-						</form>
-						<Button inverse onClick={switchModeHandler}>
-							SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIIN'}
+						)}
+						<Input
+							element="input"
+							id="email"
+							type="email"
+							validators={[VALIDATOR_EMAIL()]}
+							errorText="Please enter a valid email address."
+							onInput={inputHandler}
+							placeholder="Email"
+						/>
+						<Input
+							element="input"
+							id="password"
+							type="password"
+							validators={[VALIDATOR_MINLENGTH(5)]}
+							errorText="Please enter a valid password, min 5 characters."
+							onInput={inputHandler}
+							placeholder="Password"
+						/>
+						<Button id="loginButton" type="submit" disabled={!formState.isValid}>
+							{isLoginMode ? 'LOGIN' : 'SIGNUP'}
 						</Button>
-					</Card>
-				</div>
+					</form>
+					<Button inverse onClick={switchModeHandler}>
+						SWITCH TO {isLoginMode ? 'SIGNUP' : 'LOGIIN'}
+					</Button>
+				</Card>
 			</div>
 		</React.Fragment>
 	);
