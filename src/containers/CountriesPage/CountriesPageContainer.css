@@ -1,3 +1,8 @@
+.cntry-page {
+	display: flex;
+	flex-direction: column;
+}
+
 .cntry-pages-container {
 	display: grid;
 

@@ -39,29 +39,29 @@ const CountriesPageContainer = (props) => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			{isLoading && (
-				<div className="center">
-					<LoadingSpinner />
-				</div>
-			)}
-			<div className="cntry-pages-container">
-				{loadedCountries && (
-					<div id="title-item">
-						<h3>There is Netflix data for {loadedCountries.length} countries available!</h3>
+			<div className="cntry-page">
+				{isLoading && (
+					<div className="center">
+						<LoadingSpinner loadingSpinnerMessage="Loading data..." />
 					</div>
 				)}
-				{loadedCountries ? (
-					<div id="search-item">
-						<Search
-							countryList={loadedCountries}
-							setUpdatedCountryData={filteredCountriesHandler}
-						/>
+				<div className="cntry-pages-container">
+					{loadedCountries && (
+						<div id="title-item">
+							<h3>There is Netflix data for {loadedCountries.length} countries available!</h3>
+						</div>
+					)}
+					{loadedCountries ? (
+						<div id="search-item">
+							<Search
+								countryList={loadedCountries}
+								setUpdatedCountryData={filteredCountriesHandler}
+							/>
+						</div>
+					) : null}
+					<div id="cntry-list-item">
+						{loadedCountries && countryListData && <CountryList items={countryListData} />}
 					</div>
-				) : (
-					<h2 id="alt-search">Loading data...</h2>
-				)}
-				<div id="cntry-list-item">
-					{loadedCountries && countryListData && <CountryList items={countryListData} />}
 				</div>
 			</div>
 		</React.Fragment>
