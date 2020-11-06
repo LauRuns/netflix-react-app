@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import Card from '../../shared/components/UIElements/Card/Card';
 import Input from '../../shared/components/FormElements/Input/Input';
 import Button from '../../shared/components/UIElements/Button/Button';
-// import ImageUpload from '../../shared/components/FormElements/ImageUpload';
 import {
 	VALIDATOR_EMAIL,
 	VALIDATOR_MINLENGTH,
@@ -111,13 +110,6 @@ const Auth = () => {
 		}
 	};
 
-	const loginCardStyles = {
-		backgroundColor: '#000000',
-		opacity: 0.9,
-		borderRadius: '4px',
-		padding: '3rem 2rem'
-	};
-
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
@@ -125,7 +117,7 @@ const Auth = () => {
 
 			{isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Logging in..." />}
 			<div className="authentication">
-				<Card cardStyles={loginCardStyles}>
+				<Card login>
 					<div className="authentication__header">
 						<h1>Login</h1>
 					</div>
