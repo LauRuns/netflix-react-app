@@ -7,7 +7,7 @@ import {
 
 import Auth from './containers/Auth/Auth';
 import CountriesPageContainer from './containers/CountriesPage/CountriesPageContainer';
-import CountryDetailPage from './containers/CountryDetailPage/CountryDetailPage';
+import CountryDetailPage from './containers/CountriesPage/CountryDetailPage/CountryDetailPage';
 import Account from './containers/Account/Account';
 import Layout from './containers/layouts/Layout';
 import { AuthContext } from './shared/context/auth-context';
