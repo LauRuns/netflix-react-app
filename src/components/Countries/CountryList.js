@@ -16,8 +16,6 @@ const CountryList = (props) => {
 	}
 
 	const registerClickHandler = (e) => {
-		// const clickEvent = e.target.value;
-		console.log('_____:', e);
 		props.onItemClicked(e);
 	};
 
