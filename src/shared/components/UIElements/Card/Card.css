@@ -1,8 +1,35 @@
 .Card {
-    position: relative;
-    margin: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    border-radius: 4px;
-    overflow: hidden;
-    background: #808080;
+	position: relative;
+	margin: 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	border-radius: 4px;
+	overflow: hidden;
+	background: #808080;
+}
+
+.login-card {
+	background-color: var(--netflix-primary-black);
+	opacity: 1;
+	border-radius: 4px;
+	padding: 3rem 2rem;
+}
+
+.card-expire-item {
+	margin: 1rem 0;
+	padding: 1rem;
+	background-color: lightcoral;
+}
+@media only screen and (min-width: 576px) {
+	.card-expire-item > div {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.login-card {
+		background-color: var(--netflix-primary-black);
+		opacity: 0.86;
+		border-radius: 4px;
+		padding: 3rem 2rem;
+	}
 }
