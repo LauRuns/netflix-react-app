@@ -1,0 +1,93 @@
+.country-detail-page {
+	display: grid;
+	margin: 1rem;
+	width: 90%;
+
+	grid-template-columns: 1fr;
+	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
+
+	row-gap: 16px;
+	column-gap: 16px;
+
+	grid-template-areas:
+		'detail-1'
+		'detail-2'
+		'detail-3'
+		'detail-4'
+		'detail-5'
+		'detail-6';
+}
+
+#detail-nav-1 {
+	grid-area: detail-1;
+}
+
+#detail-container-2 {
+	grid-area: detail-2;
+}
+
+#detail-expiring-3 {
+	grid-area: detail-3;
+}
+
+.detail-actions {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.detail-item {
+	margin: 1rem;
+	padding: 1rem;
+}
+
+@media only screen and (min-width: 576px) {
+	.country-detail-page {
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) repeat(5, minmax(50px, auto));
+
+		grid-template-areas:
+			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
+			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
+			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.country-detail-page {
+		width: 80%;
+
+		grid-template-areas:
+			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
+			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
+			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+	}
+
+	.detail-card {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.country-detail-page {
+		grid-template-areas:
+			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
+			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
+			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.country-detail-page {
+		row-gap: 16px;
+		column-gap: 32px;
+
+		grid-template-areas:
+			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
+			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
+			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+	}
+}
