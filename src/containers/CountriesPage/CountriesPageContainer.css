@@ -18,6 +18,12 @@
 		'c';
 }
 
+.center-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 #search-item {
 	grid-area: a-sec;
 	padding: 0.1rem;
@@ -25,12 +31,9 @@
 	width: 80%;
 }
 
-/* DRY ?? */
 #title-item {
 	grid-area: b;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	text-align: center;
 }
 #cntry-list-item {
 	grid-area: c;
@@ -38,12 +41,8 @@
 	flex-wrap: wrap;
 }
 
-/* DRY ?? */
 #alt-search {
 	grid-area: a-sec;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 @media only screen and (min-width: 576px) {
