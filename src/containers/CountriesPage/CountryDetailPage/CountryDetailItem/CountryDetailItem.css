@@ -1,0 +1,18 @@
+.detail-card {
+	display: flex;
+	flex-direction: column;
+}
+
+.item-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+@media only screen and (min-width: 576px) {
+	.item-details {
+		display: flex;
+		flex-direction: row;
+		background-color: lightcoral;
+	}
+}
