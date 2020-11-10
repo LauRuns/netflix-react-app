@@ -8,6 +8,7 @@ import {
 import Auth from './containers/Auth/Auth';
 import CountriesPageContainer from './containers/CountriesPage/CountriesPageContainer';
 import CountryDetailPage from './containers/CountriesPage/CountryDetailPage/CountryDetailPage';
+import SearchPage from './containers/SearchPage/SearchPage';
 import Account from './containers/Account/Account';
 import Layout from './containers/layouts/Layout';
 import { AuthContext } from './shared/context/auth-context';
@@ -28,6 +29,7 @@ const App = () => {
 				<Route path="/" exact component={CountriesPageContainer} />
 				<Route path="/account" exact component={Account} />
 				<Route path="/countryinfo" exact component={CountryDetailPage} />
+				<Route path="/search" exact component={SearchPage} />
 			</Switch>
 		);
 	} else {
