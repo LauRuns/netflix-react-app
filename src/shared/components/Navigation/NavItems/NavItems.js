@@ -17,6 +17,7 @@ const NavItems = (props) => {
 		<ul className="NavigationItems">
 			{!auth.isLoggedIn && <NavItem link="/auth">Login</NavItem>}
 			{auth.isLoggedIn && <NavItem link="/">Countries</NavItem>}
+			{auth.isLoggedIn && <NavItem link="/search">Search</NavItem>}
 			{auth.isLoggedIn && <NavItem link="/account">MyAccount</NavItem>}
 			{
 				auth.isLoggedIn &&
