@@ -1,0 +1,106 @@
+.search-page-container {
+	display: grid;
+
+	margin: 1rem;
+	width: 90%;
+
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(3, minmax(50px, auto));
+
+	row-gap: 16px;
+	column-gap: 16px;
+
+	grid-template-areas:
+		'section-a'
+		'section-b'
+		'section-c';
+}
+
+.search-page-item {
+	padding: 1rem;
+}
+
+#srch-pg-item-1 {
+	grid-area: section-a;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	line-height: 1.8rem;
+	flex-wrap: wrap;
+}
+
+#srch-pg-item-1 > h1 {
+	font-size: larger;
+}
+
+#srch-pg-item-2 {
+	grid-area: section-b;
+	padding: 1rem;
+	border-bottom: 2px solid var(--netflix-shades-gray-20);
+}
+#srch-pg-item-3 {
+	grid-area: section-c;
+}
+
+#country-srch-selector {
+	padding: 0.7rem;
+	background-color: var(--netflix-shades-gray-40);
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	font-size: medium;
+	margin-top: 0.5rem;
+}
+
+#country-srch-selector:focus,
+#country-srch-selector:active {
+	border: none;
+	outline: none;
+	background-color: var(--netflix-shades-gray-20);
+}
+
+.srch-form > div > div {
+	display: flex;
+	flex-direction: column;
+}
+
+.srch-form > div > div > label {
+	font-weight: bold;
+}
+
+@media only screen and (min-width: 576px) {
+	.search-page-container {
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: repeat(3, minmax(100px, auto));
+
+		grid-template-areas:
+			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
+			'. section-b section-b section-b section-b section-b section-b section-b section-b section-b section-b .'
+			'. section-c section-c section-c section-c section-c section-c section-c section-c section-c section-c .';
+	}
+
+	#srch-pg-item-1 > h1 {
+		font-size: xx-large;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	#srch-pg-item-2 {
+		grid-area: section-b;
+		padding: 1rem;
+	}
+
+	.srch-form > div > div select {
+		width: 60%;
+	}
+
+	.srch-form > div > div > label {
+		font-weight: bold;
+	}
+
+	.title-srch-input Input {
+		width: 60%;
+	}
+}
