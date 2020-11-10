@@ -5,7 +5,9 @@ import './Card.css';
 const card = (props) => {
 	return (
 		<div
-			className={`Card ${props.expire && 'card-expire-item'} ${props.login && 'login-card'}`}
+			className={`Card ${props.expire && 'card-expire-item'} ${props.login && 'login-card'} ${
+				props.searchresult && 'search-result-card'
+			}`}
 			style={props.cardStyles}
 			onClick={props.onClick}
 		>

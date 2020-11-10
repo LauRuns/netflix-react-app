@@ -19,6 +19,26 @@
 	padding: 1rem;
 	background-color: lightcoral;
 }
+
+.search-result-card {
+	margin: 0.5rem 0;
+	padding: 0.5rem;
+	/* max-width: 40%; */
+}
+
+.search-result-content {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	/* width: 100%; */
+}
+
+.search-result-content > img {
+	max-width: 100px;
+	border-radius: 5px;
+}
+
 @media only screen and (min-width: 576px) {
 	.card-expire-item > div {
 		flex-direction: row;
@@ -31,5 +51,24 @@
 		opacity: 0.86;
 		border-radius: 4px;
 		padding: 3rem 2rem;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.search-result-card {
+		margin: 0.5rem 0;
+		padding: 0.5rem;
+		max-width: 40%;
+	}
+
+	.search-result-content {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.search-result-content > img {
+		max-width: auto;
 	}
 }
