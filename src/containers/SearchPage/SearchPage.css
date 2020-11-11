@@ -70,6 +70,10 @@
 	font-weight: bold;
 }
 
+.country-select-dropdown {
+	margin: 1rem 0;
+}
+
 @media only screen and (min-width: 576px) {
 	.search-page-container {
 		grid-template-columns: repeat(12, 1fr);
@@ -100,7 +104,18 @@
 		font-weight: bold;
 	}
 
-	.title-srch-input Input {
-		width: 60%;
+	.title-srch-input {
+		width: 40%;
+	}
+
+	.country-select-dropdown {
+		width: 40%;
+		margin-right: 3rem;
+	}
+
+	.search-form-fields {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
 	}
 }

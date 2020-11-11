@@ -9,6 +9,10 @@ import { VALIDATOR_MAXLENGTH } from '../../shared/util/validators';
 import SearchPageList from './SearchPageList/SearchPageList';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
+
+import Dropdown from '../../shared/components/FormElements/DropDown/Dropdown';
+import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
+
 import './SearchPage.css';
 
 const SearchPage = () => {
@@ -42,7 +46,7 @@ const SearchPage = () => {
 				);
 				console.log(responseData);
 				setCountryList(responseData.results);
-				// setCountryList(null);
+				// setCountryList([]); // when not wanting to make database requests
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
@@ -67,33 +71,20 @@ const SearchPage = () => {
 			);
 
 			console.log(searchResponseData.results);
-
 			setSearchResults(searchResponseData.results);
-			// console.log('SENDING SEARCH QUERY______::');
 		} catch (err) {
 			// Error is handled by useHttpClient
 		}
 	};
 
-	let options;
-	if (countryList) {
-		options = countryList.map((country) => (
-			<option key={country.countryId}>{country.country}</option>
-		));
-	}
-	const selectList = (
-		<div>
-			<label htmlFor="country-srch-selector"> Select country </label>
-			<select id="country-srch-selector" onChange={countrySearchSelectHandler}>
-				{options}
-			</select>
-		</div>
-	);
+	const selectedCountryHandler = ({ countryId }) => {
+		console.log('selectedCountryHandler', countryId);
+		setSearchSelectedCountry(countryId);
+	};
 
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-
 			<div className="search-page-container">
 				<div id="srch-pg-item-1" className="search-page-item">
 					<h1>Search the Netflix unogsNG database!</h1>
@@ -101,17 +92,26 @@ const SearchPage = () => {
 				</div>
 				<div id="srch-pg-item-2" className="search-page-item">
 					<form className="srch-form" onSubmit={searchFormSubmitHandler}>
-						<div className="country-select-section">{selectList}</div>
-						<div className="title-srch-input">
-							<Input
-								id="title"
-								element="input"
-								validators={[VALIDATOR_MAXLENGTH(20)]}
-								errorText="Please enter a title"
-								onInput={inputHandler}
-								placeholder="Enter movie or serie title..."
-								label="Enter title"
-							/>
+						<div className="search-form-fields">
+							<div className="country-select-dropdown">
+								<Dropdown
+									title="Select country"
+									label="Please select a country"
+									items={countryList}
+									selected={selectedCountryHandler}
+								/>
+							</div>
+							<div className="title-srch-input">
+								<Input
+									id="title"
+									element="input"
+									validators={[VALIDATOR_MAXLENGTH(20)]}
+									errorText="Please enter a title"
+									onInput={inputHandler}
+									placeholder="Enter movie or serie title..."
+									label="Enter title"
+								/>
+							</div>
 						</div>
 						<Button type="submit" disabled={!formState.isValid | !searchSelectedCountry}>
 							SEARCH
