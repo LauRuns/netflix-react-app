@@ -42,6 +42,8 @@
 	--breakpoint-md: 768px;
 	--breakpoint-lg: 992px;
 	--breakpoint-xl: 1200px;
+	/* Variables */
+	--netflix-var: 8px;
 }
 html {
 	background-image: radial-gradient(

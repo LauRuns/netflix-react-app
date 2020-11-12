@@ -12,9 +12,9 @@
 	background-color: var(--netflix-shades-gray-40);
 	position: relative;
 	display: flex;
-	min-height: 38px;
+	min-height: calc(var(--netflix-var) * 5);
 	flex-wrap: wrap;
-	border-radius: 5px;
+	border-radius: calc(var(--netflix-var) * 0.625);
 	z-index: 15;
 }
 
@@ -24,7 +24,7 @@
 	align-items: center;
 	cursor: pointer;
 	width: 100%;
-	padding: 20px;
+	padding: 10px;
 }
 
 .dd-header__title--bold {
@@ -37,8 +37,7 @@
 	margin: 0;
 	width: 100%;
 	position: absolute;
-	margin-top: 70px;
-	max-height: 40%;
+	margin-top: calc(var(--netflix-var) * 7.75);
 }
 
 .dd-list li {

@@ -1,42 +1,43 @@
 .form-control {
-    margin: 1rem 0;
+	margin: 1rem 0;
 }
 
 .form-control label,
 .form-control input,
 .form-control textarea {
-    display: block;
+	display: block;
 }
 
 .form-control label {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
 }
 
 .form-control input,
 .form-control textarea {
-    width: 100%;
-    font: inherit;
-    border: 1px solid #4c4c4c;
-    border-radius: 3px;
-    background: var(--netflix-shades-gray-20);
-    padding: 0.15rem 0.25rem;
+	width: 100%;
+	min-height: calc(var(--netflix-var) * 5);
+	font: inherit;
+	border: 1px solid #4c4c4c;
+	border-radius: calc(var(--netflix-var) * 0.625);
+	background: var(--netflix-shades-gray-20);
+	padding: 0.15rem 0.25rem;
 }
 
 .form-control input:focus,
 .form-control textarea:focus {
-    outline: none;
-    background: var(--netflix-shades-gray-20);
-    border-color: var(--netflix-shades-red-80);
+	outline: none;
+	background: var(--netflix-shades-gray-20);
+	border-color: var(--netflix-shades-red-80);
 }
 
 .form-control--invalid label,
 .form-control--invalid p {
-    color: var(--netflix-error-primary);
+	color: var(--netflix-error-primary);
 }
 
 .form-control--invalid input,
 .form-control--invalid textarea {
-    border-color: var(--netflix-error-primary);
-    background: var(--netflix-shades-red-40);
+	border-color: var(--netflix-error-primary);
+	background: var(--netflix-shades-red-40);
 }
