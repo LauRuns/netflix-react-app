@@ -84,7 +84,8 @@ const Auth = () => {
 					}
 				);
 
-				auth.login(responseData.userId, responseData.token);
+				const { userId, token, email } = responseData;
+				auth.login(userId, token, email);
 				history.push('/account');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
