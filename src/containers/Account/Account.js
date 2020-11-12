@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import useAuth from '../../shared/hooks/auth-hook';
+import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import Button from '../../shared/components/UIElements/Button/Button';
@@ -14,8 +14,8 @@ import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import './Account.css';
 
-const UserAccount = (props) => {
-	const { userId } = useAuth();
+const UserAccount = () => {
+	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedUser, setLoadedUser] = useState();
 	const [showProfileInfo, setShowProfileInfo] = useState(false);
@@ -28,13 +28,13 @@ const UserAccount = (props) => {
 	const [displayMessage, setDisplayMessage] = useState(false);
 
 	useEffect(() => {
-		if (!userId) {
+		if (!auth.userId) {
 			return;
 		}
 		const fetchUser = async () => {
 			try {
 				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
+					`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`
 				);
 				setLoadedUser(responseData.result);
 			} catch (err) {
@@ -42,7 +42,7 @@ const UserAccount = (props) => {
 			}
 		};
 		fetchUser();
-	}, [sendRequest, userId]);
+	}, [sendRequest, auth.userId]);
 
 	useEffect(() => {
 		const fetchCountries = async () => {
@@ -111,7 +111,7 @@ const UserAccount = (props) => {
 		setDisplayMessage(false);
 	};
 
-	if (userId) {
+	if (auth.userId) {
 		return (
 			<React.Fragment>
 				<ErrorModal error={error} onClear={clearError} />
