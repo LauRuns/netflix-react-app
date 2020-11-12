@@ -11,10 +11,10 @@ const useAuth = () => {
 	const history = useHistory();
 
 	const login = useCallback((uid, token, expirationDate) => {
-		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-
 		setToken(token);
 		setUserId(uid);
+
+		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
 		setTokenExpirationDate(tokenExpirationDate);
 
 		localStorage.setItem(
