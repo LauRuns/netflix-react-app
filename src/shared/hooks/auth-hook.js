@@ -7,16 +7,16 @@ const useAuth = () => {
 	const [token, setToken] = useState(false);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
 	const [userId, setUserId] = useState(false);
-	// const [email, setEmail] = useState(null);
 
 	const history = useHistory();
 
 	const login = useCallback((uid, token, expirationDate) => {
-		setToken(token);
-		setUserId(uid);
 		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
 
+		setToken(token);
+		setUserId(uid);
 		setTokenExpirationDate(tokenExpirationDate);
+
 		localStorage.setItem(
 			'userData',
 			JSON.stringify({
