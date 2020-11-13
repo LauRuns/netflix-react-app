@@ -1,0 +1,75 @@
+@import '../../../../variables/_variables.scss';
+
+.button {
+	font: inherit;
+	padding: 0.5rem 1.5rem;
+	border: 1px solid $primary-red;
+	border-radius: 4px;
+	background: $primary-red;
+	color: $netflix-text;
+	cursor: pointer;
+	margin-right: 1rem;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.button:focus {
+	outline: none;
+}
+
+.button:hover,
+.button:active {
+	background: $secondary-red;
+	border-color: $secondary-red;
+}
+
+.button--inverse {
+	background: transparent;
+	color: $netflix-text;
+}
+
+.button--inverse:hover,
+.button--inverse:active {
+	color: $netflix-text;
+	background: $secondary-red;
+}
+
+.button--noborder {
+	background: transparent;
+	color: $netflix-text;
+	border: none;
+}
+
+.button--noborder:hover,
+.button--noborder:active {
+	color: $netflix-text;
+	background: $secondary-red;
+}
+
+.button--danger {
+	background: $button-danger;
+	border-color: $button-danger;
+}
+
+.button--danger:hover,
+.button--danger:active {
+	background: $primary-red;
+	border-color: $primary-red;
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+	background: $button-disabled;
+	color: $netflix-text;
+	border-color: $button-disabled;
+	cursor: not-allowed;
+}
+
+.button--small {
+	font-size: 0.8rem;
+}
+
+.button--big {
+	font-size: 1.5rem;
+}

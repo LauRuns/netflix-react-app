@@ -1,0 +1,21 @@
+@import '../../../variables/_variables.scss';
+
+.search-list-results {
+	list-style: none;
+}
+
+@media only screen and (min-width: 768px) {
+	.search-list-results {
+		display: flex;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.search-list-results {
+		display: flex;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+}

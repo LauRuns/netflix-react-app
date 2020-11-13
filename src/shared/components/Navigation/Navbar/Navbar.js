@@ -3,7 +3,7 @@ import React from 'react';
 import NavItems from '../NavItems/NavItems';
 import Logo from '../../../../components/Logo/Logo';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
-import './Navbar.css';
+import './Navbar.scss';
 
 const Navbar = (props) => {
 	return (

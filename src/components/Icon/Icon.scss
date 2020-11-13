@@ -1,0 +1,24 @@
+@import '../../variables/_variables.scss';
+
+.Icon {
+	display: none;
+}
+
+@media (min-width: 500px) {
+	.Icon {
+		background-color: transparent;
+		padding: 8px;
+		height: 80%;
+		box-sizing: border-box;
+		display: block;
+		margin-left: 2rem;
+	}
+
+	.Icon img {
+		height: 100%;
+	}
+
+	.Icon:hover {
+		cursor: pointer;
+	}
+}

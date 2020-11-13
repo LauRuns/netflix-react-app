@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from '../../shared/components/UIElements/Card/Card';
 import Chip from '../../shared/components/UIElements/Chip/Chip';
-import './CountryList.css';
+import './CountryList.scss';
 
 const CountryList = (props) => {
 	if (props.items.length === 0) {

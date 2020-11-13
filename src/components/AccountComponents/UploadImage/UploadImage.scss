@@ -1,0 +1,13 @@
+@import '../../../variables/_variables.scss';
+
+.img-upload-container {
+	background-color: $shades-gray-40;
+	padding: 1rem;
+}
+
+.img-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

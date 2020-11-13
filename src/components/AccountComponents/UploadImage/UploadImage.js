@@ -7,7 +7,7 @@ import ImageUpload from '../../../shared/components/FormElements/ImageUpload/Ima
 import Button from '../../../shared/components/UIElements/Button/Button';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import './UploadImage.css';
+import './UploadImage.scss';
 
 const UploadImage = (props) => {
 	const auth = useContext(AuthContext); // sets up listener to changing values for entire app

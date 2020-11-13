@@ -1,0 +1,51 @@
+@import '../../variables/_variables.scss';
+
+.search-input {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	background-color: $primary-red;
+	padding: 1rem;
+	height: 6rem;
+	border-radius: 5px;
+}
+
+.search-input input {
+	font: inherit;
+	border: none;
+	border-bottom: hidden;
+	padding-left: 0.2rem;
+	width: 200px;
+	background-color: $secondary-black;
+	border-radius: 5px;
+	transition: width 0.8s ease-in-out;
+	padding: 0.5rem;
+	border-bottom: 2px solid transparent;
+}
+
+.search-input input:focus {
+	outline: none;
+	border-bottom: 2px solid $secondary-red;
+	background-color: $background-white;
+	width: 100%;
+}
+
+@media (min-width: 500px) {
+	.search-input {
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		padding: 2rem;
+		height: 5rem;
+	}
+
+	.search-input input {
+		margin-left: 1rem;
+	}
+
+	.search-input input:focus {
+		width: 70%;
+	}
+}

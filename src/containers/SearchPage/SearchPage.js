@@ -13,7 +13,7 @@ import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSp
 import Dropdown from '../../shared/components/FormElements/DropDown/Dropdown';
 import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
 
-import './SearchPage.css';
+import './SearchPage.scss';
 
 const SearchPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -118,7 +118,7 @@ const SearchPage = () => {
 						</Button>
 					</form>
 				</div>
-				<div id="srch-pg-item-3" className="">
+				<div id="srch-pg-item-3">
 					{isLoading ? (
 						<div className="center">
 							<LoadingSpinner

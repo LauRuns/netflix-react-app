@@ -1,0 +1,20 @@
+@import '../../../../variables/_variables.scss';
+
+.detail-card {
+	display: flex;
+	flex-direction: column;
+}
+
+.item-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+@media (min-width: 576px) {
+	.item-details {
+		display: flex;
+		flex-direction: row;
+		background-color: $shades-gray-40;
+	}
+}

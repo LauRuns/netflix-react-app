@@ -14,7 +14,7 @@ import Layout from './containers/layouts/Layout';
 import { AuthContext } from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
 
-import './App.css';
+import './App.scss';
 
 const App = () => {
 	const { token, login, logout, userId } = useAuth();

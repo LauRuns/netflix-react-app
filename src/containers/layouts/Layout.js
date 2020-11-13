@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Navbar from '../../shared/components/Navigation/Navbar/Navbar';
 import SideDrawer from '../../shared/components/Navigation/SideDrawer/SideDrawer';
 import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
-import './Layout.css';
+import './Layout.scss';
 
 const Layout = (props) => {
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);

@@ -3,7 +3,7 @@ import React from 'react';
 import Logo from '../../../../components/Logo/Logo';
 import NavItems from '../NavItems/NavItems';
 
-import './SideDrawer.css';
+import './SideDrawer.scss';
 
 const sideDrawer = (props) => {
 	let attachClasses = ['SideDrawer', 'Open', 'Close'];

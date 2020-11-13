@@ -15,7 +15,7 @@ import { AuthContext } from '../../shared/context/auth-context';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 
-import './Auth.css';
+import './Auth.scss';
 
 const Auth = () => {
 	const auth = useContext(AuthContext);

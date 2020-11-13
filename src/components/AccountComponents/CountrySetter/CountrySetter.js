@@ -5,7 +5,7 @@ import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
-import './CountrySetter.css';
+import './CountrySetter.scss';
 
 const CountrySetter = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();

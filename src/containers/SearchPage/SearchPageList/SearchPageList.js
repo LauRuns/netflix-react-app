@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SearchPageListItem from './SearchPageListItem/SearchPageListItem';
-import './SearchPageList.css';
+import './SearchPageList.scss';
 
 const SearchPageList = (props) => {
 	return (

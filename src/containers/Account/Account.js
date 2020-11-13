@@ -12,7 +12,7 @@ import CountrySet from '../../components/AccountComponents/CountrySetter/Country
 import Avatar from '../../shared/components/UIElements/Avatar/Avatar';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
-import './Account.css';
+import './Account.scss';
 
 const UserAccount = () => {
 	const auth = useContext(AuthContext);

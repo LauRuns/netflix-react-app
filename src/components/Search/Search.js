@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import './Search.css';
+import './Search.scss';
 
 const Search = React.memo((props) => {
 	const { onLoadCountryFilter, countryList } = props;

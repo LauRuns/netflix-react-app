@@ -1,19 +1,19 @@
 import React from 'react';
 
-import './DrawerToggle.css';
+import './DrawerToggle.scss';
 
 const drawerToggle = (props) => {
 	return (
 		<div className="menu-container" onClick={props.clicked}>
 			<div id="menu" />
 		</div>
-	// <div className="DrawerToggle" onClick={
-	//     props.clicked
-	// }>
-	//     <div></div>
-	//     <div></div>
-	//     <div></div>
-	// </div>
+		// <div className="DrawerToggle" onClick={
+		//     props.clicked
+		// }>
+		//     <div></div>
+		//     <div></div>
+		//     <div></div>
+		// </div>
 	);
 };
 

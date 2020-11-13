@@ -7,7 +7,7 @@ import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModa
 import { AuthContext } from '../../../../shared/context/auth-context';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
 import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import './SearchPageListItem';
+import './SearchPageListItem.scss';
 
 const SearchPageListItem = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();

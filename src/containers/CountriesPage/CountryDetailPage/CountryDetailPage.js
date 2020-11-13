@@ -7,7 +7,7 @@ import LoadingSpinner from '../../../shared/components/UIElements/Spinner/Loadin
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
 import Button from '../../../shared/components/UIElements/Button/Button';
 import CountryDetailItem from './CountryDetailItem/CountryDetailItem';
-import './CountryDetailPage.css';
+import './CountryDetailPage.scss';
 
 const CountryDetailPage = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();

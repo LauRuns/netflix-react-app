@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import './Logo.css';
+import './Logo.scss';
 import NetflixLogo from '../../assets/netflix_hexagon.png';
 
 const logo = (props) => {

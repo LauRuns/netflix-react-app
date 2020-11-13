@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Chip.css';
+import './Chip.scss';
 
 const Chip = (props) => {
 	return (

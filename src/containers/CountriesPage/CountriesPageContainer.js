@@ -7,7 +7,7 @@ import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSp
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import Search from '../../components/Search/Search';
 
-import './CountriesPageContainer.css';
+import './CountriesPageContainer.scss';
 
 const CountriesPageContainer = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();

@@ -9,7 +9,7 @@ import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/Loa
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../../shared/context/auth-context';
 
-import './CountryDetailItem';
+import './CountryDetailItem.scss';
 
 const CountryDetailItem = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();

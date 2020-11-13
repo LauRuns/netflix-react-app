@@ -1,0 +1,23 @@
+@import '../../../variables/_variables.scss';
+
+.profile-info-container {
+	flex-direction: column;
+	background-color: $shades-gray-40;
+	padding: 1rem;
+}
+
+.profile-form {
+	width: 100%;
+}
+
+@media screen and (min-width: 567px) {
+	.profile-info-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+
+	.profile-form {
+		width: 80%;
+	}
+}

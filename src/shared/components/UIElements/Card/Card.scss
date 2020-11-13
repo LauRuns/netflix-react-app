@@ -1,0 +1,120 @@
+@import '../../../../variables/_variables.scss';
+
+.Card {
+	position: relative;
+	margin: 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	border-radius: 4px;
+	overflow: hidden;
+	background: $shades-gray-40;
+}
+
+.login-card {
+	background-color: $primary-black;
+	opacity: 1;
+	border-radius: 4px;
+	padding: 3rem 2rem;
+}
+
+.card-expire-item {
+	margin: 1rem 0;
+	padding: 1rem;
+	background-color: lightcoral;
+}
+
+/* Search result card styling */
+.sr-card {
+	background-color: teal;
+	display: inline-block;
+	margin: 0.1rem;
+}
+
+.sr-res-mobile-only {
+	margin-bottom: -5px;
+}
+
+.search-result-card-header,
+.sr-res-content-container,
+.search-result-content {
+	display: none;
+}
+
+.search-result-content > img {
+	max-width: auto;
+	border-radius: 5px;
+}
+
+@media (min-width: $breakpoint-sm) {
+	.card-expire-item > div {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.login-card {
+		background-color: $primary-black;
+		opacity: 0.86;
+		border-radius: 4px;
+		padding: 3rem 2rem;
+	}
+
+	.sr-res-mobile-only {
+		display: none;
+	}
+
+	.search-result-card {
+		margin: 0.5rem 0;
+		max-width: 45%;
+	}
+
+	.search-result-card-header {
+		background-color: $shades-gray-60;
+		padding: 0.5rem;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+
+	.sr-res-content-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.search-result-content {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding: 0.5rem;
+		width: 50%;
+	}
+
+	.sr-res-img-container {
+		margin-bottom: -5px;
+	}
+}
+
+@media (min-width: $breakpoint-lg) {
+	.search-result-card {
+		max-width: 45%;
+	}
+
+	.sr-res-content-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.search-result-content {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-start;
+		padding: 0.5rem;
+		width: 50%;
+	}
+
+	.sr-res-img-container {
+		margin-bottom: -5px;
+	}
+}

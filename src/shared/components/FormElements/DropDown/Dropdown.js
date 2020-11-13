@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Backdrop from '../../../components/UIElements/Backdrop/Backdrop';
 
-import './Dropdown.css';
+import './Dropdown.scss';
 
 const Dropdown = ({ title, label, items, selected }) => {
 	const [open, setOpen] = useState(false);

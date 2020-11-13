@@ -7,7 +7,7 @@ import NavItem from './NavItem/NavItem';
 // import Icon from '.././../../../components/Icon/Icon';
 // import Tooltip from '../../UIElements/Tooltip/Tooltip';
 
-import './NavItems.css';
+import './NavItems.scss';
 import LogoutLogo from '../../../../assets/log-out.svg';
 
 const NavItems = (props) => {

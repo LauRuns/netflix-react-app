@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card from '../../../shared/components/UIElements/Card/Card';
-import './Country.css';
+import './Country.scss';
 
 const country = (props) => {
 	return (
