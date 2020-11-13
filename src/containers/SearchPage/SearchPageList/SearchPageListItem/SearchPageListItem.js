@@ -89,11 +89,19 @@ const SearchPageListItem = (props) => {
 				</div>
 			) : (
 				<Card searchresult onClick={() => onOpenSearchDetailHandler(props.netflixId)}>
-					<h3>{props.title}</h3>
-					<p>This is a Netflix {props.contentType}.</p>
-					<br />
-					<div className="search-result-content">
-						<p>{props.synopsis}</p>
+					<div className="search-result-card-header">
+						<h3>{props.title}</h3>
+						<p>This is a Netflix {props.contentType}.</p>
+					</div>
+					<div className="sr-res-content-container">
+						<div className="search-result-content">
+							<p>{props.synopsis}</p>
+						</div>
+						<div className="sr-res-img-container">
+							<img src={props.img} alt={props.netflixId} />
+						</div>
+					</div>
+					<div className="sr-res-mobile-only">
 						<img src={props.img} alt={props.netflixId} />
 					</div>
 				</Card>

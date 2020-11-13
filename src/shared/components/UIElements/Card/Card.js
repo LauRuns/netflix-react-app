@@ -6,7 +6,7 @@ const card = (props) => {
 	return (
 		<div
 			className={`Card ${props.expire && 'card-expire-item'} ${props.login && 'login-card'} ${
-				props.searchresult && 'search-result-card'
+				props.searchresult && 'search-result-card sr-card'
 			}`}
 			style={props.cardStyles}
 			onClick={props.onClick}
