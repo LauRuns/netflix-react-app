@@ -87,8 +87,10 @@ const SearchPage = () => {
 			<ErrorModal error={error} onClear={clearError} />
 			<div className="search-page-container">
 				<div id="srch-pg-item-1" className="search-page-item">
-					<h1>Search the Netflix unogsNG database!</h1>
-					<p>Check if content is available on Netflix for a specific country</p>
+					<div className="sr-pg-itm-1-content">
+						<h1>Search the Netflix unogsNG database!</h1>
+						<p>Check if content is available on Netflix for a specific country.</p>
+					</div>
 				</div>
 				<div id="srch-pg-item-2" className="search-page-item">
 					<form className="srch-form" onSubmit={searchFormSubmitHandler}>
@@ -113,9 +115,11 @@ const SearchPage = () => {
 								/>
 							</div>
 						</div>
-						<Button type="submit" disabled={!formState.isValid | !searchSelectedCountry}>
-							SEARCH
-						</Button>
+						<div className="sr-form-btn">
+							<Button type="submit" disabled={!formState.isValid | !searchSelectedCountry}>
+								SEARCH
+							</Button>
+						</div>
 					</form>
 				</div>
 				<div id="srch-pg-item-3">
@@ -126,13 +130,15 @@ const SearchPage = () => {
 							/>
 						</div>
 					) : (
-						<h3>
+						<h3 className="sr-list-rs">
 							{searchResults
 								? ` ${searchResults.length} items found`
 								: 'You have not entered a search query yet...'}
 						</h3>
 					)}
-					{searchResults && !isLoading && <SearchPageList list={searchResults} />}
+					<div className="sr-res-content">
+						{searchResults && !isLoading && <SearchPageList list={searchResults} />}
+					</div>
 				</div>
 			</div>
 		</React.Fragment>
