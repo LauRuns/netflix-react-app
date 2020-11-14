@@ -51,7 +51,8 @@ const App = () => {
 			}}
 		>
 			<Layout />
-			<div className="content center-route-content">{routes}</div>
+			<div className="content">{routes}</div>
+
 			{/* </Layout> */}
 		</AuthContext.Provider>
 	);

@@ -25,16 +25,9 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Roboto Condensed', sans-serif;
 	color: $netflix-text;
+	height: 100%;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-.center {
-	text-align: center;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 }
