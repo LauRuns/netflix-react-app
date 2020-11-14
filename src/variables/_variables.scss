@@ -37,4 +37,13 @@ $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
 /* Variables */
+$default-var: 1rem;
 $netflix-var: 8px;
+
+.center {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
