@@ -71,14 +71,15 @@ const SearchPageListItem = (props) => {
 					footerClass="place-item__modal-actions"
 					footer={<Button onClick={closeDetailInfo}>CLOSE</Button>}
 				>
-					<div>
-						<p>{detailInfo.imdbplot || detailInfo.synopsis}</p>
-						<hr />
+					<div className="sr-res-countrylist">
 						<h3>Available in countries:</h3>
-						{cList &&
-							cList.map((element) => {
-								return <span key={element}>{element}-</span>;
-							})}
+						<br />
+						<div>
+							{cList &&
+								cList.map((element) => {
+									return <p key={element}>{element}</p>;
+								})}
+						</div>
 					</div>
 				</Modal>
 			)}
@@ -88,23 +89,38 @@ const SearchPageListItem = (props) => {
 					<LoadingSpinner loadingSpinnerMessage={`Fetching data for ${props.title}`} />
 				</div>
 			) : (
-				<Card searchresult onClick={() => onOpenSearchDetailHandler(props.netflixId)}>
-					<div className="search-result-card-header">
-						<h3>{props.title}</h3>
-						<p>This is a Netflix {props.contentType}.</p>
-					</div>
-					<div className="sr-res-content-container">
-						<div className="search-result-content">
-							<p>{props.synopsis}</p>
+				<div className="search-result">
+					<Card searchresult onClick={() => onOpenSearchDetailHandler(props.netflixId)}>
+						<div className="sr-res-card-header">
+							<h3>{props.title}</h3>
+							<p>This is a Netflix {props.contentType}.</p>
 						</div>
-						<div className="sr-res-img-container">
+						<div className="sr-res-content-container">
+							<div className="sr-res-synopsis">
+								<div>
+									<p>{props.synopsis}</p>
+									<br />
+									<hr />
+									<br />
+									<p>
+										<b>Production year: </b>
+										{props.year}
+									</p>
+									<p>
+										<b>Netflix rating: </b>
+										{props.avgrating}
+									</p>
+								</div>
+							</div>
+							<div className="sr-res-img-container">
+								<img src={props.img} alt={props.netflixId} />
+							</div>
+						</div>
+						<div className="sr-res-mobile-only">
 							<img src={props.img} alt={props.netflixId} />
 						</div>
-					</div>
-					<div className="sr-res-mobile-only">
-						<img src={props.img} alt={props.netflixId} />
-					</div>
-				</Card>
+					</Card>
+				</div>
 			)}
 		</React.Fragment>
 	);

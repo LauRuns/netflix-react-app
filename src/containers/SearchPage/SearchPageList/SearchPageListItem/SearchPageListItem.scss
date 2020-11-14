@@ -1,1 +1,72 @@
 @import '../../../../variables/_variables.scss';
+
+.search-result {
+	margin: $default-var / 10;
+
+	@media (min-width: $breakpoint-sm) {
+	}
+
+	@media (min-width: $breakpoint-md) {
+	}
+
+	@media (min-width: $breakpoint-lg) {
+		width: 45%;
+	}
+}
+
+/* Search result card styling */
+.sr-res-mobile-only {
+	margin-bottom: -5px;
+	@media (min-width: $breakpoint-sm) {
+		display: block;
+	}
+
+	@media (min-width: $breakpoint-md) {
+		display: none;
+	}
+}
+
+.sr-res-card-header,
+.sr-res-content-container {
+	display: none;
+
+	@media (min-width: $breakpoint-md) {
+		display: block;
+	}
+}
+
+.sr-res-card-header {
+	background-color: $shades-gray-60;
+	padding: $default-var;
+}
+
+.sr-res-content-container {
+	line-height: $default-var * 1.4;
+	@media (min-width: $breakpoint-md) {
+		display: flex;
+		flex-direction: row;
+
+		.sr-res-synopsis {
+			padding: $default-var;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.sr-res-img-container {
+			padding: $default-var / 4;
+		}
+	}
+}
+
+.sr-res-countrylist {
+	h3 {
+		column-span: all;
+	}
+
+	div {
+		column-count: 3;
+		column-gap: $default-var;
+		column-width: auto;
+	}
+}
