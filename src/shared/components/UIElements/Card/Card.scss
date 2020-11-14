@@ -14,107 +14,57 @@
 	opacity: 1;
 	border-radius: 4px;
 	padding: 3rem 2rem;
+
+	@media (min-width: $breakpoint-sm) {
+		opacity: 0.87;
+	}
 }
 
 .card-expire-item {
 	margin: 1rem 0;
 	padding: 1rem;
-	background-color: lightcoral;
+	background-color: lightcoral; // dev only --> remove when done
+
+	@media (min-width: $breakpoint-sm) {
+		div {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
 }
 
 /* Search result card styling */
+
 .sr-card {
-	background-color: teal;
-	display: inline-block;
-	margin: 0.1rem;
+	// background-color: peru;
+	display: flex;
+	flex-direction: column;
 }
 
 .sr-res-mobile-only {
 	margin-bottom: -5px;
-}
-
-.search-result-card-header,
-.sr-res-content-container,
-.search-result-content {
-	display: none;
-}
-
-.search-result-content > img {
-	max-width: auto;
-	border-radius: 5px;
-}
-
-@media (min-width: $breakpoint-sm) {
-	.card-expire-item > div {
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
+	@media (min-width: $breakpoint-sm) {
+		display: block;
 	}
 
-	.login-card {
-		background-color: $primary-black;
-		opacity: 0.86;
-		border-radius: 4px;
-		padding: 3rem 2rem;
-	}
-
-	.sr-res-mobile-only {
+	@media (min-width: $breakpoint-md) {
 		display: none;
 	}
-
-	.search-result-card {
-		margin: 0.5rem 0;
-		max-width: 45%;
-	}
-
-	.search-result-card-header {
-		background-color: $shades-gray-60;
-		padding: 0.5rem;
-		overflow: hidden;
-		white-space: nowrap;
-	}
-
-	.sr-res-content-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
-
-	.search-result-content {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-start;
-		padding: 0.5rem;
-		width: 50%;
-	}
-
-	.sr-res-img-container {
-		margin-bottom: -5px;
-	}
 }
 
-@media (min-width: $breakpoint-lg) {
-	.search-result-card {
-		max-width: 45%;
-	}
+.sr-res-card-header,
+.sr-res-content-container {
+	display: none;
 
-	.sr-res-content-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
+	@media (min-width: $breakpoint-md) {
+		display: block;
 
-	.search-result-content {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-start;
-		padding: 0.5rem;
-		width: 50%;
-	}
-
-	.sr-res-img-container {
-		margin-bottom: -5px;
+		.sr-res-card-header {
+			background-color: orangered;
+			h3 {
+				background-color: orchid;
+			}
+		}
 	}
 }
