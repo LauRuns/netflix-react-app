@@ -42,7 +42,7 @@ const ImageUpload = (props) => {
 	};
 
 	return (
-		<div className="form-control">
+		<div className="img-upload-form-control">
 			<input
 				id={props.id}
 				ref={filePickerRef}
