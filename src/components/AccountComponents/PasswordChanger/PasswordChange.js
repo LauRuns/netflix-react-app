@@ -37,6 +37,7 @@ const PasswordChange = (props) => {
 
 		if (formState.inputs.newPassword.value !== formState.inputs.confirmNewPassword.value) {
 			formState.isValid = false;
+			return alert("The new and confirm password don't match... Please try again.");
 		}
 
 		try {
