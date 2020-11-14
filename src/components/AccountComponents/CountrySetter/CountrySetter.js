@@ -5,6 +5,7 @@ import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
+import Dropdown from '../../../shared/components/FormElements/DropDown/Dropdown';
 import './CountrySetter.scss';
 
 const CountrySetter = (props) => {
@@ -15,7 +16,7 @@ const CountrySetter = (props) => {
 
 	if (!props.countryData) {
 		return (
-			<div className="center loading-countries">
+			<div className="loading-countries">
 				<LoadingSpinner loadingSpinnerMessage="Loading country data..." />
 			</div>
 		);
@@ -24,7 +25,7 @@ const CountrySetter = (props) => {
 	const countryList = props.countryData;
 
 	const countrySelectHandler = (e) => {
-		setSelectedCountry(e.target.value);
+		setSelectedCountry(e.country);
 	};
 
 	const userUpdateCountryHandler = async (event) => {
@@ -53,16 +54,6 @@ const CountrySetter = (props) => {
 		props.setNewSelectedCountry(event);
 	};
 
-	const options = countryList.map((country) => (
-		<option key={country.countryId}>{country.country}</option>
-	));
-
-	const selectList = (
-		<select defaultValue={props.userCountry} id="countrySelector" onChange={countrySelectHandler}>
-			{options}
-		</select>
-	);
-
 	if (isLoading) {
 		return (
 			<div className="center">
@@ -83,7 +74,14 @@ const CountrySetter = (props) => {
 							selected country.
 						</p>
 					</div>
-					<div className="country-select">{selectList}</div>
+					<div className="country-dd-selector">
+						<Dropdown
+							items={countryList}
+							label="Select country"
+							title="Select one..."
+							selected={countrySelectHandler}
+						/>
+					</div>
 					<div className="check-save">
 						<p>
 							{selectedCountry
