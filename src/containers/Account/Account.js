@@ -132,7 +132,7 @@ const UserAccount = () => {
 
 				{!isLoading && loadedUser && (
 					<div className="account-container">
-						<div className="item" id="item-1">
+						<div id="item-1">
 							<h2>Useraccount for {loadedUser.name.toUpperCase()}</h2>
 						</div>
 
@@ -152,7 +152,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div className="item" id="item-3">
+						<div id="item-3">
 							<div>
 								<p>NAME: {loadedUser.name}</p>
 								<p>EMAIL: {loadedUser.email}</p>
@@ -166,7 +166,7 @@ const UserAccount = () => {
 							</Button>
 						</div>
 
-						<div className="item" id="item-4">
+						<div id="item-4">
 							<div onClick={showProfileInfoHandler}>
 								<h3>Update profile information</h3>
 								<Button noborder size="small" type="button">
@@ -174,16 +174,18 @@ const UserAccount = () => {
 								</Button>
 							</div>
 							{showProfileInfo && (
-								<ProfileInformation
-									username={loadedUser.name}
-									email={loadedUser.email}
-									country={loadedUser.country}
-									setUpdatedUserData={reloadUserData}
-								/>
+								<div className="itm-4-profile">
+									<ProfileInformation
+										username={loadedUser.name}
+										email={loadedUser.email}
+										country={loadedUser.country}
+										setUpdatedUserData={reloadUserData}
+									/>
+								</div>
 							)}
 						</div>
 
-						<div className="item" id="item-5">
+						<div id="item-5">
 							<div onClick={showCountrySet}>
 								<h3>
 									{loadedUser.country
@@ -205,7 +207,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div className="item" id="item-6">
+						<div id="item-6">
 							<div onClick={showImageUploader}>
 								<h3>Upload profile image</h3>
 								<Button noborder size="small" type="button">
@@ -221,7 +223,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div className="item" id="item-7">
+						<div id="item-7">
 							<div onClick={showPasswordChange}>
 								<h3>Change password</h3>
 								<Button noborder size="small" type="button">

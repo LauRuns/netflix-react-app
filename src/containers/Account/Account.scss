@@ -8,8 +8,8 @@
 	grid-template-columns: 1fr;
 	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
 
-	row-gap: 16px;
-	column-gap: 16px;
+	row-gap: $default-var;
+	column-gap: $default-var;
 
 	grid-template-areas:
 		'section-a'
@@ -19,48 +19,73 @@
 		'div-2'
 		'div-3'
 		'div-4';
+
+	@media (min-width: $breakpoint-sm) {
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
+
+		grid-template-areas:
+			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
+			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
+			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
+			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
+			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
+			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
+	}
+
+	@media (min-width: $breakpoint-md) {
+		width: 80%;
+	}
+
+	@media (min-width: $breakpoint-lg) {
+	}
+
+	@media (min-width: $breakpoint-xl) {
+		grid-template-areas:
+			'. . section-a section-a section-a section-a section-a section-a section-a section-a . .'
+			'. . section-b section-b section-b section-c section-c section-c section-c section-c . .'
+			'. . div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 . .'
+			'. . div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 . .'
+			'. . div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 . .'
+			'. . div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 . .';
+	}
 }
 
 .item {
 	display: flex;
+	flex-direction: column;
+	height: auto;
 	border-radius: 4px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 	transition: all 0.35s ease-in-out;
-	height: auto;
-	flex-direction: column;
-	overflow: hidden;
-	background-color: $shades-gray-60;
+	background-color: $shades-gray-80;
 	margin: 0.1rem;
-}
 
-.item > div:nth-child(1) {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 1rem;
-}
+	& > div:nth-child(1) {
+		display: flex;
+		justify-content: space-between;
+		padding: $default-var;
 
-.item > div:nth-child(1) > h3 {
-	border-bottom: 2px solid $primary-red;
-	transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-	-ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
-}
+		& > h3 {
+			border-bottom: 1px solid $primary-red;
+			transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+			-webkit-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+			-moz-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+			-o-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
+			-ms-transition: margin-left 0.3s linear, font-weight 0.2s linear, color 0.3s linear;
 
-.item > div > :nth-child(2) {
-	cursor: pointer;
-}
-
-.item > div > h3:hover {
-	margin-left: 20px;
-	font-weight: 600;
-	color: $primary-red;
-	cursor: pointer;
+			&:hover {
+				margin-left: 20px;
+				font-weight: 600;
+				color: $primary-red;
+				cursor: pointer;
+			}
+		}
+	}
 }
 
 #item-1 {
+	@extend .item;
 	grid-area: section-a;
 	justify-content: center;
 	align-items: center;
@@ -71,115 +96,44 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
 
-.user-item__image {
-	width: 100%;
-	height: 100%;
+	.user-item__image {
+		width: 100%;
+		height: 100%;
+	}
 }
 
 #item-3 {
+	@extend .item;
 	grid-area: section-c;
-	padding: 1rem;
+	padding: $default-var;
 	flex-direction: column;
 	justify-content: space-between;
-}
 
-#item-3 > div {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-self: start;
-	line-height: 1.6rem;
-}
-#item-3 > div > p {
-	display: flex;
-	justify-content: flex-start;
+	& > div:first-of-type {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		line-height: 1.6rem;
+	}
 }
 
 #item-4 {
+	@extend .item;
 	grid-area: div-1;
 }
 
 #item-5 {
+	@extend .item;
 	grid-area: div-2;
 }
 
 #item-6 {
+	@extend .item;
 	grid-area: div-3;
 }
 
 #item-7 {
+	@extend .item;
 	grid-area: div-4;
-}
-
-@media (min-width: 576px) {
-	.account-container {
-		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
-
-		grid-template-areas:
-			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
-			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
-			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
-			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
-			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
-			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
-	}
-}
-
-@media (min-width: 768px) {
-	.account-container {
-		width: 80%;
-
-		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
-
-		grid-template-areas:
-			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
-			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
-			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
-			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
-			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
-			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
-	}
-}
-
-@media (min-width: 992px) {
-	.account-container {
-		margin: 3rem;
-		width: 100%;
-
-		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
-
-		grid-template-areas:
-			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
-			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
-			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
-			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
-			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
-			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
-	}
-}
-
-@media (min-width: 1200px) {
-	.account-container {
-		margin: 3rem;
-		width: 70%;
-
-		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
-
-		row-gap: 16px;
-		column-gap: 32px;
-
-		grid-template-areas:
-			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
-			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
-			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
-			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
-			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
-			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
-	}
 }
