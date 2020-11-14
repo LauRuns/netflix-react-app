@@ -48,34 +48,32 @@ const CountriesPageContainer = (props) => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			<div className="cntry-page">
-				{isLoading ? (
-					<div className="center">
-						<LoadingSpinner loadingSpinnerMessage="Loading data..." />
-					</div>
-				) : (
-					<div className="cntry-pages-container">
-						{loadedCountries && (
-							<div id="title-item">
-								<h1>There is Netflix data for {loadedCountries.length} countries available!</h1>
-							</div>
-						)}
-						{loadedCountries ? (
-							<div id="search-item" className="center-item">
-								<Search
-									countryList={loadedCountries}
-									setUpdatedCountryData={filteredCountriesHandler}
-								/>
-							</div>
-						) : null}
-						<div id="cntry-list-item" className="center-item">
-							{loadedCountries && countryListData && (
-								<CountryList onItemClicked={clickContainerHandler} items={countryListData} />
-							)}
+			{isLoading ? (
+				<div className="center">
+					<LoadingSpinner loadingSpinnerMessage="Loading data..." />
+				</div>
+			) : (
+				<div className="cntry-pages-container">
+					{loadedCountries && (
+						<div id="title-item">
+							<h1>There is Netflix data for {loadedCountries.length} countries available!</h1>
 						</div>
+					)}
+					{loadedCountries ? (
+						<div id="search-item">
+							<Search
+								countryList={loadedCountries}
+								setUpdatedCountryData={filteredCountriesHandler}
+							/>
+						</div>
+					) : null}
+					<div id="cntry-list-item">
+						{loadedCountries && countryListData && (
+							<CountryList onItemClicked={clickContainerHandler} items={countryListData} />
+						)}
 					</div>
-				)}
-			</div>
+				</div>
+			)}
 		</React.Fragment>
 	);
 };
