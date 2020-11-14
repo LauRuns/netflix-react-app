@@ -78,7 +78,7 @@ const Input = (props) => {
 		>
 			<label htmlFor={props.id}>{props.label}</label>
 			{element}
-			{!inputState.value && inputState.isTouched && <p>{props.errorText}</p>}
+			{!inputState.value && inputState.isTouched && <p id="input-errortext">{props.errorText}</p>}
 		</div>
 	);
 };

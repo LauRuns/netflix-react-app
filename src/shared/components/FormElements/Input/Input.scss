@@ -2,44 +2,55 @@
 
 .form-control {
 	margin: 1rem 0;
+	position: relative;
+
+	#input-errortext {
+		position: absolute;
+		@media (max-width: 667px) {
+			right: 0;
+		}
+	}
+
+	label,
+	input,
+	textarea {
+		display: block;
+	}
+
+	label {
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		min-height: $default-var * 2.5;
+		font-size: $default-var;
+		color: $primary-black;
+		border: none;
+		border-radius: 5px;
+		background: $shades-gray-40;
+		padding: 0.15rem 0.25rem;
+
+		&:focus {
+			outline: none;
+			background: $shades-gray-40;
+			border-color: $shades-red-80;
+			color: $netflix-text;
+		}
+	}
 }
 
-.form-control label,
-.form-control input,
-.form-control textarea {
-	display: block;
-}
+.form-control--invalid {
+	label,
+	p {
+		color: $error-primary;
+	}
 
-.form-control label {
-	font-weight: bold;
-	margin-bottom: 0.5rem;
-}
-
-.form-control input,
-.form-control textarea {
-	width: 100%;
-	min-height: calc($netflix-var * 5);
-	font: inherit;
-	border: 1px solid #4c4c4c;
-	border-radius: calc($netflix-var * 0.625);
-	background: $shades-gray-20;
-	padding: 0.15rem 0.25rem;
-}
-
-.form-control input:focus,
-.form-control textarea:focus {
-	outline: none;
-	background: $shades-gray-20;
-	border-color: $shades-red-80;
-}
-
-.form-control--invalid label,
-.form-control--invalid p {
-	color: $error-primary;
-}
-
-.form-control--invalid input,
-.form-control--invalid textarea {
-	border-color: $error-primary;
-	background: $shades-red-40;
+	input,
+	textarea {
+		border-color: $error-primary;
+		background: $shades-red-40;
+	}
 }
