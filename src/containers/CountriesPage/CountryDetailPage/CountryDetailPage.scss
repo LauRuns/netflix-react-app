@@ -1,95 +1,84 @@
 @import '../../../variables/_variables.scss';
 
-.country-detail-page {
+.country-detail-page-container {
+	background-color: mediumorchid;
 	display: grid;
-	margin: 1rem;
-	width: 90%;
+	width: 100%;
 
 	grid-template-columns: 1fr;
-	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
-
-	row-gap: 16px;
-	column-gap: 16px;
+	grid-template-rows: repeat(3, minmax(50px, auto));
 
 	grid-template-areas:
-		'detail-1'
-		'detail-2'
-		'detail-3'
-		'detail-4'
-		'detail-5'
-		'detail-6';
-}
+		'xg'
+		'yg'
+		'zg';
 
-#detail-nav-1 {
-	grid-area: detail-1;
-}
-
-#detail-container-2 {
-	grid-area: detail-2;
-}
-
-#detail-expiring-3 {
-	grid-area: detail-3;
-}
-
-.detail-actions {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.detail-item {
-	margin: 1rem;
-	padding: 1rem;
-}
-
-@media (min-width: 576px) {
-	.country-detail-page {
+	@media (min-width: $breakpoint-sm) {
+		background-color: green;
 		grid-template-columns: repeat(12, 1fr);
-		grid-template-rows: 50px minmax(50px, auto) repeat(5, minmax(50px, auto));
 
 		grid-template-areas:
-			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
-			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
-			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+			'. xg xg xg xg xg xg xg xg xg xg .'
+			'. yg yg yg yg yg yg yg yg yg yg .'
+			'. zg zg zg zg zg zg zg zg zg zg .';
+	}
+
+	@media (min-width: $breakpoint-md) {
+	}
+	@media (min-width: $breakpoint-lg) {
+		background-color: mediumaquamarine;
+		grid-template-areas:
+			'. . xg xg xg xg xg xg xg xg . .'
+			'. . yg yg yg yg yg yg yg yg . .'
+			'. . zg zg zg zg zg zg zg zg . .';
+	}
+	@media (min-width: $breakpoint-xl) {
 	}
 }
 
-@media (min-width: 768px) {
-	.country-detail-page {
-		width: 80%;
+#detail-1 {
+	background-color: lightskyblue;
+	grid-area: xg;
 
-		grid-template-areas:
-			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
-			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
-			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
-	}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1rem 0;
 
-	.detail-card {
-		display: flex;
-		flex-direction: column;
+	@media (min-width: $breakpoint-sm) {
+		flex-direction: row;
 		justify-content: space-between;
 	}
 }
 
-@media (min-width: 992px) {
-	.country-detail-page {
-		grid-template-areas:
-			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
-			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
-			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+#detail-2 {
+	background-color: lightcoral;
+	grid-area: yg;
+
+	.detail-actions {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+
+		& Button {
+			margin: 0.2rem;
+		}
+
+		@media (min-width: $breakpoint-sm) {
+			flex-direction: row;
+			justify-content: space-around;
+		}
 	}
 }
 
-@media (min-width: 1200px) {
-	.country-detail-page {
-		row-gap: 16px;
-		column-gap: 32px;
+#detail-3 {
+	background-color: lightcyan;
+	grid-area: zg;
 
-		grid-template-areas:
-			'. detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 detail-1 .'
-			'. detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 detail-2 .'
-			'. detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 detail-3 .';
+	.detail-item {
+		background-color: tomato;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
 	}
 }

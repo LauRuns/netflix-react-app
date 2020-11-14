@@ -14,6 +14,7 @@ const CountryDetailPage = (props) => {
 	const auth = useContext(AuthContext);
 
 	const [expiringData, setExpiringData] = useState(null);
+	const [detailIDs, setDetailIDs] = useState(null);
 
 	const { name, countryId } = props.location.state;
 
@@ -32,6 +33,10 @@ const CountryDetailPage = (props) => {
 
 			const { count, results } = responseData;
 
+			const ids = results.map(({ netflixid }) => netflixid);
+			console.log(ids);
+			setDetailIDs(ids);
+
 			console.log('EXPIRING DATA_____::', responseData);
 			setExpiringData(results);
 		} catch (err) {
@@ -46,20 +51,22 @@ const CountryDetailPage = (props) => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-			<div className="country-detail-page">
-				<div id="detail-nav-1" className="detail-nav-section">
+			<div className="country-detail-page-container">
+				<div id="detail-1" className="detail-nav-section">
+					<h2>Netflix details for {name}</h2>
 					<NavLink to="/">
 						<Button inverse>Back to Country overview</Button>
 					</NavLink>
 				</div>
 
-				<div id="detail-container-2" className="cntry-detail-page-container">
-					<h1>Netflix details for {name}</h1>
-				</div>
-				<div id="detail-expiring-3">
+				<div id="detail-2">
 					<div className="detail-actions">
 						<Button onClick={() => fetchExpiringData()}>Expiring content</Button>
+						<Button>New content</Button>
+						<Button>Current content</Button>
 					</div>
+				</div>
+				<div id="detail-3">
 					{isLoading ? (
 						<div className="center">
 							<LoadingSpinner loadingSpinnerMessage={`Fetching data for ${name}`} />
@@ -67,14 +74,15 @@ const CountryDetailPage = (props) => {
 					) : (
 						expiringData && (
 							<div className="detail-item">
-								{expiringData.map((item) => {
+								{detailIDs.map((id) => {
 									return (
 										<CountryDetailItem
-											key={item.netflixid}
-											id={item.netflixid}
-											title={item.title}
-											expiredate={item.expiredate}
-											onClick={() => cardDetailHandler(item)}
+											key={id}
+											netflixid={id}
+											// title={item.title}
+											// expiredate={item.expiredate}
+											// image={item.img}
+											onClick={() => cardDetailHandler(id)}
 										/>
 									);
 								})}
