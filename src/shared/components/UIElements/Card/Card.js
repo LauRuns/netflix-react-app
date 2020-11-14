@@ -5,7 +5,7 @@ import './Card.scss';
 const card = (props) => {
 	return (
 		<div
-			className={`Card ${props.expire && 'card-expire-item'} ${props.login && 'login-card'} ${
+			className={`Card ${props.expire && 'expire-card'} ${props.login && 'login-card'} ${
 				props.searchresult && 'sr-card'
 			}`}
 			style={props.cardStyles}
