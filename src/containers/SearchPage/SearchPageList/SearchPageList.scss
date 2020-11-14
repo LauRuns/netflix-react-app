@@ -2,9 +2,12 @@
 
 .search-list-results {
 	list-style: none;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
-@media only screen and (min-width: 768px) {
+@media (min-width: $breakpoint-sm) {
 	.search-list-results {
 		display: flex;
 		justify-content: space-evenly;
@@ -12,7 +15,15 @@
 	}
 }
 
-@media only screen and (min-width: 992px) {
+@media (min-width: $breakpoint-md) {
+	.search-list-results {
+		display: flex;
+		justify-content: space-evenly;
+		flex-wrap: wrap;
+	}
+}
+
+@media (min-width: $breakpoint-lg) {
 	.search-list-results {
 		display: flex;
 		justify-content: space-evenly;
