@@ -2,22 +2,23 @@
 
 .profile-info-container {
 	flex-direction: column;
-	background-color: $shades-gray-40;
-	padding: 1rem;
-}
+	background-color: $shades-gray-60;
+	padding: $default-var;
 
-.profile-form {
-	width: 100%;
-}
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 
-@media screen and (min-width: 567px) {
-	.profile-info-container {
+	@media (min-width: $breakpoint-sm) {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 	}
 
 	.profile-form {
-		width: 80%;
+		width: 100%;
+
+		@media (min-width: $breakpoint-sm) {
+			width: 80%;
+		}
 	}
 }
