@@ -56,12 +56,9 @@ const UploadImage = (props) => {
 				<form className="img-form" onSubmit={userUploadImgHandler}>
 					{isLoading && <LoadingSpinner asOverlay />}
 					<h3>{formState.isValid ? 'For real?? This image??!' : 'Set your user avatar!'}</h3>
-					<ImageUpload
-						center
-						id="image"
-						onInput={inputHandler}
-						errorText="Please provide an image"
-					/>
+					<div>
+						<ImageUpload id="image" onInput={inputHandler} />
+					</div>
 					<Button type="submit" disabled={!formState.isValid}>
 						SAVE IMAGE
 					</Button>
