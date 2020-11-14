@@ -11,7 +11,7 @@ import { AuthContext } from '../../../../shared/context/auth-context';
 
 import './CountryDetailItem.scss';
 
-const CountryDetailItem = (props) => {
+const CountryDetailItem = ({ netflixid, title, expiredate, image }) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 	const [showDetails, setShowDetails] = useState(false);
@@ -22,22 +22,44 @@ const CountryDetailItem = (props) => {
 
 	const fetchDetails = async () => {
 		try {
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/idinfo`,
-				'POST',
-				JSON.stringify({ netflixid: props.id }),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
-				}
-			);
-			console.log(responseData.results);
-			setItemDetail(responseData.results);
-			openDetailsHandler(true);
+			// const responseData = await sendRequest(
+			// 	`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/idinfo`,
+			// 	'POST',
+			// 	JSON.stringify({ netflixid: netflixid }),
+			// 	{
+			// 		'Content-Type': 'application/json',
+			// 		Authorization: `Bearer ${auth.token}`
+			// 	}
+			// );
+			// console.log(responseData.results);
+			// setItemDetail(responseData.results);
+			// openDetailsHandler(true);
 		} catch (err) {
 			// Error is handled by useHttpClient
 		}
 	};
+
+	useEffect(() => {
+		const fetchCountrDetail = async () => {
+			try {
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/idinfo`,
+					'POST',
+					JSON.stringify({ netflixid: netflixid }),
+					{
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${auth.token}`
+					}
+				);
+
+				console.log(responseData.results);
+				setItemDetail(responseData.results);
+			} catch (err) {
+				// Error is handled by useHttpClient
+			}
+		};
+		fetchCountrDetail();
+	}, [sendRequest]);
 
 	return (
 		<React.Fragment>
@@ -65,21 +87,29 @@ const CountryDetailItem = (props) => {
 
 			{isLoading ? (
 				<div className="center">
-					<LoadingSpinner loadingSpinnerMessage={`Fetching data for ${props.title}`} />
+					<LoadingSpinner loadingSpinnerMessage={netflixid} />
 				</div>
 			) : (
-				<Card expire>
-					<div className="detail-card">
-						<div>
-							<h3>Title: {props.title}</h3>
-							<p>Netflix id: {props.netflixid}</p>
-							<p>Expiration date: {props.expiredate}</p>
-						</div>
-						<div>
-							<Button onClick={fetchDetails}>SHOW DETAILS</Button>
-						</div>
+				itemDetail &&
+				!isLoading && (
+					<div className="detail-poster-card">
+						<Card expire onClick={openDetailsHandler}>
+							<div className="detail-card">
+								<div>
+									<h3>Title: {itemDetail.title}</h3>
+									<p>Netflix id: {itemDetail.netflixid}</p>
+									<p>Expiration date: {itemDetail.expiredate}</p>
+								</div>
+								<div>
+									<Button onClick={openDetailsHandler}>SHOW DETAILS</Button>
+								</div>
+							</div>
+							<div>
+								<img src={itemDetail.img} alt="" />
+							</div>
+						</Card>
 					</div>
-				</Card>
+				)
 			)}
 		</React.Fragment>
 	);
