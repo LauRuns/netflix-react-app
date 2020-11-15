@@ -47,11 +47,11 @@ const UserAccount = () => {
 	useEffect(() => {
 		const fetchCountries = async () => {
 			try {
-				// const responseData = await sendRequest(
-				// 	`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				// );
-				// setLoadedCountries(responseData.results);
-				setLoadedCountries(null);
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+				);
+				setLoadedCountries(responseData.results);
+				// setLoadedCountries(null);
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
