@@ -84,9 +84,15 @@ const Auth = () => {
 					}
 				);
 
-				const { userId, token } = responseData;
-				auth.login(userId, token);
-				history.push('/account');
+				const {
+					userId,
+					token,
+					user: { country }
+				} = responseData;
+				console.log(country);
+
+				auth.login(userId, token, country);
+				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}

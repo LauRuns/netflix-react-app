@@ -5,19 +5,20 @@ import {
 	Switch
 } from 'react-router-dom';
 
+import MainNavigation from './Pages/MainNavigation/MainNavigation';
 import Auth from './Pages/Auth/Auth';
 import CountriesPageContainer from './Pages/CountriesPage/CountriesPageContainer';
 import CountryDetailPage from './Pages/CountriesPage/CountryDetailPage/CountryDetailPage';
 import SearchPage from './Pages/SearchPage/SearchPage';
 import Account from './Pages/Account/Account';
-import MainNavigation from './Pages/MainNavigation/MainNavigation';
+import LandingPage from './Pages/LandingPage/LandingPage';
 import { AuthContext } from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
 
 import './App.scss';
 
 const App = () => {
-	const { token, login, logout, userId } = useAuth();
+	const { token, login, logout, userId, userCountry } = useAuth();
 
 	let routes;
 
@@ -26,10 +27,11 @@ const App = () => {
 		routes = (
 			<Switch>
 				<Route path="/auth" exact component={Auth} />
-				<Route path="/" exact component={CountriesPageContainer} />
+				<Route path="/countries" exact component={CountriesPageContainer} />
 				<Route path="/account" exact component={Account} />
 				<Route path="/countryinfo" exact component={CountryDetailPage} />
 				<Route path="/search" exact component={SearchPage} />
+				<Route path="/home" exact component={LandingPage} />
 			</Switch>
 		);
 	} else {
@@ -46,6 +48,7 @@ const App = () => {
 				isLoggedIn: !!token,
 				token: token,
 				userId: userId,
+				country: userCountry,
 				login: login,
 				logout: logout
 			}}
