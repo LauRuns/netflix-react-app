@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import Navbar from '../../shared/components/Navigation/Navbar/Navbar';
 import SideDrawer from '../../shared/components/Navigation/SideDrawer/SideDrawer';
 import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
-import './Layout.scss';
+import './MainNavigation.scss';
 
-const Layout = (props) => {
+const MainNavigation = (props) => {
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
 	const openDrawerHandler = () => {
@@ -21,9 +21,8 @@ const Layout = (props) => {
 			{drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
 			<Navbar drawerToggleClicked={openDrawerHandler} />
 			<SideDrawer open={drawerIsOpen} navItemClicked={closeDrawerHandler} />
-			{/* {<main className="Content">{props.children}</main>} */}
 		</React.Fragment>
 	);
 };
 
-export default Layout;
+export default MainNavigation;

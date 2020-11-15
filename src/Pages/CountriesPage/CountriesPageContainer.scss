@@ -1,9 +1,10 @@
-@import '../../variables/_variables.scss';
+// @import '../../variables/_variables.scss';
+@import '../../styles/main.scss';
 
 .cntry-pages-container {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(3, minmax(50px, auto));
+	grid-template-rows: repeat(3, minmax($default-var * 4, auto));
 	padding: $default-var 0;
 
 	grid-template-areas:
@@ -13,7 +14,6 @@
 
 	@media (min-width: $breakpoint-sm) {
 		grid-template-columns: repeat(12, 1fr);
-		// grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
 
 		grid-template-areas:
 			'. a a a a a a a a a a .'
@@ -49,4 +49,5 @@
 	grid-area: c;
 	display: flex;
 	flex-wrap: wrap;
+	width: 100%;
 }
