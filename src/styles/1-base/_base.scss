@@ -1,0 +1,43 @@
+// @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
+html,
+body {
+	width: 100%;
+	// margin: 0;
+	// padding: 0;
+}
+
+html {
+	background-image: radial-gradient(500px at top, #db0000, #000000);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100%;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'Roboto Condensed', sans-serif;
+	color: #efefef;
+	height: 100%;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+::-moz-focus-inner {
+	border: 0;
+}
+
+// *,
+// ::after,
+// ::before {
+// 	box-sizing: border-box;
+// }
