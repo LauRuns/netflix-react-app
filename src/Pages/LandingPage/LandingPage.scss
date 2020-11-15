@@ -1,0 +1,73 @@
+@import '../../styles/main.scss';
+
+.landingpage-container {
+	background-color: violet;
+
+	width: 100%;
+	margin: 0 $default-var;
+	display: grid;
+
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(4, minmaxl($default-var * 6, auto));
+
+	row-gap: $default-var;
+	column-gap: $default-var;
+
+	grid-template-areas:
+		'a'
+		'b'
+		'c'
+		'd';
+
+	@media (min-width: $breakpoint-sm) {
+		background-color: green;
+		grid-template-columns: repeat(12, 1fr);
+
+		grid-template-areas:
+			'. a a a a a a a a a a .'
+			'. b b b b b b b b b b .'
+			'. c c c c c c c c c c .'
+			'. d d d d d d d d d d .';
+	}
+
+	@media (min-width: $breakpoint-md) {
+		width: 80%;
+	}
+
+	@media (min-width: $breakpoint-lg) {
+		background-color: indianred;
+	}
+
+	@media (min-width: $breakpoint-xl) {
+		grid-template-areas:
+			'. . a a a a a a a a . .'
+			'. . b b b b b b b b . .'
+			'. . c c c c c c c c . .'
+			'. . d d d d d d d d . .';
+	}
+}
+
+#home-1 {
+	grid-area: a;
+	background-color: indigo;
+	@extend .center-column;
+	padding: $default-var;
+}
+
+#home-2 {
+	grid-area: b;
+	background-color: mediumturquoise;
+	padding: $default-var;
+}
+
+#home-3 {
+	grid-area: c;
+	background-color: lightseagreen;
+	padding: $default-var;
+}
+
+#home-4 {
+	grid-area: d;
+	background-color: mediumslateblue;
+	padding: $default-var;
+}
