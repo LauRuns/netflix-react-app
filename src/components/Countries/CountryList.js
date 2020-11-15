@@ -4,8 +4,8 @@ import Card from '../../shared/components/UIElements/Card/Card';
 import Chip from '../../shared/components/UIElements/Chip/Chip';
 import './CountryList.scss';
 
-const CountryList = (props) => {
-	if (props.items.length === 0) {
+const CountryList = ({ items, onItemClicked }) => {
+	if (items.length === 0) {
 		return (
 			<div>
 				<Card>
@@ -16,13 +16,13 @@ const CountryList = (props) => {
 	}
 
 	const registerClickHandler = (e) => {
-		props.onItemClicked(e);
+		onItemClicked(e);
 	};
 
 	return (
 		<React.Fragment>
 			<ul className="CountryList">
-				{props.items.map((country) => {
+				{items.map((country) => {
 					return (
 						<Chip
 							onClick={() =>
