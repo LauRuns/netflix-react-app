@@ -5,12 +5,12 @@ import {
 	Switch
 } from 'react-router-dom';
 
-import Auth from './containers/Auth/Auth';
-import CountriesPageContainer from './containers/CountriesPage/CountriesPageContainer';
-import CountryDetailPage from './containers/CountriesPage/CountryDetailPage/CountryDetailPage';
-import SearchPage from './containers/SearchPage/SearchPage';
-import Account from './containers/Account/Account';
-import Layout from './containers/layouts/Layout';
+import Auth from './Pages/Auth/Auth';
+import CountriesPageContainer from './Pages/CountriesPage/CountriesPageContainer';
+import CountryDetailPage from './Pages/CountriesPage/CountryDetailPage/CountryDetailPage';
+import SearchPage from './Pages/SearchPage/SearchPage';
+import Account from './Pages/Account/Account';
+import MainNavigation from './Pages/MainNavigation/MainNavigation';
 import { AuthContext } from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
 
@@ -50,10 +50,8 @@ const App = () => {
 				logout: logout
 			}}
 		>
-			<Layout />
+			<MainNavigation />
 			<div className="content">{routes}</div>
-
-			{/* </Layout> */}
 		</AuthContext.Provider>
 	);
 };
