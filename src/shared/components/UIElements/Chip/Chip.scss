@@ -1,4 +1,5 @@
-@import '../../../../variables/_variables.scss';
+// @import '../../../../variables/_variables.scss';
+@import '../../../../styles/main.scss';
 
 .chip-container {
 	background-color: $secondary-red;
@@ -9,7 +10,7 @@
 	line-height: $default-var * 3.25;
 	border-radius: 2rem;
 	transition: all 0.2s ease-in-out;
-	opacity: 0.6;
+	opacity: 0.8;
 
 	&:active {
 		cursor: pointer;
