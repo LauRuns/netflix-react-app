@@ -15,10 +15,34 @@ const LandingPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	const [userCountry, setUserCountry] = useState(null);
+	const [expiringData, setExpiringData] = useState(null);
 
 	useEffect(() => {
-		setUserCountry(auth.country);
-	});
+		console.log('Landingpage --> Auth.country____::', auth.country);
+		// const getCountryFromLocalStorage = JSON.parse(localStorage.getItem('userData'));
+		// const { country } = getCountryFromLocalStorage;
+		// console.log('Get userData --> country', country);
+		// setUserCountry(country);
+
+		const fetchExpiringData = async () => {
+			try {
+				const expResponseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
+					'POST',
+					{
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${auth.token}`
+					}
+				);
+				console.log(expResponseData);
+				const { results } = expResponseData;
+				console.log(results);
+			} catch (error) {
+				// Error is handled by useHttpClient
+			}
+		};
+		fetchExpiringData();
+	}, [sendRequest]);
 
 	return (
 		<React.Fragment>
@@ -27,7 +51,7 @@ const LandingPage = () => {
 			<div className="landingpage-container">
 				<div id="home-1">
 					<h1>Welcome back!</h1>
-					<h3>Here is your data for {userCountry}</h3>
+					{userCountry && <h3>Here is your data for {userCountry.country}</h3>}
 				</div>
 				<div id="home-2">
 					<h2>New releases</h2>
