@@ -25,11 +25,11 @@ const CountryList = ({ items, onItemClicked }) => {
 				{items.map((country) => {
 					return (
 						<Chip
+							key={country.countryId}
+							name={country.country}
 							onClick={() =>
 								registerClickHandler({ countryId: country.countryId, name: country.country })
 							}
-							key={country.countryId}
-							name={country.country}
 						/>
 					);
 				})}
