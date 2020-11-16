@@ -83,8 +83,16 @@ const UserAccount = () => {
 	};
 
 	const reloadUserData = (newProfileData) => {
+		console.log('Reload profileData____::', newProfileData);
 		setLoadedUser(newProfileData);
 		closeAllInfoTabs();
+		updateLocalStorageUserData(newProfileData.country);
+	};
+
+	const updateLocalStorageUserData = (countryObj) => {
+		const getCountry = JSON.parse(localStorage.getItem('userData'));
+		getCountry.country = countryObj;
+		localStorage.setItem('userData', JSON.stringify(getCountry));
 	};
 
 	const displayInfoHandler = () => {
@@ -157,7 +165,7 @@ const UserAccount = () => {
 								<p>NAME: {loadedUser.name}</p>
 								<p>EMAIL: {loadedUser.email}</p>
 								<p>ID: {loadedUser.id}</p>
-								<p>SET COUNTRY: {loadedUser.country}</p>
+								<p>SET COUNTRY: {loadedUser.country.country}</p>
 								<p>LAST UPDATED AT: {new Date(loadedUser.updatedAt).toDateString()}</p>
 							</div>
 							<Button type="button" inverse onClick={displayInfoHandler}>
@@ -189,7 +197,7 @@ const UserAccount = () => {
 							<div onClick={showCountrySet}>
 								<h3>
 									{loadedUser.country
-										? `Current country: ${loadedUser.country}`
+										? `Current country: ${loadedUser.country.country}`
 										: 'Set your country'}
 								</h3>
 								<Button noborder size="small" type="button">
