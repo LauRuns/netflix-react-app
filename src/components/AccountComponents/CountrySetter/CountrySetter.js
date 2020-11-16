@@ -12,7 +12,7 @@ const CountrySetter = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
-	const [selectedCountry, setSelectedCountry] = useState(props.userCountry || undefined);
+	const [selectedCountry, setSelectedCountry] = useState(props.userCountry.country || undefined);
 
 	if (!props.countryData) {
 		return (
@@ -25,7 +25,7 @@ const CountrySetter = (props) => {
 	const countryList = props.countryData;
 
 	const countrySelectHandler = (e) => {
-		setSelectedCountry(e.country);
+		setSelectedCountry(e);
 	};
 
 	const userUpdateCountryHandler = async (event) => {
@@ -84,8 +84,8 @@ const CountrySetter = (props) => {
 					</div>
 					<div className="check-save">
 						<p>
-							{selectedCountry
-								? `Save ${selectedCountry} as your new default country?`
+							{selectedCountry.country
+								? `Save ${selectedCountry.country} as your new default country?`
 								: 'No country selected'}
 						</p>
 						<Button disabled={!selectedCountry} type="submit">
