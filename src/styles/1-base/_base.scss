@@ -1,14 +1,14 @@
-// @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+@import '../2-variables/_colors';
 
 html,
 body {
 	width: 100%;
-	// margin: 0;
-	// padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 html {
-	background-image: radial-gradient(500px at top, #db0000, #000000);
+	background-image: radial-gradient(500px at top, $primary-red, $primary-black);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -24,7 +24,7 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Roboto Condensed', sans-serif;
-	color: #efefef;
+	color: $netflix-text;
 	height: 100%;
 }
 
@@ -35,9 +35,3 @@ code {
 ::-moz-focus-inner {
 	border: 0;
 }
-
-// *,
-// ::after,
-// ::before {
-// 	box-sizing: border-box;
-// }
