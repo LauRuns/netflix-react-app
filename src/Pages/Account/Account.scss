@@ -1,10 +1,9 @@
-// @import '../../variables/_variables.scss';
-@import '../../styles/main.scss';
+@import '../../styles/2-variables/_variables-index';
 
-.account-container {
+#account__container {
 	display: grid;
 	margin: 1rem;
-	width: 90%;
+	width: 100%;
 
 	grid-template-columns: 1fr;
 	grid-template-rows: 50px minmax(50px, auto) minmax(50px, auto);
@@ -13,25 +12,25 @@
 	column-gap: $default-var;
 
 	grid-template-areas:
-		'section-a'
-		'section-b'
-		'section-c'
-		'div-1'
-		'div-2'
-		'div-3'
-		'div-4';
+		'account-header'
+		'account-avatar'
+		'user-info'
+		'update-profile'
+		'set-country'
+		'update-avatar'
+		'change-pwd';
 
 	@media (min-width: $breakpoint-sm) {
 		grid-template-columns: repeat(12, 1fr);
 		grid-template-rows: 50px minmax(50px, auto) repeat(4, minmax(50px, auto));
 
 		grid-template-areas:
-			'. section-a section-a section-a section-a section-a section-a section-a section-a section-a section-a .'
-			'. section-b section-b section-b section-b section-c section-c section-c section-c section-c section-c .'
-			'. div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 .'
-			'. div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 .'
-			'. div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 .'
-			'. div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 .';
+			'. account-header account-header account-header account-header account-header account-header account-header account-header account-header account-header .'
+			'. account-avatar account-avatar account-avatar account-avatar user-info user-info user-info user-info user-info user-info .'
+			'. update-profile update-profile update-profile update-profile update-profile update-profile update-profile update-profile update-profile update-profile .'
+			'. set-country set-country set-country set-country set-country set-country set-country set-country set-country set-country .'
+			'. update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar .'
+			'. change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd .';
 	}
 
 	@media (min-width: $breakpoint-md) {
@@ -43,16 +42,38 @@
 
 	@media (min-width: $breakpoint-xl) {
 		grid-template-areas:
-			'. . section-a section-a section-a section-a section-a section-a section-a section-a . .'
-			'. . section-b section-b section-b section-c section-c section-c section-c section-c . .'
-			'. . div-1 div-1 div-1 div-1 div-1 div-1 div-1 div-1 . .'
-			'. . div-2 div-2 div-2 div-2 div-2 div-2 div-2 div-2 . .'
-			'. . div-3 div-3 div-3 div-3 div-3 div-3 div-3 div-3 . .'
-			'. . div-4 div-4 div-4 div-4 div-4 div-4 div-4 div-4 . .';
+			'. . account-header account-header account-header account-header account-header account-header account-header account-header . .'
+			'. . account-avatar account-avatar account-avatar user-info user-info user-info user-info user-info . .'
+			'. . update-profile update-profile update-profile update-profile update-profile update-profile update-profile update-profile . .'
+			'. . set-country set-country set-country set-country set-country set-country set-country set-country . .'
+			'. . update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar update-avatar . .'
+			'. . change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd change-pwd . .';
 	}
 }
 
-.item {
+#account-header {
+	grid-area: account-header;
+}
+#account-avatar {
+	grid-area: account-avatar;
+}
+#account-user-info {
+	grid-area: user-info;
+}
+#account-update-profile {
+	grid-area: update-profile;
+}
+#account-set-country {
+	grid-area: set-country;
+}
+#account-update-avatar {
+	grid-area: update-avatar;
+}
+#account-change-password {
+	grid-area: change-pwd;
+}
+
+.account__item {
 	display: flex;
 	flex-direction: column;
 	height: auto;
@@ -85,15 +106,13 @@
 	}
 }
 
-#item-1 {
-	@extend .item;
-	grid-area: section-a;
+.account__header {
+	@extend .account__item;
 	justify-content: center;
 	align-items: center;
 }
 
-#item-2 {
-	grid-area: section-b;
+.account__avatar {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -104,9 +123,8 @@
 	}
 }
 
-#item-3 {
-	@extend .item;
-	grid-area: section-c;
+.account__user__info {
+	@extend .account__item;
 	padding: $default-var;
 	flex-direction: column;
 	justify-content: space-between;
@@ -119,22 +137,18 @@
 	}
 }
 
-#item-4 {
-	@extend .item;
-	grid-area: div-1;
+.account__update__profile {
+	@extend .account__item;
 }
 
-#item-5 {
-	@extend .item;
-	grid-area: div-2;
+.account__country__setter {
+	@extend .account__item;
 }
 
-#item-6 {
-	@extend .item;
-	grid-area: div-3;
+.account__update__avatar {
+	@extend .account__item;
 }
 
-#item-7 {
-	@extend .item;
-	grid-area: div-4;
+.account__change__pwd {
+	@extend .account__item;
 }

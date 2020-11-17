@@ -14,7 +14,7 @@ import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import './Account.scss';
 
-const UserAccount = () => {
+export const UserAccount = () => {
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedUser, setLoadedUser] = useState();
@@ -87,6 +87,7 @@ const UserAccount = () => {
 		setLoadedUser(newProfileData);
 		closeAllInfoTabs();
 		updateLocalStorageUserData(newProfileData.country);
+		auth.updateCountry(newProfileData.country);
 	};
 
 	const updateLocalStorageUserData = (countryObj) => {
@@ -139,12 +140,12 @@ const UserAccount = () => {
 				)}
 
 				{!isLoading && loadedUser && (
-					<div className="account-container">
-						<div id="item-1">
+					<div id="account__container">
+						<div id="account-header" className="account__header">
 							<h2>Useraccount for {loadedUser.name.toUpperCase()}</h2>
 						</div>
 
-						<div id="item-2">
+						<div id="account-avatar" className="account__avatar">
 							{loadedUser.image ? (
 								<Avatar
 									image={loadedUser.image}
@@ -160,7 +161,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div id="item-3">
+						<div id="account-user-info" className="account__user__info">
 							<div>
 								<p>NAME: {loadedUser.name}</p>
 								<p>EMAIL: {loadedUser.email}</p>
@@ -174,7 +175,7 @@ const UserAccount = () => {
 							</Button>
 						</div>
 
-						<div id="item-4">
+						<div id="account-update-profile" className="account__update__profile">
 							<div onClick={showProfileInfoHandler}>
 								<h3>Update profile information</h3>
 								<Button noborder size="small" type="button">
@@ -193,7 +194,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div id="item-5">
+						<div id="account-set-country" className="account__country__setter">
 							<div onClick={showCountrySet}>
 								<h3>
 									{loadedUser.country
@@ -215,7 +216,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div id="item-6">
+						<div id="account-update-avatar" className="account__update__avatar">
 							<div onClick={showImageUploader}>
 								<h3>Upload profile image</h3>
 								<Button noborder size="small" type="button">
@@ -231,7 +232,7 @@ const UserAccount = () => {
 							)}
 						</div>
 
-						<div id="item-7">
+						<div id="account-change-password" className="account__change__pwd">
 							<div onClick={showPasswordChange}>
 								<h3>Change password</h3>
 								<Button noborder size="small" type="button">
@@ -259,5 +260,3 @@ const UserAccount = () => {
 		</div>
 	);
 };
-
-export default UserAccount;
