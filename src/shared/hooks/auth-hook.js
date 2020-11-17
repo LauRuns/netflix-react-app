@@ -39,6 +39,11 @@ const useAuth = () => {
 		history.push('/auth');
 	}, [history]);
 
+	const updateCountry = useCallback((country) => {
+		console.log('Update country called_____:', country);
+		setUserCountry(country);
+	}, []);
+
 	useEffect(() => {
 		if (token && tokenExpirationDate) {
 			const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
@@ -60,7 +65,7 @@ const useAuth = () => {
 		}
 	}, [login]);
 
-	return { token, login, logout, userId, userCountry };
+	return { token, login, logout, updateCountry, userId, userCountry };
 };
 
 export default useAuth;
