@@ -1,5 +1,4 @@
-// @import '../../../../../variables/_variables.scss';
-@import '../../../../../styles/main.scss';
+@import '../../../../../styles/2-variables/_variables-index';
 
 .NavItem {
 	margin: 10px 0;
@@ -20,11 +19,9 @@
 .NavItem a:active,
 .NavItem a.active {
 	color: $netflix-text;
-	/* border-left: 3px solid var(--netflix-primary-red); */
-	/* padding-left: 1rem; */
 }
 
-@media (min-width: 500px) {
+@media (min-width: $breakpoint-sm) {
 	.NavItem {
 		margin: 0;
 		display: flex;

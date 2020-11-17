@@ -1,5 +1,4 @@
-// @import '../../../../../variables/_variables.scss';
-@import '../../../../../styles/main.scss';
+@import '../../../../../styles/2-variables/_variables-index';
 
 .DrawerToggle {
 	width: 40px;
@@ -19,7 +18,7 @@
 	background-color: $primary-red;
 }
 
-@media (min-width: 500px) {
+@media (min-width: $breakpoint-sm) {
 	.DrawerToggle {
 		display: none;
 	}
@@ -79,18 +78,18 @@
 	transform: rotate(-45deg);
 }
 
-#menu:active::before,
-#menu:active::after {
+#menu:hover::before,
+#menu:hover::after {
 	top: 0;
 	left: 0;
 	transform: rotate(-45deg);
 }
 
-#menu:active::after {
+#menu:hover::after {
 	transform: rotate(45deg);
 }
 
-@media (min-width: 500px) {
+@media (min-width: $breakpoint-sm) {
 	.menu-container {
 		display: none;
 	}
