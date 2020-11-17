@@ -1,73 +1,112 @@
-@import '../../styles/main.scss';
+@import '../../styles/2-variables/_variables-index';
+@import '../../styles/5-globals/_globals-index';
 
 .landingpage-container {
-	background-color: violet;
-
-	width: 100%;
-	margin: 0 $default-var;
 	display: grid;
 
+	width: 100%;
+
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(4, minmaxl($default-var * 6, auto));
+	grid-template-rows: repeat(4, minmax($default-var * 6, auto));
 
 	row-gap: $default-var;
 	column-gap: $default-var;
 
 	grid-template-areas:
-		'a'
-		'b'
-		'c'
-		'd';
+		'homepageheader'
+		'expiring'
+		'expiring-nld'
+		'new-nld'
+		'test';
 
 	@media (min-width: $breakpoint-sm) {
-		background-color: green;
+		// background-color: green;
 		grid-template-columns: repeat(12, 1fr);
 
 		grid-template-areas:
-			'. a a a a a a a a a a .'
-			'. b b b b b b b b b b .'
-			'. c c c c c c c c c c .'
-			'. d d d d d d d d d d .';
+			'. homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader .'
+			'. expiring expiring expiring expiring expiring expiring expiring expiring expiring expiring  .'
+			'. expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld  .'
+			'. new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld  .'
+			'. test test test test test test test test test test  .';
 	}
 
 	@media (min-width: $breakpoint-md) {
-		width: 80%;
+		// background-color: lightgreen;
 	}
 
 	@media (min-width: $breakpoint-lg) {
-		background-color: indianred;
-	}
-
-	@media (min-width: $breakpoint-xl) {
-		grid-template-areas:
-			'. . a a a a a a a a . .'
-			'. . b b b b b b b b . .'
-			'. . c c c c c c c c . .'
-			'. . d d d d d d d d . .';
+		// background-color: indianred;
 	}
 }
 
-#home-1 {
-	grid-area: a;
+/* Grid layout */
+#homepage-header {
+	grid-area: homepageheader;
+}
+#homepage-expiring {
+	grid-area: expiring;
+}
+#homepage-nld-expiring {
+	grid-area: expiring-nld;
+}
+#homepage-nld-new-content {
+	grid-area: new-nld;
+}
+#homepage-testing-carousel {
+	grid-area: test;
+}
+
+.homepage__header {
 	background-color: indigo;
 	@extend .center-column;
 	padding: $default-var;
 }
 
-#home-2 {
-	grid-area: b;
+.homepage__expiring {
 	background-color: mediumturquoise;
+
 	padding: $default-var;
+
+	.carousel-homepage {
+		background-color: tan;
+		padding: $default-var;
+
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		&:first-child {
+			margin: 0.5rem;
+		}
+
+		@media (min-width: $breakpoint-md) {
+			max-height: 200px;
+		}
+	}
 }
 
-#home-3 {
-	grid-area: c;
+.hompage__base {
+	padding: $default-var;
+	width: 100%;
+}
+
+.homepage__nld__expiring {
 	background-color: lightseagreen;
-	padding: $default-var;
+	@extend .hompage__base;
 }
 
-#home-4 {
-	grid-area: d;
+.homepage__nld__new_content {
 	background-color: mediumslateblue;
-	padding: $default-var;
+	@extend .hompage__base;
+}
+
+.homepage__testing__carousel {
+	background-color: royalblue;
+	@extend .hompage__base;
+
+	.test-carousel {
+	}
 }
