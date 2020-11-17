@@ -1,12 +1,11 @@
-// @import '../../../../variables/_variables.scss';
-@import '../../../../styles/main.scss';
+@import '../../../../styles/2-variables/_variables-index';
 
 .Card {
 	position: relative;
 	margin: 0;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 	border-radius: 4px;
-	overflow: hidden;
+	// overflow: hidden;
 	background: $shades-gray-40;
 }
 
@@ -67,4 +66,8 @@
 			}
 		}
 	}
+}
+/* Home-card */
+.home-card {
+	margin: 0.5rem;
 }

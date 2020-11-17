@@ -7,7 +7,7 @@ const card = (props) => {
 		<div
 			className={`Card ${props.expire && 'expire-card'} ${props.login && 'login-card'} ${
 				props.searchresult && 'sr-card'
-			}`}
+			} ${props.homecard && 'home-card'}`}
 			style={props.cardStyles}
 			onClick={props.onClick}
 		>
