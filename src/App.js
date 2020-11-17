@@ -6,11 +6,11 @@ import {
 } from 'react-router-dom';
 
 import MainNavigation from './Pages/MainNavigation/MainNavigation';
-import Auth from './Pages/Auth/Auth';
+import Auth from './Pages/AuthPage/Auth';
 import CountriesPageContainer from './Pages/CountriesPage/CountriesPageContainer';
 import CountryDetailPage from './Pages/CountriesPage/CountryDetailPage/CountryDetailPage';
 import SearchPage from './Pages/SearchPage/SearchPage';
-import Account from './Pages/Account/Account';
+import { UserAccount } from './Pages/Account/Account';
 import LandingPage from './Pages/LandingPage/LandingPage';
 import { AuthContext } from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
@@ -18,7 +18,7 @@ import useAuth from './shared/hooks/auth-hook';
 import './App.scss';
 
 const App = () => {
-	const { token, login, logout, userId, userCountry } = useAuth();
+	const { token, login, logout, updateCountry, userId, userCountry } = useAuth();
 
 	let routes;
 
@@ -28,7 +28,7 @@ const App = () => {
 			<Switch>
 				<Route path="/auth" exact component={Auth} />
 				<Route path="/countries" exact component={CountriesPageContainer} />
-				<Route path="/account" exact component={Account} />
+				<Route path="/account" exact component={UserAccount} />
 				<Route path="/countryinfo" exact component={CountryDetailPage} />
 				<Route path="/search" exact component={SearchPage} />
 				<Route path="/home" exact component={LandingPage} />
@@ -50,7 +50,8 @@ const App = () => {
 				userId: userId,
 				country: userCountry,
 				login: login,
-				logout: logout
+				logout: logout,
+				updateCountry: updateCountry
 			}}
 		>
 			<MainNavigation />
