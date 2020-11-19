@@ -1,29 +1,15 @@
 @import '../../styles/2-variables/_variables-index';
 
-.backgroundContainer {
-	position: fixed;
-	height: 100vh;
-	width: 100vw;
-	z-index: -1;
-	background: url('../../assets/netflix-image.jpg') no-repeat center center fixed;
-	background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: auto;
-	background-attachment: fixed;
-	transform: scale(1.4);
-}
-
 .authentication__container {
 	width: 100%;
 	text-align: center;
 	z-index: 5;
+	margin-top: $default-var * 3;
 
 	.authentication__header {
 		color: $netflix-text;
 		text-align: center;
-		margin-bottom: 2rem;
+		margin-bottom: $default-var * 2;
 	}
 
 	.authentication__form {
@@ -36,46 +22,31 @@
 		position: fixed;
 		height: 100vh;
 		width: 100vw;
+		top: 0;
+		left: 0;
 		z-index: -1;
-		background: url('../../assets/netflix-image.jpg') no-repeat center center fixed;
-		background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: auto;
-		transform: scale(1.4);
+		background: url('../../assets/netflix-image.jpg') left top/cover no-repeat;
 	}
 
 	.authentication__container {
 		width: 80%;
-		max-width: 35rem;
-		text-align: center;
+		max-width: $default-var * 35;
+		margin-top: $default-var * 10;
 	}
 }
 
 @media (min-width: $breakpoint-lg) {
-	.backgroundContainer {
-		transform: scale(1.6);
-	}
 }
 
 @media (min-width: $breakpoint-xl) {
-	.backgroundContainer {
-		transform: scale(1.8);
-	}
-
 	.authentication__container {
 		width: 100%;
-		max-width: 35rem;
-		margin-top: 9rem;
-		text-align: center;
+		max-width: $default-var * 35;
+		margin-top: $default-var * 10;
 		opacity: 1;
 
 		.authentication__header {
-			color: $netflix-text;
 			font-size: x-large;
-			text-align: center;
-			margin-bottom: 2rem;
 		}
 	}
 }

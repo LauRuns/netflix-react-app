@@ -8,7 +8,6 @@ body {
 }
 
 html {
-	background-image: radial-gradient(500px at top, $primary-red, $primary-black);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -26,6 +25,7 @@ body {
 	font-family: 'Roboto Condensed', sans-serif;
 	color: $netflix-text;
 	height: 100%;
+	background-image: radial-gradient(500px at top, $primary-red, $primary-black);
 }
 
 code {
