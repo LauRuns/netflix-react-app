@@ -51,7 +51,7 @@ export const UserAccount = () => {
 					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
 				);
 				setLoadedCountries(responseData.results);
-				// setLoadedCountries(null);
+				// setLoadedCountries(null); // <-- when constant fetching of data is not needed
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
@@ -83,7 +83,6 @@ export const UserAccount = () => {
 	};
 
 	const reloadUserData = (newProfileData) => {
-		console.log('Reload profileData____::', newProfileData);
 		setLoadedUser(newProfileData);
 		closeAllInfoTabs();
 		updateLocalStorageUserData(newProfileData.country);
@@ -93,7 +92,6 @@ export const UserAccount = () => {
 	const updateLocalStorageUserData = (countryObj) => {
 		const getCountry = JSON.parse(localStorage.getItem('userData'));
 		getCountry.country = countryObj;
-		localStorage.setItem('userData', JSON.stringify(getCountry));
 	};
 
 	const displayInfoHandler = () => {
@@ -149,7 +147,6 @@ export const UserAccount = () => {
 							{loadedUser.image ? (
 								<Avatar
 									image={loadedUser.image}
-									// image={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
 									alt={loadedUser.name || 'Default img'}
 									style={{ width: '200px', height: '200px' }}
 									width="200px"

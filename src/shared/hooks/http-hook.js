@@ -12,7 +12,7 @@ export const useHttpClient = () => {
 		const httpAbortController = new AbortController();
 		activeHttpRequests.current.push(httpAbortController);
 
-		// declare a request interceptor
+		// request interceptor
 		axios.interceptors.request.use(
 			(config) => {
 				/*
@@ -28,7 +28,7 @@ export const useHttpClient = () => {
 			}
 		);
 
-		// Response interceptor
+		// response interceptor
 		axios.interceptors.response.use(
 			(response) => {
 				// perform a task before the response is received

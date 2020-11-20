@@ -1,10 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Card from '../../shared/components/UIElements/Card/Card';
 import Button from '../../shared/components/UIElements/Button/Button';
 import './Carousel.scss';
-import Testimage from '../../assets/netflix_logo_circle.png';
-import Logo from '../../components/Logo/Logo';
 
 const Carousel = ({ list, itemClicked }) => {
 	const [currentCard, setCurrentCard] = useState(0);

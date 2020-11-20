@@ -4,8 +4,6 @@ import React, { useContext } from 'react';
 
 import { AuthContext } from '../../../context/auth-context';
 import NavItem from './NavItem/NavItem';
-// import Icon from '.././../../../components/Icon/Icon';
-// import Tooltip from '../../UIElements/Tooltip/Tooltip';
 
 import './NavItems.scss';
 import LogoutLogo from '../../../../assets/log-out.svg';
@@ -20,23 +18,19 @@ const NavItems = (props) => {
 			{auth.isLoggedIn && <NavItem link="/countries">Countries</NavItem>}
 			{auth.isLoggedIn && <NavItem link="/search">Search</NavItem>}
 			{auth.isLoggedIn && <NavItem link="/account">MyAccount</NavItem>}
-			{
-				auth.isLoggedIn &&
-					(props.drawerIsOpen ? (
-						<div onClick={auth.logout}>
-							<hr />
-							<strong>
-								<p>Logout</p>
-							</strong>
-						</div>
-					) : (
-						<div id="LogoutIcon" className="Icon" onClick={auth.logout} data-tooltip="Logout, bye!">
-							<img src={LogoutLogo} alt="Logout icon" />
-						</div>
-					))
-				// <Tooltip content="Please logout" direction="bottom">
-				// </Tooltip>
-			}
+			{auth.isLoggedIn &&
+				(props.drawerIsOpen ? (
+					<div onClick={auth.logout}>
+						<hr />
+						<strong>
+							<p>Logout</p>
+						</strong>
+					</div>
+				) : (
+					<div id="LogoutIcon" className="Icon" onClick={auth.logout} data-tooltip="Logout, bye!">
+						<img src={LogoutLogo} alt="Logout icon" />
+					</div>
+				))}
 		</ul>
 	);
 };
