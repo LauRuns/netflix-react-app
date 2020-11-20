@@ -46,7 +46,6 @@ uploads/
 
 # Discard environment variables in folder
 environment/
-util/
 /environment
 dev-env.ts
 config/
