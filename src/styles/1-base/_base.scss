@@ -2,7 +2,7 @@
 
 html,
 body {
-	width: 100%;
+	// width: 100%;
 	margin: 0;
 	padding: 0;
 }
@@ -24,8 +24,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'Roboto Condensed', sans-serif;
 	color: $netflix-text;
-	height: 100%;
+	height: 100vh;
 	background-image: radial-gradient(500px at top, $primary-red, $primary-black);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 code {

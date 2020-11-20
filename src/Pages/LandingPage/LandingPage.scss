@@ -57,6 +57,7 @@
 	grid-area: test;
 }
 
+/* Classes */
 .homepage__header {
 	background-color: indigo;
 	@extend .center-column;
@@ -106,7 +107,4 @@
 .homepage__testing__carousel {
 	background-color: royalblue;
 	@extend .hompage__base;
-
-	.test-carousel {
-	}
 }
