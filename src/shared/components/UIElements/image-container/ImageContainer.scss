@@ -1,0 +1,15 @@
+@import '../../../../styles/2-variables/_variables-index';
+@import '../../../../styles/5-globals/_globals-index';
+
+.image-contained {
+	background-color: yellowgreen;
+	// max-width: 300px;
+	// max-height: 250px;
+	// overflow: hidden;
+
+	& > img {
+		width: 100%;
+		height: auto;
+		vertical-align: middle;
+	}
+}
