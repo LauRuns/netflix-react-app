@@ -1,0 +1,99 @@
+@import '../../styles/2-variables/_variables-index';
+@import '../../styles/5-globals/_globals-index';
+
+// .sample-slider-container {
+// 	background-color: orange;
+// 	width: 300px;
+// 	height: 300px;
+// }
+
+.slider-container {
+	background-color: lightsalmon;
+	position: relative;
+	// width: 100%;
+	margin: 0;
+	padding: 0;
+
+	// max-height: fit-content;
+
+	display: flex;
+	// flex-direction: row;
+	overflow: hidden;
+
+	.slide-container {
+		background-color: indianred;
+		display: flex;
+		flex-direction: row;
+		// justify-content: center;
+		align-items: center;
+		width: 100%;
+
+		@media (min-width: $breakpoint-sm) {
+			width: 50%;
+		}
+
+		@media (min-width: $breakpoint-md) {
+			width: 25%;
+		}
+
+		.slide {
+			position: relative;
+			background-color: lightseagreen;
+			min-width: 100%;
+			transition: 0.5s;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			display: inline-block;
+			// padding: 1rem;
+		}
+	}
+
+	%btn-styles {
+		position: absolute;
+		// top: 30%;
+		// transform: translateY(-20%);
+		width: 10%;
+		height: 100%;
+		background: none;
+		border: none;
+		outline: none;
+		color: green;
+		// background-color: white;
+		transition: all 0.4s ease;
+
+		@media (min-width: $breakpoint-xs) {
+			width: 25%;
+		}
+
+		@media (min-width: $breakpoint-sm) {
+			width: 15%;
+		}
+
+		&:hover {
+			// background: rgba(0, 0, 0, 0.356);
+			background-color: rgba($color: #000000, $alpha: 0.5);
+			color: yellow;
+		}
+
+		&:disabled {
+			color: gray;
+			// background-color: orange;
+		}
+	}
+
+	#goLeft {
+		left: 0;
+		@extend %btn-styles;
+	}
+
+	#goRight {
+		right: 0;
+		@extend %btn-styles;
+	}
+
+	.no-data {
+		background-color: violet;
+	}
+}
