@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './Tooltip.scss';
 
-const Tooltip = (props) => {
+export const Tooltip = ({ direction, delay, message, children }) => {
 	let timeout;
 	const [active, setActive] = useState(false);
 
 	const showTip = () => {
 		timeout = setTimeout(() => {
 			setActive(true);
-		}, props.delay || 400);
+		}, delay || 400);
 	};
 
 	const hideTip = () => {
@@ -17,22 +17,9 @@ const Tooltip = (props) => {
 	};
 
 	return (
-		<div
-			className="Tooltip-Wrapper"
-			// When to show the tooltip
-			onMouseEnter={showTip}
-			onMouseLeave={hideTip}
-		>
-			{/* Wrapping */}
-			{props.children}
-			{active && (
-				<div className={`Tooltip-Tip ${props.direction || 'top'}`}>
-					{/* Content */}
-					{props.content}
-				</div>
-			)}
+		<div className="Tooltip-Wrapper" onMouseEnter={showTip} onMouseLeave={hideTip}>
+			{children}
+			{active && <div className={`Tooltip-Tip ${direction || 'top'}`}>{message}</div>}
 		</div>
 	);
 };
-
-export default Tooltip;
