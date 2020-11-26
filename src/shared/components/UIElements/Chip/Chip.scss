@@ -11,6 +11,13 @@
 	transition: all 0.2s ease-in-out;
 	opacity: 0.8;
 
+	& > button {
+		background-color: transparent;
+		font-family: inherit;
+		font-size: inherit;
+		color: $netflix-text;
+	}
+
 	&:active {
 		cursor: pointer;
 		opacity: 1;
