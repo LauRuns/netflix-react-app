@@ -4,22 +4,29 @@ import React, { useContext } from 'react';
 
 import { AuthContext } from '../../../context/auth-context';
 import NavItem from './NavItem/NavItem';
+import { Tooltip } from '../../UIElements/Tooltip/Tooltip';
 
 import './NavItems.scss';
 import LogoutLogo from '../../../../assets/log-out.svg';
 
-const NavItems = (props) => {
+const NavItems = ({ drawerIsOpen, navItemsList }) => {
 	const auth = useContext(AuthContext);
 
 	return (
-		<ul className="NavigationItems">
+		<ul className="navigation-items-list">
 			{!auth.isLoggedIn && <NavItem link="/auth">Login</NavItem>}
-			{auth.isLoggedIn && <NavItem link="/home">Home</NavItem>}
-			{auth.isLoggedIn && <NavItem link="/countries">Countries</NavItem>}
-			{auth.isLoggedIn && <NavItem link="/search">Search</NavItem>}
-			{auth.isLoggedIn && <NavItem link="/account">MyAccount</NavItem>}
 			{auth.isLoggedIn &&
-				(props.drawerIsOpen ? (
+				navItemsList &&
+				navItemsList.map(({ linkTo, linkName }) => {
+					return (
+						<NavItem key={linkName} link={linkTo}>
+							{linkName}
+						</NavItem>
+					);
+				})}
+
+			{auth.isLoggedIn &&
+				(drawerIsOpen ? (
 					<div onClick={auth.logout}>
 						<hr />
 						<strong>
@@ -27,8 +34,10 @@ const NavItems = (props) => {
 						</strong>
 					</div>
 				) : (
-					<div id="LogoutIcon" className="Icon" onClick={auth.logout} data-tooltip="Logout, bye!">
-						<img src={LogoutLogo} alt="Logout icon" />
+					<div id="logout-icon-btn" className="logout-icon" onClick={auth.logout}>
+						<Tooltip direction="bottom" message="Logout, bye!" delay={100}>
+							<img src={LogoutLogo} alt="Logout icon" />
+						</Tooltip>
 					</div>
 				))}
 		</ul>
