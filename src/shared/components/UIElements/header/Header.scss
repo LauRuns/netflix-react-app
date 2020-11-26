@@ -1,0 +1,25 @@
+@import '../../../../styles/2-variables/_variables-index';
+
+.header-item {
+	background-color: lightcoral;
+	padding: 0.5rem;
+	font-weight: bold;
+}
+
+.header-center {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.header-medium {
+	font-size: 1rem;
+}
+
+.header-large {
+	font-size: 1.4rem;
+}
+
+.header-x-large {
+	font-size: 1.8rem;
+}
