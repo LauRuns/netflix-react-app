@@ -4,7 +4,6 @@
 .Tooltip-Wrapper {
 	display: inline-block;
 	position: relative;
-	height: inherit;
 
 	/* Absolute positioning */
 	.Tooltip-Tip {
@@ -70,10 +69,10 @@
 }
 
 /* CSS border triangles */
-.Tooltip-Tip.bottom::before {
-	bottom: 100%;
-	border-bottom-color: $shades-red-60;
-}
+// .Tooltip-Tip.bottom::before {
+// 	bottom: 100%;
+// 	border-bottom-color: $shades-red-60;
+// }
 
 /* Absolute positioning */
 .Tooltip-Tip.left {
