@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import Navbar from '../../shared/components/Navigation/Navbar/Navbar';
-import SideDrawer from '../../shared/components/Navigation/SideDrawer/SideDrawer';
+import { SideDrawer } from '../../shared/components/Navigation/SideDrawer/SideDrawer';
 import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
 import { AuthContext } from '../../shared/context/auth-context';
 
@@ -50,8 +50,15 @@ const MainNavigation = (props) => {
 				drawerToggleClicked={openDrawerHandler}
 				onLogout={logOut}
 				drawerIsOpen={drawerIsOpen}
+				isLoggedIn={auth.isLoggedIn}
 			/>
-			<SideDrawer open={drawerIsOpen} navItemClicked={closeDrawerHandler} />
+			<SideDrawer
+				open={drawerIsOpen}
+				navItemClicked={closeDrawerHandler}
+				navItems={navItemsList}
+				isLoggedIn={auth.isLoggedIn}
+				onLogout={logOut}
+			/>
 		</React.Fragment>
 	);
 };
