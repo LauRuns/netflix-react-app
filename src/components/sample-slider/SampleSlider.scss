@@ -1,35 +1,23 @@
 @import '../../styles/2-variables/_variables-index';
 @import '../../styles/5-globals/_globals-index';
 
-// .sample-slider-container {
-// 	background-color: orange;
-// 	width: 300px;
-// 	height: 300px;
-// }
-
 .slider-container {
 	background-color: lightsalmon;
 	position: relative;
-	// width: 100%;
 	margin: 0;
 	padding: 0;
-
-	// max-height: fit-content;
-
 	display: flex;
-	// flex-direction: row;
 	overflow: hidden;
 
 	.slide-container {
 		background-color: indianred;
 		display: flex;
 		flex-direction: row;
-		// justify-content: center;
 		align-items: center;
 		width: 100%;
 
-		@media (min-width: $breakpoint-sm) {
-			width: 50%;
+		@media (min-width: $breakpoint-xs) {
+			width: 25%;
 		}
 
 		@media (min-width: $breakpoint-md) {
