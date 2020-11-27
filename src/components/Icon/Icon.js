@@ -1,13 +1,35 @@
 import React from 'react';
 
+import iconPath from '../../assets/iconslib';
 import './Icon.scss';
 
-const Icon = (props) => {
+const defaultStyles = { display: 'inline-block', verticalAlign: 'middle' };
+
+export const Icon = ({ icon, altIcon, size, color, className, style, onClick }) => {
+	const defaultSvg = {
+		size: 16,
+		color: 'green',
+		viewBox: '0 0 24 24',
+		style: {},
+		className: ''
+	};
+
+	const styles = { ...defaultStyles, ...style };
 	return (
-		<div className="Icon">
-			<img src={props.icon} alt={props.altIcon} />
-		</div>
+		// <div className="icon-item-container">
+		// 	<img src={icon} alt={altIcon} />
+		// </div>
+		<svg
+			className={className}
+			style={styles}
+			viewBox="0 0 24 24"
+			width={`${size || defaultSvg.size}px`}
+			height={`${size || defaultSvg.size}px`}
+			xmlns="http://www.w3.org/2000/svg"
+			xmlnsXlink="http://www.w3.org/1999/xlink"
+			onClick={onClick}
+		>
+			<path fill={color || defaultSvg.color} d={iconPath[icon]} />
+		</svg>
 	);
 };
-
-export default Icon;

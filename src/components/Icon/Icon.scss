@@ -1,24 +1,16 @@
 @import '../../styles/2-variables/_variables-index';
 
-.Icon {
-	display: none;
-}
+.icon-item-container {
+	background-color: transparent;
+	box-sizing: border-box;
+	display: inline-block;
+	vertical-align: middle;
 
-@media (min-width: 500px) {
-	.Icon {
-		background-color: transparent;
-		padding: 8px;
-		height: 80%;
-		box-sizing: border-box;
-		display: block;
-		margin-left: 2rem;
-	}
-
-	.Icon img {
+	& > img {
 		height: 100%;
 	}
 
-	.Icon:hover {
+	&:hover {
 		cursor: pointer;
 	}
 }
