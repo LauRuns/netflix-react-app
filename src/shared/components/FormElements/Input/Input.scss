@@ -1,12 +1,13 @@
 @import '../../../../styles/2-variables/_variables-index';
 
 .form-control {
-	margin: 1rem 0;
+	margin: 1.5rem 0;
 	position: relative;
 
 	#input-errortext {
 		position: absolute;
-		@media (max-width: 667px) {
+		margin-bottom: $default-var * 2;
+		@media (max-width: $breakpoint-md) {
 			right: 0;
 		}
 	}
@@ -19,7 +20,7 @@
 
 	label {
 		font-weight: bold;
-		margin-bottom: 0.5rem;
+		margin-bottom: $default-var / 2;
 	}
 
 	input,
@@ -39,6 +40,10 @@
 			border-color: $shades-red-80;
 			color: $netflix-text;
 		}
+	}
+
+	input {
+		padding-left: $default-var;
 	}
 }
 
