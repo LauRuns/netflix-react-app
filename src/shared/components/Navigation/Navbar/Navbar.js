@@ -3,26 +3,8 @@ import React from 'react';
 import NavItems from '../NavItems/NavItems';
 import Logo from '../../../../components/Logo/Logo';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
+import { Icon } from '../../../../components/Icon/Icon';
 import './Navbar.scss';
-
-const navItemsList = [
-	{
-		linkTo: '/home',
-		linkName: 'Home'
-	},
-	{
-		linkTo: '/countries',
-		linkName: 'Countries'
-	},
-	{
-		linkTo: '/search',
-		linkName: 'Search'
-	},
-	{
-		linkTo: '/account',
-		linkName: 'Account'
-	}
-];
 
 const Navbar = (props) => {
 	return (
@@ -31,7 +13,8 @@ const Navbar = (props) => {
 				<Logo />
 			</div>
 			<nav className="DesktopOnly">
-				<NavItems navItemsList={navItemsList} />
+				<NavItems navItemsList={props.navItemsList} />
+				<Icon icon="exitApp" size={32} color="#fff" onClick={props.onLogout} />
 			</nav>
 			<menu className="MobileOnly">
 				<DrawerToggle clicked={props.drawerToggleClicked} />
