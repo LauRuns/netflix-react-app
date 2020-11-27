@@ -1,6 +1,6 @@
 @import '../../../../styles/2-variables/_variables-index';
 
-.NavigationItems {
+.navigation-items-list {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -9,16 +9,16 @@
 	height: 100%;
 }
 
-#LogoutIcon {
+#logout-icon-btn {
 	display: none;
 }
 
 @media (min-width: $breakpoint-sm) {
-	.NavigationItems {
+	.navigation-items-list {
 		flex-flow: row;
 	}
 
-	#LogoutIcon {
+	#logout-icon-btn {
 		display: block;
 		margin-top: 0.4rem;
 		transition: all 0.4s ease;
@@ -27,20 +27,20 @@
 		margin: 0.6rem 0 0 2rem;
 	}
 
-	#LogoutIcon img {
+	#logout-icon-btn img {
 		height: 100%;
 	}
 
-	#LogoutIcon:hover::after {
-		content: attr(data-tooltip);
-		position: absolute;
-		display: block;
-		top: 4.5rem;
-		right: 1.5rem;
-		margin-left: 5px;
-		padding: 15px;
-		z-index: 10;
-		background-color: $primary-red;
-		border-radius: 4px;
-	}
+	// #logout-icon-btn:hover::after {
+	// 	content: attr(data-tooltip);
+	// 	position: absolute;
+	// 	display: block;
+	// 	top: 4.5rem;
+	// 	right: 1.5rem;
+	// 	margin-left: 5px;
+	// 	padding: 15px;
+	// 	z-index: 10;
+	// 	background-color: $primary-red;
+	// 	border-radius: 4px;
+	// }
 }
