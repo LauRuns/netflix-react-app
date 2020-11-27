@@ -36,7 +36,12 @@
 	}
 
 	@media (min-width: $breakpoint-lg) {
-		// background-color: indianred;
+		background-color: indianred;
+		grid-template-areas:
+			'. homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader .'
+			'. expiring expiring expiring expiring expiring expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .'
+			'. new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld  .'
+			'. test test test test test test test test test test  .';
 	}
 }
 
@@ -58,53 +63,87 @@
 }
 
 /* Classes */
+
+.homepage__base {
+	padding: $default-var;
+	// width: 100%;
+	max-width: 100vw;
+}
+
+.homepage__base_vertical_list {
+	background-color: tan;
+
+	// max-height: 300px;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	&:first-child {
+		margin: 0.5rem;
+	}
+
+	@media (min-width: $breakpoint-md) {
+		max-height: $default-var * 20;
+	}
+
+	@media (min-width: $breakpoint-lg) {
+		max-height: $default-var * 25;
+	}
+}
+
 .homepage__header {
 	background-color: indigo;
 	@extend .center-column;
-	padding: $default-var;
+	@extend .homepage__base;
 }
 
 .homepage__expiring {
 	background-color: mediumturquoise;
-
-	padding: $default-var;
-
-	.carousel-homepage {
-		background-color: tan;
-		padding: $default-var;
-
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
-		&::-webkit-scrollbar {
-			display: none;
-		}
-
-		&:first-child {
-			margin: 0.5rem;
-		}
-
-		@media (min-width: $breakpoint-md) {
-			max-height: 200px;
-		}
-	}
-}
-
-.hompage__base {
-	padding: $default-var;
-	width: 100%;
+	@extend .homepage__base;
+	@extend .homepage__base_vertical_list;
 }
 
 .homepage__nld__expiring {
 	background-color: lightseagreen;
-	@extend .hompage__base;
+	@extend .homepage__base;
+	// @extend .homepage__base_vertical_list;
+	.exp-chip-container {
+		// background-color: orange;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
 }
 
 .homepage__nld__new_content {
-	background-color: mediumslateblue;
-	@extend .hompage__base;
+	background-color: orange;
+	@extend .homepage__base;
+
+	@media (min-width: $breakpoint-md) {
+		max-width: 100%;
+	}
 }
 
 .homepage__testing__carousel {
 	background-color: royalblue;
-	@extend .hompage__base;
+	@extend .homepage__base;
+	@media (min-width: $breakpoint-md) {
+		max-width: 100%;
+	}
+
+	.test-carousel {
+		background-color: orchid;
+
+		.slick-slider-carousel {
+			background-color: orangered;
+			// display: inline-block;
+			width: 80%;
+
+			& > img {
+				width: 100%;
+			}
+		}
+	}
 }
