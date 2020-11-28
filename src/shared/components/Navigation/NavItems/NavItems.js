@@ -5,7 +5,7 @@ import NavItem from './NavItem/NavItem';
 
 import './NavItems.scss';
 
-const NavItems = ({ drawerIsOpen, navItemsList }) => {
+const NavItems = ({ navItemsList }) => {
 	const auth = useContext(AuthContext);
 
 	return (
