@@ -1,18 +1,17 @@
 import React from 'react';
 
 import NavItems from '../NavItems/NavItems';
-import Logo from '../../../../components/Logo/Logo';
+import { Logo } from '../../../../components/Logo/Logo';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 import { Icon } from '../../../../components/Icon/Icon';
 import { Tooltip } from '../../UIElements/Tooltip/Tooltip';
+import NetflixHexagon from '../../../../assets/netflix_hexagon.png';
 import './Navbar.scss';
 
-const Navbar = ({ navItemsList, onLogout, drawerToggleClicked, isLoggedIn }) => {
+const Navbar = ({ navItemsList, onLogout, drawerToggleClicked, isLoggedIn, onLogoNavigate }) => {
 	return (
 		<header className="Navbar">
-			<div className="NavbarLogo">
-				<Logo />
-			</div>
+			<Logo logoSource={NetflixHexagon} altLogo="Hexagon" size={32} onClick={onLogoNavigate} />
 			<nav className="DesktopOnly">
 				<NavItems navItemsList={navItemsList} />
 				{isLoggedIn && (
