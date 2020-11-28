@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 import './NavItem.scss';
 
-const navItem = (props) => {
+const navItem = ({ link, children }) => {
 	return (
 		<li className="NavItem">
-			<NavLink to={props.link} exact activeClassName="active">
-				{props.children}
+			<NavLink to={link} exact activeClassName="active">
+				{children}
 			</NavLink>
 		</li>
 	);
