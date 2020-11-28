@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 import Button from '../../UIElements/Button/Button';
+import { IconButton } from '../../UIElements/iconButton/IconButton';
 import './ImageUpload.scss';
 
 const ImageUpload = (props) => {
@@ -56,9 +57,19 @@ const ImageUpload = (props) => {
 					{previewUrl && <img src={previewUrl} alt="Preview" />}
 					{!previewUrl && <p>Please select an image.</p>}
 				</div>
-				<Button type="button" onClick={pickImageHandler}>
+				{/* <Button type="button" onClick={pickImageHandler}>
 					PICK IMAGE
-				</Button>
+				</Button> */}
+				<IconButton
+					icon="search"
+					iconSize={24}
+					iconColor="#fff"
+					before
+					iconStyle={{ marginRight: '.5rem' }}
+					onClick={pickImageHandler}
+				>
+					SELECT IMAGE
+				</IconButton>
 			</div>
 			{!isValid && <p>{props.errorText}</p>}
 		</div>
