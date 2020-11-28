@@ -7,7 +7,7 @@ import { AuthContext } from '../../shared/context/auth-context';
 
 import './MainNavigation.scss';
 
-const MainNavigation = (props) => {
+const MainNavigation = () => {
 	const auth = useContext(AuthContext);
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
@@ -26,19 +26,31 @@ const MainNavigation = (props) => {
 	const navItemsList = [
 		{
 			linkTo: '/home',
-			linkName: 'Home'
+			linkName: 'Home',
+			iconName: 'home',
+			iconSize: 32,
+			iconColor: '#fff'
 		},
 		{
 			linkTo: '/countries',
-			linkName: 'Countries'
+			linkName: 'Countries',
+			iconName: 'marker',
+			iconSize: 32,
+			iconColor: '#fff'
 		},
 		{
 			linkTo: '/search',
-			linkName: 'Search'
+			linkName: 'Search',
+			iconName: 'search',
+			iconSize: 32,
+			iconColor: '#fff'
 		},
 		{
 			linkTo: '/account',
-			linkName: 'Account'
+			linkName: 'Account',
+			iconName: 'account',
+			iconSize: 32,
+			iconColor: '#fff'
 		}
 	];
 
