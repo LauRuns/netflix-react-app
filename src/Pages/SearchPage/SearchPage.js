@@ -11,7 +11,7 @@ import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 
 import { Dropdown } from '../../shared/components/FormElements/DropDown/Dropdown';
-import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
+import { Backdrop } from '../../shared/components/UIElements/Backdrop/Backdrop';
 
 import './SearchPage.scss';
 

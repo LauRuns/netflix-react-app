@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import Navbar from '../../shared/components/Navigation/Navbar/Navbar';
 import { SideDrawer } from '../../shared/components/Navigation/SideDrawer/SideDrawer';
-import Backdrop from '../../shared/components/UIElements/Backdrop/Backdrop';
+import { Backdrop } from '../../shared/components/UIElements/Backdrop/Backdrop';
 import { AuthContext } from '../../shared/context/auth-context';
 
 import './MainNavigation.scss';

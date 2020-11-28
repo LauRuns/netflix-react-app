@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Backdrop from '../../../components/UIElements/Backdrop/Backdrop';
+import { Backdrop } from '../../../components/UIElements/Backdrop/Backdrop';
 
 import './Dropdown.scss';
 
