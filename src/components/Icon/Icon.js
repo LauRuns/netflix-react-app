@@ -5,7 +5,7 @@ import './Icon.scss';
 
 const defaultStyles = { display: 'inline-block', verticalAlign: 'middle' };
 
-export const Icon = ({ icon, altIcon, size, color, className, style, onClick }) => {
+export const Icon = ({ icon, size, color, className, style, onClick }) => {
 	const defaultSvg = {
 		size: 16,
 		color: 'green',
@@ -16,9 +16,6 @@ export const Icon = ({ icon, altIcon, size, color, className, style, onClick }) 
 
 	const styles = { ...defaultStyles, ...style };
 	return (
-		// <div className="icon-item-container">
-		// 	<img src={icon} alt={altIcon} />
-		// </div>
 		<svg
 			className={className}
 			style={styles}
