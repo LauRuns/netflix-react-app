@@ -4,7 +4,7 @@ import Backdrop from '../../../components/UIElements/Backdrop/Backdrop';
 
 import './Dropdown.scss';
 
-const Dropdown = ({ title, label, items, selected }) => {
+export const Dropdown = ({ title, label, items, selected }) => {
 	const [open, setOpen] = useState(false);
 	const [selection, setSelection] = useState(null);
 	const [showBackDrop, setShowBackDrop] = useState(false);
@@ -58,5 +58,3 @@ const Dropdown = ({ title, label, items, selected }) => {
 		</>
 	);
 };
-
-export default Dropdown;
