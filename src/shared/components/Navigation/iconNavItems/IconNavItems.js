@@ -11,8 +11,7 @@ export const IconNavItems = ({ navItems }) => {
 		<ul className="icon-nav-items-container">
 			{auth.isLoggedIn &&
 				navItems &&
-				navItems.map(({ linkTo, linkName, iconName, iconSize, iconColor }) => {
-					console.log(linkName, iconName);
+				navItems.map(({ linkTo, linkName, iconName, iconSize, iconColor, iconStyle }) => {
 					return (
 						<IconNavItem
 							key={linkName}
@@ -20,6 +19,7 @@ export const IconNavItems = ({ navItems }) => {
 							iconName={iconName}
 							iconSize={iconSize}
 							iconColor={iconColor}
+							iconStyle={iconStyle}
 						>
 							{linkName}
 						</IconNavItem>
