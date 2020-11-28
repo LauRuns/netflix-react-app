@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
 import Logo from '../../../../components/Logo/Logo';
-import NavItems from '../NavItems/NavItems';
 import { AuthContext } from '../../../context/auth-context';
 import Button from '../../UIElements/Button/Button';
+import { IconNavItems } from '../../Navigation/iconNavItems/IconNavItems';
 
 import './SideDrawer.scss';
 
@@ -15,6 +15,7 @@ export const SideDrawer = ({ open, navItemClicked, navItems, isLoggedIn, onLogou
 	if (open) {
 		attachClasses = ['SideDrawer', 'Open'];
 	}
+	console.log(navItems);
 
 	return (
 		<React.Fragment>
@@ -23,7 +24,7 @@ export const SideDrawer = ({ open, navItemClicked, navItems, isLoggedIn, onLogou
 					<Logo />
 				</div>
 				<nav onClick={navItemClicked}>
-					<NavItems drawerIsOpen={open} navItemsList={navItems} />
+					<IconNavItems drawerIsOpen={open} navItems={navItems} />
 					{isLoggedIn && <Button onClick={onLogout}>LOGOUT</Button>}
 				</nav>
 			</div>
