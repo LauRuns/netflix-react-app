@@ -7,10 +7,12 @@ import ImageUpload from '../../../shared/components/FormElements/ImageUpload/Ima
 import Button from '../../../shared/components/UIElements/Button/Button';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
+import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+
 import './UploadImage.scss';
 
 const UploadImage = (props) => {
-	const auth = useContext(AuthContext); // sets up listener to changing values for entire app
+	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	const [formState, inputHandler] = useForm(
@@ -59,9 +61,17 @@ const UploadImage = (props) => {
 					<div>
 						<ImageUpload id="image" onInput={inputHandler} />
 					</div>
-					<Button type="submit" disabled={!formState.isValid}>
+					<IconButton
+						icon="save"
+						iconSize={24}
+						iconColor="#fff"
+						disabled={!formState.isValid}
+						buttonType="submit"
+						before
+						iconStyle={{ marginRight: '.5rem' }}
+					>
 						SAVE IMAGE
-					</Button>
+					</IconButton>
 				</form>
 			</div>
 		</React.Fragment>

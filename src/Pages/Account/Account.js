@@ -14,6 +14,8 @@ import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import './Account.scss';
 
+import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
+
 export const UserAccount = () => {
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -36,7 +38,9 @@ export const UserAccount = () => {
 				const responseData = await sendRequest(
 					`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`
 				);
-				setLoadedUser(responseData.result);
+				const { result } = responseData;
+				console.log(result);
+				setLoadedUser(result);
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
@@ -59,21 +63,10 @@ export const UserAccount = () => {
 		fetchCountries();
 	}, [sendRequest]);
 
-	const showProfileInfoHandler = () => {
-		setShowProfileInfo(!showProfileInfo);
-	};
-
-	const showCountrySet = () => {
-		setShowCountrySetter(!showCountrySetter);
-	};
-
-	const showImageUploader = () => {
-		setShowUploadImage(!showUploadImage);
-	};
-
-	const showPasswordChange = () => {
-		setShowChangePassword(!showChangePassword);
-	};
+	const showProfileInfoHandler = () => setShowProfileInfo(!showProfileInfo);
+	const showCountrySet = () => setShowCountrySetter(!showCountrySetter);
+	const showImageUploader = () => setShowUploadImage(!showUploadImage);
+	const showPasswordChange = () => setShowChangePassword(!showChangePassword);
 
 	const closeAllInfoTabs = () => {
 		setShowProfileInfo(false);
@@ -173,11 +166,18 @@ export const UserAccount = () => {
 						</div>
 
 						<div id="account-update-profile" className="account__update__profile">
-							<div onClick={showProfileInfoHandler}>
+							<div>
 								<h3>Update profile information</h3>
-								<Button noborder size="small" type="button">
+								<IconButton
+									icon={showProfileInfo ? 'cancel' : 'edit'}
+									iconSize={20}
+									iconColor="#fff"
+									onClick={showProfileInfoHandler}
+									noborder
+									iconStyle={{ marginLeft: '.5rem' }}
+								>
 									{showProfileInfo ? 'CLOSE' : 'EDIT'}
-								</Button>
+								</IconButton>
 							</div>
 							{showProfileInfo && (
 								<div className="itm-4-profile">
@@ -192,21 +192,29 @@ export const UserAccount = () => {
 						</div>
 
 						<div id="account-set-country" className="account__country__setter">
-							<div onClick={showCountrySet}>
+							<div>
 								<h3>
 									{loadedUser.country
 										? `Current country: ${loadedUser.country.country}`
 										: 'Set your country'}
 								</h3>
-								<Button noborder size="small" type="button">
+								<IconButton
+									icon={showProfileInfo ? 'cancel' : 'edit'}
+									iconSize={20}
+									iconColor="#fff"
+									onClick={showCountrySet}
+									noborder
+									iconStyle={{ marginLeft: '.5rem' }}
+								>
 									{showCountrySetter ? 'CLOSE' : 'EDIT'}
-								</Button>
+								</IconButton>
 							</div>
-							{showCountrySetter && (
+							{showCountrySetter && loadedUser && (
 								<CountrySet
-									username={loadedUser.name}
-									email={loadedUser.email}
-									userCountry={loadedUser.country || null}
+									// username={loadedUser.name}
+									// email={loadedUser.email}
+									// userCountry={loadedUser.country || null}
+									userData={loadedUser}
 									setNewSelectedCountry={reloadUserData}
 									countryData={loadedCountries}
 								/>
@@ -216,9 +224,16 @@ export const UserAccount = () => {
 						<div id="account-update-avatar" className="account__update__avatar">
 							<div onClick={showImageUploader}>
 								<h3>Upload profile image</h3>
-								<Button noborder size="small" type="button">
+								<IconButton
+									icon={showProfileInfo ? 'cancel' : 'edit'}
+									iconSize={20}
+									iconColor="#fff"
+									onClick={showImageUploader}
+									noborder
+									iconStyle={{ marginLeft: '.5rem' }}
+								>
 									{showUploadImage ? 'CLOSE' : 'EDIT'}
-								</Button>
+								</IconButton>
 							</div>
 							{showUploadImage && (
 								<ImageUpload
@@ -232,9 +247,16 @@ export const UserAccount = () => {
 						<div id="account-change-password" className="account__change__pwd">
 							<div onClick={showPasswordChange}>
 								<h3>Change password</h3>
-								<Button noborder size="small" type="button">
+								<IconButton
+									icon={showProfileInfo ? 'cancel' : 'edit'}
+									iconSize={20}
+									iconColor="#fff"
+									onClick={setShowChangePassword}
+									noborder
+									iconStyle={{ marginLeft: '.5rem' }}
+								>
 									{showChangePassword ? 'CLOSE' : 'EDIT'}
-								</Button>
+								</IconButton>
 							</div>
 							{showChangePassword && (
 								<PasswordChange

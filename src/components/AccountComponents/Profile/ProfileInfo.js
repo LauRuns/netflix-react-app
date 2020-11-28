@@ -12,7 +12,7 @@ import { useHttpClient } from '../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../shared/context/auth-context';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
-
+import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
 import './ProfileInfo.scss';
 
 const ProfileInfo = (props) => {
@@ -112,9 +112,17 @@ const ProfileInfo = (props) => {
 							initialValid
 						/>
 					</div>
-					<Button type="submit" disabled={!formState.isValid}>
-						UPDATE PROFILE
-					</Button>
+					<IconButton
+						icon="save"
+						iconSize={24}
+						iconColor="#fff"
+						disabled={!formState.isValid}
+						buttonType="submit"
+						before
+						iconStyle={{ marginRight: '.5rem' }}
+					>
+						SAVE
+					</IconButton>
 				</form>
 			</div>
 		</React.Fragment>
