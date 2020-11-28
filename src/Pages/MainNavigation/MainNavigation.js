@@ -20,34 +20,36 @@ const MainNavigation = () => {
 	const logOut = () => auth.logout();
 	const navigateOnLogo = () => history.push('/home');
 
+	const defaultNavStyling = {
+		iconSize: 32,
+		iconColor: '#fff',
+		iconStyle: { marginRight: '1rem' }
+	};
+
 	const navItemsList = [
 		{
 			linkTo: '/home',
 			linkName: 'Home',
 			iconName: 'home',
-			iconSize: 32,
-			iconColor: '#fff'
+			...defaultNavStyling
 		},
 		{
 			linkTo: '/countries',
 			linkName: 'Countries',
 			iconName: 'marker',
-			iconSize: 32,
-			iconColor: '#fff'
+			...defaultNavStyling
 		},
 		{
 			linkTo: '/search',
 			linkName: 'Search',
 			iconName: 'search',
-			iconSize: 32,
-			iconColor: '#fff'
+			...defaultNavStyling
 		},
 		{
 			linkTo: '/account',
 			linkName: 'Account',
 			iconName: 'account',
-			iconSize: 32,
-			iconColor: '#fff'
+			...defaultNavStyling
 		}
 	];
 
