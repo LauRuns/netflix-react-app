@@ -6,23 +6,23 @@ import { useHttpClient } from '../../../shared/hooks/http-hook';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
 import Dropdown from '../../../shared/components/FormElements/DropDown/Dropdown';
+import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+
 import './CountrySetter.scss';
 
-const CountrySetter = (props) => {
+const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
-	const [selectedCountry, setSelectedCountry] = useState(props.userCountry.country || undefined);
+	const [selectedCountry, setSelectedCountry] = useState(userData.country || null);
 
-	if (!props.countryData) {
+	if (!countryData) {
 		return (
 			<div className="loading-countries">
 				<LoadingSpinner loadingSpinnerMessage="Loading country data..." />
 			</div>
 		);
 	}
-
-	const countryList = props.countryData;
 
 	const countrySelectHandler = (e) => {
 		setSelectedCountry(e);
@@ -35,8 +35,8 @@ const CountrySetter = (props) => {
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`,
 				'PATCH',
 				JSON.stringify({
-					username: props.username,
-					email: props.email,
+					username: userData.name,
+					email: userData.email,
 					country: selectedCountry
 				}),
 				{
@@ -44,6 +44,7 @@ const CountrySetter = (props) => {
 					Authorization: `Bearer ${auth.token}`
 				}
 			);
+			console.log(responseData.updatedUser);
 			onUpdate(responseData.updatedUser);
 		} catch (err) {
 			// Error is handled by the useHttpClient
@@ -51,7 +52,7 @@ const CountrySetter = (props) => {
 	};
 
 	const onUpdate = (event) => {
-		props.setNewSelectedCountry(event);
+		setNewSelectedCountry(event);
 	};
 
 	if (isLoading) {
@@ -76,7 +77,7 @@ const CountrySetter = (props) => {
 					</div>
 					<div className="country-dd-selector">
 						<Dropdown
-							items={countryList}
+							items={countryData}
 							label="Select country"
 							title="Select one..."
 							selected={countrySelectHandler}
@@ -88,9 +89,17 @@ const CountrySetter = (props) => {
 								? `Save ${selectedCountry.country} as your new default country?`
 								: 'No country selected'}
 						</p>
-						<Button disabled={!selectedCountry} type="submit">
-							SAVE COUNTRY
-						</Button>
+						<IconButton
+							icon="save"
+							iconSize={24}
+							iconColor="#fff"
+							disabled={!selectedCountry}
+							buttonType="submit"
+							before
+							iconStyle={{ marginRight: '.5rem' }}
+						>
+							SAVE
+						</IconButton>
 					</div>
 				</form>
 			</div>
