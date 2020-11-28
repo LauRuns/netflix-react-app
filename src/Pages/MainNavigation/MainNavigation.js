@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Navbar from '../../shared/components/Navigation/Navbar/Navbar';
 import { SideDrawer } from '../../shared/components/Navigation/SideDrawer/SideDrawer';
@@ -11,17 +12,13 @@ const MainNavigation = () => {
 	const auth = useContext(AuthContext);
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
-	const openDrawerHandler = () => {
-		setDrawerIsOpen(true);
-	};
+	const history = useHistory();
 
-	const closeDrawerHandler = () => {
-		setDrawerIsOpen(!drawerIsOpen);
-	};
+	const openDrawerHandler = () => setDrawerIsOpen(true);
+	const closeDrawerHandler = () => setDrawerIsOpen(!drawerIsOpen);
 
-	const logOut = () => {
-		auth.logout();
-	};
+	const logOut = () => auth.logout();
+	const navigateOnLogo = () => history.push('/home');
 
 	const navItemsList = [
 		{
@@ -63,6 +60,7 @@ const MainNavigation = () => {
 				onLogout={logOut}
 				drawerIsOpen={drawerIsOpen}
 				isLoggedIn={auth.isLoggedIn}
+				onLogoNavigate={navigateOnLogo}
 			/>
 			<SideDrawer
 				open={drawerIsOpen}
