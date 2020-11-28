@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 
-import Logo from '../../../../components/Logo/Logo';
+import { Logo } from '../../../../components/Logo/Logo';
 import { AuthContext } from '../../../context/auth-context';
 import Button from '../../UIElements/Button/Button';
 import { IconNavItems } from '../../Navigation/iconNavItems/IconNavItems';
+import NetflixHexagon from '../../../../assets/netflix_hexagon.png';
 
 import './SideDrawer.scss';
 
@@ -20,8 +21,8 @@ export const SideDrawer = ({ open, navItemClicked, navItems, isLoggedIn, onLogou
 	return (
 		<React.Fragment>
 			<div className={attachClasses.join(' ')}>
-				<div className="Sidedrawerlogo">
-					<Logo />
+				<div className="side-drawer-logo">
+					<Logo logoSource={NetflixHexagon} altLogo="Hexagon" size={64} />
 				</div>
 				<nav onClick={navItemClicked}>
 					<IconNavItems drawerIsOpen={open} navItems={navItems} />

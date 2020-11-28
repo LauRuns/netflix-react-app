@@ -36,7 +36,9 @@
 	transform: translateX(-100%);
 }
 
-.Sidedrawerlogo {
-	height: 11%;
-	margin-bottom: 32px;
+.side-drawer-logo {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: $default-var * 2;
 }
