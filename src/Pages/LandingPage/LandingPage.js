@@ -6,7 +6,6 @@ import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSp
 import Button from '../../shared/components/UIElements/Button/Button';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
-import { Tooltip } from '../../shared/components/UIElements/Tooltip/Tooltip';
 import { Header } from '../../shared/components/UIElements/header/Header';
 
 import { SampleSlider } from '../../components/sample-slider/SampleSLider';
@@ -22,8 +21,6 @@ const LandingPage = React.memo(() => {
 	const [otherNewContent, setOtherNewContent] = useState(null);
 	const [expNLD, setExpNLD] = useState(null);
 	const [expOther, setExpOther] = useState(null);
-
-	const renders = React.useRef(0);
 
 	const fetchLandingPageData = useCallback(async () => {
 		try {
