@@ -1,0 +1,28 @@
+@import '../../styles/2-variables/_variables-index';
+
+.netflix-item {
+	overflow-y: scroll;
+}
+.netflix-item__content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	& > div {
+		padding: 0.5rem;
+	}
+
+	.netflix-item__image {
+		display: none;
+	}
+
+	@media (min-width: $breakpoint-md) {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		.netflix-item__image {
+			display: block;
+		}
+	}
+}
