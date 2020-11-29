@@ -30,8 +30,6 @@ const Input = ({
 	label,
 	placeholder,
 	validators,
-	value,
-	isValid,
 	element,
 	type,
 	row,
@@ -43,8 +41,7 @@ const Input = ({
 		isValid: initialValid || false
 	});
 
-	// const { id, onInput } = props;
-	// const { value, isValid } = inputState;
+	const { value, isValid } = inputState;
 
 	useEffect(() => {
 		onInput(id, value, isValid);
