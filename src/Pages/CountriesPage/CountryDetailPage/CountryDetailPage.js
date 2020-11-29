@@ -54,7 +54,7 @@ const CountryDetailPage = (props) => {
 			<div className="country-detail-page-container">
 				<div id="detail-1" className="detail-nav-section">
 					<h2>Netflix details for {name}</h2>
-					<NavLink to="/">
+					<NavLink to="/countries">
 						<Button inverse>Back to Country overview</Button>
 					</NavLink>
 				</div>
