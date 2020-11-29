@@ -1,24 +1,6 @@
 @import '../../../../styles/2-variables/_variables-index';
 @import '../../../../styles/5-globals/_globals-index';
 
-.lds-dual-ring {
-	display: inline-block;
-	width: 64px;
-	height: 64px;
-}
-
-.lds-dual-ring:after {
-	content: ' ';
-	display: block;
-	width: 46px;
-	height: 46px;
-	margin: 1px;
-	border-radius: 50%;
-	border: 5px solid $primary-red;
-	border-color: $primary-red transparent $primary-red transparent;
-	animation: lds-dual-ring 1.2s linear infinite;
-}
-
 .loading-spinner__overlay {
 	height: 100%;
 	width: 100%;
@@ -31,6 +13,24 @@
 	justify-content: center;
 	align-items: center;
 	z-index: 100;
+}
+
+.lds-dual-ring {
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+
+	&:after {
+		content: ' ';
+		display: block;
+		width: 46px;
+		height: 46px;
+		margin: 1px;
+		border-radius: 50%;
+		border: 5px solid $primary-red;
+		border-color: $primary-red transparent $primary-red transparent;
+		animation: lds-dual-ring 1.2s linear infinite;
+	}
 }
 
 @keyframes lds-dual-ring {
