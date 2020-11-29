@@ -51,12 +51,12 @@ export const SampleSlider = ({ slideList, onClick }) => {
 				)}
 				{slideList && (
 					<div id="goLeft" onClick={goLeft}>
-						<Icon icon="chevron_left" size={64} disabled={x === 0} style={{ zIndex: '90' }} />
+						<Icon icon="chevron_left" size={64} disabled={x === 0} style={{ zIndex: '80' }} />
 					</div>
 				)}
 				{slideList && (
 					<div id="goRight" onClick={goRight}>
-						<Icon icon="chevron_right" size={64} disabled={x === 0} style={{ zIndex: '90' }} />
+						<Icon icon="chevron_right" size={64} disabled={x === 0} style={{ zIndex: '80' }} />
 					</div>
 				)}
 			</div>
