@@ -6,13 +6,10 @@
 	justify-content: flex-start;
 	align-items: center;
 	list-style: none;
-	margin-bottom: 1.5rem;
-	// width: 100%;
 
 	& > a {
 		color: $netflix-text;
 		text-decoration: none;
-		font-size: larger;
 	}
 	& > .active {
 		color: $primary-red;
