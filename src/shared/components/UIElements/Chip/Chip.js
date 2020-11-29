@@ -4,8 +4,8 @@ import './Chip.scss';
 
 const Chip = (props) => {
 	return (
-		<div className="chip-container">
-			<button onClick={props.onClick}>{props.name}</button>
+		<div className="chip-container" onClick={props.onClick}>
+			<button>{props.name}</button>
 		</div>
 	);
 };
