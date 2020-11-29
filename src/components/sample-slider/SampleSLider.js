@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ImageContainer } from '../../shared/components/UIElements/image-container/ImageContainer';
 import './SampleSlider.scss';
 
-export const SampleSlider = ({ slideList }, props) => {
+export const SampleSlider = ({ slideList, onClick }) => {
 	const [x, setX] = useState(0);
 
 	const goLeft = () => {
@@ -47,7 +47,7 @@ export const SampleSlider = ({ slideList }, props) => {
 									}}
 								>
 									<ImageContainer
-										onClick={() => onItemClickHandler(item)}
+										onClick={() => onClick(item)}
 										src={item.img ? item.img : item.poster}
 										alt={item.title}
 									/>
