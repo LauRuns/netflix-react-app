@@ -7,7 +7,7 @@ import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import { Header } from '../../shared/components/UIElements/header/Header';
 
-import { SampleSlider } from '../../components/sample-slider/SampleSLider';
+import { SampleSlider } from '../../components/sample-slider/SampleSlider';
 
 import './LandingPage.scss';
 import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
