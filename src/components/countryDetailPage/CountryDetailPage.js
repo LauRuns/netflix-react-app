@@ -95,12 +95,12 @@ export const CountryDetailPage = (props) => {
 			{isLoading && <LoadingSpinner loadingSpinnerMessage="Bussy fetching data..." asOverlay />}
 			<div className="country-detail-page-container">
 				<div id="country-detail-page-header" className="dp__header">
-					<IconNavItem link="/countries" iconName="chevron_left" iconSize={54}>
-						GO BACK
-					</IconNavItem>
 					<Header center lg>
 						<h2>Content for {name || '...'}</h2>
 					</Header>
+					<IconNavItem link="/countries" iconName="chevron_left" iconSize={54}>
+						Back to countries overview
+					</IconNavItem>
 				</div>
 
 				<div id="country-detail-page-newcontent" className="dp__newcontent">
@@ -114,7 +114,7 @@ export const CountryDetailPage = (props) => {
 
 				<div id="country-detail-page-expiringcontent" className="dp__expcontent">
 					<Header md>
-						<h2>Expiring content for {name || '...'}:</h2>
+						<h2>Expiring content for {name || '...'}</h2>
 					</Header>
 					{!isLoading && expCountryData && (
 						<SampleSlider slideList={expCountryData} onClick={detailItemClicked} />
