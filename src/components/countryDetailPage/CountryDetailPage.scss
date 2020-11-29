@@ -1,0 +1,65 @@
+@import '../../styles/2-variables/_variables-index';
+
+.country-detail-page-container {
+	display: grid;
+
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(3, minmax(50px, auto));
+
+	grid-template-areas:
+		'detailpageheader'
+		'detailpagenew'
+		'detailpageexp';
+
+	@media (min-width: $breakpoint-sm) {
+		grid-template-columns: repeat(12, 1fr);
+		grid-template-areas:
+			'. detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader .'
+			'. detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew .'
+			'. detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp .';
+	}
+
+	@media (min-width: $breakpoint-md) {
+	}
+
+	@media (min-width: $breakpoint-lg) {
+		grid-template-areas:
+			'. . detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader detailpageheader . .'
+			'. . detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew detailpagenew . .'
+			'. . detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp detailpageexp . .';
+	}
+	@media (min-width: $breakpoint-xl) {
+	}
+}
+
+#country-detail-page-header {
+	grid-area: detailpageheader;
+}
+
+#country-detail-page-newcontent {
+	grid-area: detailpagenew;
+}
+
+#country-detail-page-expiringcontent {
+	grid-area: detailpageexp;
+}
+
+/* Classes */
+.base-country-det-page {
+	padding: $default-var;
+	max-width: 100vw;
+}
+
+.dp__header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.dp__newcontent {
+	@extend .base-country-det-page;
+}
+
+.dp__expcontent {
+	@extend .base-country-det-page;
+}
