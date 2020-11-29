@@ -6,6 +6,7 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import Search from '../../components/Search/Search';
+import { Header } from '../../shared/components/UIElements/header/Header';
 
 import './CountriesPageContainer.scss';
 
@@ -39,7 +40,7 @@ const CountriesPageContainer = (props) => {
 		}
 	};
 
-	const clickContainerHandler = (e) => {
+	const onCountryClickedHandler = (e) => {
 		const { name, countryId } = e;
 		console.log('clickContainerHandler', e);
 		history.push('/countryinfo', { name, countryId });
@@ -49,27 +50,29 @@ const CountriesPageContainer = (props) => {
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
 			{isLoading ? (
-				<div className="center">
-					<LoadingSpinner loadingSpinnerMessage="Loading data..." />
-				</div>
+				<LoadingSpinner center loadingSpinnerMessage="Loading data..." />
 			) : (
-				<div className="cntry-pages-container">
+				// <div className="center">
+				// </div>
+				<div className="country-page-container">
 					{loadedCountries && (
-						<div id="title-item">
-							<h1>There is Netflix data for {loadedCountries.length} countries available!</h1>
+						<div id="country-page-header" className="country-page__header">
+							<Header md center>
+								<h1>There is Netflix data for {loadedCountries.length} countries available!</h1>
+							</Header>
 						</div>
 					)}
 					{loadedCountries ? (
-						<div id="search-item">
+						<div id="country-page-search-section" className="country-page__search-section">
 							<Search
 								countryList={loadedCountries}
 								setUpdatedCountryData={filteredCountriesHandler}
 							/>
 						</div>
 					) : null}
-					<div id="cntry-list-item">
+					<div id="country-page-list-countries" className="country-page__list-country">
 						{loadedCountries && countryListData && (
-							<CountryList onItemClicked={clickContainerHandler} items={countryListData} />
+							<CountryList onItemClicked={onCountryClickedHandler} items={countryListData} />
 						)}
 					</div>
 				</div>

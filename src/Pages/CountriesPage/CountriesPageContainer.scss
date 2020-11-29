@@ -1,23 +1,23 @@
 @import '../../styles/2-variables/_variables-index';
 
-.cntry-pages-container {
+.country-page-container {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: repeat(3, minmax($default-var * 4, auto));
 	padding: $default-var 0;
 
 	grid-template-areas:
-		'a'
-		'b'
-		'c';
+		'headersection'
+		'searchsection'
+		'countrysection';
 
 	@media (min-width: $breakpoint-sm) {
 		grid-template-columns: repeat(12, 1fr);
 
 		grid-template-areas:
-			'. a a a a a a a a a a .'
-			'. b b b b b b b b b b .'
-			'. c c c c c c c c c c .';
+			'. headersection headersection headersection headersection headersection headersection headersection headersection headersection headersection .'
+			'. searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection .'
+			'. countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection .';
 	}
 
 	@media (min-width: $breakpoint-md) {
@@ -26,26 +26,37 @@
 
 	@media (min-width: $breakpoint-lg) {
 		grid-template-areas:
-			'. . a a a a a a a a . .'
-			'. . b b b b b b b b . .'
-			'. . c c c c c c c c . .';
+			'. . headersection headersection headersection headersection headersection headersection headersection headersection . .'
+			'. . searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection . .'
+			'. . countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection . .';
 	}
 }
 
-#title-item {
-	grid-area: a;
-	text-align: center;
+#country-page-header {
+	grid-area: headersection;
 }
 
-#search-item {
-	grid-area: b;
+#country-page-search-section {
+	grid-area: searchsection;
+}
+
+#country-page-list-countries {
+	grid-area: countrysection;
+}
+
+/* Classes */
+
+.country-page__header {
+	// text-align: center;
+}
+
+.country-page__search-section {
 	padding: 0.1rem;
 	margin: $default-var auto;
 	width: 100%;
 }
 
-#cntry-list-item {
-	grid-area: c;
+.country-page__list-country {
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
