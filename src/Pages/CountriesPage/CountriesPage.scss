@@ -1,0 +1,57 @@
+@import '../../styles/2-variables/_variables-index';
+@import '../../styles/5-globals/_globals-index';
+
+.country-page-container {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(3, minmax($default-var * 4, auto));
+	padding: $default-var 0;
+
+	grid-template-areas:
+		'headersection'
+		'searchsection'
+		'countrysection';
+
+	@media (min-width: $breakpoint-sm) {
+		grid-template-columns: repeat(12, 1fr);
+
+		grid-template-areas:
+			'. headersection headersection headersection headersection headersection headersection headersection headersection headersection headersection .'
+			'. searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection .'
+			'. countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection .';
+	}
+
+	@media (min-width: $breakpoint-lg) {
+		grid-template-areas:
+			'. . headersection headersection headersection headersection headersection headersection headersection headersection . .'
+			'. . searchsection searchsection searchsection searchsection searchsection searchsection searchsection searchsection . .'
+			'. . countrysection countrysection countrysection countrysection countrysection countrysection countrysection countrysection . .';
+	}
+}
+
+#country-page-header {
+	grid-area: headersection;
+}
+
+#country-page-search-section {
+	grid-area: searchsection;
+}
+
+#country-page-list-countries {
+	grid-area: countrysection;
+}
+
+/* Classes */
+
+.country-page__header {
+	background-color: lightcoral;
+	@extend .center;
+}
+
+.country-page__search-section {
+	background-color: lightgreen;
+}
+
+.country-page__list-country {
+	background-color: lightseagreen;
+}
