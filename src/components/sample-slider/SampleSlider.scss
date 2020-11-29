@@ -2,7 +2,6 @@
 @import '../../styles/5-globals/_globals-index';
 
 .slider-container {
-	background-color: lightsalmon;
 	position: relative;
 	margin: 0;
 	padding: 0;
@@ -10,7 +9,6 @@
 	overflow: hidden;
 
 	.slide-container {
-		background-color: indianred;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -26,48 +24,32 @@
 
 		.slide {
 			position: relative;
-			background-color: lightseagreen;
-			min-width: 100%;
 			transition: 0.5s;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-
 			display: inline-block;
-			// padding: 1rem;
 		}
 	}
 
 	%btn-styles {
 		position: absolute;
-		// top: 30%;
-		// transform: translateY(-20%);
 		width: 10%;
 		height: 100%;
 		background: none;
 		border: none;
 		outline: none;
-		color: green;
-		// background-color: white;
 		transition: all 0.4s ease;
-
-		@media (min-width: $breakpoint-xs) {
-			width: 25%;
-		}
-
-		@media (min-width: $breakpoint-sm) {
-			width: 15%;
-		}
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		&:hover {
-			// background: rgba(0, 0, 0, 0.356);
-			background-color: rgba($color: #000000, $alpha: 0.5);
-			color: yellow;
+			background: rgba(0, 0, 0, 0.356);
 		}
 
 		&:disabled {
 			color: gray;
-			// background-color: orange;
 		}
 	}
 
@@ -79,9 +61,5 @@
 	#goRight {
 		right: 0;
 		@extend %btn-styles;
-	}
-
-	.no-data {
-		background-color: violet;
 	}
 }

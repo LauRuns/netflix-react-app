@@ -1,40 +1,33 @@
 import React, { useState } from 'react';
 
 import { ImageContainer } from '../../shared/components/UIElements/image-container/ImageContainer';
+import { Icon } from '../Icon/Icon';
+import { Header } from '../../shared/components/UIElements/header/Header';
 import './SampleSlider.scss';
 
 export const SampleSlider = ({ slideList, onClick }) => {
 	const [x, setX] = useState(0);
 
 	const goLeft = () => {
-		console.log('GO LEFT___', x);
-
-		// setX(x + 100);
 		if (x !== 0) {
-			// x === 0 ? setX(slideList.length - 1) : setX(x + 100);
 			setX(x + 100);
+		} else {
+			return;
 		}
-		if (x === 0) return;
 	};
 
 	const goRight = () => {
-		console.log('GO RIGHT___', x);
 		x === -100 * (slideList.length - 1) ? setX(0) : setX(x - 100);
-	};
-
-	const onItemClickHandler = (e) => {
-		console.log(e);
 	};
 
 	return (
 		<>
 			<div className="slider-container">
 				{!slideList ? (
-					<div className="no-data">
-						<h2>No slide data available</h2>
-					</div>
+					<Header md center>
+						<h3>Sorry, no data available at the moment...</h3>
+					</Header>
 				) : (
-					// <div>{props.children}</div>
 					<div className="slide-container">
 						{slideList.map((item, index) => {
 							return (
@@ -48,7 +41,7 @@ export const SampleSlider = ({ slideList, onClick }) => {
 								>
 									<ImageContainer
 										onClick={() => onClick(item)}
-										src={item.img ? item.img : item.poster}
+										src={item.img ? item.img : item.poster || item.imdbposter}
 										alt={item.title}
 									/>
 								</div>
@@ -56,12 +49,16 @@ export const SampleSlider = ({ slideList, onClick }) => {
 						})}
 					</div>
 				)}
-				<button id="goLeft" onClick={goLeft} disabled={x === 0}>
-					LEFT
-				</button>
-				<button id="goRight" onClick={goRight} disabled={x === slideList.length - 1}>
-					RIGHT
-				</button>
+				{slideList && (
+					<div id="goLeft" onClick={goLeft}>
+						<Icon icon="chevron_left" size={64} disabled={x === 0} style={{ zIndex: '90' }} />
+					</div>
+				)}
+				{slideList && (
+					<div id="goRight" onClick={goRight}>
+						<Icon icon="chevron_right" size={64} disabled={x === 0} style={{ zIndex: '90' }} />
+					</div>
+				)}
 			</div>
 		</>
 	);
