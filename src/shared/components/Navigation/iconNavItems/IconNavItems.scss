@@ -1,4 +1,21 @@
 @import '../../../../styles/2-variables/_variables-index';
 
 .icon-nav-items-container {
+	& > li {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		list-style: none;
+		margin-bottom: 1.5rem;
+
+		& > a {
+			color: $netflix-text;
+			text-decoration: none;
+			font-size: larger;
+		}
+		& > .active {
+			color: $primary-red;
+		}
+	}
 }

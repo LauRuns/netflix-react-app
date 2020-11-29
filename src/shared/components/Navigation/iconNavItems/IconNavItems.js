@@ -11,18 +11,20 @@ export const IconNavItems = ({ navItems }) => {
 		<ul className="icon-nav-items-container">
 			{auth.isLoggedIn &&
 				navItems &&
-				navItems.map(({ linkTo, linkName, iconName, iconSize, iconColor, iconStyle }) => {
+				navItems.map(({ linkTo, linkName, iconName, iconSize, iconColor, iconStyle, textSize }) => {
 					return (
-						<IconNavItem
-							key={linkName}
-							link={linkTo}
-							iconName={iconName}
-							iconSize={iconSize}
-							iconColor={iconColor}
-							iconStyle={iconStyle}
-						>
-							{linkName}
-						</IconNavItem>
+						<li key={linkName}>
+							<IconNavItem
+								link={linkTo}
+								iconName={iconName}
+								iconSize={iconSize}
+								iconColor={iconColor}
+								iconStyle={iconStyle}
+								textSize={textSize}
+							>
+								{linkName}
+							</IconNavItem>
+						</li>
 					);
 				})}
 		</ul>
