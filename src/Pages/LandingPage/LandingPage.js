@@ -28,33 +28,34 @@ const LandingPage = React.memo(() => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
 
-	const fetchLandingPageData = async () => {
-		try {
-			console.time();
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
-				'POST',
-				JSON.stringify({
-					countryId: auth.country.countryId
-				}),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
-				}
-			);
+	// const fetchLandingPageData = async () => {
+	// 	try {
+	// 		console.time();
+	// 		const responseData = await sendRequest(
+	// 			`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
+	// 			'POST',
+	// 			JSON.stringify({
+	// 				countryId: auth.country.countryId
+	// 			}),
+	// 			{
+	// 				'Content-Type': 'application/json',
+	// 				Authorization: `Bearer ${auth.token}`
+	// 			}
+	// 		);
 
-			const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = responseData;
-			console.log(responseData);
-			setNldNewContent(newResultsNL);
-			setExpNLD(resultsNLD);
-			setExpOther(resultsOTHER);
-			setOtherNewContent(newResultsOther);
-			console.timeEnd();
-		} catch (error) {
-			// Error is handled by useHttpClient
-		}
-	};
+	// 		const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = responseData;
+	// 		console.log(responseData);
+	// 		setNldNewContent(newResultsNL);
+	// 		setExpNLD(resultsNLD);
+	// 		setExpOther(resultsOTHER);
+	// 		setOtherNewContent(newResultsOther);
+	// 		console.timeEnd();
+	// 	} catch (error) {
+	// 		// Error is handled by useHttpClient
+	// 	}
+	// };
 
+	/*
 	const fetchNldData = async () => {
 		try {
 			console.time();
@@ -99,7 +100,9 @@ const LandingPage = React.memo(() => {
 		} catch (error) {
 			// Error is handled by useHttpClient
 		}
-	};
+    };
+
+    */
 
 	useEffect(() => {
 		let cancelRequest = false;
@@ -114,14 +117,14 @@ const LandingPage = React.memo(() => {
 		if (cancelRequest) {
 			return;
 		} else {
-			fetchLandingPageData();
+			// fetchLandingPageData();
 			// fetchNldData();
 			// fetchOtherData();
 
-			// setNldNewContent(testitems);
-			// setExpNLD(testitems);
-			// setExpOther(testitems);
-			// setOtherNewContent(testitems);
+			setNldNewContent(testitems);
+			setExpNLD(testitems);
+			setExpOther(testitems);
+			setOtherNewContent(testitems);
 		}
 		return () => {
 			cancelRequest = true;
