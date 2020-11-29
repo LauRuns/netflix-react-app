@@ -23,7 +23,8 @@ const MainNavigation = () => {
 	const defaultNavStyling = {
 		iconSize: 32,
 		iconColor: '#fff',
-		iconStyle: { marginRight: '1rem' }
+		iconStyle: { marginRight: '1rem' },
+		textSize: { fontSize: 'larger' }
 	};
 
 	const navItemsList = [
