@@ -29,7 +29,7 @@ export const IconButton = ({
 				onClick={onClick}
 				disabled={disabled}
 			>
-				<Icon icon={icon} size={iconSize} color={iconColor} style={iconStyle} />
+				<Icon icon={icon} size={iconSize || 24} color={iconColor || '#fff'} style={iconStyle} />
 				{children}
 			</button>
 		);
@@ -45,7 +45,7 @@ export const IconButton = ({
 				disabled={disabled}
 			>
 				{children}
-				<Icon icon={icon} size={iconSize} color={iconColor} style={iconStyle} />
+				<Icon icon={icon} size={iconSize || 24} color={iconColor || '#fff'} style={iconStyle} />
 			</button>
 		);
 	}
