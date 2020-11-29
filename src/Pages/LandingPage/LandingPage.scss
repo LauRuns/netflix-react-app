@@ -38,7 +38,6 @@
 			'. homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader .'
 			'. expiring expiring expiring expiring expiring expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .'
 			'. new-nld new-nld new-nld new-nld new-nld test test test test test .';
-		// '. test test test test test test test test test test  .';
 	}
 }
 
@@ -97,12 +96,6 @@
 
 .homepage__nld__expiring {
 	@extend .homepage__base;
-
-	.exp-chip-container {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
 }
 
 .homepage__nld__new_content {
@@ -117,14 +110,5 @@
 	@extend .homepage__base;
 	@media (min-width: $breakpoint-md) {
 		max-width: 100%;
-	}
-
-	.test-carousel {
-		.slick-slider-carousel {
-			width: 80%;
-			& > img {
-				width: 100%;
-			}
-		}
 	}
 }

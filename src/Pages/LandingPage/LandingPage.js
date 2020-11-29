@@ -31,7 +31,7 @@ const LandingPage = React.memo(() => {
 	const fetchLandingPageData = useCallback(async () => {
 		try {
 			console.time();
-			const expResponseData = await sendRequest(
+			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
 				'POST',
 				JSON.stringify({
@@ -43,7 +43,8 @@ const LandingPage = React.memo(() => {
 				}
 			);
 
-			const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = expResponseData;
+			const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = responseData;
+			console.log(responseData);
 			setNldNewContent(newResultsNL);
 			setExpNLD(resultsNLD);
 			setExpOther(resultsOTHER);
@@ -184,13 +185,11 @@ const LandingPage = React.memo(() => {
 					<Header md>
 						<h2>Netherlands expiring content:</h2>
 					</Header>
-					<div className="exp-chip-container">
-						{isLoading ? (
-							<LoadingSpinner center loadingSpinnerMessage={`Loading expiring content...`} />
-						) : (
-							expNLD && <SampleSlider slideList={expNLD} onClick={onItemClickedHandler} />
-						)}
-					</div>
+					{isLoading ? (
+						<LoadingSpinner center loadingSpinnerMessage={`Loading expiring content...`} />
+					) : (
+						expNLD && <SampleSlider slideList={expNLD} onClick={onItemClickedHandler} />
+					)}
 				</div>
 				<div id="homepage-nld-new-content" className="homepage__nld__new_content">
 					<Header md>
@@ -208,18 +207,16 @@ const LandingPage = React.memo(() => {
 					<Header md>
 						<h2>New content for {auth.country.country}:</h2>
 					</Header>
-					<div className="test-carousel">
-						{isLoading ? (
-							<LoadingSpinner
-								center
-								loadingSpinnerMessage={`Loading new content for ${userCountry.country}`}
-							/>
-						) : (
-							otherNewContent && (
-								<SampleSlider slideList={otherNewContent} onClick={onItemClickedHandler} />
-							)
-						)}
-					</div>
+					{isLoading ? (
+						<LoadingSpinner
+							center
+							loadingSpinnerMessage={`Loading new content for ${userCountry.country}`}
+						/>
+					) : (
+						otherNewContent && (
+							<SampleSlider slideList={otherNewContent} onClick={onItemClickedHandler} />
+						)
+					)}
 				</div>
 			</div>
 		</React.Fragment>
