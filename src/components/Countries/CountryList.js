@@ -22,14 +22,12 @@ const CountryList = ({ items, onItemClicked }) => {
 	return (
 		<React.Fragment>
 			<ul className="CountryList">
-				{items.map((country) => {
+				{items.map(({ country, countryId }) => {
 					return (
 						<Chip
-							key={country.countryId}
-							name={country.country}
-							onClick={() =>
-								registerClickHandler({ countryId: country.countryId, name: country.country })
-							}
+							key={countryId}
+							name={country}
+							onClick={() => registerClickHandler({ countryId: countryId, name: country })}
 						/>
 					);
 				})}
