@@ -8,7 +8,7 @@ const defaultStyles = { display: 'inline-block', verticalAlign: 'middle' };
 export const Icon = ({ icon, size, color, className, style, onClick }) => {
 	const defaultSvg = {
 		size: 16,
-		color: 'green',
+		color: '#fff',
 		viewBox: '0 0 24 24',
 		style: {},
 		className: ''
