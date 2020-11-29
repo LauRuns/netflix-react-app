@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import './Search.scss';
 
-const Search = React.memo((props) => {
-	const { onLoadCountryFilter, countryList } = props;
+const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountryData }) => {
+	// const { onLoadCountryFilter, countryList } = props;
 	const [enteredFilter, setEnteredFilter] = useState('');
 	const inputRef = useRef();
 
@@ -19,7 +19,7 @@ const Search = React.memo((props) => {
 	useEffect(() => {
 		let searchedCountry;
 		const onUpdate = (event) => {
-			props.setUpdatedCountryData(event);
+			setUpdatedCountryData(event);
 		};
 
 		const timer = setTimeout(() => {
@@ -52,7 +52,7 @@ const Search = React.memo((props) => {
 		return () => {
 			clearTimeout(timer);
 		};
-	}, [enteredFilter, onLoadCountryFilter, inputRef, countryList]);
+	}, [enteredFilter, onLoadCountryFilter, inputRef, countryList, setUpdatedCountryData]);
 
 	return (
 		<div className="search-input">

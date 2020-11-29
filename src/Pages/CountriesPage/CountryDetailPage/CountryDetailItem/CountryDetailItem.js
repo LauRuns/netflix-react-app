@@ -40,7 +40,7 @@ const CountryDetailItem = ({ netflixid, title, expiredate, image }) => {
 	};
 
 	useEffect(() => {
-		const fetchCountrDetail = async () => {
+		const fetchCountryDetail = async () => {
 			try {
 				const responseData = await sendRequest(
 					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/idinfo`,
@@ -58,8 +58,8 @@ const CountryDetailItem = ({ netflixid, title, expiredate, image }) => {
 				// Error is handled by useHttpClient
 			}
 		};
-		fetchCountrDetail();
-	}, [sendRequest]);
+		fetchCountryDetail();
+	}, [sendRequest, auth, netflixid]);
 
 	return (
 		<React.Fragment>

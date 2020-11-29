@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 
-import Button from '../../../shared/components/UIElements/Button/Button';
 import { AuthContext } from '../../../shared/context/auth-context';
 import { useHttpClient } from '../../../shared/hooks/http-hook';
 import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';

@@ -11,7 +11,6 @@ import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 
 import { Dropdown } from '../../shared/components/FormElements/DropDown/Dropdown';
-import { Backdrop } from '../../shared/components/UIElements/Backdrop/Backdrop';
 
 import './SearchPage.scss';
 
@@ -23,7 +22,7 @@ const SearchPage = () => {
 	const [searchSelectedCountry, setSearchSelectedCountry] = useState();
 	const [searchResults, setSearchResults] = useState();
 
-	const [formState, inputHandler, setFormData] = useForm(
+	const [formState, inputHandler] = useForm(
 		{
 			title: {
 				value: '',
@@ -33,10 +32,10 @@ const SearchPage = () => {
 		false
 	);
 
-	const countrySearchSelectHandler = (e) => {
-		const { countryId } = countryList.find((item) => item.country === e.target.value);
-		setSearchSelectedCountry(countryId);
-	};
+	// const countrySearchSelectHandler = (e) => {
+	// 	const { countryId } = countryList.find((item) => item.country === e.target.value);
+	// 	setSearchSelectedCountry(countryId);
+	// };
 
 	useEffect(() => {
 		const loadCountries = async () => {

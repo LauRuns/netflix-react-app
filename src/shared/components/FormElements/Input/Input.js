@@ -22,25 +22,39 @@ const inputReducer = (state, action) => {
 	}
 };
 
-const Input = (props) => {
+const Input = ({
+	initialValue,
+	initialValid,
+	onInput,
+	id,
+	label,
+	placeholder,
+	validators,
+	value,
+	isValid,
+	element,
+	type,
+	row,
+	errorText
+}) => {
 	const [inputState, dispatch] = useReducer(inputReducer, {
-		value: props.initialValue || '',
+		value: initialValue || '',
 		isTouched: false,
-		isValid: props.initialValid || false
+		isValid: initialValid || false
 	});
 
-	const { id, onInput } = props;
-	const { value, isValid } = inputState;
+	// const { id, onInput } = props;
+	// const { value, isValid } = inputState;
 
 	useEffect(() => {
-		props.onInput(id, value, isValid);
+		onInput(id, value, isValid);
 	}, [id, value, isValid, onInput]);
 
 	const onChangeHandler = (event) => {
 		dispatch({
 			type: 'CHANGE',
 			val: event.target.value,
-			validators: props.validators
+			validators: validators
 		});
 	};
 
@@ -50,20 +64,20 @@ const Input = (props) => {
 		});
 	};
 
-	const element =
-		props.element === 'input' ? (
+	const selectedElement =
+		element === 'input' ? (
 			<input
-				id={props.id}
-				type={props.type}
-				placeholder={props.placeholder}
+				id={id}
+				type={type}
+				placeholder={placeholder}
 				onChange={onChangeHandler}
 				onBlur={touchhandler}
 				value={inputState.value}
 			/>
 		) : (
 			<textarea
-				id={props.id}
-				rows={props.row || 3}
+				id={id}
+				rows={row || 3}
 				onChange={onChangeHandler}
 				onBlur={touchhandler}
 				value={inputState.value}
@@ -76,9 +90,9 @@ const Input = (props) => {
 				!inputState.isValid && inputState.isTouched && 'form-control--invalid'
 			}`}
 		>
-			<label htmlFor={props.id}>{props.label}</label>
-			{element}
-			{!inputState.value && inputState.isTouched && <p id="input-errortext">{props.errorText}</p>}
+			<label htmlFor={id}>{label}</label>
+			{selectedElement}
+			{!inputState.value && inputState.isTouched && <p id="input-errortext">{errorText}</p>}
 		</div>
 	);
 };

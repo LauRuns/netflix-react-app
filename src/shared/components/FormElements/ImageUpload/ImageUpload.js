@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 
-import Button from '../../UIElements/Button/Button';
 import { IconButton } from '../../UIElements/iconButton/IconButton';
 import './ImageUpload.scss';
 
