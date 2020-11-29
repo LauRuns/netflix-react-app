@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Card from '../../shared/components/UIElements/Card/Card';
-import { Header } from '../../shared/components/UIElements/header/Header';
 import { ImageContainer } from '../../shared/components/UIElements/image-container/ImageContainer';
 import './NetflixItem.scss';
 

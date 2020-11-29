@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -28,7 +28,7 @@ const LandingPage = React.memo(() => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
 
-	const fetchLandingPageData = useCallback(async () => {
+	const fetchLandingPageData = async () => {
 		try {
 			console.time();
 			const responseData = await sendRequest(
@@ -53,7 +53,7 @@ const LandingPage = React.memo(() => {
 		} catch (error) {
 			// Error is handled by useHttpClient
 		}
-	});
+	};
 
 	const fetchNldData = async () => {
 		try {
@@ -114,19 +114,19 @@ const LandingPage = React.memo(() => {
 		if (cancelRequest) {
 			return;
 		} else {
-			// fetchLandingPageData();
+			fetchLandingPageData();
 			// fetchNldData();
 			// fetchOtherData();
 
-			setNldNewContent(testitems);
-			setExpNLD(testitems);
-			setExpOther(testitems);
-			setOtherNewContent(testitems);
+			// setNldNewContent(testitems);
+			// setExpNLD(testitems);
+			// setExpOther(testitems);
+			// setOtherNewContent(testitems);
 		}
 		return () => {
 			cancelRequest = true;
 		};
-	}, []);
+	}, [auth]);
 	// });
 
 	const onItemClickedHandler = (data) => {

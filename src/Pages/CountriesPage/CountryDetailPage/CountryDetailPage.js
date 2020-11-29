@@ -31,7 +31,7 @@ const CountryDetailPage = (props) => {
 				}
 			);
 
-			const { count, results } = responseData;
+			const { results } = responseData;
 
 			const ids = results.map(({ netflixid }) => netflixid);
 			console.log(ids);
