@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { Icon } from '../../components/Icon/Icon';
+import { Header } from '../../shared/components/UIElements/header/Header';
 import './Search.scss';
 
-const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountryData }) => {
-	// const { onLoadCountryFilter, countryList } = props;
+export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountryData }) => {
 	const [enteredFilter, setEnteredFilter] = useState('');
 	const inputRef = useRef();
 
@@ -48,7 +49,6 @@ const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountry
 			return onUpdate(searchedCountry);
 		}, 500);
 
-		// cleaning up effect
 		return () => {
 			clearTimeout(timer);
 		};
@@ -56,7 +56,10 @@ const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountry
 
 	return (
 		<div className="search-input">
-			<h3>Search country</h3>
+			<Header md center>
+				<Icon icon="search" size={24} />
+				<h3>Search country</h3>
+			</Header>
 			<input
 				placeholder="Enter country name..."
 				ref={inputRef}
@@ -67,5 +70,3 @@ const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountry
 		</div>
 	);
 });
-
-export default Search;
