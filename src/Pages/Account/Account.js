@@ -124,11 +124,7 @@ export const UserAccount = () => {
 						</Button>
 					}
 				/>
-				{isLoading && (
-					<div className="center">
-						<LoadingSpinner loadingSpinnerMessage="Loading userdata..." />
-					</div>
-				)}
+				{isLoading && <LoadingSpinner loadingSpinnerMessage="Loading userdata..." asOverlay />}
 
 				{!isLoading && loadedUser && (
 					<div id="account__container">
