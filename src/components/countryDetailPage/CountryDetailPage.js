@@ -5,7 +5,7 @@ import { AuthContext } from '../../shared/context/auth-context';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import { Header } from '../../shared/components/UIElements/header/Header';
-import { SampleSlider } from '../../components/sample-slider/SampleSlider';
+import { SampleSlider } from '../../components/sample-slider/SampleSLider';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
 import { NetflixItem } from '../netflixItem/NetflixItem';
