@@ -1,0 +1,15 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.radio-button-container {
+	padding: 0.5rem;
+}
+
+.display-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.display-row {
+	display: flex;
+	flex-direction: row;
+}
