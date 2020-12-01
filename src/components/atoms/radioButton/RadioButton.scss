@@ -1,0 +1,11 @@
+@import '../../../styles/2-variables/_variables-index';
+@import '../../../styles/5-globals/_globals-index';
+
+.radio-button-item {
+	display: inline;
+	vertical-align: top;
+
+	& > Input {
+		margin-right: 0.8rem;
+	}
+}
