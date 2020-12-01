@@ -1,67 +1,92 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import Input from '../../shared/components/FormElements/Input/Input';
-import Button from '../../shared/components/UIElements/Button/Button';
-import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
-import { VALIDATOR_MAXLENGTH } from '../../shared/util/validators';
-import SearchPageList from './SearchPageList/SearchPageList';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
-
-import { Dropdown } from '../../shared/components/FormElements/DropDown/Dropdown';
+import { Header } from '../../shared/components/UIElements/header/Header';
+import { SearchForm } from '../../components/organisms/searchForm/SearchForm';
 
 import './SearchPage.scss';
+
+// remove when done with development
+const testcountries = [
+	{ country: 'Argentina', countryId: 21 },
+	{ country: 'Australia', countryId: 23 },
+	{ country: 'Belgium', countryId: 26 },
+	{ country: 'Brazil', countryId: 29 },
+	{ country: 'Canada', countryId: 33 },
+	{ country: 'Switzerland', countryId: 34 },
+	{ country: 'Germany', countryId: 39 },
+	{ country: 'France', countryId: 45 },
+	{ country: 'United Kingdom', countryId: 46 },
+	{ country: 'Mexico', countryId: 65 },
+	{ country: 'Netherlands', countryId: 67 },
+	{ country: 'Sweden', countryId: 73 },
+	{ country: 'United States', countryId: 78 },
+	{ country: 'Iceland', countryId: 265 },
+	{ country: 'Japan', countryId: 267 },
+	{ country: 'Portugal', countryId: 268 },
+	{ country: 'Italy', countryId: 269 },
+	{ country: 'Spain', countryId: 270 },
+	{ country: 'Czech Republic', countryId: 307 },
+	{ country: 'Greece', countryId: 327 },
+	{ country: 'Hong Kong', countryId: 331 },
+	{ country: 'Hungary', countryId: 334 },
+	{ country: 'Israel', countryId: 336 },
+	{ country: 'India', countryId: 337 },
+	{ country: 'South Korea', countryId: 348 },
+	{ country: 'Lithuania', countryId: 357 },
+	{ country: 'Poland', countryId: 392 },
+	{ country: 'Romania', countryId: 400 },
+	{ country: 'Russia', countryId: 402 },
+	{ country: 'Singapore', countryId: 408 },
+	{ country: 'Slovakia', countryId: 412 },
+	{ country: 'Thailand', countryId: 425 },
+	{ country: 'Turkey', countryId: 432 },
+	{ country: 'South Africa', countryId: 447 }
+];
 
 const SearchPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
 	const [countryList, setCountryList] = useState();
-	const [searchSelectedCountry, setSearchSelectedCountry] = useState();
 	const [searchResults, setSearchResults] = useState();
 
-	const [formState, inputHandler] = useForm(
-		{
-			title: {
-				value: '',
-				isValid: false
-			}
-		},
-		false
-	);
-
-	// const countrySearchSelectHandler = (e) => {
-	// 	const { countryId } = countryList.find((item) => item.country === e.target.value);
-	// 	setSearchSelectedCountry(countryId);
-	// };
+	const loadCountries = async () => {
+		try {
+			const responseData = await sendRequest(
+				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+			);
+			const { results, count } = responseData;
+			console.log('Loaded country data____:', results);
+			// console.log('Nr of loaded countries:____:', count);
+			setCountryList(results);
+		} catch (err) {
+			// Error is handled by useHttpClient
+		}
+	};
 
 	useEffect(() => {
-		const loadCountries = async () => {
-			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
-				console.log(responseData);
-				setCountryList(responseData.results);
-				// setCountryList([]); // when not wanting to make database requests
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
-		loadCountries();
+		setCountryList(testcountries);
+		// loadCountries();
 	}, [sendRequest]);
 
 	const searchFormSubmitHandler = async (event) => {
-		event.preventDefault();
+		console.log('EVENT__DATA____:', event);
+		const { contentselector, countryselect, endyear, startyear, query } = event;
+
 		try {
 			const searchResponseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search`,
 				'POST',
 				JSON.stringify({
-					query: formState.inputs.title.value,
-					countrylist: searchSelectedCountry
+					query: query,
+					countrylist: countryselect,
+					start_year: startyear,
+					end_year: endyear,
+					type: contentselector
 				}),
 				{
 					'Content-Type': 'application/json',
@@ -69,75 +94,31 @@ const SearchPage = () => {
 				}
 			);
 
-			console.log(searchResponseData.results);
-			setSearchResults(searchResponseData.results);
+			const { results, count } = searchResponseData;
+			console.log('Search resonse count____:', count);
+			console.log('Search response results____:', results);
+			setSearchResults(results);
 		} catch (err) {
 			// Error is handled by useHttpClient
 		}
-	};
-
-	const selectedCountryHandler = ({ countryId }) => {
-		console.log('selectedCountryHandler', countryId);
-		setSearchSelectedCountry(countryId);
 	};
 
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
 			<div className="search-page-container">
-				<div id="srch-pg-item-1" className="search-page-item">
-					<div className="sr-pg-itm-1-content">
-						<h1>Search the Netflix unogsNG database!</h1>
-						<p>Check if content is available on Netflix for a specific country.</p>
-					</div>
+				<div id="search-page-header" className="search-page__header">
+					<Header lg center>
+						<h2>Search the Netflix unogsNG database!</h2>
+					</Header>
 				</div>
-				<div id="srch-pg-item-2" className="search-page-item">
-					<form className="srch-form" onSubmit={searchFormSubmitHandler}>
-						<div className="search-form-fields">
-							<div className="country-select-dropdown">
-								<Dropdown
-									title="Select country"
-									label="Please select a country"
-									items={countryList}
-									selected={selectedCountryHandler}
-								/>
-							</div>
-							<div className="title-srch-input">
-								<Input
-									id="title"
-									element="input"
-									validators={[VALIDATOR_MAXLENGTH(20)]}
-									errorText="Please enter a title"
-									onInput={inputHandler}
-									placeholder="Enter movie or serie title..."
-									label="Enter title"
-								/>
-							</div>
-						</div>
-						<div className="sr-form-btn">
-							<Button type="submit" disabled={!formState.isValid | !searchSelectedCountry}>
-								SEARCH
-							</Button>
-						</div>
-					</form>
+				<div id="search-page-form" className="search-page__form">
+					<SearchForm countries={countryList} sendFormData={searchFormSubmitHandler} />
 				</div>
-				<div id="srch-pg-item-3">
-					{isLoading ? (
-						<div className="center">
-							<LoadingSpinner
-								loadingSpinnerMessage={`Fetching data for ${formState.inputs.title.value}`}
-							/>
-						</div>
-					) : (
-						<h3 className="sr-list-rs">
-							{searchResults
-								? ` ${searchResults.length} items found`
-								: 'You have not entered a search query yet...'}
-						</h3>
-					)}
-					<div className="sr-res-content">
-						{searchResults && !isLoading && <SearchPageList list={searchResults} />}
-					</div>
+				<div id="search-page-reults" className="search-page__results">
+					<h2>Results go here</h2>
+					{isLoading && <LoadingSpinner center loadingSpinnerMessage="Bussy fetching data..." />}
+					{!isLoading && searchResults && <h2>We have search results!</h2>}
 				</div>
 			</div>
 		</React.Fragment>
