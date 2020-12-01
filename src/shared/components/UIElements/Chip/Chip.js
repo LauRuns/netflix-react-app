@@ -2,10 +2,10 @@ import React from 'react';
 
 import './Chip.scss';
 
-const Chip = (props) => {
+const Chip = ({ onClick, name }) => {
 	return (
-		<div className="chip-container" onClick={props.onClick}>
-			<button>{props.name}</button>
+		<div className="chip-container" onClick={onClick}>
+			<button>{name}</button>
 		</div>
 	);
 };
