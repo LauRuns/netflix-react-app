@@ -1,0 +1,9 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.text-input-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding: 0.5rem;
+	width: 100%;
+}
