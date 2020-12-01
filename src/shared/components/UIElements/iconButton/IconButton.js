@@ -21,7 +21,6 @@ export const IconButton = ({
 	if (before) {
 		return (
 			<button
-				// className="icon-button"
 				className={`icon-button icon-button--${iconButtonSize || 'default'} ${
 					inverse && 'icon--button--inverse'
 				} ${danger && 'icon--button--danger'} ${noborder && 'icon--button--noborder'}`}
@@ -36,7 +35,6 @@ export const IconButton = ({
 	} else {
 		return (
 			<button
-				// className="icon-button"
 				className={`icon-button icon-button--${iconButtonSize || 'default'} ${
 					inverse && 'icon--button--inverse'
 				} ${danger && 'icon--button--danger'} ${noborder && 'icon--button--noborder'}`}
