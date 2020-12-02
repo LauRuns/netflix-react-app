@@ -45,12 +45,12 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		// setCountryList(testCountryList);
+		setCountryList(testCountryList);
 		// setSearchResults(testSearchResults);
 		// setSearchResults(singleSearchResult);
-		// setSearchResults(multipleSearchResult);
+		setSearchResults(multipleSearchResult);
 
-		loadCountries();
+		// loadCountries();
 	}, [sendRequest]);
 
 	const searchFormSubmitHandler = async (event) => {
