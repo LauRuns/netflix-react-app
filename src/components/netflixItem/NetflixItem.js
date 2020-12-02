@@ -7,7 +7,7 @@ export const NetflixItem = ({ item }) => {
 		<div className="flip-card">
 			<div className="flip-card-inner">
 				<div className="flip-card-front">
-					<img src={item.img} alt="Avatar" />
+					<img src={item.img} alt="Poster" />
 				</div>
 				<div className="flip-card-back">
 					<p>{item.synopsis}</p>
