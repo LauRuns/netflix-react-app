@@ -184,3 +184,397 @@ export const testitems = [
 		year: 2017
 	}
 ];
+
+export const testCountryList = [
+	{ country: 'Argentina', countryId: 21 },
+	{ country: 'Australia', countryId: 23 },
+	{ country: 'Belgium', countryId: 26 },
+	{ country: 'Brazil', countryId: 29 },
+	{ country: 'Canada', countryId: 33 },
+	{ country: 'Switzerland', countryId: 34 },
+	{ country: 'Germany', countryId: 39 },
+	{ country: 'France', countryId: 45 },
+	{ country: 'United Kingdom', countryId: 46 },
+	{ country: 'Mexico', countryId: 65 },
+	{ country: 'Netherlands', countryId: 67 },
+	{ country: 'Sweden', countryId: 73 },
+	{ country: 'United States', countryId: 78 },
+	{ country: 'Iceland', countryId: 265 },
+	{ country: 'Japan', countryId: 267 },
+	{ country: 'Portugal', countryId: 268 },
+	{ country: 'Italy', countryId: 269 },
+	{ country: 'Spain', countryId: 270 },
+	{ country: 'Czech Republic', countryId: 307 },
+	{ country: 'Greece', countryId: 327 },
+	{ country: 'Hong Kong', countryId: 331 },
+	{ country: 'Hungary', countryId: 334 },
+	{ country: 'Israel', countryId: 336 },
+	{ country: 'India', countryId: 337 },
+	{ country: 'South Korea', countryId: 348 },
+	{ country: 'Lithuania', countryId: 357 },
+	{ country: 'Poland', countryId: 392 },
+	{ country: 'Romania', countryId: 400 },
+	{ country: 'Russia', countryId: 402 },
+	{ country: 'Singapore', countryId: 408 },
+	{ country: 'Slovakia', countryId: 412 },
+	{ country: 'Thailand', countryId: 425 },
+	{ country: 'Turkey', countryId: 432 },
+	{ country: 'South Africa', countryId: 447 }
+];
+
+export const testSearchResults = [
+	{
+		avgrating: 4.4912367,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+18"',
+		id: 26325,
+		imdbid: 'tt1856010',
+		imdbrating: 8.8,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABTnYahZUc5Q2hdr8SXr857cDzzs8P8EaDq4WN4xHzw2SdZTmarF6XSrsWZoBQkmV5xpEJrBCkNb9UL-ej1leBGIPrXiB1vpw9onWuKWR_4EaLAahfrWqohwOyTY.jpg?r=3c1',
+		nfid: 70178217,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BMjM3ODMyMjc3MV5BMl5BanBnXkFtZTgwNDgzNDc5NzE@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'Ruthless Congressman Frank Underwood will stop at nothing to conquer Washington D.C. in this Emmy winning political drama.',
+		title: 'House of Cards',
+		titledate: '2015-04-14',
+		top250: 0,
+		top250tv: 84,
+		vtype: 'series',
+		year: 2013
+	},
+
+	{
+		avgrating: 3.397021,
+		clist:
+			'""CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+17""',
+		id: 27685,
+		imdbid: 'tt3692064',
+		imdbrating: 4.9,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABTfgpx8o4X9r06ddB99UTaeKDnahu_l6MlmDiGazvscxQpFalrBwW92saWU-ywqdlyDGXg5AKLwUeSxrL54s9f5Ycw.jpg?r=3d5',
+		nfid: 80011539,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BN2RkM2N…QtMDMyZGEyNjRiZjA0XkEyXkFqcGdeQXVyNjM1MjMyMDE@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'The exciting new adventures of Bob the Tomato, Larry the Cucumber, and all their Veggie friends as you&#39;ve never seen them before: in the house!',
+		title: 'VeggieTales in the House',
+		titledate: '2015-04-14',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2014
+	},
+	{
+		avgrating: 2.93548,
+		clist:
+			'""CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20""',
+		id: 42872,
+		imdbid: 'tt4790546',
+		imdbrating: 8.2,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABS4xMSOvDB9OZBZiIaImSHS7rIcFex_OzC4YNnqkRJMyGclvRfkNjN1qFJROG5KbbHWTWtXjptvZDI0QizKwTJkuxfF47WzRJmjOSqv53-EluhhjDaEBhfRAlrw.jpg?r=de2',
+		nfid: 80067942,
+		poster: 'N/A',
+		runtime: 0,
+		synopsis:
+			'A new set of six men and women start their lives together under one roof. All they get is a fabulous home and a car. As always, there is no script.',
+		title: 'Terrace House: Boys and Girls in the City',
+		titledate: '2015-09-01',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2015
+	},
+	{
+		avgrating: 4.704222,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 46234,
+		imdbid: 'tt3986586',
+		imdbrating: 6.8,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABWNj3Cbl3s78bi7JbjJvYKTSMej1hvuo62hbrusfWOiDRSmlzhBNWNYX0BLmml5pvZH5Zr439WL34_jnSAsjIP59UXCGh41LMtTf-8cW2lzB5HjzUBX8qQVW3Ao.jpg?r=389',
+		nfid: 80051137,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BOTM0MzIwODk3OV5BMl5BanBnXkFtZTgwNjQ5NDY4MDI@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'The Tanner family’s adventures continue as DJ Tanner-Fuller shares a home with her sister Stephanie and friend Kimmy who help raise her three boys.',
+		title: 'Fuller House',
+		titledate: '2016-02-26',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2016
+	},
+	{
+		avgrating: 4.3577585,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 49913,
+		imdbid: 'notfound',
+		imdbrating: null,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABZMuJr7-rVzzKehiI6Jd19QdAcmgfAdC0Zv7aaxtXIIzqFxPfNeyYvPpkqm6uLKSEqN7kwC_KNr7wUXLidObbmAPuO2BhyZLRyznNWRMAdrgp8uQw8Tzvswk11Y.jpg?r=9b7',
+		nfid: 80131479,
+		poster: null,
+		runtime: 0,
+		synopsis:
+			'The beautiful island of Oahu is host to a new batch of six strangers who share a single roof, multiple conflicts and no script in this reality series.',
+		title: 'Terrace House: Aloha State',
+		titledate: '2016-11-01',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2016
+	},
+	{
+		avgrating: 0,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 55065,
+		imdbid: 'tt6596634',
+		imdbrating: 7.5,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABe7aOdcZHgnd5q9B8myNJpyva4btSN2qL1vpkWgs6XZ22RR6R8RmX-VnsImcchAUjtWAv8qsnC1WzOGuOLZTTYf4fg.jpg?r=eea',
+		nfid: 80181555,
+		poster: 'N/A',
+		runtime: 0,
+		synopsis:
+			'Drawing on newly available info, this show traces how the British royal family has survived the last 100 years of power struggles, politics and more.',
+		title: 'The Royal House of Windsor',
+		titledate: '2017-09-30',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2017
+	},
+	{
+		avgrating: 0,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 56017,
+		imdbid: 'tt7776244',
+		imdbrating: 7.8,
+		img:
+			'https://occ-0-2773-2774.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABTHD--3nnRmF5oGz0rkb_kUYchlyeYRzLRDeAUvZ6guM2_zb7ASmWfTdBh9oVlGAqr23spTcICGJWGaoW_Vvut6nbg1yf-C5OyissBISOteihve1zAbXSlMJLG4.jpg?r=846',
+		nfid: 80212301,
+		poster: null,
+		runtime: 0,
+		synopsis:
+			'A group of young people -- including a chef, a snowboarder and an ice hockey player -- gather in the Karuizawa woods while pursuing their dreams.',
+		title: 'Terrace House: Opening New Doors',
+		titledate: '2017-12-29',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2017
+	},
+	{
+		avgrating: 0,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 58950,
+		imdbid: 'tt8387348',
+		imdbrating: 7.8,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABUUnSCpIiMA-vYXbpXZfLl698BtDQOZS2vmGLa-YGIFztL6W_kzHNXoXVLbRD6N8EdMaD-JHtl5qsjYdvheKn-S4phSdgkrP-R_dxYhQTYOR9gqLw--F5_xRw0mHMLI5zoiLCbwZFc6-kg8UXPTGQIfEy6Ia.jpg?r=260',
+		nfid: 80160935,
+		poster:
+			'https://m.media-amazon.com/images/M/MV5BMjI0Njk0NDM2NF5BMl5BanBnXkFtZTgwNDY4ODA3NTM@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'In this dark comedy, a wealthy matriarch tries to maintain her family&#39;s facade of perfection after her husband&#39;s mistress exposes their dirty secrets.',
+		title: 'The House of Flowers',
+		titledate: '2018-08-10',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2018
+	},
+	{
+		avgrating: 0,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 59740,
+		imdbid: 'tt6763664',
+		imdbrating: 8.7,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABU76f7qex4oowjzMYZ9uFknVEXhd7EAfIDrSSQes3LAhoK5pWt01OP4ZXQAQ89hI6RQMxkvAn8asCWrk0uvg-7ojwy5IADh_nT3XpfdskpDB471sadwuzRw0OZY.jpg?r=d6b',
+		nfid: 80189221,
+		poster:
+			'https://m.media-amazon.com/images/M/MV5BMTU4NzA4MDEwNF5BMl5BanBnXkFtZTgwMTQxODYzNjM@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'Flashing between past and present, a fractured family confronts haunting memories of their old home and the terrifying events that drove them from it.',
+		title: 'The Haunting of Hill House',
+		titledate: '2018-10-12',
+		top250: 0,
+		top250tv: 127,
+		vtype: 'series',
+		year: 2018
+	},
+	{
+		avgrating: 0,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+19"',
+		id: 66420,
+		imdbid: null,
+		imdbrating: null,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABUaCBSH2RZ7ztkoVcl1vkWZBtfMimeyeHXN4GUb93X_8X7yKWUyhPMLhwymTil1rlARgOXjNF_NM4bUZtG9gjag-hHk6rcnBhJ3b7NH-nk77ZrcZ6Pz16aAiTiE.jpg?r=90c',
+		nfid: 81274984,
+		poster: null,
+		runtime: 0,
+		synopsis:
+			'After a newly rich family moves into an upper-class neighborhood, they try to keep their matriarch&#39;s obsessive pursuit of social acceptance in check.',
+		title: 'Ojos in d&#39; House',
+		titledate: '2020-08-23',
+		top250: null,
+		top250tv: null,
+		vtype: 'series',
+		year: 2013
+	},
+	{
+		avgrating: 0,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","BR":"Brazil","more":"+18"',
+		id: 67145,
+		imdbid: 'tt0492472',
+		imdbrating: 8.9,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABRFrzrMjITsPs7HfFCfPr7CYzGMwtlR75kXyGXWBOK-_dEli380UvdjepIys1qqWa6ZBWDrdV4_9vSnAQKhVX1lJ62rRSTstmFtA8cBwJlAY1yBerkXYT0SN06i3k7GB_2QJzUPyhxW74mmzlaKwxKgYC_b4.jpg?r=861',
+		nfid: 81284341,
+		poster:
+			'https://m.media-amazon.com/images/M/MV5BNDI3NzcwMzA2MF5BMl5BanBnXkFtZTcwMTUzNDM5MQ@@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'Five kids and their resilient families navigate the treatments and traumas of pediatric cancer in this documentary filmed over the course of six years.',
+		title: 'A Lion in the House',
+		titledate: '2020-11-10',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2006
+	}
+];
+
+export const singleSearchResult = [
+	{
+		avgrating: 4.4912367,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+18"',
+		id: 26325,
+		imdbid: 'tt1856010',
+		imdbrating: 8.8,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABTnYahZUc5Q2hdr8SXr857cDzzs8P8EaDq4WN4xHzw2SdZTmarF6XSrsWZoBQkmV5xpEJrBCkNb9UL-ej1leBGIPrXiB1vpw9onWuKWR_4EaLAahfrWqohwOyTY.jpg?r=3c1',
+		nfid: 70178217,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BMjM3ODMyMjc3MV5BMl5BanBnXkFtZTgwNDgzNDc5NzE@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'Ruthless Congressman Frank Underwood will stop at nothing to conquer Washington D.C. in this Emmy winning political drama.',
+		title: 'House of Cards',
+		titledate: '2015-04-14',
+		top250: 0,
+		top250tv: 84,
+		vtype: 'series',
+		year: 2013
+	}
+];
+
+export const multipleSearchResult = [
+	{
+		avgrating: 4.4912367,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+18"',
+		id: 26325,
+		imdbid: 'tt1856010',
+		imdbrating: 8.8,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABTnYahZUc5Q2hdr8SXr857cDzzs8P8EaDq4WN4xHzw2SdZTmarF6XSrsWZoBQkmV5xpEJrBCkNb9UL-ej1leBGIPrXiB1vpw9onWuKWR_4EaLAahfrWqohwOyTY.jpg?r=3c1',
+		nfid: 70178217,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BMjM3ODMyMjc3MV5BMl5BanBnXkFtZTgwNDgzNDc5NzE@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'Ruthless Congressman Frank Underwood will stop at nothing to conquer Washington D.C. in this Emmy winning political drama.',
+		title: 'House of Cards',
+		titledate: '2015-04-14',
+		top250: 0,
+		top250tv: 84,
+		vtype: 'series',
+		year: 2013
+	},
+
+	{
+		avgrating: 3.397021,
+		clist:
+			'""CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+17""',
+		id: 27685,
+		imdbid: 'tt3692064',
+		imdbrating: 4.9,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABTfgpx8o4X9r06ddB99UTaeKDnahu_l6MlmDiGazvscxQpFalrBwW92saWU-ywqdlyDGXg5AKLwUeSxrL54s9f5Ycw.jpg?r=3d5',
+		nfid: 80011539,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BN2RkM2N…QtMDMyZGEyNjRiZjA0XkEyXkFqcGdeQXVyNjM1MjMyMDE@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'The exciting new adventures of Bob the Tomato, Larry the Cucumber, and all their Veggie friends as you&#39;ve never seen them before: in the house!',
+		title: 'VeggieTales in the House',
+		titledate: '2015-04-14',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2014
+	},
+	{
+		avgrating: 2.93548,
+		clist:
+			'""CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20""',
+		id: 42872,
+		imdbid: 'tt4790546',
+		imdbrating: 8.2,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABS4xMSOvDB9OZBZiIaImSHS7rIcFex_OzC4YNnqkRJMyGclvRfkNjN1qFJROG5KbbHWTWtXjptvZDI0QizKwTJkuxfF47WzRJmjOSqv53-EluhhjDaEBhfRAlrw.jpg?r=de2',
+		nfid: 80067942,
+		poster: 'N/A',
+		runtime: 0,
+		synopsis:
+			'A new set of six men and women start their lives together under one roof. All they get is a fabulous home and a car. As always, there is no script.',
+		title: 'Terrace House: Boys and Girls in the City',
+		titledate: '2015-09-01',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2015
+	},
+	{
+		avgrating: 4.704222,
+		clist:
+			'"CA":"Canada","FR":"France","DE":"Germany","NL":"Netherlands","PL":"Poland","GB":"United Kingdom","US":"United States","AR":"Argentina","AU":"Australia","BE":"Belgium","more":"+20"',
+		id: 46234,
+		imdbid: 'tt3986586',
+		imdbrating: 6.8,
+		img:
+			'https://occ-0-2851-38.1.nflxso.net/dnm/api/v6/evlCitJPPCVCry0BZlEFb5-QjKc/AAAABWNj3Cbl3s78bi7JbjJvYKTSMej1hvuo62hbrusfWOiDRSmlzhBNWNYX0BLmml5pvZH5Zr439WL34_jnSAsjIP59UXCGh41LMtTf-8cW2lzB5HjzUBX8qQVW3Ao.jpg?r=389',
+		nfid: 80051137,
+		poster:
+			'https://images-na.ssl-images-amazon.com/images/M/MV5BOTM0MzIwODk3OV5BMl5BanBnXkFtZTgwNjQ5NDY4MDI@._V1_SX300.jpg',
+		runtime: 0,
+		synopsis:
+			'The Tanner family’s adventures continue as DJ Tanner-Fuller shares a home with her sister Stephanie and friend Kimmy who help raise her three boys.',
+		title: 'Fuller House',
+		titledate: '2016-02-26',
+		top250: 0,
+		top250tv: 0,
+		vtype: 'series',
+		year: 2016
+	}
+];
