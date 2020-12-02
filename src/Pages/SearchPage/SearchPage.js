@@ -5,47 +5,20 @@ import { AuthContext } from '../../shared/context/auth-context';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import { Header } from '../../shared/components/UIElements/header/Header';
-import { SearchForm } from '../../components/organisms/searchForm/SearchForm';
+import { SearchForm, SearchFormResults } from '../../components/organisms/oganismsIndex';
+import { NetflixItem } from '../../components/netflixItem/NetflixItem';
+import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
+import Modal from '../../shared/components/UIElements/Modal/Modal';
+
+// remove after development
+import {
+	testCountryList,
+	testSearchResults,
+	singleSearchResult,
+	multipleSearchResult
+} from '../../assets/testitems';
 
 import './SearchPage.scss';
-
-// remove when done with development
-const testcountries = [
-	{ country: 'Argentina', countryId: 21 },
-	{ country: 'Australia', countryId: 23 },
-	{ country: 'Belgium', countryId: 26 },
-	{ country: 'Brazil', countryId: 29 },
-	{ country: 'Canada', countryId: 33 },
-	{ country: 'Switzerland', countryId: 34 },
-	{ country: 'Germany', countryId: 39 },
-	{ country: 'France', countryId: 45 },
-	{ country: 'United Kingdom', countryId: 46 },
-	{ country: 'Mexico', countryId: 65 },
-	{ country: 'Netherlands', countryId: 67 },
-	{ country: 'Sweden', countryId: 73 },
-	{ country: 'United States', countryId: 78 },
-	{ country: 'Iceland', countryId: 265 },
-	{ country: 'Japan', countryId: 267 },
-	{ country: 'Portugal', countryId: 268 },
-	{ country: 'Italy', countryId: 269 },
-	{ country: 'Spain', countryId: 270 },
-	{ country: 'Czech Republic', countryId: 307 },
-	{ country: 'Greece', countryId: 327 },
-	{ country: 'Hong Kong', countryId: 331 },
-	{ country: 'Hungary', countryId: 334 },
-	{ country: 'Israel', countryId: 336 },
-	{ country: 'India', countryId: 337 },
-	{ country: 'South Korea', countryId: 348 },
-	{ country: 'Lithuania', countryId: 357 },
-	{ country: 'Poland', countryId: 392 },
-	{ country: 'Romania', countryId: 400 },
-	{ country: 'Russia', countryId: 402 },
-	{ country: 'Singapore', countryId: 408 },
-	{ country: 'Slovakia', countryId: 412 },
-	{ country: 'Thailand', countryId: 425 },
-	{ country: 'Turkey', countryId: 432 },
-	{ country: 'South Africa', countryId: 447 }
-];
 
 const SearchPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -54,6 +27,9 @@ const SearchPage = () => {
 	const [countryList, setCountryList] = useState();
 	const [searchResults, setSearchResults] = useState();
 
+	const [selectedItem, setSelectedItem] = useState(null);
+	const [showSelected, setShowSelected] = useState(false);
+
 	const loadCountries = async () => {
 		try {
 			const responseData = await sendRequest(
@@ -61,7 +37,7 @@ const SearchPage = () => {
 			);
 			const { results, count } = responseData;
 			console.log('Loaded country data____:', results);
-			// console.log('Nr of loaded countries:____:', count);
+			console.log('Nr of loaded countries:____:', count);
 			setCountryList(results);
 		} catch (err) {
 			// Error is handled by useHttpClient
@@ -69,8 +45,12 @@ const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		setCountryList(testcountries);
-		// loadCountries();
+		// setCountryList(testCountryList);
+		// setSearchResults(testSearchResults);
+		// setSearchResults(singleSearchResult);
+		// setSearchResults(multipleSearchResult);
+
+		loadCountries();
 	}, [sendRequest]);
 
 	const searchFormSubmitHandler = async (event) => {
@@ -93,7 +73,6 @@ const SearchPage = () => {
 					Authorization: `Bearer ${auth.token}`
 				}
 			);
-
 			const { results, count } = searchResponseData;
 			console.log('Search resonse count____:', count);
 			console.log('Search response results____:', results);
@@ -103,9 +82,39 @@ const SearchPage = () => {
 		}
 	};
 
+	const openModal = () => setShowSelected(true);
+	const closeModal = () => setShowSelected(false);
+
+	const resultItemClikedHandler = (data) => {
+		console.log('resultItemClikedHandler____:', data);
+		setSelectedItem(data);
+		openModal();
+	};
+
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
+			{selectedItem && (
+				<Modal
+					show={showSelected}
+					header={selectedItem.title}
+					onCancel={closeModal}
+					footer={
+						<IconButton
+							icon="cancel"
+							buttonType="button"
+							before
+							inverse
+							iconStyle={{ marginRight: '0.5rem' }}
+							onClick={closeModal}
+						>
+							CLOSE
+						</IconButton>
+					}
+				>
+					<NetflixItem item={selectedItem} />
+				</Modal>
+			)}
 			<div className="search-page-container">
 				<div id="search-page-header" className="search-page__header">
 					<Header lg center>
@@ -116,9 +125,18 @@ const SearchPage = () => {
 					<SearchForm countries={countryList} sendFormData={searchFormSubmitHandler} />
 				</div>
 				<div id="search-page-reults" className="search-page__results">
-					<h2>Results go here</h2>
 					{isLoading && <LoadingSpinner center loadingSpinnerMessage="Bussy fetching data..." />}
-					{!isLoading && searchResults && <h2>We have search results!</h2>}
+					{!isLoading && searchResults && (
+						<SearchFormResults
+							resultData={searchResults}
+							onClick={resultItemClikedHandler}
+							header={
+								searchResults.length > 1
+									? searchResults.length + ' results:'
+									: searchResults.length + ' result:'
+							}
+						/>
+					)}
 				</div>
 			</div>
 		</React.Fragment>

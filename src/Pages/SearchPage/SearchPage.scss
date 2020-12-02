@@ -32,12 +32,13 @@
 		grid-template-areas:
 			'. . searchheader searchheader searchheader searchheader searchheader searchheader searchheader searchheader . .'
 			'. . searchform searchform searchform searchform searchform searchform searchform searchform . .'
-			'. . searchresults searchresults searchresults searchresults searchresults searchresults searchresults searchresults . .';
+			'. . . searchresults searchresults searchresults searchresults searchresults searchresults . . .';
 	}
 }
 
 .base-search-page-item {
 	padding: $default-var;
+	max-width: 100vw;
 }
 
 #search-page-header {
@@ -58,8 +59,13 @@
 }
 
 .search-page__form {
+	@extend .base-search-page-item;
 }
 
 .search-page__results {
-	background-color: mediumturquoise;
+	overflow: hidden;
+
+	@media (min-width: $breakpoint-md) {
+		width: 100%;
+	}
 }
