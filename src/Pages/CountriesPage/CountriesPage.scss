@@ -42,16 +42,18 @@
 }
 
 /* Classes */
+.base__country-page {
+	padding: $default-var;
+}
 
 .country-page__header {
-	background-color: lightcoral;
 	@extend .center;
 }
 
 .country-page__search-section {
-	background-color: lightgreen;
+	@extend .base__country-page;
 }
 
 .country-page__list-country {
-	background-color: lightseagreen;
+	@extend .base__country-page;
 }
