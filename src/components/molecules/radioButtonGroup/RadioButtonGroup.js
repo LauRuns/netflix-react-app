@@ -7,6 +7,7 @@ import './RadioButtonGroup.scss';
 
 export const RadioButtonGroup = ({ children, name, row, column, label, labelSize }) => {
 	const { errors } = useFormContext();
+
 	return (
 		<div className={`radio-button-container ${column && 'display-column'} ${row && 'display-row'}`}>
 			<Label name={name} size={labelSize}>

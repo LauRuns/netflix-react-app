@@ -50,7 +50,7 @@ export const SearchForm = ({ countries, sendFormData }) => {
 					<div id="search-form-query">
 						<TextInput
 							name="query"
-							placeholder="Enter search query like: 'House of Cards'"
+							placeholder="Enter title"
 							inputSize="large"
 							labelSize="large"
 							label="Enter title"
@@ -65,7 +65,7 @@ export const SearchForm = ({ countries, sendFormData }) => {
 					<div id="search-form-startyear">
 						<NumberInput
 							name="startyear"
-							placeholder="Enter start year... 2012?"
+							placeholder="Start year... 2012?"
 							inputSize="large"
 							labelSize="large"
 							label="Start year"
@@ -84,7 +84,7 @@ export const SearchForm = ({ countries, sendFormData }) => {
 					<div id="search-form-endyear">
 						<NumberInput
 							name="endyear"
-							placeholder="Enter end year"
+							placeholder="End year"
 							inputSize="large"
 							labelSize="large"
 							label="End year"
