@@ -40,7 +40,6 @@ const useAuth = () => {
 	}, [history]);
 
 	const updateCountry = useCallback((country) => {
-		console.log('Update country called_____:', country);
 		setUserCountry(country);
 	}, []);
 
