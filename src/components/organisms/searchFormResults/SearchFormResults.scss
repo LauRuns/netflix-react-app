@@ -1,0 +1,13 @@
+@import '../../../styles/2-variables/_variables-index';
+@import '../../../styles/5-globals/_globals-index';
+
+.search-form-results-container {
+	display: flex;
+	flex-direction: column;
+	& > div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+}
