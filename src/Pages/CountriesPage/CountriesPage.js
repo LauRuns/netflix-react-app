@@ -8,6 +8,7 @@ import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import { Search } from '../../components/Search/Search';
 import { Header } from '../../shared/components/UIElements/header/Header';
 
+import { testCountryList } from '../../assets/testitems';
 import './CountriesPage.scss';
 
 export const CountriesPage = (props) => {
@@ -17,19 +18,21 @@ export const CountriesPage = (props) => {
 
 	const history = useHistory();
 
+	const fetchCountries = async () => {
+		try {
+			const responseData = await sendRequest(
+				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+			);
+			setLoadedCountries(responseData.results);
+			setCountryListData(responseData.results);
+		} catch (err) {
+			// Error is handled by useHttpClient
+		}
+	};
+
 	useEffect(() => {
-		const fetchCountries = async () => {
-			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
-				setLoadedCountries(responseData.results);
-				setCountryListData(responseData.results);
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
-		fetchCountries();
+		// fetchCountries();
+		setLoadedCountries(testCountryList);
 	}, [sendRequest]);
 
 	const filteredCountriesHandler = (filteredCountries) => {
@@ -56,7 +59,7 @@ export const CountriesPage = (props) => {
 						<div id="country-page-header" className="country-page__header">
 							<Header md style={{ flexDirection: 'column' }}>
 								<h1>There is Netflix data for {loadedCountries.length} countries available!</h1>
-								<p>Click on a country to see what Netflix data it has available</p>
+								<p>Click on a country to see it's new and expiring Netflix content!</p>
 							</Header>
 						</div>
 					)}
