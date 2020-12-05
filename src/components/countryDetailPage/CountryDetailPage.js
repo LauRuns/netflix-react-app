@@ -63,7 +63,6 @@ export const CountryDetailPage = (props) => {
 	const closeModal = () => setShowDetails(false);
 
 	const detailItemClicked = (data) => {
-		console.log('ITEM DETAILS_____:', data);
 		setSelectedItem(data);
 		openModal();
 	};
