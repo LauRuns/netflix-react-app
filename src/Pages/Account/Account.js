@@ -15,6 +15,7 @@ import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import './Account.scss';
 
 import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
+import { testCountryList } from '../../assets/testitems';
 
 export const UserAccount = () => {
 	const auth = useContext(AuthContext);
@@ -29,39 +30,37 @@ export const UserAccount = () => {
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [displayMessage, setDisplayMessage] = useState(false);
 
+	const fetchUser = async () => {
+		try {
+			const responseData = await sendRequest(
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`
+			);
+			const { result } = responseData;
+			console.log(result);
+			setLoadedUser(result);
+		} catch (err) {
+			// Error is handled by useHttpClient
+		}
+	};
+
+	const fetchCountries = async () => {
+		try {
+			const responseData = await sendRequest(
+				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+			);
+			setLoadedCountries(responseData.results);
+		} catch (err) {
+			// Error is handled by useHttpClient
+		}
+	};
+
 	useEffect(() => {
 		if (!auth.userId) {
 			return;
 		}
-		const fetchUser = async () => {
-			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`
-				);
-				const { result } = responseData;
-				console.log(result);
-				setLoadedUser(result);
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
 		fetchUser();
+		// fetchCountries();
 	}, [sendRequest, auth.userId]);
-
-	useEffect(() => {
-		const fetchCountries = async () => {
-			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
-				setLoadedCountries(responseData.results);
-				// setLoadedCountries(null); // <-- when constant fetching of data is not needed
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
-		fetchCountries();
-	}, [sendRequest]);
 
 	const showProfileInfoHandler = () => setShowProfileInfo(!showProfileInfo);
 	const showCountrySet = () => setShowCountrySetter(!showCountrySetter);
@@ -212,7 +211,8 @@ export const UserAccount = () => {
 									// userCountry={loadedUser.country || null}
 									userData={loadedUser}
 									setNewSelectedCountry={reloadUserData}
-									countryData={loadedCountries}
+									// countryData={loadedCountries}
+									countryData={testCountryList} // <-- development data
 								/>
 							)}
 						</div>
