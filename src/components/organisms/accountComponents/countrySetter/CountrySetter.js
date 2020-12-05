@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
 
-import { AuthContext } from '../../../shared/context/auth-context';
-import { useHttpClient } from '../../../shared/hooks/http-hook';
-import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
-import { Dropdown } from '../../../shared/components/FormElements/DropDown/Dropdown';
-import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+import { AuthContext } from '../../../../shared/context/auth-context';
+import { useHttpClient } from '../../../../shared/hooks/http-hook';
+import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
+import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
+import { Dropdown } from '../../../../shared/components/FormElements/DropDown/Dropdown';
+import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
 
 import './CountrySetter.scss';
 
-const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) => {
+export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
@@ -105,5 +105,3 @@ const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) => {
 		</React.Fragment>
 	);
 };
-
-export default CountrySetter;

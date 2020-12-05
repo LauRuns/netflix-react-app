@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 
-import Input from '../../../shared/components/FormElements/Input/Input';
-import { VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../shared/util/validators';
-import { useForm } from '../../../shared/hooks/form-hook';
-import { useHttpClient } from '../../../shared/hooks/http-hook';
-import { AuthContext } from '../../../shared/context/auth-context';
-import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
-import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+import Input from '../../../../shared/components/FormElements/Input/Input';
+import { VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../../shared/util/validators';
+import { useForm } from '../../../../shared/hooks/form-hook';
+import { useHttpClient } from '../../../../shared/hooks/http-hook';
+import { AuthContext } from '../../../../shared/context/auth-context';
+import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
+import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
+import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
 
 import './PasswordChange.scss';
 
-const PasswordChange = (props) => {
+export const PasswordChange = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
@@ -126,5 +126,3 @@ const PasswordChange = (props) => {
 		</React.Fragment>
 	);
 };
-
-export default PasswordChange;

@@ -1,20 +1,20 @@
 import React, { useEffect, useContext } from 'react';
 
-import Input from '../../../shared/components/FormElements/Input/Input';
+import Input from '../../../../shared/components/FormElements/Input/Input';
 import {
 	VALIDATOR_MAXLENGTH,
 	VALIDATOR_MINLENGTH,
 	VALIDATOR_EMAIL
-} from '../../../shared/util/validators';
-import { useForm } from '../../../shared/hooks/form-hook';
-import { useHttpClient } from '../../../shared/hooks/http-hook';
-import { AuthContext } from '../../../shared/context/auth-context';
-import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
-import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+} from '../../../../shared/util/validators';
+import { useForm } from '../../../../shared/hooks/form-hook';
+import { useHttpClient } from '../../../../shared/hooks/http-hook';
+import { AuthContext } from '../../../../shared/context/auth-context';
+import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
+import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
+import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
 import './ProfileInfo.scss';
 
-const ProfileInfo = (props) => {
+export const ProfileInfo = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
@@ -127,5 +127,3 @@ const ProfileInfo = (props) => {
 		</React.Fragment>
 	);
 };
-
-export default ProfileInfo;

@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 
-import { useHttpClient } from '../../../shared/hooks/http-hook';
-import { AuthContext } from '../../../shared/context/auth-context';
-import { useForm } from '../../../shared/hooks/form-hook';
-import ImageUpload from '../../../shared/components/FormElements/ImageUpload/ImageUpload';
-import ErrorModal from '../../../shared/components/UIElements/Modal/ErrorModal';
-import LoadingSpinner from '../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+import { useHttpClient } from '../../../../shared/hooks/http-hook';
+import { AuthContext } from '../../../../shared/context/auth-context';
+import { useForm } from '../../../../shared/hooks/form-hook';
+import ImageUpload from '../../../../shared/components/FormElements/ImageUpload/ImageUpload';
+import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
+import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
+import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
 
 import './UploadImage.scss';
 
-const UploadImage = (props) => {
+export const UploadImage = (props) => {
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -76,5 +76,3 @@ const UploadImage = (props) => {
 		</React.Fragment>
 	);
 };
-
-export default UploadImage;
