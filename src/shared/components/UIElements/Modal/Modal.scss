@@ -8,13 +8,21 @@
 	width: 80%;
 	background: $secondary-black;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	border-radius: 5px;
 }
 
 .modal__header {
 	width: 100%;
-	padding: 1rem 0.5rem;
+	padding: 0.5rem;
 	background: $primary-red;
 	color: $netflix-text;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	text-align: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 .modal__header h2 {
@@ -22,11 +30,11 @@
 }
 
 .modal__content {
-	padding: 1rem 0.5rem;
+	padding: 0.5rem;
 }
 
 .modal__footer {
-	padding: 1rem 0.5rem;
+	padding: 0.5rem;
 }
 
 @media (min-width: 768px) {
