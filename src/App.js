@@ -5,14 +5,16 @@ import {
 	Switch
 } from 'react-router-dom';
 
-import MainNavigation from './Pages/MainNavigation/MainNavigation';
-import Auth from './Pages/AuthPage/Auth';
-import { CountriesPage } from './Pages/CountriesPage/CountriesPage';
-import { CountryDetailPage } from './components/countryDetailPage/CountryDetailPage';
+import {
+	AccountPage,
+	LoginPage,
+	CountryDetailPage,
+	LandingPage,
+	CountriesPage,
+	MainNavigation,
+	SearchPage
+} from './pages';
 
-import SearchPage from './Pages/SearchPage/SearchPage';
-import { UserAccount } from './Pages/Account/Account';
-import LandingPage from './Pages/LandingPage/LandingPage';
 import { AuthContext } from './shared/context/auth-context';
 import useAuth from './shared/hooks/auth-hook';
 
@@ -20,16 +22,14 @@ import './App.scss';
 
 const App = () => {
 	const { token, login, logout, updateCountry, userId, userCountry } = useAuth();
-
 	let routes;
 
-	// use this with token verification
 	if (token) {
 		routes = (
 			<Switch>
-				<Route path="/auth" exact component={Auth} />
+				<Route path="/auth" exact component={LoginPage} />
 				<Route path="/countries" exact component={CountriesPage} />
-				<Route path="/account" exact component={UserAccount} />
+				<Route path="/account" exact component={AccountPage} />
 				<Route path="/countryinfo" exact component={CountryDetailPage} />
 				<Route path="/search" exact component={SearchPage} />
 				<Route path="/home" exact component={LandingPage} />
@@ -38,7 +38,7 @@ const App = () => {
 	} else {
 		routes = (
 			<Switch>
-				<Route path="/auth" exact component={Auth} />
+				<Route path="/auth" exact component={LoginPage} />
 			</Switch>
 		);
 	}
