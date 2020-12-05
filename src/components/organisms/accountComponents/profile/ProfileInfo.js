@@ -1,17 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 
-import Input from '../../../../shared/components/FormElements/Input/Input';
 import {
 	VALIDATOR_MAXLENGTH,
 	VALIDATOR_MINLENGTH,
 	VALIDATOR_EMAIL
-} from '../../../../shared/util/validators';
+} from '../../../../shared/util/validators.js';
 import { useForm } from '../../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../../shared/context/auth-context';
-import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
-import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
+import { IconButton, ErrorModal, LoadingSpinner } from '../../../../components/uiElements';
+import { Input } from '../../../formElements/input/Input';
 import './ProfileInfo.scss';
 
 export const ProfileInfo = (props) => {

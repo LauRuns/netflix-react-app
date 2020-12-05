@@ -1,14 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Navbar from '../../shared/components/Navigation/Navbar/Navbar';
-import { SideDrawer } from '../../shared/components/Navigation/SideDrawer/SideDrawer';
-import { Backdrop } from '../../shared/components/UIElements/Backdrop/Backdrop';
 import { AuthContext } from '../../shared/context/auth-context';
+import { Navbar, SideDrawer } from '../../components/navigation';
+import { Backdrop } from '../../components/uiElements';
 
 import './MainNavigation.scss';
 
-const MainNavigation = () => {
+export const MainNavigation = () => {
 	const auth = useContext(AuthContext);
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
@@ -75,5 +74,3 @@ const MainNavigation = () => {
 		</React.Fragment>
 	);
 };
-
-export default MainNavigation;

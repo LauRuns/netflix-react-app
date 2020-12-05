@@ -1,0 +1,53 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.Navbar {
+	height: 55px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: $primary-black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+	box-sizing: border-box;
+	z-index: 90;
+
+	& > nav {
+		height: 100%;
+	}
+
+	.NavbarLogo {
+		height: 80%;
+	}
+
+	.DesktopOnly {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		#logout-icon-navbar {
+			margin-left: $default-var * 2;
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+@media (max-width: $breakpoint-sm) {
+	.Navbar {
+		.DesktopOnly {
+			display: none;
+		}
+	}
+}
+
+@media (min-width: $breakpoint-sm) {
+	.Navbar {
+		.MobileOnly {
+			display: none;
+		}
+	}
+}

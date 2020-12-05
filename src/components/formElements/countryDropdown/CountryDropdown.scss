@@ -1,0 +1,85 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.dd-container {
+	display: flex;
+	flex-direction: column;
+
+	.dd-label {
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+	}
+
+	.dd-wrapper {
+		background-color: $shades-gray-40;
+		position: relative;
+		display: flex;
+		min-height: $default-var * 2.5;
+		flex-wrap: wrap;
+		border-radius: 5px;
+		z-index: 92;
+
+		&:focus,
+		&:active {
+			background-color: $shades-gray-20;
+		}
+
+		.dd-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			cursor: pointer;
+			width: 100%;
+			padding: $default-var * 0.6;
+		}
+
+		.dd-header__title--bold {
+			font-weight: bold;
+		}
+
+		.dd-list {
+			box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+			padding: 0;
+			margin-top: $default-var * 3.5;
+			width: 100%;
+			position: absolute;
+
+			li {
+				list-style-type: none;
+				overflow: hidden;
+
+				&:first-child {
+					border-top: 1px solid $dropdown-background;
+					border-top-left-radius: 5px;
+					border-top-right-radius: 5px;
+				}
+
+				&:last-child {
+					border-bottom-left-radius: 5px;
+					border-bottom-right-radius: 5px;
+					margin-bottom: $default-var * 3;
+				}
+			}
+		}
+
+		.dd-list-item button {
+			display: flex;
+			justify-content: space-between;
+			background-color: $shades-gray-40;
+			font-size: $default-var;
+			padding: $default-var;
+			border: 0;
+			border-bottom: 1px solid $dropdown-background;
+			width: 100%;
+			text-align: left;
+			border-left: 1px solid $dropdown-background;
+			border-right: 1px solid $dropdown-background;
+
+			&:hover,
+			&:focus {
+				cursor: pointer;
+				font-weight: bold;
+				background-color: $shades-gray-20;
+			}
+		}
+	}
+}

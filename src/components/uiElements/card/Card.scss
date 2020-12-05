@@ -1,0 +1,74 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.Card {
+	position: relative;
+	margin: 0;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	border-radius: 4px;
+	// overflow: hidden;
+	background: $shades-gray-40;
+}
+
+.login-card {
+	background-color: $primary-black;
+	opacity: 1;
+	border-radius: 4px;
+	padding: 3rem 2rem;
+
+	@media (min-width: $breakpoint-sm) {
+		opacity: 0.87;
+	}
+}
+
+/* Expire card styling */
+.expire-card {
+	display: inline-block;
+	margin-bottom: -$default-var;
+	margin: $default-var * 0.4;
+
+	@media (min-width: $breakpoint-sm) {
+		div {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+		}
+	}
+}
+
+/* Search result card styling */
+.sr-card {
+	display: flex;
+	flex-direction: column;
+}
+
+.sr-res-mobile-only {
+	margin-bottom: -5px;
+	@media (min-width: $breakpoint-sm) {
+		display: block;
+	}
+
+	@media (min-width: $breakpoint-md) {
+		display: none;
+	}
+}
+
+.sr-res-card-header,
+.sr-res-content-container {
+	display: none;
+
+	@media (min-width: $breakpoint-md) {
+		display: block;
+
+		.sr-res-card-header {
+			background-color: orangered;
+			h3 {
+				background-color: orchid;
+			}
+		}
+	}
+}
+/* Home-card */
+.home-card {
+	margin: 0.5rem;
+	padding: 0.5rem;
+}

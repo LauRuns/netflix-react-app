@@ -2,10 +2,8 @@ import React, { useState, useContext } from 'react';
 
 import { AuthContext } from '../../../../shared/context/auth-context';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
-import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
-import { Dropdown } from '../../../../shared/components/FormElements/DropDown/Dropdown';
-import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
+import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
+import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
 
 import './CountrySetter.scss';
 
@@ -75,7 +73,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 						</p>
 					</div>
 					<div className="country-dd-selector">
-						<Dropdown
+						<CountryDropdown
 							items={countryData}
 							label="Select country"
 							title="Select one..."

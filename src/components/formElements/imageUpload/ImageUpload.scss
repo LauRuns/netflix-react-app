@@ -1,0 +1,29 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.img-upload-form-control {
+	.image-upload {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.image-upload__preview {
+			width: 13rem;
+			height: 13rem;
+			border: 1px solid $dropdown-background;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			margin-bottom: 1rem;
+			border-radius: 50%;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 50%;
+			}
+		}
+	}
+}

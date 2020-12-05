@@ -1,7 +1,8 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { Select, Label, ErrorMessage } from '../../atoms/atomsIndex';
+import { Label, ErrorMessage } from '../../atoms';
+import { Select } from '../select/Select';
 import './Dropdown.scss';
 
 export const Dropdown = ({ label, name, dropdownData, size, fieldRef, onChange }) => {

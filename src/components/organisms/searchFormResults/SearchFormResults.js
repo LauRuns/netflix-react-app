@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Header } from '../../../shared/components/UIElements/header/Header';
-import { SampleSlider } from '../../../components/sample-slider/SampleSLider';
-import { NetflixItem } from '../../../components/netflixItem/NetflixItem';
+import { Header } from '../../atoms';
+import { NetflixItem } from '../../molecules';
+import { Slider } from '../../organisms';
 
 import './SearchFormResults.scss';
 
@@ -13,7 +13,7 @@ export const SearchFormResults = ({ resultData, header, onClick }) => {
 				<Header md center>
 					<h2>{header}</h2>
 				</Header>
-				<SampleSlider slideList={resultData} onClick={onClick} />
+				<Slider slideList={resultData} onClick={onClick} />
 			</div>
 		);
 	} else {

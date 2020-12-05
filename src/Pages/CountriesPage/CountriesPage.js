@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { CountryList } from '../../components/countryList/CountryList';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
-import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
-import { Search } from '../../components/Search/Search';
-import { Header } from '../../shared/components/UIElements/header/Header';
+import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
+import { Header } from '../../components/atoms';
+import { Search, CountryList } from '../../components/organisms';
 
 import { testCountryList } from '../../assets/testitems';
 import './CountriesPage.scss';

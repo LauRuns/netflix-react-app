@@ -1,0 +1,7 @@
+@import '../../../styles/2-variables/_variables-index';
+
+.logo-component-container {
+	&:hover {
+		cursor: pointer;
+	}
+}

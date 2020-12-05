@@ -3,10 +3,8 @@ import React, { useContext } from 'react';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
 import { AuthContext } from '../../../../shared/context/auth-context';
 import { useForm } from '../../../../shared/hooks/form-hook';
-import ImageUpload from '../../../../shared/components/FormElements/ImageUpload/ImageUpload';
-import ErrorModal from '../../../../shared/components/UIElements/Modal/ErrorModal';
-import LoadingSpinner from '../../../../shared/components/UIElements/Spinner/LoadingSpinner';
-import { IconButton } from '../../../../shared/components/UIElements/iconButton/IconButton';
+import { IconButton, LoadingSpinner, ErrorModal } from '../../../uiElements';
+import { ImageUpload } from '../../../formElements/imageUpload/ImageUpload';
 
 import './UploadImage.scss';
 

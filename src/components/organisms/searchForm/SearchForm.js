@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { TextInput, NumberInput, RadioButtonGroup, Dropdown } from '../../molecules/formMolecules';
-import { RadioButton } from '../../atoms/atomsIndex';
-import { IconButton } from '../../../shared/components/UIElements/iconButton/IconButton';
+import { TextInput, NumberInput, RadioButtonGroup, Dropdown } from '../../molecules';
+import { RadioButton } from '../../atoms';
+import { IconButton } from '../../uiElements';
 
 import './SearchForm.scss';
 

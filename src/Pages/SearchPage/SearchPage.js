@@ -2,13 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
-import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
-import { Header } from '../../shared/components/UIElements/header/Header';
+import { Header } from '../../components/atoms';
+import { NetflixItem } from '../../components/molecules';
 import { SearchForm, SearchFormResults } from '../../components/organisms';
-import { NetflixItem } from '../../components/netflixItem/NetflixItem';
-import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
-import Modal from '../../shared/components/UIElements/Modal/Modal';
+import { ErrorModal, LoadingSpinner, IconButton, Modal } from '../../components/uiElements';
 
 // remove after development
 import {
@@ -20,7 +17,7 @@ import {
 
 import './SearchPage.scss';
 
-const SearchPage = () => {
+export const SearchPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const auth = useContext(AuthContext);
 
@@ -142,5 +139,3 @@ const SearchPage = () => {
 		</React.Fragment>
 	);
 };
-
-export default SearchPage;

@@ -2,20 +2,16 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
-import Modal from '../../shared/components/UIElements/Modal/Modal';
-import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
-import { Header } from '../../shared/components/UIElements/header/Header';
-import { SampleSlider } from '../../components/sample-slider/SampleSLider';
-import { Carousel } from '../../components/organisms';
+import { IconButton, Modal, ErrorModal, LoadingSpinner } from '../../components/uiElements';
+import { Header } from '../../components/atoms';
+import { NetflixItem } from '../../components/molecules';
+import { Carousel, Slider } from '../../components/organisms';
 
 import './LandingPage.scss';
-import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
-import { NetflixItem } from '../../components/netflixItem/NetflixItem';
 
 import { testitems } from '../../assets/testitems';
 
-const LandingPage = React.memo(() => {
+export const LandingPage = React.memo(() => {
 	const auth = useContext(AuthContext);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -130,7 +126,7 @@ const LandingPage = React.memo(() => {
 							loadingSpinnerMessage={`Loading data for ${userCountry.country}`}
 						/>
 					) : (
-						expOther && <SampleSlider slideList={expOther} onClick={onItemClickedHandler} />
+						expOther && <Slider slideList={expOther} onClick={onItemClickedHandler} />
 					)}
 				</div>
 				<div id="homepage-nld-expiring" className="homepage__nld__expiring">
@@ -140,7 +136,7 @@ const LandingPage = React.memo(() => {
 					{isLoading ? (
 						<LoadingSpinner center loadingSpinnerMessage={`Loading expiring content...`} />
 					) : (
-						expNLD && <SampleSlider slideList={expNLD} onClick={onItemClickedHandler} />
+						expNLD && <Slider slideList={expNLD} onClick={onItemClickedHandler} />
 					)}
 				</div>
 				<div id="homepage-nld-new-content" className="homepage__nld__new_content">
@@ -150,9 +146,7 @@ const LandingPage = React.memo(() => {
 					{isLoading ? (
 						<LoadingSpinner center loadingSpinnerMessage={`Loading new content...`} />
 					) : (
-						nldNewContent && (
-							<SampleSlider slideList={nldNewContent} onClick={onItemClickedHandler} />
-						)
+						nldNewContent && <Slider slideList={nldNewContent} onClick={onItemClickedHandler} />
 					)}
 				</div>
 				<div id="homepage-testing-carousel" className="homepage__testing__carousel">
@@ -184,5 +178,3 @@ const LandingPage = React.memo(() => {
 		</React.Fragment>
 	);
 });
-
-export default LandingPage;

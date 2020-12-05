@@ -1,9 +1,7 @@
 import React from 'react';
 
-import { Label } from '../../atoms/label/Label';
-import { FormInput } from '../../atoms/formInput/FormInput';
-import { ErrorMessage } from '../../atoms/errorMessage/ErrorMessage';
 import { useFormContext } from 'react-hook-form';
+import { Label, FormInput, ErrorMessage } from '../../atoms';
 
 import './NumberInput.scss';
 
