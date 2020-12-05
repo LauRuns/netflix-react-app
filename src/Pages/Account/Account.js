@@ -5,10 +5,13 @@ import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/Spinner/LoadingSpinner';
 import Button from '../../shared/components/UIElements/Button/Button';
-import ProfileInformation from '../../components/AccountComponents/Profile/ProfileInfo';
-import PasswordChange from '../../components/AccountComponents/PasswordChanger/PasswordChange';
-import ImageUpload from '../../components/AccountComponents/UploadImage/UploadImage';
-import CountrySet from '../../components/AccountComponents/CountrySetter/CountrySetter';
+import {
+	CountrySetter,
+	PasswordChange,
+	ProfileInfo,
+	UploadImage
+} from '../../components/organisms';
+
 import Avatar from '../../shared/components/UIElements/Avatar/Avatar';
 import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
@@ -176,7 +179,7 @@ export const UserAccount = () => {
 							</div>
 							{showProfileInfo && (
 								<div className="itm-4-profile">
-									<ProfileInformation
+									<ProfileInfo
 										username={loadedUser.name}
 										email={loadedUser.email}
 										country={loadedUser.country}
@@ -205,7 +208,7 @@ export const UserAccount = () => {
 								</IconButton>
 							</div>
 							{showCountrySetter && loadedUser && (
-								<CountrySet
+								<CountrySetter
 									// username={loadedUser.name}
 									// email={loadedUser.email}
 									// userCountry={loadedUser.country || null}
@@ -232,7 +235,7 @@ export const UserAccount = () => {
 								</IconButton>
 							</div>
 							{showUploadImage && (
-								<ImageUpload
+								<UploadImage
 									username={loadedUser.name}
 									email={loadedUser.email}
 									setUpdatedUserAvatar={reloadUserData}
