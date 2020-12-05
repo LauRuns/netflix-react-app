@@ -4,12 +4,12 @@ import './NetflixItem.scss';
 
 export const NetflixItem = ({ item }) => {
 	return (
-		<div className="flip-card">
-			<div className="flip-card-inner">
-				<div className="flip-card-front">
+		<div className="nf-item-card">
+			<div className="nf-item-inner">
+				<div className="nf-item-front">
 					<img src={item.img} alt="Poster" />
 				</div>
-				<div className="flip-card-back">
+				<div className="nf-item-back">
 					<p>{item.synopsis}</p>
 					<br />
 					{item.year && (
