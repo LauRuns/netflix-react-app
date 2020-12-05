@@ -4,10 +4,19 @@
 .search-form-results-container {
 	display: flex;
 	flex-direction: column;
-	& > div {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-wrap: wrap;
+
+	.search-form-results-items {
+		@media screen and (max-width: $breakpoint-md) {
+			width: auto;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+		@media screen and (min-width: $breakpoint-lg) {
+			display: flex;
+			justify-content: flex-start;
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
 	}
 }

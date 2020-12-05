@@ -7,7 +7,6 @@ import { NetflixItem } from '../../../components/netflixItem/NetflixItem';
 import './SearchFormResults.scss';
 
 export const SearchFormResults = ({ resultData, header, onClick }) => {
-	console.log(resultData.length);
 	if (resultData.length > 4) {
 		return (
 			<div className="search-form-results-container">
@@ -23,7 +22,7 @@ export const SearchFormResults = ({ resultData, header, onClick }) => {
 				<Header md center>
 					<h2>{header}</h2>
 				</Header>
-				<div>
+				<div className="search-form-results-items">
 					{resultData &&
 						resultData.map((item, index) => {
 							return (
