@@ -63,12 +63,15 @@ export const PasswordChange = (props) => {
 		}
 	};
 
+	if (isLoading) {
+		return <LoadingSpinner asOverlay loadingSpinnerMessage="Updating password..." />;
+	}
+
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
 
 			<div className="pwd-change-container">
-				{isLoading && <LoadingSpinner center loadingSpinnerMessage="Updating password..." />}
 				{!isLoading && (
 					<form className="pwd-update-form" onSubmit={updatePwdHandler}>
 						<div>

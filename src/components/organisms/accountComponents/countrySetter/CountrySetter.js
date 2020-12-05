@@ -53,11 +53,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 	};
 
 	if (isLoading) {
-		return (
-			<div className="center">
-				<LoadingSpinner loadingSpinnerMessage="Updating..." />
-			</div>
-		);
+		return <LoadingSpinner asOverlay loadingSpinnerMessage="Updating..." />;
 	}
 
 	return (

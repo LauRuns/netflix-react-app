@@ -75,7 +75,7 @@ export const ProfileInfo = (props) => {
 	if (isLoading) {
 		return (
 			<div className="center">
-				<LoadingSpinner loadingSpinnerMessage="Updating..." />
+				<LoadingSpinner asOverlay loadingSpinnerMessage="Updating..." />
 			</div>
 		);
 	}

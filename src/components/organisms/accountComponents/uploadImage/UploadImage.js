@@ -48,12 +48,15 @@ export const UploadImage = (props) => {
 		}
 	};
 
+	if (isLoading) {
+		return <LoadingSpinner asOverlay loadingSpinnerMessage="Uploading image..." />;
+	}
+
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
 			<div className="img-upload-container">
 				<form className="img-form" onSubmit={userUploadImgHandler}>
-					{isLoading && <LoadingSpinner asOverlay />}
 					<h3>{formState.isValid ? 'For real?? This image??!' : 'Set your user avatar!'}</h3>
 					<div>
 						<ImageUpload id="image" onInput={inputHandler} />
