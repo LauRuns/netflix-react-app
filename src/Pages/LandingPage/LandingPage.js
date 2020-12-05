@@ -7,6 +7,7 @@ import Modal from '../../shared/components/UIElements/Modal/Modal';
 import ErrorModal from '../../shared/components/UIElements/Modal/ErrorModal';
 import { Header } from '../../shared/components/UIElements/header/Header';
 import { SampleSlider } from '../../components/sample-slider/SampleSLider';
+import { Carousel } from '../../components/organisms/oganismsIndex';
 
 import './LandingPage.scss';
 import { IconButton } from '../../shared/components/UIElements/iconButton/IconButton';
@@ -54,55 +55,6 @@ const LandingPage = React.memo(() => {
 		}
 	};
 
-	/*
-	const fetchNldData = async () => {
-		try {
-			console.time();
-			const nldResponseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home/nld`,
-				'POST',
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
-				}
-			);
-			console.log('nldResponseData______:', nldResponseData);
-			const { expResults, newResults } = nldResponseData;
-			setExpNLD(expResults);
-			setNldNewContent(newResults);
-			console.timeEnd();
-		} catch (error) {
-			// Error is handled by useHttpClient
-		}
-	};
-
-	const fetchOtherData = async () => {
-		try {
-			console.time();
-			const otherResponseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home/other`,
-				'POST',
-				JSON.stringify({
-					countryId: auth.country.countryId
-				}),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
-				}
-			);
-
-			console.log('Other - ResponseData______:', otherResponseData);
-			const { expResultsOther, newResultsOther } = otherResponseData;
-			setExpOther(expResultsOther);
-			setOtherNewContent(newResultsOther);
-			console.timeEnd();
-		} catch (error) {
-			// Error is handled by useHttpClient
-		}
-    };
-
-    */
-
 	useEffect(() => {
 		let cancelRequest = false;
 		// const getCountryFromLocalStorage = JSON.parse(localStorage.getItem('userData'));
@@ -117,8 +69,6 @@ const LandingPage = React.memo(() => {
 			return;
 		} else {
 			// fetchLandingPageData();
-			// fetchNldData();
-			// fetchOtherData();
 
 			setNldNewContent(testitems);
 			setExpNLD(testitems);
@@ -209,7 +159,7 @@ const LandingPage = React.memo(() => {
 					<Header md>
 						<h2>New content for {auth.country.country}:</h2>
 					</Header>
-					{isLoading ? (
+					{/* {isLoading ? (
 						<LoadingSpinner
 							center
 							loadingSpinnerMessage={`Loading new content for ${userCountry.country}`}
@@ -217,6 +167,16 @@ const LandingPage = React.memo(() => {
 					) : (
 						otherNewContent && (
 							<SampleSlider slideList={otherNewContent} onClick={onItemClickedHandler} />
+						)
+					)} */}
+					{isLoading ? (
+						<LoadingSpinner
+							center
+							loadingSpinnerMessage={`Loading new content for ${userCountry.country}`}
+						/>
+					) : (
+						otherNewContent && (
+							<Carousel list={otherNewContent} itemClicked={onItemClickedHandler} />
 						)
 					)}
 				</div>
