@@ -16,13 +16,7 @@ export const CountryList = ({ items, onItemClicked }) => {
 		<React.Fragment>
 			<ul className="CountryList">
 				{items.map(({ country, countryId }) => {
-					return (
-						<Chip
-							key={countryId}
-							name={country}
-							onClick={() => onItemClicked({ countryId: countryId, name: country })}
-						/>
-					);
+					return <Chip key={countryId} name={country} countryId={countryId} />;
 				})}
 			</ul>
 		</React.Fragment>
