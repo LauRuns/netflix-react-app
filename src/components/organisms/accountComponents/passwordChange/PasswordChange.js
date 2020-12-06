@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../../shared/util/validators';
 import { useForm } from '../../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
-import { AuthContext } from '../../../../shared/context/auth-context';
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { Input } from '../../../formElements/input/Input';
+import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
 
 import './PasswordChange.scss';
 
 export const PasswordChange = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const auth = useContext(AuthContext);
+	const { token, userId } = useAuthentication();
 
 	const [formState, inputHandler] = useForm(
 		{
@@ -41,7 +41,7 @@ export const PasswordChange = (props) => {
 
 		try {
 			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/auth/update/${auth.userId}`,
+				`${process.env.REACT_APP_CONNECTION_STRING}/auth/update/${userId}`,
 				'PATCH',
 				JSON.stringify({
 					email: props.email,
@@ -51,7 +51,7 @@ export const PasswordChange = (props) => {
 				}),
 				{
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
+					Authorization: `Bearer ${token}`
 				}
 			);
 

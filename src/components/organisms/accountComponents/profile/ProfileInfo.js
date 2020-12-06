@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 
 import {
 	VALIDATOR_MAXLENGTH,
@@ -7,14 +7,15 @@ import {
 } from '../../../../shared/util/validators.js';
 import { useForm } from '../../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
-import { AuthContext } from '../../../../shared/context/auth-context';
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../../components/uiElements';
 import { Input } from '../../../formElements/input/Input';
+import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
+
 import './ProfileInfo.scss';
 
 export const ProfileInfo = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const auth = useContext(AuthContext);
+	const { token, userId } = useAuthentication();
 
 	const [formState, inputHandler, setFormData] = useForm(
 		{
@@ -50,7 +51,7 @@ export const ProfileInfo = (props) => {
 		event.preventDefault();
 		try {
 			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`,
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
 				'PATCH',
 				JSON.stringify({
 					username: formState.inputs.username.value,
@@ -59,7 +60,7 @@ export const ProfileInfo = (props) => {
 				}),
 				{
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
+					Authorization: `Bearer ${token}`
 				}
 			);
 			onUpdate(responseData.updatedUser);

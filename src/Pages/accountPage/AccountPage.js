@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { AuthContext } from '../../shared/context/auth-context';
+import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import {
 	Button,
@@ -20,12 +21,17 @@ import {
 
 import './AccountPage.scss';
 
-import { testCountryList } from '../../assets/testitems';
+// use for development:
+// import { testCountryList } from '../../assets/testitems';
 
 export const AccountPage = () => {
-	const auth = useContext(AuthContext);
+	const { isAuthenticated, updateCountry } = useAuthentication();
+
+	let { userId } = useParams();
+
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const [loadedUser, setLoadedUser] = useState();
+	const [loadedUser, setLoadedUser] = useState(null);
+
 	const [showProfileInfo, setShowProfileInfo] = useState(false);
 	const [showCountrySetter, setShowCountrySetter] = useState(false);
 	const [showUploadImage, setShowUploadImage] = useState(false);
@@ -38,7 +44,7 @@ export const AccountPage = () => {
 	const fetchUser = async () => {
 		try {
 			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
 			);
 			const { result } = responseData;
 			console.log(result);
@@ -60,12 +66,16 @@ export const AccountPage = () => {
 	};
 
 	useEffect(() => {
-		if (!auth.userId) {
+		// if (!auth.userId) {
+		// 	return;
+		// }
+		if (!isAuthenticated) {
 			return;
 		}
 		fetchUser();
-		// fetchCountries();
-	}, [sendRequest, auth.userId]);
+		fetchCountries();
+		// setLoadedCountries(testCountryList);
+	}, [sendRequest, isAuthenticated, userId]);
 
 	const showProfileInfoHandler = () => setShowProfileInfo(!showProfileInfo);
 	const showCountrySet = () => setShowCountrySetter(!showCountrySetter);
@@ -83,7 +93,7 @@ export const AccountPage = () => {
 		setLoadedUser(newProfileData);
 		closeAllInfoTabs();
 		updateLocalStorageUserData(newProfileData.country);
-		auth.updateCountry(newProfileData.country);
+		updateCountry(newProfileData.country);
 	};
 
 	const updateLocalStorageUserData = (countryObj) => {
@@ -115,7 +125,7 @@ export const AccountPage = () => {
 		setDisplayMessage(false);
 	};
 
-	if (auth.userId) {
+	if (userId && isAuthenticated) {
 		return (
 			<React.Fragment>
 				<ErrorModal error={error} onClear={clearError} />
@@ -213,7 +223,7 @@ export const AccountPage = () => {
 								<CountrySetter
 									userData={loadedUser}
 									setNewSelectedCountry={reloadUserData}
-									countryData={testCountryList} // <-- development data
+									countryData={loadedCountries}
 								/>
 							)}
 						</div>

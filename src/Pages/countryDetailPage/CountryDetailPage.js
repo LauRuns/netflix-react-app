@@ -1,20 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { AuthContext } from '../../shared/context/auth-context';
 import { IconButton, Modal, ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { IconNavItem } from '../../components/navigation';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { Slider } from '../../components/organisms';
+import { useAuthentication } from '../../shared/hooks/authentication-hook';
 
 import './CountryDetailPage.scss';
 
-import { testitems } from '../../assets/testitems';
+// remove after development
+// import { testitems } from '../../assets/testitems';
 
-export const CountryDetailPage = (props) => {
+export const CountryDetailPage = () => {
+	const { token } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const auth = useContext(AuthContext);
 
 	const [expCountryData, setExpCountryData] = useState(null);
 	const [newCountryData, setNewCountryData] = useState(null);
@@ -23,7 +25,9 @@ export const CountryDetailPage = (props) => {
 	const [selectedItem, setSelectedItem] = useState(null);
 
 	// pass this with a useParams() ???
-	const { name, countryId } = props.location.state;
+	// const { name, countryId } = props.location.state;
+	const { countryId, countryName } = useParams();
+	console.log('useParams___:', countryId);
 
 	const fetchCountryNetflixData = async () => {
 		try {
@@ -34,7 +38,7 @@ export const CountryDetailPage = (props) => {
 				JSON.stringify({ countryId: countryId, offset: 0, limit: 50 }),
 				{
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
+					Authorization: `Bearer ${token}`
 				}
 			);
 
@@ -49,9 +53,9 @@ export const CountryDetailPage = (props) => {
 	};
 
 	useEffect(() => {
-		// fetchCountryNetflixData();
-		setNewCountryData(testitems);
-		setExpCountryData(testitems);
+		fetchCountryNetflixData();
+		// setNewCountryData(testitems);
+		// setExpCountryData(testitems);
 		return () => {
 			// cleanup
 		};
@@ -93,7 +97,7 @@ export const CountryDetailPage = (props) => {
 			<div className="country-detail-page-container">
 				<div id="country-detail-page-header" className="dp__header">
 					<Header center lg>
-						<h2>Content for {name || '...'}</h2>
+						<h2>Content for {countryName || '...'}</h2>
 					</Header>
 					<IconNavItem link="/countries" iconName="chevron_left" iconSize={54}>
 						Back to countries overview
@@ -102,7 +106,7 @@ export const CountryDetailPage = (props) => {
 
 				<div id="country-detail-page-newcontent" className="dp__newcontent">
 					<Header md>
-						<h2>New content for {name || '...'}</h2>
+						<h2>New content for {countryName || '...'}</h2>
 					</Header>
 					{!isLoading && newCountryData && (
 						<Slider slideList={newCountryData} onClick={detailItemClicked} />
@@ -111,7 +115,7 @@ export const CountryDetailPage = (props) => {
 
 				<div id="country-detail-page-expiringcontent" className="dp__expcontent">
 					<Header md>
-						<h2>Expiring content for {name || '...'}</h2>
+						<h2>Expiring content for {countryName || '...'}</h2>
 					</Header>
 					{!isLoading && expCountryData && (
 						<Slider slideList={expCountryData} onClick={detailItemClicked} />
@@ -121,5 +125,3 @@ export const CountryDetailPage = (props) => {
 		</React.Fragment>
 	);
 };
-
-// export default CountryDetailPage;

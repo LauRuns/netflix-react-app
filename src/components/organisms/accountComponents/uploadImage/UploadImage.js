@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
-import { AuthContext } from '../../../../shared/context/auth-context';
 import { useForm } from '../../../../shared/hooks/form-hook';
 import { IconButton, LoadingSpinner, ErrorModal } from '../../../uiElements';
 import { ImageUpload } from '../../../formElements/imageUpload/ImageUpload';
+import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
 
 import './UploadImage.scss';
 
 export const UploadImage = (props) => {
-	const auth = useContext(AuthContext);
+	const { token, userId } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	const [formState, inputHandler] = useForm(
@@ -31,11 +31,11 @@ export const UploadImage = (props) => {
 			formData.append('image', formState.inputs.image.value);
 
 			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`,
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
 				'PATCH',
 				formData,
 				{
-					Authorization: `Bearer ${auth.token}`
+					Authorization: `Bearer ${token}`
 				}
 			);
 			// history.push('/account');

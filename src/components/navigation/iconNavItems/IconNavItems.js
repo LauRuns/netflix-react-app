@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
-
-import { AuthContext } from '../../../shared/context/auth-context';
+import React from 'react';
 import { IconNavItem } from '../iconNavItem/IconNavItem';
-
+import { useAuthentication } from '../../../shared/hooks/authentication-hook';
 import './IconNavItems.scss';
 
 export const IconNavItems = ({ navItems }) => {
-	const auth = useContext(AuthContext);
+	const { isAuthenticated } = useAuthentication();
+
 	return (
 		<ul className="icon-nav-items-container">
-			{auth.isLoggedIn &&
+			{isAuthenticated &&
 				navItems &&
 				navItems.map(({ linkTo, linkName, iconName, iconSize, iconColor, iconStyle, textSize }) => {
 					return (

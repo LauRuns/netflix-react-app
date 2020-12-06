@@ -8,12 +8,12 @@ import { SearchForm, SearchFormResults } from '../../components/organisms';
 import { ErrorModal, LoadingSpinner, IconButton, Modal } from '../../components/uiElements';
 
 // remove after development
-import {
-	testCountryList,
-	testSearchResults,
-	singleSearchResult,
-	multipleSearchResult
-} from '../../assets/testitems';
+// import {
+// 	testCountryList,
+// 	testSearchResults,
+// 	singleSearchResult,
+// 	multipleSearchResult
+// } from '../../assets/testitems';
 
 import './SearchPage.scss';
 
@@ -42,12 +42,12 @@ export const SearchPage = () => {
 	};
 
 	useEffect(() => {
-		setCountryList(testCountryList);
+		// setCountryList(testCountryList);
 		// setSearchResults(testSearchResults);
 		// setSearchResults(singleSearchResult);
-		setSearchResults(multipleSearchResult);
+		// setSearchResults(multipleSearchResult);
 
-		// loadCountries();
+		loadCountries();
 	}, [sendRequest]);
 
 	const searchFormSubmitHandler = async (event) => {

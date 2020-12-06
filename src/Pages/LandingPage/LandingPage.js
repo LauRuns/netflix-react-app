@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { IconButton, Modal, ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { Carousel, Slider } from '../../components/organisms';
-
+import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import './LandingPage.scss';
 
-import { testitems } from '../../assets/testitems';
+// remove after development
+// import { testitems } from '../../assets/testitems';
 
 export const LandingPage = React.memo(() => {
-	const auth = useContext(AuthContext);
+	const { country, token } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-	const [userCountry, setUserCountry] = useState(null);
+	const [currentUserCountry, setCurrentUserCountry] = useState(null);
 	const [nldNewContent, setNldNewContent] = useState(null);
 	const [otherNewContent, setOtherNewContent] = useState(null);
 	const [expNLD, setExpNLD] = useState(null);
@@ -31,11 +31,11 @@ export const LandingPage = React.memo(() => {
 				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
 				'POST',
 				JSON.stringify({
-					countryId: auth.country.countryId
+					countryId: country.countryId
 				}),
 				{
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
+					Authorization: `Bearer ${token}`
 				}
 			);
 
@@ -57,24 +57,24 @@ export const LandingPage = React.memo(() => {
 		// const { country } = getCountryFromLocalStorage;
 		// console.log('Get userData --> country', country);
 
-		const { country } = auth;
-		console.log('Landingpage --> Auth.country____::', country);
-		setUserCountry(country);
+		// const { country } = auth;
+		// console.log('Landingpage --> Auth.country____::', country);
+		setCurrentUserCountry(country);
+		console.log(country);
 
 		if (cancelRequest) {
 			return;
 		} else {
-			// fetchLandingPageData();
-
-			setNldNewContent(testitems);
-			setExpNLD(testitems);
-			setExpOther(testitems);
-			setOtherNewContent(testitems);
+			fetchLandingPageData();
+			// setNldNewContent(testitems);
+			// setExpNLD(testitems);
+			// setExpOther(testitems);
+			// setOtherNewContent(testitems);
 		}
 		return () => {
 			cancelRequest = true;
 		};
-	}, [auth]);
+	}, [country]);
 	// });
 
 	const onItemClickedHandler = (data) => {
@@ -116,14 +116,18 @@ export const LandingPage = React.memo(() => {
 					<Header lg>
 						<h1>Welcome back!</h1>
 					</Header>
-					{userCountry && <h3>Here is your new &amp; expiring data for {userCountry.country}</h3>}
+					{currentUserCountry && (
+						<h3>Here is your new &amp; expiring data for {currentUserCountry.country}</h3>
+					)}
 				</div>
 				<div id="homepage-expiring" className="homepage__expiring">
-					<Header md>{userCountry && <h2>Expiring content for {userCountry.country}:</h2>}</Header>
+					<Header md>
+						{currentUserCountry && <h2>Expiring content for {currentUserCountry.country}:</h2>}
+					</Header>
 					{isLoading ? (
 						<LoadingSpinner
 							center
-							loadingSpinnerMessage={`Loading data for ${userCountry.country}`}
+							loadingSpinnerMessage={`Loading data for ${currentUserCountry.country}`}
 						/>
 					) : (
 						expOther && <Slider slideList={expOther} onClick={onItemClickedHandler} />
@@ -151,7 +155,7 @@ export const LandingPage = React.memo(() => {
 				</div>
 				<div id="homepage-testing-carousel" className="homepage__testing__carousel">
 					<Header md>
-						<h2>New content for {auth.country.country}:</h2>
+						{currentUserCountry && <h2>New content for {currentUserCountry.country}:</h2>}
 					</Header>
 					{/* {isLoading ? (
 						<LoadingSpinner
@@ -166,7 +170,7 @@ export const LandingPage = React.memo(() => {
 					{isLoading ? (
 						<LoadingSpinner
 							center
-							loadingSpinnerMessage={`Loading new content for ${userCountry.country}`}
+							loadingSpinnerMessage={`Loading new content for ${currentUserCountry.country}`}
 						/>
 					) : (
 						otherNewContent && (

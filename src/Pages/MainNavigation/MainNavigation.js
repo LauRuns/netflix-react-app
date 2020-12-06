@@ -1,22 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { AuthContext } from '../../shared/context/auth-context';
 import { Navbar, SideDrawer } from '../../components/navigation';
 import { Backdrop } from '../../components/uiElements';
-
+import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import './MainNavigation.scss';
 
 export const MainNavigation = () => {
-	const auth = useContext(AuthContext);
+	const { isAuthenticated, userId, logout } = useAuthentication();
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+
+	console.log('Mainnavigation__isAuthenticated__?__', isAuthenticated);
 
 	const history = useHistory();
 
 	const openDrawerHandler = () => setDrawerIsOpen(true);
 	const closeDrawerHandler = () => setDrawerIsOpen(!drawerIsOpen);
 
-	const logOut = () => auth.logout();
+	const logOut = () => {
+		logout();
+		history.push('/login');
+	};
 	const navigateOnLogo = () => history.push('/home');
 
 	const defaultNavStyling = {
@@ -46,7 +50,7 @@ export const MainNavigation = () => {
 			...defaultNavStyling
 		},
 		{
-			linkTo: '/account',
+			linkTo: `/account/${userId}`,
 			linkName: 'Account',
 			iconName: 'account',
 			...defaultNavStyling
@@ -61,14 +65,14 @@ export const MainNavigation = () => {
 				drawerToggleClicked={openDrawerHandler}
 				onLogout={logOut}
 				drawerIsOpen={drawerIsOpen}
-				isLoggedIn={auth.isLoggedIn}
+				isLoggedIn={isAuthenticated}
 				onLogoNavigate={navigateOnLogo}
 			/>
 			<SideDrawer
 				open={drawerIsOpen}
 				navItemClicked={closeDrawerHandler}
 				navItems={navItemsList}
-				isLoggedIn={auth.isLoggedIn}
+				isLoggedIn={isAuthenticated}
 				onLogout={logOut}
 			/>
 		</React.Fragment>

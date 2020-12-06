@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -8,14 +8,15 @@ import {
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { AuthContext } from '../../shared/context/auth-context';
 import { Button, Card, LoadingSpinner, ErrorModal } from '../../components/uiElements';
 import { Input } from '../../components/formElements/input/Input';
+import { useAuthentication } from '../../shared/hooks/authentication-hook';
 
 import './LoginPage.scss';
 
 export const LoginPage = () => {
-	const auth = useContext(AuthContext);
+	const { login } = useAuthentication();
+
 	const [isLoginMode, setIsLoginMode] = useState(true);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -86,9 +87,8 @@ export const LoginPage = () => {
 					token,
 					user: { country }
 				} = responseData;
-				console.log(country);
 
-				auth.login(userId, token, country);
+				login(userId, token, country);
 				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
@@ -107,7 +107,7 @@ export const LoginPage = () => {
 					formData
 				);
 
-				auth.login(responseData.userId, responseData.token);
+				login(responseData.userId, responseData.token);
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}

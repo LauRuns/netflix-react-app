@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
-import { AuthContext } from '../../../../shared/context/auth-context';
+import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
@@ -9,7 +9,7 @@ import './CountrySetter.scss';
 
 export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const auth = useContext(AuthContext);
+	const { token, userId } = useAuthentication();
 
 	const [selectedCountry, setSelectedCountry] = useState(userData.country || null);
 
@@ -29,7 +29,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 		event.preventDefault();
 		try {
 			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${auth.userId}`,
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
 				'PATCH',
 				JSON.stringify({
 					username: userData.name,
@@ -38,7 +38,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 				}),
 				{
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${auth.token}`
+					Authorization: `Bearer ${token}`
 				}
 			);
 			console.log(responseData.updatedUser);

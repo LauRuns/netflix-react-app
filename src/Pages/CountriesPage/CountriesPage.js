@@ -6,10 +6,10 @@ import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { Search, CountryList } from '../../components/organisms';
 
-import { testCountryList } from '../../assets/testitems';
+// import { testCountryList } from '../../assets/testitems';
 import './CountriesPage.scss';
 
-export const CountriesPage = (props) => {
+export const CountriesPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
@@ -29,8 +29,8 @@ export const CountriesPage = (props) => {
 	};
 
 	useEffect(() => {
-		// fetchCountries();
-		setLoadedCountries(testCountryList);
+		fetchCountries();
+		// setLoadedCountries(testCountryList);
 	}, [sendRequest]);
 
 	const filteredCountriesHandler = (filteredCountries) => {
