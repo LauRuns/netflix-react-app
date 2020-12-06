@@ -11,6 +11,11 @@
 	transition: all 0.2s ease-in-out;
 	opacity: 0.8;
 
+	& > a {
+		text-decoration: none;
+		color: inherit;
+	}
+
 	& > button {
 		background-color: transparent;
 		font-family: inherit;
