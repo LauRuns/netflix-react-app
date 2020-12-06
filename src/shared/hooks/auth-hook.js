@@ -36,7 +36,7 @@ const useAuth = () => {
 		setUserId(null);
 		setUserCountry(null);
 		localStorage.removeItem('userData');
-		history.push('/auth');
+		history.push('/login');
 	}, [history]);
 
 	const updateCountry = useCallback((country) => {
