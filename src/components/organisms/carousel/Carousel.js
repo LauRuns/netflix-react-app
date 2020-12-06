@@ -15,7 +15,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 export const Carousel = ({ list, itemClicked }) => {
 	return (
 		<Swiper
-			spaceBetween={0}
+			spaceBetween={10}
 			slidesPerView={3}
 			navigation
 			pagination={{ clickable: true }}
@@ -27,7 +27,7 @@ export const Carousel = ({ list, itemClicked }) => {
 				list.map((item, index) => {
 					return (
 						<SwiperSlide key={index} onClick={() => itemClicked(item)}>
-							<img src={item.img} alt="poster" style={{ maxWidth: '100%', height: '100%' }} />
+							<img src={item.img} alt="poster" style={{ maxWidth: '100%', height: 'auto' }} />
 						</SwiperSlide>
 					);
 				})}
