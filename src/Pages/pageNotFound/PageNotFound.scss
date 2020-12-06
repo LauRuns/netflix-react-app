@@ -1,0 +1,113 @@
+@import '../../styles/2-variables/_variables-index';
+@import '../../styles/5-globals/_globals-index';
+
+.page-not-found-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	& h1 {
+		@extend .center;
+
+		font-size: 6rem;
+		text-shadow: -2rem 1rem 2rem rgba(0, 0, 0, 0.5), -0.8rem 0.8rem 0 rgba(255, 255, 255, 0.5),
+			-1.6rem 1.6rem 0 rgba(255, 255, 255, 0.2), -2.4rem 2.2rem 0 rgba(255, 255, 255, 0.05);
+
+		@media screen and (min-width: $breakpoint-md) {
+			font-size: 12rem;
+		}
+
+		@media screen and (min-width: $breakpoint-xl) {
+			font-size: 15rem;
+		}
+
+		.page-not-found-zero {
+			position: relative;
+			display: inline-block;
+			width: 5rem;
+			height: 5rem;
+			background: linear-gradient(to bottom, #fff, #777);
+			border-radius: 50%;
+			margin: 0 1rem;
+			box-shadow: -2rem 1rem 2rem rgba(0, 0, 0, 0.5);
+
+			@media screen and (min-width: $breakpoint-md) {
+				width: 10rem;
+				height: 10rem;
+			}
+
+			@media screen and (min-width: $breakpoint-xl) {
+				width: 12rem;
+				height: 12rem;
+			}
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				right: 0;
+				transform: translateY(-50%);
+				width: 4.4rem;
+				height: 4.4rem;
+				background: linear-gradient(to top, #fff, #777);
+				border-radius: 50%;
+
+				@media screen and (min-width: $breakpoint-md) {
+					width: 9rem;
+					height: 9rem;
+				}
+
+				@media screen and (min-width: $breakpoint-xl) {
+					width: 11rem;
+					height: 11rem;
+				}
+			}
+
+			&::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 3rem;
+				height: 3rem;
+				background: linear-gradient(135deg, #03a9f4, #03a9f4 50%, #333 50%, #333);
+				border-radius: 50%;
+				box-shadow: inset 0 0 30px rgba(0, 0, 0, 1);
+				animation: animaterotate 4s steps(192) infinite;
+
+				@media screen and (min-width: $breakpoint-md) {
+					width: 5rem;
+					height: 5rem;
+				}
+
+				@media screen and (min-width: $breakpoint-xl) {
+					width: 7rem;
+					height: 7rem;
+				}
+			}
+		}
+	}
+
+	.page-not-found-actions {
+		@extend .center-column;
+
+		& > h3 {
+			padding: 1rem;
+		}
+	}
+}
+
+@keyframes animaterotate {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
