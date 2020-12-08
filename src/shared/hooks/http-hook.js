@@ -5,13 +5,14 @@ export const useHttpClient = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
 
-	const activeHttpRequests = useRef([]);
+	// const activeHttpRequests = useRef([]);
+	const cancelToken = axios.CancelToken.source();
 
 	const sendRequest = useCallback(
 		async (url, method = 'GET', body = null, headers = {}) => {
 			setIsLoading(true);
-			const httpAbortController = new AbortController();
-			activeHttpRequests.current.push(httpAbortController);
+			// const httpAbortController = new AbortController();
+			// activeHttpRequests.current.push(httpAbortController);
 
 			// request interceptor
 			axios.interceptors.request.use(
@@ -48,7 +49,8 @@ export const useHttpClient = () => {
 					url: url,
 					data: body,
 					headers: headers,
-					signal: httpAbortController.signal
+					// signal: httpAbortController.signal
+					cancelToken: cancelToken.token
 				});
 
 				/*
@@ -63,9 +65,9 @@ export const useHttpClient = () => {
 
 				// const responseData = await response.json();
 
-				activeHttpRequests.current = activeHttpRequests.current.filter(
-					(reqCtrl) => reqCtrl !== httpAbortController
-				);
+				// activeHttpRequests.current = activeHttpRequests.current.filter(
+				// 	(reqCtrl) => reqCtrl !== httpAbortController
+				// );
 
 				const responseData = response.data;
 
@@ -78,10 +80,11 @@ export const useHttpClient = () => {
 				// setError(err.messag); // <-- when using fetch as method
 				setError(err.response.data.message);
 				setIsLoading(false);
-				throw error;
+				console.log('USE HTTP CLIENT ERROR_____>>', err);
+				// throw error;
 			}
 		},
-		[error]
+		[error, cancelToken]
 	);
 
 	const clearError = () => {
@@ -90,9 +93,10 @@ export const useHttpClient = () => {
 
 	useEffect(() => {
 		return () => {
-			activeHttpRequests.current.forEach((abortControl) => abortControl.abort());
+			// activeHttpRequests.current.forEach((abortControl) => abortControl.abort());
+			cancelToken.cancel();
 		};
 	}, []);
 
-	return { isLoading, error, sendRequest, clearError };
+	return { isLoading, error, sendRequest, clearError, cancelToken };
 };
