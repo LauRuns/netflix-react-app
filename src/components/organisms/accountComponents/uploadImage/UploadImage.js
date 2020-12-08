@@ -38,9 +38,7 @@ export const UploadImage = (props) => {
 					Authorization: `Bearer ${token}`
 				}
 			);
-			// history.push('/account');
 			if (responseData) {
-				console.log(responseData);
 				props.setUpdatedUserAvatar(responseData.updatedUser);
 			}
 		} catch (err) {
