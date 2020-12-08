@@ -4,12 +4,17 @@
 .header-item {
 	padding: 0.5rem;
 	font-weight: bold;
+
+	.header-actions {
+		@extend .center;
+	}
 }
 
 .header-center {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	@extend .center-column;
+	// display: flex;
+	// flex-direction: column;
+	// justify-content: center;
 }
 
 .header-medium {
