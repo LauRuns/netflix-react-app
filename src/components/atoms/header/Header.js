@@ -4,7 +4,7 @@ import './Header.scss';
 
 const defaultHeader = { display: 'flex' };
 
-export const Header = ({ children, center, md, lg, xl, style, title }) => {
+export const Header = ({ children, center, md, lg, xl, style, title, headerActions }) => {
 	const styles = { ...defaultHeader, ...style };
 	return (
 		<div
@@ -14,7 +14,8 @@ export const Header = ({ children, center, md, lg, xl, style, title }) => {
 			style={styles}
 		>
 			{title && <h2>{title}</h2>}
-			{children}
+			<div className="header-sub-head">{children}</div>
+			<div className="header-actions">{headerActions}</div>
 		</div>
 	);
 };
