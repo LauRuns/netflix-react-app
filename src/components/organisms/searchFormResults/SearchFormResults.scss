@@ -2,21 +2,10 @@
 @import '../../../styles/5-globals/_globals-index';
 
 .search-form-results-container {
-	display: flex;
-	flex-direction: column;
+	@extend .center-column;
 
 	.search-form-results-items {
-		@media screen and (max-width: $breakpoint-md) {
-			width: auto;
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
-		}
-		@media screen and (min-width: $breakpoint-lg) {
-			display: flex;
-			justify-content: flex-start;
-			flex-direction: row;
-			flex-wrap: wrap;
-		}
+		@extend .center;
+		flex-wrap: wrap;
 	}
 }
