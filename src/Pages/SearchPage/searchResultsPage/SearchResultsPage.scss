@@ -1,0 +1,14 @@
+@import '../../../styles/2-variables/_variables-index';
+@import '../../../styles/5-globals/_globals-index';
+
+.search-results-page {
+	max-width: 100vw;
+	@extend .center-column;
+
+	.search-results-page-items {
+		max-width: 100vw;
+		padding: 1rem;
+		background-color: violet;
+		// overflow-x: hidden;
+	}
+}

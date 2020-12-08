@@ -6,6 +6,7 @@ import { CountriesPage } from './countriesPage/CountriesPage';
 import { MainNavigation } from './mainNavigation/MainNavigation';
 import { SearchPage } from './searchPage/SearchPage';
 import { PageNotFound } from './pageNotFound/PageNotFound';
+import { SearchResultsPage } from './searchPage/searchResultsPage/SearchResultsPage';
 
 export {
 	AccountPage,
@@ -15,5 +16,6 @@ export {
 	CountriesPage,
 	MainNavigation,
 	SearchPage,
-	PageNotFound
+	PageNotFound,
+	SearchResultsPage
 };
