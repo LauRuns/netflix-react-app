@@ -1,14 +1,25 @@
-import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
+import React, { useState, useContext, createContext, useCallback, useEffect, useRef } from 'react';
 
 const AuthContext = createContext();
 let logoutTimer;
 
 export const AuthProvider = ({ children }) => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [token, setToken] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(null);
+	const [token, setToken] = useState(null);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
-	const [userId, setUserId] = useState(false);
+	const [userId, setUserId] = useState(null);
 	const [userCountry, setUserCountry] = useState(null);
+
+	const isMounted = useRef(null);
+
+	useEffect(() => {
+		// executed when component mounted
+		isMounted.current = true;
+		return () => {
+			// executed when unmount
+			isMounted.current = false;
+		};
+	}, []);
 
 	const login = useCallback((uid, token, country, expirationDate) => {
 		setToken(token);
@@ -48,8 +59,13 @@ export const AuthProvider = ({ children }) => {
 			const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
 			logoutTimer = setTimeout(logout, remainingTime);
 		} else {
+			console.log('Clear out timer');
 			clearTimeout(logoutTimer);
 		}
+		return () => {
+			console.log('Login Hook setTimer CLEANUP______________<<<<<');
+			isMounted.current = false;
+		};
 	}, [token, logout, tokenExpirationDate]);
 
 	useEffect(() => {
@@ -62,6 +78,10 @@ export const AuthProvider = ({ children }) => {
 				new Date(storedData.expiration)
 			);
 		}
+		return () => {
+			console.log('Login Hook checkLocalStorage CLEANUP_________<<<<<');
+			isMounted.current = false;
+		};
 	}, [login]);
 
 	return (

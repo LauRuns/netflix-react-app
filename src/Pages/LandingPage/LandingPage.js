@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { IconButton, Modal, ErrorModal, LoadingSpinner } from '../../components/uiElements';
@@ -9,9 +9,9 @@ import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import './LandingPage.scss';
 
 // remove after development
-// import { testitems } from '../../assets/testitems';
+import { testitems } from '../../assets/testitems';
 
-export const LandingPage = React.memo(() => {
+export const LandingPage = () => {
 	const { country, token } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -24,61 +24,66 @@ export const LandingPage = React.memo(() => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
 
-	const fetchLandingPageData = async () => {
-		try {
-			console.time();
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
-				'POST',
-				JSON.stringify({
-					countryId: country.countryId
-				}),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				}
-			);
-
-			const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = responseData;
-			console.log(responseData);
-			setNldNewContent(newResultsNL);
-			setExpNLD(resultsNLD);
-			setExpOther(resultsOTHER);
-			setOtherNewContent(newResultsOther);
-			console.timeEnd();
-		} catch (error) {
-			// Error is handled by useHttpClient
-		}
-	};
+	const _isMounted = useRef(null);
 
 	useEffect(() => {
-		let cancelRequest = false;
-		// const getCountryFromLocalStorage = JSON.parse(localStorage.getItem('userData'));
-		// const { country } = getCountryFromLocalStorage;
-		// console.log('Get userData --> country', country);
-
-		// const { country } = auth;
-		// console.log('Landingpage --> Auth.country____::', country);
+		_isMounted.current = true;
 		setCurrentUserCountry(country);
-		console.log(country);
 
-		if (cancelRequest) {
-			return;
-		} else {
-			fetchLandingPageData();
-			// setNldNewContent(testitems);
-			// setExpNLD(testitems);
-			// setExpOther(testitems);
-			// setOtherNewContent(testitems);
-		}
 		return () => {
-			cancelRequest = true;
+			_isMounted.current = false;
+		};
+	}, []);
+
+	useEffect(() => {
+		// const { country } = JSON.parse(localStorage.getItem('userData'));
+
+		const fetchLandingPageData = async () => {
+			try {
+				// console.time();
+
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
+					'POST',
+					JSON.stringify({
+						countryId: country.countryId
+					}),
+					{
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`
+					}
+				);
+
+				const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = responseData;
+				console.log(responseData);
+
+				if (_isMounted.current) {
+					setNldNewContent(newResultsNL);
+					setExpNLD(resultsNLD);
+					setExpOther(resultsOTHER);
+					setOtherNewContent(newResultsOther);
+				}
+
+				// console.timeEnd();
+			} catch (error) {
+				// Error is handled by useHttpClient
+			}
+		};
+		if (_isMounted.current) {
+			fetchLandingPageData();
+		}
+		// setNldNewContent(testitems);
+		// setExpNLD(testitems);
+		// setExpOther(testitems);
+		// setOtherNewContent(testitems);
+
+		return () => {
+			console.log('LandingPage CLEANUP');
+			_isMounted.current = false;
 		};
 	}, [country]);
-	// });
 
 	const onItemClickedHandler = (data) => {
-		console.log('onExpiredItemClickedHandler_____-->__::', data);
 		setSelectedItem(data);
 		openModal();
 	};
@@ -181,4 +186,4 @@ export const LandingPage = React.memo(() => {
 			</div>
 		</React.Fragment>
 	);
-});
+};

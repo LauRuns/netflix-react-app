@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -17,6 +17,7 @@ import './CountryDetailPage.scss';
 export const CountryDetailPage = () => {
 	const { token } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
+	const isMounted = useRef(null);
 
 	const [expCountryData, setExpCountryData] = useState(null);
 	const [newCountryData, setNewCountryData] = useState(null);
@@ -24,40 +25,39 @@ export const CountryDetailPage = () => {
 	const [showDetails, setShowDetails] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
 
-	// pass this with a useParams() ???
-	// const { name, countryId } = props.location.state;
 	const { countryId, countryName } = useParams();
-	console.log('useParams___:', countryId);
-
-	const fetchCountryNetflixData = async () => {
-		try {
-			console.time();
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/countrydata`,
-				'POST',
-				JSON.stringify({ countryId: countryId, offset: 0, limit: 50 }),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				}
-			);
-
-			console.log(responseData);
-			const { expResults, newResults } = responseData;
-			setNewCountryData(newResults);
-			setExpCountryData(expResults);
-			console.timeEnd();
-		} catch (err) {
-			// Error is handled by useHttpClient
-		}
-	};
 
 	useEffect(() => {
+		isMounted.current = true;
+		const fetchCountryNetflixData = async () => {
+			try {
+				console.time();
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/countrydata`,
+					'POST',
+					JSON.stringify({ countryId: countryId, offset: 0, limit: 50 }),
+					{
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${token}`
+					}
+				);
+
+				const { expResults, newResults } = responseData;
+				if (isMounted.current) {
+					setNewCountryData(newResults);
+					setExpCountryData(expResults);
+				}
+				console.timeEnd();
+			} catch (err) {
+				// Error is handled by useHttpClient
+			}
+		};
 		fetchCountryNetflixData();
 		// setNewCountryData(testitems);
 		// setExpCountryData(testitems);
 		return () => {
-			// cleanup
+			console.log('CountryDetailPage CLEANUP');
+			isMounted.current = false;
 		};
 	}, []);
 

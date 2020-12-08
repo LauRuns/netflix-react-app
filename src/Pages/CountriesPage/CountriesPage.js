@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -6,32 +6,37 @@ import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { Search, CountryList } from '../../components/organisms';
 
-// import { testCountryList } from '../../assets/testitems';
+import { testCountryList } from '../../assets/testitems';
 import './CountriesPage.scss';
 
 export const CountriesPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
+	const isMounted = useRef(null);
+	const history = useHistory();
+
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
 
-	const history = useHistory();
-
-	const fetchCountries = async () => {
-		try {
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-			);
-			setLoadedCountries(responseData.results);
-			setCountryListData(responseData.results);
-		} catch (err) {
-			// Error is handled by useHttpClient
-		}
-	};
-
 	useEffect(() => {
+		isMounted.current = true;
+		const fetchCountries = async () => {
+			try {
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+				);
+				if (isMounted.current) {
+					setLoadedCountries(responseData.results);
+					setCountryListData(responseData.results);
+				}
+			} catch (err) {
+				// Error is handled by useHttpClient
+			}
+		};
 		fetchCountries();
-		// setLoadedCountries(testCountryList);
-	}, [sendRequest]);
+		return () => {
+			isMounted.current = false;
+		};
+	}, []);
 
 	const filteredCountriesHandler = (filteredCountries) => {
 		if (filteredCountries && filteredCountries.length !== 0) {

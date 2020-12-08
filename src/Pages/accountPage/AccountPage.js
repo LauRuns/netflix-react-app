@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
@@ -22,10 +22,11 @@ import {
 import './AccountPage.scss';
 
 // use for development:
-// import { testCountryList } from '../../assets/testitems';
+import { testCountryList } from '../../assets/testitems';
 
 export const AccountPage = () => {
 	const { isAuthenticated, updateCountry } = useAuthentication();
+	const _isMounted = useRef(null);
 
 	let { userId } = useParams();
 
@@ -41,41 +42,59 @@ export const AccountPage = () => {
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [displayMessage, setDisplayMessage] = useState(false);
 
-	const fetchUser = async () => {
-		try {
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
-			);
-			const { result } = responseData;
-			console.log(result);
-			setLoadedUser(result);
-		} catch (err) {
-			// Error is handled by useHttpClient
-		}
-	};
+	useEffect(() => {
+		_isMounted.current = true;
+		const fetchCountries = async () => {
+			try {
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
+				);
+				if (_isMounted.current) {
+					setLoadedCountries(responseData.results);
+				}
+			} catch (err) {
+				// Error is handled by useHttpClient
+			}
+		};
 
-	const fetchCountries = async () => {
-		try {
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-			);
-			setLoadedCountries(responseData.results);
-		} catch (err) {
-			// Error is handled by useHttpClient
-		}
-	};
+		fetchCountries();
+		// setLoadedCountries(testCountryList);
+
+		return () => {
+			console.log('AccountPage fetchCountries CLEANUP');
+			_isMounted.current = false;
+		};
+	}, []);
 
 	useEffect(() => {
-		// if (!auth.userId) {
-		// 	return;
-		// }
 		if (!isAuthenticated) {
 			return;
 		}
+
+		_isMounted.current = true;
+
+		const fetchUser = async () => {
+			try {
+				const responseData = await sendRequest(
+					`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
+				);
+				const { result } = responseData;
+				console.log(result);
+				if (_isMounted.current) {
+					setLoadedUser(result);
+				}
+			} catch (err) {
+				// Error is handled by useHttpClient
+			}
+		};
+
 		fetchUser();
-		fetchCountries();
-		// setLoadedCountries(testCountryList);
-	}, [sendRequest, isAuthenticated, userId]);
+
+		return () => {
+			console.log('AccountPage fetchUser CLEANUP');
+			_isMounted.current = false;
+		};
+	}, [isAuthenticated, userId]);
 
 	const showProfileInfoHandler = () => setShowProfileInfo(!showProfileInfo);
 	const showCountrySet = () => setShowCountrySetter(!showCountrySetter);

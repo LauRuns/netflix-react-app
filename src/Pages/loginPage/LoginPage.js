@@ -88,7 +88,7 @@ export const LoginPage = () => {
 					user: { country }
 				} = responseData;
 
-				login(userId, token, country);
+				await login(userId, token, country);
 				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
@@ -107,7 +107,7 @@ export const LoginPage = () => {
 					formData
 				);
 
-				login(responseData.userId, responseData.token);
+				await login(responseData.userId, responseData.token);
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}
