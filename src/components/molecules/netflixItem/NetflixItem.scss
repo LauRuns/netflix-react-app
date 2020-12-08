@@ -60,6 +60,8 @@
 
 @media screen and (min-width: $breakpoint-md) {
 	.nf-item-card {
+		// max-width: 50%;
+
 		.nf-item-inner {
 			display: flex;
 			flex-direction: row;
@@ -73,7 +75,7 @@
 }
 
 @media screen and (min-width: $breakpoint-lg) {
-	.nf-item-inner {
+	.nf-item-card {
 		max-width: 30rem;
 	}
 }
