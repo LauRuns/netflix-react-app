@@ -8,6 +8,8 @@
 	display: flex;
 	overflow: hidden;
 
+	max-width: 100vw;
+
 	.slide-container {
 		display: flex;
 		flex-direction: row;
