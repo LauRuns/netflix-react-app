@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import './Tooltip.scss';
 
-export const Tooltip = ({ direction, delay, message, children }) => {
-	let timeout;
+export const Tooltip = ({ direction, message, children }) => {
 	const [active, setActive] = useState(false);
 
 	const showTip = () => {
-		timeout = setTimeout(() => {
-			setActive(true);
-		}, delay || 400);
+		setActive(true);
 	};
 
 	const hideTip = () => {
-		clearInterval(timeout);
 		setActive(false);
 	};
 
