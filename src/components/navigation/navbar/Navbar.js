@@ -20,7 +20,7 @@ export const Navbar = ({
 			<nav className="DesktopOnly">
 				<NavItems navItemsList={navItemsList} />
 				{isLoggedIn && (
-					<Tooltip direction="bottom" delay={200} message="Logout">
+					<Tooltip direction="bottom" message="Logout">
 						<div id="logout-icon-navbar">
 							<Icon icon="exitApp" size={32} color="#fff" onClick={onLogout} />
 						</div>
