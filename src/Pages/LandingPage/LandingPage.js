@@ -6,13 +6,14 @@ import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { Carousel, Slider } from '../../components/organisms';
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
+
 import './LandingPage.scss';
 
 // remove after development
 import { testitems } from '../../assets/testitems';
 
 export const LandingPage = () => {
-	const { country, token } = useAuthentication();
+	const { token } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	const [currentUserCountry, setCurrentUserCountry] = useState(null);
@@ -28,7 +29,6 @@ export const LandingPage = () => {
 
 	useEffect(() => {
 		_isMounted.current = true;
-		setCurrentUserCountry(country);
 
 		return () => {
 			_isMounted.current = false;
@@ -36,12 +36,10 @@ export const LandingPage = () => {
 	}, []);
 
 	useEffect(() => {
-		// const { country } = JSON.parse(localStorage.getItem('userData'));
-
+		const { country } = JSON.parse(localStorage.getItem('userData'));
+		setCurrentUserCountry(country);
 		const fetchLandingPageData = async () => {
 			try {
-				// console.time();
-
 				const responseData = await sendRequest(
 					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/home`,
 					'POST',
@@ -55,7 +53,6 @@ export const LandingPage = () => {
 				);
 
 				const { newResultsNL, newResultsOther, resultsNLD, resultsOTHER } = responseData;
-				console.log(responseData);
 
 				if (_isMounted.current) {
 					setNldNewContent(newResultsNL);
@@ -63,8 +60,6 @@ export const LandingPage = () => {
 					setExpOther(resultsOTHER);
 					setOtherNewContent(newResultsOther);
 				}
-
-				// console.timeEnd();
 			} catch (error) {
 				// Error is handled by useHttpClient
 			}
@@ -81,7 +76,7 @@ export const LandingPage = () => {
 			console.log('LandingPage CLEANUP');
 			_isMounted.current = false;
 		};
-	}, [country]);
+	}, []);
 
 	const onItemClickedHandler = (data) => {
 		setSelectedItem(data);
@@ -115,6 +110,7 @@ export const LandingPage = () => {
 					<NetflixItem item={selectedItem} />
 				</Modal>
 			)}
+			{/* {isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Fetching data..." />} */}
 
 			<div className="landingpage-container">
 				<div id="homepage-header" className="homepage__header">
