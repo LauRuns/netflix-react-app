@@ -59,11 +59,9 @@ export const AuthProvider = ({ children }) => {
 			const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
 			logoutTimer = setTimeout(logout, remainingTime);
 		} else {
-			console.log('Clear out timer');
 			clearTimeout(logoutTimer);
 		}
 		return () => {
-			console.log('Login Hook setTimer CLEANUP______________<<<<<');
 			isMounted.current = false;
 		};
 	}, [token, logout, tokenExpirationDate]);
@@ -79,7 +77,6 @@ export const AuthProvider = ({ children }) => {
 			);
 		}
 		return () => {
-			console.log('Login Hook checkLocalStorage CLEANUP_________<<<<<');
 			isMounted.current = false;
 		};
 	}, [login]);
