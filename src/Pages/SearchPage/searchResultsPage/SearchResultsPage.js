@@ -18,7 +18,7 @@ import {
 } from '../../../assets/testitems';
 
 export const SearchResultsPage = () => {
-	const { isLoading, error, sendRequest, clearError, cancelToken } = useHttpClient();
+	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const { token } = useAuthentication();
 	const isMounted = useRef(null);
 	const { search } = useLocation();
