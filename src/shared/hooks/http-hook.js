@@ -6,97 +6,128 @@ export const useHttpClient = () => {
 	const [error, setError] = useState();
 
 	// const activeHttpRequests = useRef([]);
-	const cancelToken = axios.CancelToken.source();
+	let signal;
+	let isMounted = useRef(null);
 
-	const sendRequest = useCallback(
-		async (url, method = 'GET', body = null, headers = {}) => {
-			setIsLoading(true);
-			// const httpAbortController = new AbortController();
-			// activeHttpRequests.current.push(httpAbortController);
+	useEffect(() => {
+		isMounted.current = true;
+		signal = axios.CancelToken.source();
 
-			// request interceptor
-			axios.interceptors.request.use(
-				(config) => {
-					/*
-                perform a task before the request is sent
-                - Setting the Authorization token on every request
-                */
-					return config;
-				},
-				(err) => {
-					// handle the error
-					setIsLoading(false);
-					throw err;
-				}
-			);
+		return () => {
+			// activeHttpRequests.current.forEach((abortControl) => abortControl.abort());
+			console.log('HTTP HOOK RUNNING CLEANUP');
+			signal.cancel('The request was cancelled!');
+			setIsLoading(false);
+			isMounted.current = false;
+		};
+	}, []);
 
-			// response interceptor
-			axios.interceptors.response.use(
-				(response) => {
-					// perform a task before the response is received
-					return response;
-				},
-				(err) => {
-					// handle the error
-					setIsLoading(false);
-					throw err;
-				}
-			);
+	const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
+		setIsLoading(true);
+		// const httpAbortController = new AbortController();
+		// activeHttpRequests.current.push(httpAbortController);
 
-			try {
+		// request interceptor
+		axios.interceptors.request.use(
+			(config) => {
+				/*
+            perform a task before the request is sent
+            - Setting the Authorization token on every request?
+            */
+				return config;
+			},
+			(err) => {
+				// handle the error
+				setIsLoading(false);
+				throw err;
+			}
+		);
+
+		// response interceptor
+		axios.interceptors.response.use(
+			(response) => {
+				// perform a task before the response is received
+				return response;
+			},
+			(err) => {
+				// handle the error
+				throw err;
+			}
+		);
+		try {
+			if (isMounted.current) {
 				const response = await axios({
 					method: method,
 					url: url,
 					data: body,
 					headers: headers,
-					// signal: httpAbortController.signal
-					cancelToken: cancelToken.token
+					cancelToken: signal.token
 				});
-
-				/*
-            Using Fetch
-            */
-				// const response = await fetch(url, {
-				// 	method,
-				// 	body,
-				// 	headers,
-				// 	signal: httpAbortController.signal
+				// .catch((err) => {
+				// 	if (axios.isCancel(err)) {
+				// 		console.log('Axios isCancel is thrown', err);
+				// 		setError(err.message);
+				// 		setIsLoading(false);
+				// 	}
+				// 	if (err.response) {
+				// 		console.log("Voldemort says there's an issue with your Response ", err.response.status);
+				// 	} else if (err.request) {
+				// 		console.log("Voldemort says there's an issue with your Request.");
+				// 	} else {
+				// 		console.log('Voldemort says ', err.message);
+				// 	}
 				// });
 
-				// const responseData = await response.json();
-
-				// activeHttpRequests.current = activeHttpRequests.current.filter(
-				// 	(reqCtrl) => reqCtrl !== httpAbortController
-				// );
-
-				const responseData = response.data;
-
-				// if (response.statusText !== 'OK') {
-				// 	throw new Error(response.message);
-				// }
+				let responseData;
+				if (response?.data) {
+					responseData = response.data;
+				}
 				setIsLoading(false);
 				return responseData;
-			} catch (err) {
-				// setError(err.messag); // <-- when using fetch as method
-				setError(err.response.data.message);
-				setIsLoading(false);
-				console.log('USE HTTP CLIENT ERROR_____>>', err);
-				// throw error;
 			}
-		},
-		[error, cancelToken]
-	);
+
+			/*
+            Using Fetch
+            */
+			// const response = await fetch(url, {
+			// 	method,
+			// 	body,
+			// 	headers,
+			// 	signal: httpAbortController.signal
+			// });
+
+			// const responseData = await response.json();
+
+			// activeHttpRequests.current = activeHttpRequests.current.filter(
+			// 	(reqCtrl) => reqCtrl !== httpAbortController
+			// );
+
+			// if (response.statusText !== 'OK') {
+			// 	throw new Error(response.message);
+			// }
+
+			// let responseData;
+			// if (response?.data) {
+			// 	console.log('There is response data!');
+
+			// 	responseData = response.data;
+			// }
+			// setIsLoading(false);
+			// return responseData;
+		} catch (err) {
+			// setError(err.message); // <-- when using fetch as method
+			// setError(err.response.data.message);
+			if (isMounted.current) {
+				setError(err.message);
+				setIsLoading(false);
+			}
+			throw err;
+		}
+	}, []);
 
 	const clearError = () => {
 		setError(null);
 	};
 
-	useEffect(() => {
-		return () => {
-			// activeHttpRequests.current.forEach((abortControl) => abortControl.abort());
-			cancelToken.cancel();
-		};
-	}, []);
-
-	return { isLoading, error, sendRequest, clearError, cancelToken };
+	return { isLoading, error, sendRequest, clearError };
 };
