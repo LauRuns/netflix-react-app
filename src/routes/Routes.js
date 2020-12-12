@@ -28,11 +28,7 @@ export const Routes = () => {
 			<PrivateRoute path="/search" exact>
 				<SearchPage />
 			</PrivateRoute>
-			<PrivateRoute
-				// path="/search?title=:title&start_year=:start_year&end_year=:end_year&content_type=:content_type&country=:countryId"
-				path="/search/results"
-				exact
-			>
+			<PrivateRoute path="/search/results" exact>
 				<SearchResultsPage />
 			</PrivateRoute>
 			<PrivateRoute path="/account/:userId" exact>
