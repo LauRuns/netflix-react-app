@@ -10,8 +10,6 @@ export const MainNavigation = () => {
 	const { isAuthenticated, userId, logout } = useAuthentication();
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
-	console.log('Mainnavigation__isAuthenticated__>>>______?', isAuthenticated);
-
 	const history = useHistory();
 
 	const openDrawerHandler = () => setDrawerIsOpen(true);
