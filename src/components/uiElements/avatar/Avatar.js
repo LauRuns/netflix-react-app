@@ -1,8 +1,9 @@
 import React from 'react';
-
+import defaultAvatar from '../../../assets/no-profile-picture.jpg';
 import './Avatar.scss';
 
 export const Avatar = (props) => {
+	console.log(props.image);
 	const onImgErrorHandler = () => {
 		console.log('User Avatar has an error');
 	};
@@ -11,7 +12,7 @@ export const Avatar = (props) => {
 		<div className={`avatar ${props.className}`} style={props.style}>
 			<img
 				onError={onImgErrorHandler}
-				src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`}
+				src={props.image ? `${process.env.REACT_APP_ASSET_URL}/${props.image}` : defaultAvatar}
 				alt={props.alt}
 				style={{ width: props.width, height: props.height }}
 			/>
