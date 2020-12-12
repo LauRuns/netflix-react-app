@@ -78,7 +78,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 					</div>
 					<div className="check-save">
 						<p>
-							{selectedCountry.country
+							{selectedCountry?.country
 								? `Save ${selectedCountry.country} as your new default country?`
 								: 'No country selected'}
 						</p>
