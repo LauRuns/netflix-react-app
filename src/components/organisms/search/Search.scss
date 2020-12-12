@@ -11,6 +11,11 @@
 	height: 6rem;
 	border-radius: 5px;
 
+	& > div {
+		display: flex;
+		flex-direction: row;
+	}
+
 	& > input {
 		font: inherit;
 		border: none;
@@ -32,7 +37,7 @@
 	}
 }
 
-@media (min-width: $breakpoint-sm) {
+@media (min-width: $breakpoint-md) {
 	.search-input {
 		flex-direction: row;
 		justify-content: flex-start;

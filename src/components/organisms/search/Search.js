@@ -55,10 +55,10 @@ export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdated
 
 	return (
 		<div className="search-input">
-			<Header md center>
+			<div>
 				<Icon icon="search" size={24} />
 				<h3>Search country</h3>
-			</Header>
+			</div>
 			<input
 				placeholder="Enter country name..."
 				ref={inputRef}
