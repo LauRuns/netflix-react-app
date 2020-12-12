@@ -28,7 +28,7 @@ export const SearchPage = () => {
 
 	useEffect(() => {
 		isMounted.current = true;
-		setCountryList(testCountryList); // <-- dev
+		// setCountryList(testCountryList); // <-- dev
 		// setSearchResults(testSearchResults);
 		// setSearchResults(singleSearchResult);
 		// setSearchResults(multipleSearchResult);
@@ -48,7 +48,7 @@ export const SearchPage = () => {
 			}
 		};
 
-		// loadCountries();
+		loadCountries();
 		return () => {
 			isMounted.current = false;
 		};
