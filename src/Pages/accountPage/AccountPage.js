@@ -228,7 +228,7 @@ export const AccountPage = () => {
 										: 'Set your country'}
 								</h3>
 								<IconButton
-									icon={showProfileInfo ? 'cancel' : 'edit'}
+									icon={showCountrySetter ? 'cancel' : 'edit'}
 									iconSize={20}
 									iconColor="#fff"
 									onClick={showCountrySet}
@@ -251,7 +251,7 @@ export const AccountPage = () => {
 							<div onClick={showImageUploader}>
 								<h3>Upload profile image</h3>
 								<IconButton
-									icon={showProfileInfo ? 'cancel' : 'edit'}
+									icon={showUploadImage ? 'cancel' : 'edit'}
 									iconSize={20}
 									iconColor="#fff"
 									onClick={showImageUploader}
@@ -274,7 +274,7 @@ export const AccountPage = () => {
 							<div onClick={showPasswordChange}>
 								<h3>Change password</h3>
 								<IconButton
-									icon={showProfileInfo ? 'cancel' : 'edit'}
+									icon={showChangePassword ? 'cancel' : 'edit'}
 									iconSize={20}
 									iconColor="#fff"
 									onClick={setShowChangePassword}
