@@ -37,6 +37,7 @@ export const LandingPage = () => {
 
 	useEffect(() => {
 		const { country } = JSON.parse(localStorage.getItem('userData'));
+
 		setCurrentUserCountry(country);
 		const fetchLandingPageData = async () => {
 			try {
@@ -120,7 +121,7 @@ export const LandingPage = () => {
 						<h3>Here is your new &amp; expiring data for {currentUserCountry.country}</h3>
 					)}
 				</div>
-				{!isLoading && (
+				{!isLoading && expOther && (
 					<div id="homepage-expiring" className="homepage__expiring">
 						<Header md>
 							{currentUserCountry && <h2>Expiring content for {currentUserCountry.country}:</h2>}
@@ -128,7 +129,7 @@ export const LandingPage = () => {
 						{expOther && <Slider slideList={expOther} onClick={onItemClickedHandler} />}
 					</div>
 				)}
-				{!isLoading && (
+				{!isLoading && expNLD && (
 					<div id="homepage-nld-expiring" className="homepage__nld__expiring">
 						<Header md>
 							<h2>Netherlands expiring content:</h2>
@@ -136,7 +137,7 @@ export const LandingPage = () => {
 						{expNLD && <Slider slideList={expNLD} onClick={onItemClickedHandler} />}
 					</div>
 				)}
-				{!isLoading && (
+				{!isLoading && nldNewContent && (
 					<div id="homepage-nld-new-content" className="homepage__nld__new_content">
 						<Header md>
 							<h2>New content for the Netherlands:</h2>
@@ -144,7 +145,7 @@ export const LandingPage = () => {
 						{nldNewContent && <Slider slideList={nldNewContent} onClick={onItemClickedHandler} />}
 					</div>
 				)}
-				{!isLoading && (
+				{!isLoading && otherNewContent && (
 					<div id="homepage-testing-carousel" className="homepage__testing__carousel">
 						<Header md>
 							{currentUserCountry && <h2>New content for {currentUserCountry.country}:</h2>}
