@@ -3,6 +3,11 @@ import React, { useState, useContext, createContext, useCallback, useEffect, use
 const AuthContext = createContext();
 let logoutTimer;
 
+const defaultCountry = {
+	country: 'Netherlands',
+	countryId: 67
+};
+
 export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(null);
 	const [token, setToken] = useState(null);
@@ -21,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 		};
 	}, []);
 
-	const login = useCallback((uid, token, country, expirationDate) => {
+	const login = useCallback((uid, token, country = defaultCountry, expirationDate) => {
 		setToken(token);
 		setUserId(uid);
 		setUserCountry(country);
