@@ -166,7 +166,7 @@ export const AccountPage = () => {
 						</div>
 
 						<div id="account-avatar" className="account__avatar">
-							{loadedUser.image ? (
+							{loadedUser && (
 								<Avatar
 									image={loadedUser.image}
 									alt={loadedUser.name || 'Default img'}
@@ -175,8 +175,6 @@ export const AccountPage = () => {
 									height="200px"
 									className="user-item__image"
 								/>
-							) : (
-								<p>No image data</p>
 							)}
 						</div>
 
@@ -185,7 +183,7 @@ export const AccountPage = () => {
 								<p>NAME: {loadedUser.name}</p>
 								<p>EMAIL: {loadedUser.email}</p>
 								<p>ID: {loadedUser.id}</p>
-								<p>SET COUNTRY: {loadedUser.country.country}</p>
+								<p>SET COUNTRY: {loadedUser?.country?.country}</p>
 								<p>LAST UPDATED AT: {new Date(loadedUser.updatedAt).toDateString()}</p>
 							</div>
 							<Button type="button" inverse onClick={displayInfoHandler}>
