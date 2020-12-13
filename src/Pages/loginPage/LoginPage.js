@@ -41,8 +41,7 @@ export const LoginPage = () => {
 			setFormData(
 				{
 					...formState.inputs,
-					name: undefined,
-					image: undefined
+					name: undefined
 				},
 				formState.inputs.email.isValid && formState.inputs.password.isValid
 			);
@@ -52,10 +51,6 @@ export const LoginPage = () => {
 					...formState.inputs,
 					name: {
 						value: '',
-						isValid: false
-					},
-					image: {
-						value: null,
 						isValid: false
 					}
 				},
@@ -99,7 +94,6 @@ export const LoginPage = () => {
 				formData.append('email', formState.inputs.email.value);
 				formData.append('name', formState.inputs.name.value);
 				formData.append('password', formState.inputs.password.value);
-				formData.append('image', formState.inputs.image.value);
 
 				const responseData = await sendRequest(
 					`${process.env.REACT_APP_CONNECTION_STRING}/users/signup`,
@@ -108,6 +102,7 @@ export const LoginPage = () => {
 				);
 
 				await login(responseData.userId, responseData.token);
+				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}
