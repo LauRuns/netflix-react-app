@@ -5,6 +5,7 @@ import { CountrySetter, PasswordChange, ProfileInfo, UploadImage } from './accou
 import { CountryList } from './countryList/CountryList';
 import { Slider } from './slider/Slider';
 import { Search } from './search/Search';
+import { ExpContentList } from './expContentList/ExpContentList';
 
 export {
 	SearchForm,
@@ -16,5 +17,6 @@ export {
 	UploadImage,
 	CountryList,
 	Slider,
-	Search
+	Search,
+	ExpContentList
 };
