@@ -6,6 +6,7 @@ import { NetflixItem } from './netflixItem/NetflixItem';
 import { Select } from './select/Select';
 import { NavButtons } from './navButtons/NavButtons';
 import { ExpItem } from './expItem/ExpItem';
+import { NewItem } from './newItem/NewItem';
 
 export {
 	TextInput,
@@ -15,5 +16,6 @@ export {
 	NetflixItem,
 	Select,
 	NavButtons,
-	ExpItem
+	ExpItem,
+	NewItem
 };
