@@ -17,7 +17,6 @@ export const ExpItem = ({ netflixid, title, itemClick }) => {
 						netflixid: netflixid
 					}
 				});
-				console.log(response[0]);
 				setExpItem(response[0]);
 			};
 			fetchExpItem();
@@ -35,7 +34,7 @@ export const ExpItem = ({ netflixid, title, itemClick }) => {
 					onClick={() => itemClick(expItem)}
 					cardStyles={{ display: 'inline-block', margin: '0.5rem' }}
 				>
-					<ImageContainer src={expItem?.img} imgSize={24} />
+					<ImageContainer src={expItem?.img} />
 				</Card>
 			)}
 		</>
