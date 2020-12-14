@@ -1,0 +1,7 @@
+@import '../../../styles/2-variables/_variables-index';
+@import '../../../styles/5-globals/_globals-index';
+
+.nav-buttons {
+	@extend .center;
+	padding: 0.5rem;
+}
