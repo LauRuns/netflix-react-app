@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import { useNetflixClient } from '../../shared/hooks/netflix-hook';
 import { IconButton, Modal, ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
-import { Carousel, Slider } from '../../components/organisms';
+import { Carousel, Slider, ExpContentList } from '../../components/organisms';
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
 
 import './LandingPage.scss';
-
-// remove after development
-import { testitems } from '../../assets/testitems';
 
 export const LandingPage = () => {
 	const { token } = useAuthentication();
@@ -19,8 +17,6 @@ export const LandingPage = () => {
 	const [currentUserCountry, setCurrentUserCountry] = useState(null);
 	const [nldNewContent, setNldNewContent] = useState(null);
 	const [otherNewContent, setOtherNewContent] = useState(null);
-	const [expNLD, setExpNLD] = useState(null);
-	const [expOther, setExpOther] = useState(null);
 
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
@@ -37,7 +33,6 @@ export const LandingPage = () => {
 
 	useEffect(() => {
 		const { country } = JSON.parse(localStorage.getItem('userData'));
-
 		setCurrentUserCountry(country);
 		const fetchLandingPageData = async () => {
 			try {
@@ -57,8 +52,6 @@ export const LandingPage = () => {
 
 				if (_isMounted.current) {
 					setNldNewContent(newResultsNL);
-					setExpNLD(resultsNLD);
-					setExpOther(resultsOTHER);
 					setOtherNewContent(newResultsOther);
 				}
 			} catch (error) {
@@ -80,6 +73,7 @@ export const LandingPage = () => {
 	}, []);
 
 	const onItemClickedHandler = (data) => {
+		console.log('onItemClickedHandler', data);
 		setSelectedItem(data);
 		openModal();
 	};
@@ -121,22 +115,26 @@ export const LandingPage = () => {
 						<h3>Here is your new &amp; expiring data for {currentUserCountry.country}</h3>
 					)}
 				</div>
-				{!isLoading && expOther && (
-					<div id="homepage-expiring" className="homepage__expiring">
-						<Header md>
-							{currentUserCountry && <h2>Expiring content for {currentUserCountry.country}:</h2>}
-						</Header>
-						{expOther && <Slider slideList={expOther} onClick={onItemClickedHandler} />}
-					</div>
-				)}
-				{!isLoading && expNLD && (
-					<div id="homepage-nld-expiring" className="homepage__nld__expiring">
-						<Header md>
-							<h2>Netherlands expiring content:</h2>
-						</Header>
-						{expNLD && <Slider slideList={expNLD} onClick={onItemClickedHandler} />}
-					</div>
-				)}
+
+				<div id="homepage-expiring" className="homepage__expiring">
+					<Header md>
+						{currentUserCountry && <h2>Expiring content for {currentUserCountry.country}:</h2>}
+					</Header>
+					{currentUserCountry && (
+						<ExpContentList
+							countryIdCode={`${currentUserCountry.countryId}`}
+							itemClick={onItemClickedHandler}
+						/>
+					)}
+				</div>
+
+				<div id="homepage-nld-expiring" className="homepage__nld__expiring">
+					<Header md>
+						<h2>Netherlands expiring content:</h2>
+					</Header>
+					<ExpContentList countryIdCode="67" itemClick={onItemClickedHandler} />
+				</div>
+
 				{!isLoading && nldNewContent && (
 					<div id="homepage-nld-new-content" className="homepage__nld__new_content">
 						<Header md>
