@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { NavButtons, ExpItem } from '../../molecules';
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
 import './ExpContentList';
+import { LoadingSpinner } from '../../uiElements';
 
 export const ExpContentList = ({ countryIdCode, itemClick }) => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
@@ -20,7 +21,6 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 						limit: 6
 					}
 				});
-				console.log(response);
 				setIdList(response);
 			};
 			fetchIds();
@@ -40,7 +40,9 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 
 	return (
 		<>
-			{!isLoading && (
+			{isLoading ? (
+				<LoadingSpinner center loadingSpinnerMessage="Fetching expiting data..." />
+			) : (
 				<div className="exp-content-list">
 					<NavButtons onNext={onLoadNext} onPrevious={onLoadPrevious} disabled={offset === 0} />
 					<div>
