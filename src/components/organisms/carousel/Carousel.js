@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -13,10 +13,12 @@ import 'swiper/components/scrollbar/scrollbar.scss';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
 export const Carousel = ({ list, itemClicked }) => {
+	// const []
+
 	return (
 		<Swiper
 			spaceBetween={10}
-			slidesPerView={3}
+			slidesPerView={4}
 			navigation
 			pagination={{ clickable: true }}
 			scrollbar={{ draggable: true }}
