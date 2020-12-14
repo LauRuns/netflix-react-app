@@ -1,0 +1,7 @@
+@import '../../../styles/2-variables/_variables-index';
+@import '../../../styles/5-globals/_globals-index';
+
+.exp-content-list {
+	@extend .center-column;
+	background-color: mediumorchid;
+}
