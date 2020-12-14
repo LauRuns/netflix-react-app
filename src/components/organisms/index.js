@@ -6,6 +6,7 @@ import { CountryList } from './countryList/CountryList';
 import { Slider } from './slider/Slider';
 import { Search } from './search/Search';
 import { ExpContentList } from './expContentList/ExpContentList';
+import { NewContentList } from './newContentList/NewContentList';
 
 export {
 	SearchForm,
@@ -18,5 +19,6 @@ export {
 	CountryList,
 	Slider,
 	Search,
-	ExpContentList
+	ExpContentList,
+	NewContentList
 };
