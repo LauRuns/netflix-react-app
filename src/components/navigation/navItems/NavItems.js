@@ -1,12 +1,9 @@
 import React from 'react';
 import { NavItem } from '../navItem/NavItem';
-import { useAuthentication } from '../../../shared/hooks/authentication-hook';
 
 import './NavItems.scss';
 
-export const NavItems = ({ navItemsList }) => {
-	const { isAuthenticated } = useAuthentication();
-
+export const NavItems = ({ navItemsList, isAuthenticated }) => {
 	return (
 		<ul className="navigation-items-list">
 			{!isAuthenticated && <NavItem link="/login">Login</NavItem>}

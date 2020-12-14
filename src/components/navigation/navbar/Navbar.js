@@ -18,7 +18,7 @@ export const Navbar = ({
 		<header className="Navbar">
 			<Logo logoSource={NetflixHexagon} altLogo="Hexagon" size={32} onClick={onLogoNavigate} />
 			<nav className="DesktopOnly">
-				<NavItems navItemsList={navItemsList} />
+				<NavItems navItemsList={navItemsList} isAuthenticated={isLoggedIn} />
 				{isLoggedIn && (
 					<Tooltip direction="bottom" message="Logout">
 						<div id="logout-icon-navbar">
