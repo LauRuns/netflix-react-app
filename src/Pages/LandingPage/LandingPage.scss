@@ -14,30 +14,32 @@
 
 	grid-template-areas:
 		'homepageheader'
-		'expiring'
-		'expiring-nld'
+		'new-current'
 		'new-nld'
-		'test';
+		'expiring-current'
+		'expiring-nld';
 
 	@media (min-width: $breakpoint-sm) {
 		grid-template-columns: repeat(12, 1fr);
 
 		grid-template-areas:
 			'. homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader .'
-			'. expiring expiring expiring expiring expiring expiring expiring expiring expiring expiring  .'
-			'. expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld  .'
-			'. new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld  .'
-			'. test test test test test test test test test test  .';
+			'. new-current new-current new-current new-current new-current new-current new-current new-current new-current new-current .'
+			'. new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld new-nld .'
+			'. expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current .'
+			'. expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .';
 	}
 
 	@media (min-width: $breakpoint-md) {
 	}
 
-	@media (min-width: $breakpoint-lg) {
+	@media (min-width: $breakpoint-xl) {
+		grid-template-columns: repeat(12, 1fr);
+
 		grid-template-areas:
 			'. homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader .'
-			'. expiring expiring expiring expiring expiring expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .'
-			'. new-nld new-nld new-nld new-nld new-nld test test test test test .';
+			'. new-current new-current new-current new-current new-current new-nld new-nld new-nld new-nld new-nld .'
+			'. expiring-current expiring-current expiring-current expiring-current expiring-current expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .';
 	}
 }
 
@@ -45,17 +47,17 @@
 #homepage-header {
 	grid-area: homepageheader;
 }
-#homepage-expiring {
-	grid-area: expiring;
+#homepage-new-current {
+	grid-area: new-current;
+}
+#homepage-nld-new {
+	grid-area: new-nld;
+}
+#homepage-current-expiring {
+	grid-area: expiring-current;
 }
 #homepage-nld-expiring {
 	grid-area: expiring-nld;
-}
-#homepage-nld-new-content {
-	grid-area: new-nld;
-}
-#homepage-testing-carousel {
-	grid-area: test;
 }
 
 /* Classes */
@@ -89,25 +91,18 @@
 	@extend .homepage__base;
 }
 
-.homepage__expiring {
-	@extend .homepage__base;
-}
-
-.homepage__nld__expiring {
+.homepage__new__current {
 	@extend .homepage__base;
 }
 
 .homepage__nld__new_content {
 	@extend .homepage__base;
-
-	@media (min-width: $breakpoint-md) {
-		max-width: 100%;
-	}
 }
 
-.homepage__testing__carousel {
+.homepage__current__expiring {
 	@extend .homepage__base;
-	@media (min-width: $breakpoint-md) {
-		max-width: 100%;
-	}
+}
+
+.homepage__nld__expiring {
+	@extend .homepage__base;
 }
