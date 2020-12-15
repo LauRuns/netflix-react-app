@@ -1,35 +1,44 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
 
-import { useHttpClient } from '../../shared/hooks/http-hook';
+import { useNetflixClient } from '../../shared/hooks/netflix-hook';
 import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { Search, CountryList } from '../../components/organisms';
 
-import { testCountryList } from '../../assets/testitems';
 import './CountriesPage.scss';
 
 export const CountriesPage = () => {
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
+	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const isMounted = useRef(null);
-	const history = useHistory();
 
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
+
+	let countryList = [];
 
 	useEffect(() => {
 		isMounted.current = true;
 		const fetchCountries = async () => {
 			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
+				const response = await fetchNetflixData({
+					urlEndpoint: 'countries'
+				});
 				if (isMounted.current) {
-					setLoadedCountries(responseData.results);
-					setCountryListData(responseData.results);
+					response.forEach((element) => {
+						const newEl = {
+							country: element.country.trim(),
+							countryId: element.id,
+							countrycode: element.countrycode
+						};
+						countryList.push(newEl);
+					});
+					if (isMounted.current) {
+						setLoadedCountries(countryList);
+						setCountryListData(countryList);
+					}
 				}
 			} catch (err) {
-				// Error is handled by useHttpClient
+				// Error is handled by useNetflixClient
 			}
 		};
 		fetchCountries();
@@ -44,11 +53,6 @@ export const CountriesPage = () => {
 		} else {
 			setCountryListData(loadedCountries);
 		}
-	};
-
-	const onCountryClickedHandler = (data) => {
-		const { name, countryId } = data;
-		history.push('/countryinfo', { name, countryId });
 	};
 
 	return (
@@ -75,9 +79,7 @@ export const CountriesPage = () => {
 						</div>
 					) : null}
 					<div id="country-page-list-countries" className="country-page__list-country">
-						{loadedCountries && countryListData && (
-							<CountryList onItemClicked={onCountryClickedHandler} items={countryListData} />
-						)}
+						{loadedCountries && countryListData && <CountryList items={countryListData} />}
 					</div>
 				</div>
 			)}
