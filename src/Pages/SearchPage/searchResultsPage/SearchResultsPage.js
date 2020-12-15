@@ -11,11 +11,10 @@ import './SearchResultsPage.scss';
 
 export const SearchResultsPage = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
-	const [offset, setOffset] = useState(0);
-
-	const isMounted = useRef(null);
 	const { search } = useLocation();
 	const { title, start_year, end_year, content_type, country } = queryString.parse(search);
+
+	const isMounted = useRef(null);
 	const history = useHistory();
 
 	const [searchResults, setSearchResults] = useState();
@@ -24,10 +23,9 @@ export const SearchResultsPage = () => {
 
 	let searchParams = {
 		query: title,
-		offset,
+		offset: 0,
 		start_year,
 		orderby: 'date',
-		limit: 6,
 		countrylist: `${country}`,
 		audio: 'english',
 		type: content_type,
