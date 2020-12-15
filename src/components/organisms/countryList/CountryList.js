@@ -3,7 +3,7 @@ import React from 'react';
 import { Chip, Card } from '../../uiElements';
 import './CountryList.scss';
 
-export const CountryList = ({ items, onItemClicked }) => {
+export const CountryList = ({ items }) => {
 	if (items.length === 0) {
 		return (
 			<Card>
