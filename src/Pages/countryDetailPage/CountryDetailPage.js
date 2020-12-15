@@ -1,65 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import { IconButton, Modal, ErrorModal, LoadingSpinner } from '../../components/uiElements';
+import { IconButton, Modal } from '../../components/uiElements';
 import { IconNavItem } from '../../components/navigation';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
-import { Slider } from '../../components/organisms';
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
-
+import { NewContentList, ExpContentList } from '../../components/organisms';
 import './CountryDetailPage.scss';
 
-// remove after development
-// import { testitems } from '../../assets/testitems';
-
 export const CountryDetailPage = () => {
-	const { token } = useAuthentication();
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const isMounted = useRef(null);
-
-	const [expCountryData, setExpCountryData] = useState(null);
-	const [newCountryData, setNewCountryData] = useState(null);
-
 	const [showDetails, setShowDetails] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
 
 	const { countryId, countryName } = useParams();
-
-	useEffect(() => {
-		isMounted.current = true;
-		const fetchCountryNetflixData = async () => {
-			try {
-				console.time();
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search/countrydata`,
-					'POST',
-					JSON.stringify({ countryId: countryId, offset: 0, limit: 50 }),
-					{
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				);
-
-				const { expResults, newResults } = responseData;
-				if (isMounted.current) {
-					setNewCountryData(newResults);
-					setExpCountryData(expResults);
-				}
-				console.timeEnd();
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
-		fetchCountryNetflixData();
-		// setNewCountryData(testitems);
-		// setExpCountryData(testitems);
-		return () => {
-			console.log('CountryDetailPage CLEANUP');
-			isMounted.current = false;
-		};
-	}, []);
 
 	const openModal = () => setShowDetails(true);
 	const closeModal = () => setShowDetails(false);
@@ -71,7 +24,6 @@ export const CountryDetailPage = () => {
 
 	return (
 		<React.Fragment>
-			<ErrorModal error={error} onClear={clearError} />
 			{selectedItem && (
 				<Modal
 					show={showDetails}
@@ -93,7 +45,6 @@ export const CountryDetailPage = () => {
 					<NetflixItem item={selectedItem} />
 				</Modal>
 			)}
-			{isLoading && <LoadingSpinner loadingSpinnerMessage="Bussy fetching data..." asOverlay />}
 			<div className="country-detail-page-container">
 				<div id="country-detail-page-header" className="dp__header">
 					<Header center lg>
@@ -108,18 +59,14 @@ export const CountryDetailPage = () => {
 					<Header md>
 						<h2>New content for {countryName || '...'}</h2>
 					</Header>
-					{!isLoading && newCountryData && (
-						<Slider slideList={newCountryData} onClick={detailItemClicked} />
-					)}
+					<NewContentList countryIdCode={`${countryId}`} itemClick={detailItemClicked} />
 				</div>
 
 				<div id="country-detail-page-expiringcontent" className="dp__expcontent">
 					<Header md>
 						<h2>Expiring content for {countryName || '...'}</h2>
 					</Header>
-					{!isLoading && expCountryData && (
-						<Slider slideList={expCountryData} onClick={detailItemClicked} />
-					)}
+					<ExpContentList countryIdCode={`${countryId}`} itemClick={detailItemClicked} />
 				</div>
 			</div>
 		</React.Fragment>
