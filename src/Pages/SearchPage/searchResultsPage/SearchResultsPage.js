@@ -3,23 +3,16 @@ import { useLocation, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
 
 import { SearchFormResults } from '../../../components/organisms';
-import { useHttpClient } from '../../../shared/hooks/http-hook';
-import { useAuthentication } from '../../../shared/hooks/authentication-hook';
+import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
 import { Header } from '../../../components/atoms';
 import { LoadingSpinner, ErrorModal, IconButton, Modal } from '../../../components/uiElements';
 import { NetflixItem } from '../../../components/molecules';
 import './SearchResultsPage.scss';
 
-// remove after development
-import {
-	testSearchResults,
-	singleSearchResult,
-	multipleSearchResult
-} from '../../../assets/testitems';
-
 export const SearchResultsPage = () => {
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const { token } = useAuthentication();
+	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
+	const [offset, setOffset] = useState(0);
+
 	const isMounted = useRef(null);
 	const { search } = useLocation();
 	const { title, start_year, end_year, content_type, country } = queryString.parse(search);
@@ -29,37 +22,33 @@ export const SearchResultsPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
 
+	let searchParams = {
+		query: title,
+		offset,
+		start_year,
+		orderby: 'date',
+		limit: 6,
+		countrylist: `${country}`,
+		audio: 'english',
+		type: content_type,
+		end_year
+	};
+
 	useEffect(() => {
 		isMounted.current = true;
 		const fetchSearchData = async () => {
 			try {
-				const searchResponseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/search`,
-					'POST',
-					JSON.stringify({
-						query: title,
-						countrylist: country,
-						start_year: start_year,
-						end_year: end_year,
-						type: content_type
-					}),
-					{
-						'Content-Type': 'application/json',
-						Authorization: `Bearer ${token}`
-					}
-				);
-				const { results } = searchResponseData;
-				console.log('Responsedata Search results____:', results);
-				if (isMounted.current) {
-					setSearchResults(results);
-				}
+				const searchResponse = await fetchNetflixData({
+					urlEndpoint: 'search',
+					params: searchParams
+				});
+				if (isMounted.current) setSearchResults(searchResponse);
 			} catch (err) {
-				// Error is handled by useHttpClient
+				// Error is handled by useNetflixClient
 			}
 		};
 
 		fetchSearchData();
-		// setSearchResults(testSearchResults); // <-- dev
 		return () => {
 			isMounted.current = false;
 		};
@@ -106,7 +95,6 @@ export const SearchResultsPage = () => {
 			{!isLoading && (
 				<div className="search-results-page">
 					<Header
-						style={{ backgroundColor: 'green' }}
 						center
 						md
 						headerActions={
@@ -115,7 +103,7 @@ export const SearchResultsPage = () => {
 							</IconButton>
 						}
 					>
-						{searchResults && <h2>Results for query: {title}</h2>}
+						{searchResults && <h2>Results for query: '{title}'</h2>}
 					</Header>
 					{searchResults && (
 						<div className="search-results-page-items">
