@@ -90,12 +90,12 @@ export const AuthProvider = ({ children }) => {
 		<AuthContext.Provider
 			value={{
 				isAuthenticated: isAuthenticated || localStorage.getItem('userData') ? true : false,
-				token: token,
-				userId: userId,
+				token,
+				userId,
 				country: userCountry,
-				login: login,
-				logout: logout,
-				updateCountry: updateCountry
+				login,
+				logout,
+				updateCountry
 			}}
 		>
 			{children}
