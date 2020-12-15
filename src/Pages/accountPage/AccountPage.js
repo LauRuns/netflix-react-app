@@ -21,9 +21,6 @@ import {
 
 import './AccountPage.scss';
 
-// use for development:
-import { testCountryList } from '../../assets/testitems';
-
 export const AccountPage = () => {
 	const { isAuthenticated, updateCountry } = useAuthentication();
 	const _isMounted = useRef(null);
