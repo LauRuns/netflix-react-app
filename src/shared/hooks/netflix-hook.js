@@ -27,8 +27,6 @@ export const useNetflixClient = () => {
 
 	const fetchNetflixData = useCallback(
 		async ({ urlEndpoint, method = 'GET', body = null, params }) => {
-			console.log('urlEndpoint', urlEndpoint);
-			console.log('params', params);
 			setIsLoading(true);
 
 			axios.interceptors.request.use(
@@ -50,32 +48,33 @@ export const useNetflixClient = () => {
 			);
 
 			try {
-				if (_isMounted.current) {
-					const response = await axios({
-						method: method,
-						url: `https://unogsng.p.rapidapi.com/${urlEndpoint}`,
-						data: body,
-						headers: headersConfig,
-						params: params,
-						cancelToken: cancelToken.token
-					}).catch((e) => {
-						if (axios.isCancel(e)) {
-							console.log('Axios CX on Netflix request');
-							setError(e.message);
-						}
-						if (e.response) {
-							console.log('There is an issue with the response', e);
-						} else if (e.request) {
-							console.log('There is an error with the request', e);
-						} else {
-							console.log('The colonel says: ', e.message);
-						}
-					});
+				const response = await axios({
+					method: method,
+					url: `https://unogsng.p.rapidapi.com/${urlEndpoint}`,
+					data: body,
+					headers: headersConfig,
+					params: params,
+					cancelToken: cancelToken.token
+				}).catch((e) => {
+					if (axios.isCancel(e)) {
+						console.log('Axios CX on Netflix request');
+						setError(e.message);
+					}
+					if (e.response) {
+						console.log('There is an issue with the response', e);
+						setError(e.message);
+					} else if (e.request) {
+						console.log('There is an error with the request', e);
+					} else {
+						console.log('The colonel says: ', e.message);
+					}
+				});
 
-					let responseData = response.data.results;
-					// if (response?.data) {
-					// 	responseData = response.data;
-					// }
+				if (_isMounted.current) {
+					let responseData;
+					if (response?.data) {
+						responseData = response.data.results;
+					}
 					setIsLoading(false);
 					return responseData;
 				}
