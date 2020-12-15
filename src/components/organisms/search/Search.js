@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { Icon, Header } from '../../atoms';
+import { Icon } from '../../atoms';
 import './Search.scss';
 
 export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountryData }) => {
