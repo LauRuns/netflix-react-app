@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { NavButtons, ExpItem } from '../../molecules';
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
-import './ExpContentList';
-import { LoadingSpinner } from '../../uiElements';
+import { LoadingSpinner, ErrorModal } from '../../uiElements';
+import './ExpContentList.scss';
 
 export const ExpContentList = ({ countryIdCode, itemClick }) => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
@@ -40,6 +40,7 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 
 	return (
 		<>
+			<ErrorModal error={error} onClear={clearError} />
 			{isLoading ? (
 				<LoadingSpinner center loadingSpinnerMessage="Fetching expiting data..." />
 			) : (

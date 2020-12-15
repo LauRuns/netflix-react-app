@@ -3,5 +3,8 @@
 
 .exp-content-list {
 	@extend .center-column;
-	background-color: mediumorchid;
+	& > div {
+		@extend .center;
+		flex-wrap: wrap;
+	}
 }
