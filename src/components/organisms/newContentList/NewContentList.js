@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { NavButtons, NewItem } from '../../molecules';
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
-
+import { LoadingSpinner, ErrorModal } from '../../uiElements';
 import './NewContentList.scss';
-import { LoadingSpinner } from '../../uiElements';
 
 export const NewContentList = ({ countryIdCode, itemClick }) => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const [offset, setOffset] = useState(0);
 	const [newItems, setNewItems] = useState(0);
+
+	const isMounted = useRef(null);
 
 	let searchParams = {
 		newdate: new Date('2015-01-01'),
@@ -23,37 +24,35 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 	};
 
 	useEffect(() => {
+		isMounted.current = true;
 		try {
-			console.log('fetchNewContent');
-
 			const fetchNewContent = async () => {
 				const response = await fetchNetflixData({
 					urlEndpoint: 'search',
 					params: searchParams
 				});
-
-				console.log('response', response);
-				console.log('fetchNewContent finished');
-				setNewItems(response);
+				if (isMounted.current) setNewItems(response);
 			};
-
 			fetchNewContent();
 		} catch (error) {
 			console.log(error);
 		}
+
+		return () => {
+			isMounted.current = false;
+		};
 	}, [offset]);
 
 	const onLoadNext = () => {
-		console.log('onLoadNewNext');
 		setOffset(offset + 6);
 	};
 	const onLoadPrevious = () => {
-		console.log('onLoadNewPrevious');
 		if (offset !== 0) setOffset(offset - 6);
 	};
 
 	return (
 		<>
+			<ErrorModal error={error} onClear={clearError} />
 			{isLoading ? (
 				<LoadingSpinner center loadingSpinnerMessage="Fetching new data..." />
 			) : (
