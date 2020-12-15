@@ -1,53 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
+import { useNetflixClient } from '../../shared/hooks/netflix-hook';
 import { Header } from '../../components/atoms';
 import { SearchForm } from '../../components/organisms';
 import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
 
-// remove after development
-import {
-	testCountryList
-	// testSearchResults,
-	// singleSearchResult,
-	// multipleSearchResult
-} from '../../assets/testitems';
-
 import './SearchPage.scss';
 
 export const SearchPage = () => {
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const { token } = useAuthentication();
-	const isMounted = useRef(null);
-
+	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const [countryList, setCountryList] = useState();
 
+	const isMounted = useRef(null);
 	const history = useHistory();
+
+	let loadedCountries = [];
 
 	useEffect(() => {
 		isMounted.current = true;
-		// setCountryList(testCountryList); // <-- dev
-		// setSearchResults(testSearchResults);
-		// setSearchResults(singleSearchResult);
-		// setSearchResults(multipleSearchResult);
 
 		const loadCountries = async () => {
 			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
-				const { results } = responseData;
-				console.log('Loaded country data____:', results);
+				const response = await fetchNetflixData({
+					urlEndpoint: 'countries'
+				});
 				if (isMounted.current) {
-					setCountryList(results);
+					response.forEach((element) => {
+						const newEl = {
+							country: element.country.trim(),
+							countryId: element.id,
+							countrycode: element.countrycode
+						};
+						loadedCountries.push(newEl);
+					});
+					setCountryList(loadedCountries);
 				}
 			} catch (err) {
-				// Error is handled by useHttpClient
+				// Error is handled by useNetflixClient
 			}
 		};
-
 		loadCountries();
 		return () => {
 			isMounted.current = false;
