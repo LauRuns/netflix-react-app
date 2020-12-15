@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { Header } from '../../atoms';
-import { NetflixItem } from '../../molecules';
-import { Slider } from '../../organisms';
+import { NetflixItem, NewItem } from '../../molecules';
 
 import './SearchFormResults.scss';
 
@@ -13,7 +12,12 @@ export const SearchFormResults = ({ resultData, header, onClick }) => {
 				<Header md center>
 					<h2>{header}</h2>
 				</Header>
-				<Slider slideList={resultData} onClick={onClick} />
+				<div className="search-form-results-items">
+					{resultData &&
+						resultData.map((item, index) => {
+							return <NewItem key={index} item={item} itemClick={() => onClick(item)} />;
+						})}
+				</div>
 			</div>
 		);
 	} else {
