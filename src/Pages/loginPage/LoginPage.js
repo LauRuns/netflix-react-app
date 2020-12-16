@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import {
@@ -11,11 +11,13 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import { Button, Card, LoadingSpinner, ErrorModal } from '../../components/uiElements';
 import { Input } from '../../components/formElements/input/Input';
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
+import { UserContext } from '../../shared/context/user-context';
 
 import './LoginPage.scss';
 
 export const LoginPage = () => {
 	const { login } = useAuthentication();
+	const { setNewCurrentUser } = useContext(UserContext);
 
 	const [isLoginMode, setIsLoginMode] = useState(true);
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -82,8 +84,9 @@ export const LoginPage = () => {
 					token,
 					user: { country }
 				} = responseData;
-
+				console.log(responseData);
 				await login(userId, token, country);
+				await setNewCurrentUser(responseData.user);
 				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
