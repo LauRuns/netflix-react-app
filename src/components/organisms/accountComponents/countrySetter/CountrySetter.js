@@ -1,59 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
-import { useHttpClient } from '../../../../shared/hooks/http-hook';
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
+import { useContextUser } from '../../../../shared/context/user-context';
+import { useNetflixClient } from '../../../../shared/hooks/netflix-hook';
 
 import './CountrySetter.scss';
 
-export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) => {
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const { token, userId } = useAuthentication();
+export const CountrySetter = () => {
+	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
+	const { currentUser, updateUser } = useContextUser();
 
-	const [selectedCountry, setSelectedCountry] = useState(userData.country || null);
+	const [countryList, setCountryList] = useState(null);
+	const [selectedCountry, setSelectedCountry] = useState(null);
 
-	if (!countryData) {
-		return (
-			<div className="loading-countries">
-				<LoadingSpinner loadingSpinnerMessage="Loading country data..." />
-			</div>
-		);
-	}
+	const isMounted = useRef(null);
+	let countryData = [];
+
+	useEffect(() => {
+		isMounted.current = true;
+		const fetchCountries = async () => {
+			try {
+				const response = await fetchNetflixData({
+					urlEndpoint: 'countries'
+				});
+				if (isMounted.current) {
+					response.forEach((element) => {
+						const newEl = {
+							country: element.country.trim(),
+							countryId: element.id,
+							countrycode: element.countrycode
+						};
+						countryData.push(newEl);
+					});
+					if (isMounted.current) {
+						setCountryList(countryData);
+					}
+				}
+			} catch (err) {
+				// Error is handled by useNetflixClient
+			}
+		};
+		fetchCountries();
+		return () => {
+			isMounted.current = false;
+		};
+	}, []);
 
 	const countrySelectHandler = (e) => {
 		setSelectedCountry(e);
 	};
 
-	const userUpdateCountryHandler = async (event) => {
+	const updateUserCountryHandler = async (event) => {
 		event.preventDefault();
-		try {
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
-				'PATCH',
-				JSON.stringify({
-					username: userData.name,
-					email: userData.email,
-					country: selectedCountry
-				}),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				}
-			);
-			console.log(responseData.updatedUser);
-			onUpdate(responseData.updatedUser);
-		} catch (err) {
-			// Error is handled by the useHttpClient
-		}
-	};
-
-	const onUpdate = (event) => {
-		setNewSelectedCountry(event);
+		console.log(currentUser, selectedCountry);
+		updateUser({ country: selectedCountry });
 	};
 
 	if (isLoading) {
-		return <LoadingSpinner asOverlay loadingSpinnerMessage="Updating..." />;
+		return <LoadingSpinner asOverlay loadingSpinnerMessage="Loading..." />;
 	}
 
 	return (
@@ -61,7 +66,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 			<ErrorModal error={error} onClear={clearError} />
 
 			<div className="country-set-container">
-				<form className="set-country-form" onSubmit={userUpdateCountryHandler}>
+				<form className="set-country-form" onSubmit={updateUserCountryHandler}>
 					<div className="country-dsply-info">
 						<p>
 							Set your country. The next time you log in it will load Netflix data based on your
@@ -70,7 +75,7 @@ export const CountrySetter = ({ userData, setNewSelectedCountry, countryData }) 
 					</div>
 					<div className="country-dd-selector">
 						<CountryDropdown
-							items={countryData}
+							items={countryList}
 							label="Select country"
 							title="Select one..."
 							selected={countrySelectHandler}
