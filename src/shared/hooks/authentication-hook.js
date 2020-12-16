@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
 
 const AuthContext = createContext();
 let logoutTimer;
@@ -14,17 +14,6 @@ export const AuthProvider = ({ children }) => {
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
 	const [userId, setUserId] = useState(null);
 	const [userCountry, setUserCountry] = useState(null);
-
-	const isMounted = useRef(null);
-
-	useEffect(() => {
-		// executed when component mounted
-		isMounted.current = true;
-		return () => {
-			// executed when unmount
-			isMounted.current = false;
-		};
-	}, []);
 
 	const login = useCallback((uid, token, country = defaultCountry, expirationDate) => {
 		setToken(token);
@@ -66,9 +55,6 @@ export const AuthProvider = ({ children }) => {
 		} else {
 			clearTimeout(logoutTimer);
 		}
-		return () => {
-			isMounted.current = false;
-		};
 	}, [token, logout, tokenExpirationDate]);
 
 	useEffect(() => {
@@ -81,9 +67,6 @@ export const AuthProvider = ({ children }) => {
 				new Date(storedData.expiration)
 			);
 		}
-		return () => {
-			isMounted.current = false;
-		};
 	}, [login]);
 
 	return (
