@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { NavButtons, ExpItem } from '../../molecules';
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
@@ -10,9 +10,13 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 	const [idList, setIdList] = useState(null);
 	const [offset, setOffset] = useState(0);
 
+	const _isMounted = useRef(null);
+
 	useEffect(() => {
-		try {
-			const fetchIds = async () => {
+		_isMounted.current = true;
+
+		const fetchIds = async () => {
+			try {
 				const response = await fetchNetflixData({
 					urlEndpoint: 'expiring',
 					params: {
@@ -21,12 +25,18 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 						limit: 6
 					}
 				});
-				setIdList(response);
-			};
-			fetchIds();
-		} catch (error) {
-			console.log(error);
-		}
+				if (_isMounted.current) {
+					setIdList(response);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		fetchIds();
+
+		return () => {
+			_isMounted.current = false;
+		};
 	}, [offset]);
 
 	const onLoadNext = () => {
