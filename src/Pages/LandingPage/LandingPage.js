@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { IconButton, Modal } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { ExpContentList, NewContentList } from '../../components/organisms';
+import { useContextUser } from '../../shared/context/user-context';
 
 import './LandingPage.scss';
 
 export const LandingPage = () => {
-	const [currentUserCountry, setCurrentUserCountry] = useState(null);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
-
-	useEffect(() => {
-		const { country } = JSON.parse(localStorage.getItem('userData'));
-		setCurrentUserCountry(country);
-	}, []);
+	const { currentUser } = useContextUser();
 
 	const onItemClickedHandler = (data) => {
 		setSelectedItem(data);
@@ -53,17 +49,17 @@ export const LandingPage = () => {
 					<Header lg>
 						<h1>Welcome back!</h1>
 					</Header>
-					{currentUserCountry && (
-						<h3>Here is your new &amp; expiring data for {currentUserCountry.country}</h3>
+					{currentUser && (
+						<h3>Here is your new &amp; expiring data for {currentUser.country.country}</h3>
 					)}
 				</div>
 				<div id="homepage-new-current" className="homepage__new__current">
 					<Header md>
-						{currentUserCountry && <h2>New content for {currentUserCountry.country}:</h2>}
+						{currentUser && <h2>New content for {currentUser.country.country}:</h2>}
 					</Header>
-					{currentUserCountry && (
+					{currentUser && (
 						<NewContentList
-							countryIdCode={`${currentUserCountry.countryId}`}
+							countryIdCode={`${currentUser.country.countryId}`}
 							itemClick={onItemClickedHandler}
 						/>
 					)}
@@ -76,11 +72,11 @@ export const LandingPage = () => {
 				</div>
 				<div id="homepage-current-expiring" className="homepage__current__expiring">
 					<Header md>
-						{currentUserCountry && <h2>Expiring content for {currentUserCountry.country}:</h2>}
+						{currentUser && <h2>Expiring content for {currentUser.country.country}:</h2>}
 					</Header>
-					{currentUserCountry && (
+					{currentUser && (
 						<ExpContentList
-							countryIdCode={`${currentUserCountry.countryId}`}
+							countryIdCode={`${currentUser.country.countryId}`}
 							itemClick={onItemClickedHandler}
 						/>
 					)}
