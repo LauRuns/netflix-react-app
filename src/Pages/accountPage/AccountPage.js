@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import { useContextUser } from '../../shared/context/user-context';
 import {
 	Button,
 	LoadingSpinner,
@@ -23,51 +24,22 @@ import './AccountPage.scss';
 
 export const AccountPage = () => {
 	const { isAuthenticated, updateCountry } = useAuthentication();
-	const _isMounted = useRef(null);
-
+	const { currentUser, setNewCurrentUser, isUpdating, updatingError } = useContextUser();
+	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	let { userId } = useParams();
 
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const [loadedUser, setLoadedUser] = useState(null);
-
-	const [showProfileInfo, setShowProfileInfo] = useState(false);
-	const [showCountrySetter, setShowCountrySetter] = useState(false);
-	const [showUploadImage, setShowUploadImage] = useState(false);
-	const [showChangePassword, setShowChangePassword] = useState(false);
-	const [openedDivs, setOpenedDivs] = useState(false);
-
-	const [loadedCountries, setLoadedCountries] = useState();
-	const [displayMessage, setDisplayMessage] = useState(false);
+	const _isMounted = useRef(null);
 
 	useEffect(() => {
-		_isMounted.current = true;
-		const fetchCountries = async () => {
-			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/netflix/countries`
-				);
-				if (_isMounted.current) {
-					setLoadedCountries(responseData.results);
-				}
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
-
-		fetchCountries();
-		// setLoadedCountries(testCountryList);
-
-		return () => {
-			console.log('AccountPage fetchCountries CLEANUP');
-			_isMounted.current = false;
-		};
-	}, []);
+		closeAllInfoTabs();
+	}, [isLoading, isUpdating]);
 
 	useEffect(() => {
 		if (!isAuthenticated) {
+			console.log('Not authenticated - setting current user to null');
+			setNewCurrentUser(null);
 			return;
 		}
-
 		_isMounted.current = true;
 
 		const fetchUser = async () => {
@@ -76,15 +48,14 @@ export const AccountPage = () => {
 					`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
 				);
 				const { result } = responseData;
-				console.log(result);
+				console.log('Loaded user__>', result);
 				if (_isMounted.current) {
-					setLoadedUser(result);
+					setNewCurrentUser(result);
 				}
 			} catch (err) {
 				// Error is handled by useHttpClient
 			}
 		};
-
 		fetchUser();
 
 		return () => {
@@ -92,6 +63,14 @@ export const AccountPage = () => {
 			_isMounted.current = false;
 		};
 	}, [isAuthenticated, userId]);
+
+	const [showProfileInfo, setShowProfileInfo] = useState(false);
+	const [showCountrySetter, setShowCountrySetter] = useState(false);
+	const [showUploadImage, setShowUploadImage] = useState(false);
+	const [showChangePassword, setShowChangePassword] = useState(false);
+	const [openedDivs, setOpenedDivs] = useState(isLoading || isUpdating ? false : true);
+
+	const [displayMessage, setDisplayMessage] = useState(false);
 
 	const showProfileInfoHandler = () => setShowProfileInfo(!showProfileInfo);
 	const showCountrySet = () => setShowCountrySetter(!showCountrySetter);
@@ -103,18 +82,6 @@ export const AccountPage = () => {
 		setShowCountrySetter(false);
 		setShowUploadImage(false);
 		setShowChangePassword(false);
-	};
-
-	const reloadUserData = (newProfileData) => {
-		setLoadedUser(newProfileData);
-		closeAllInfoTabs();
-		updateLocalStorageUserData(newProfileData.country);
-		updateCountry(newProfileData.country);
-	};
-
-	const updateLocalStorageUserData = (countryObj) => {
-		const getCountry = JSON.parse(localStorage.getItem('userData'));
-		getCountry.country = countryObj;
 	};
 
 	const displayInfoHandler = () => {
@@ -144,7 +111,7 @@ export const AccountPage = () => {
 	if (userId && isAuthenticated) {
 		return (
 			<React.Fragment>
-				<ErrorModal error={error} onClear={clearError} />
+				<ErrorModal error={error || updatingError} onClear={clearError} />
 				<Modal
 					show={displayMessage}
 					header="Password updated!"
@@ -154,19 +121,20 @@ export const AccountPage = () => {
 						</Button>
 					}
 				/>
-				{isLoading && <LoadingSpinner loadingSpinnerMessage="Loading userdata..." asOverlay />}
+				{isLoading ||
+					(isUpdating && <LoadingSpinner asOverlay loadingSpinnerMessage="Updating userdata..." />)}
 
-				{!isLoading && loadedUser && (
+				{currentUser && (
 					<div id="account__container">
 						<div id="account-header" className="account__header">
-							<h2>Useraccount for {loadedUser.name.toUpperCase()}</h2>
+							<h2>Useraccount for {currentUser.name.toUpperCase()}</h2>
 						</div>
 
 						<div id="account-avatar" className="account__avatar">
-							{loadedUser && (
+							{currentUser && (
 								<Avatar
-									image={loadedUser.image}
-									alt={loadedUser.name || 'Default img'}
+									image={currentUser.image}
+									alt={currentUser.name || 'Default img'}
 									style={{ width: '200px', height: '200px' }}
 									width="200px"
 									height="200px"
@@ -177,11 +145,11 @@ export const AccountPage = () => {
 
 						<div id="account-user-info" className="account__user__info">
 							<div>
-								<p>NAME: {loadedUser.name}</p>
-								<p>EMAIL: {loadedUser.email}</p>
-								<p>ID: {loadedUser.id}</p>
-								<p>SET COUNTRY: {loadedUser?.country?.country}</p>
-								<p>LAST UPDATED AT: {new Date(loadedUser.updatedAt).toDateString()}</p>
+								<p>NAME: {currentUser.name}</p>
+								<p>EMAIL: {currentUser.email}</p>
+								<p>ID: {currentUser.id}</p>
+								<p>SET COUNTRY: {currentUser?.country?.country}</p>
+								<p>LAST UPDATED AT: {new Date(currentUser.updatedAt).toDateString()}</p>
 							</div>
 							<Button type="button" inverse onClick={displayInfoHandler}>
 								{' '}
@@ -203,23 +171,14 @@ export const AccountPage = () => {
 									{showProfileInfo ? 'CLOSE' : 'EDIT'}
 								</IconButton>
 							</div>
-							{showProfileInfo && (
-								<div className="itm-4-profile">
-									<ProfileInfo
-										username={loadedUser.name}
-										email={loadedUser.email}
-										country={loadedUser.country}
-										setUpdatedUserData={reloadUserData}
-									/>
-								</div>
-							)}
+							{showProfileInfo && <ProfileInfo />}
 						</div>
 
 						<div id="account-set-country" className="account__country__setter">
 							<div>
 								<h3>
-									{loadedUser.country
-										? `Current country: ${loadedUser.country.country}`
+									{currentUser.country
+										? `Current country: ${currentUser.country.country}`
 										: 'Set your country'}
 								</h3>
 								<IconButton
@@ -233,13 +192,7 @@ export const AccountPage = () => {
 									{showCountrySetter ? 'CLOSE' : 'EDIT'}
 								</IconButton>
 							</div>
-							{showCountrySetter && loadedUser && (
-								<CountrySetter
-									userData={loadedUser}
-									setNewSelectedCountry={reloadUserData}
-									countryData={loadedCountries}
-								/>
-							)}
+							{showCountrySetter && <CountrySetter />}
 						</div>
 
 						<div id="account-update-avatar" className="account__update__avatar">
@@ -256,13 +209,7 @@ export const AccountPage = () => {
 									{showUploadImage ? 'CLOSE' : 'EDIT'}
 								</IconButton>
 							</div>
-							{showUploadImage && (
-								<UploadImage
-									username={loadedUser.name}
-									email={loadedUser.email}
-									setUpdatedUserAvatar={reloadUserData}
-								/>
-							)}
+							{showUploadImage && <UploadImage />}
 						</div>
 
 						<div id="account-change-password" className="account__change__pwd">
@@ -281,8 +228,8 @@ export const AccountPage = () => {
 							</div>
 							{showChangePassword && (
 								<PasswordChange
-									username={loadedUser.name}
-									email={loadedUser.email}
+									username={currentUser.name}
+									email={currentUser.email}
 									closeSection={openModal}
 								/>
 							)}
