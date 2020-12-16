@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 import { AuthProvider } from './shared/hooks/authentication-hook';
+import { UserProvider } from './shared/context/user-context';
 
 import './index.scss';
 
@@ -13,7 +14,9 @@ ReactDOM.render(
 	<React.StrictMode>
 		<Router>
 			<AuthProvider>
-				<App />
+				<UserProvider>
+					<App />
+				</UserProvider>
 			</AuthProvider>
 		</Router>
 	</React.StrictMode>,
