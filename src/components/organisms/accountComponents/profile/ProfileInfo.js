@@ -6,16 +6,14 @@ import {
 	VALIDATOR_EMAIL
 } from '../../../../shared/util/validators.js';
 import { useForm } from '../../../../shared/hooks/form-hook';
-import { useHttpClient } from '../../../../shared/hooks/http-hook';
-import { IconButton, ErrorModal, LoadingSpinner } from '../../../../components/uiElements';
+import { IconButton } from '../../../../components/uiElements';
 import { Input } from '../../../formElements/input/Input';
-import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
+import { useContextUser } from '../../../../shared/context/user-context';
 
 import './ProfileInfo.scss';
 
-export const ProfileInfo = (props) => {
-	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const { token, userId } = useAuthentication();
+export const ProfileInfo = () => {
+	const { currentUser, updateUser } = useContextUser();
 
 	const [formState, inputHandler, setFormData] = useForm(
 		{
@@ -35,55 +33,29 @@ export const ProfileInfo = (props) => {
 		setFormData(
 			{
 				username: {
-					value: props.username,
+					value: currentUser.name,
 					isValid: true
 				},
 				email: {
-					value: props.email,
+					value: currentUser.email,
 					isValid: true
 				}
 			},
 			true
 		);
-	}, [props, setFormData]);
+	}, [currentUser, setFormData]);
 
 	const userProfileUpdateSubmitHandler = async (event) => {
 		event.preventDefault();
-		try {
-			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
-				'PATCH',
-				JSON.stringify({
-					username: formState.inputs.username.value,
-					email: formState.inputs.email.value,
-					country: props.country
-				}),
-				{
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${token}`
-				}
-			);
-			onUpdate(responseData.updatedUser);
-		} catch (err) {
-			// Error is handled by the useHttpClient
-		}
+		const newValues = {
+			username: formState.inputs.username.value,
+			email: formState.inputs.email.value
+		};
+		updateUser(newValues);
 	};
-
-	const onUpdate = (event) => {
-		props.setUpdatedUserData(event);
-	};
-
-	if (isLoading) {
-		return (
-			<div className="center">
-				<LoadingSpinner asOverlay loadingSpinnerMessage="Updating..." />
-			</div>
-		);
-	}
 
 	return (
 		<React.Fragment>
-			<ErrorModal error={error} onClear={clearError} />
 			<div className="profile-info-container">
 				<form className="profile-form" onSubmit={userProfileUpdateSubmitHandler}>
 					<div>
@@ -94,7 +66,7 @@ export const ProfileInfo = (props) => {
 							validators={[VALIDATOR_MAXLENGTH(20), VALIDATOR_MINLENGTH(5)]}
 							errorText="Please enter a valid namelength"
 							onInput={inputHandler}
-							initialValue={props.username}
+							initialValue={currentUser.name}
 							initialValid
 						/>
 					</div>
@@ -106,7 +78,7 @@ export const ProfileInfo = (props) => {
 							validators={[VALIDATOR_EMAIL]}
 							errorText="Please enter a valid email"
 							onInput={inputHandler}
-							initialValue={props.email}
+							initialValue={currentUser.email}
 							initialValid
 						/>
 					</div>
