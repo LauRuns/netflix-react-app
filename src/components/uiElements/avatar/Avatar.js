@@ -3,7 +3,6 @@ import defaultAvatar from '../../../assets/no-profile-picture.jpg';
 import './Avatar.scss';
 
 export const Avatar = (props) => {
-	console.log(props.image);
 	const onImgErrorHandler = () => {
 		console.log('User Avatar has an error');
 	};
