@@ -27,9 +27,11 @@ export const Navbar = ({
 					</Tooltip>
 				)}
 			</nav>
-			<menu className="MobileOnly">
-				<DrawerToggle clicked={drawerToggleClicked} />
-			</menu>
+			{isLoggedIn && (
+				<menu className="MobileOnly">
+					<DrawerToggle clicked={drawerToggleClicked} />
+				</menu>
+			)}
 		</header>
 	);
 };
