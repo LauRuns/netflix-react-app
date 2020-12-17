@@ -4,9 +4,6 @@
 .new-content-list {
 	@extend .center-column;
 	& > div {
-		// display: flex;
-		// flex-direction: row;
-		// justify-content: center;
 		@extend .center;
 		flex-wrap: wrap;
 	}
