@@ -31,7 +31,7 @@ export const UploadImage = () => {
 		<React.Fragment>
 			<div className="img-upload-container">
 				<form className="img-form" onSubmit={userUploadImgHandler}>
-					<h3>{formState.isValid ? 'For real?? This image??!' : 'Set your user avatar!'}</h3>
+					<h3>{formState.isValid ? null : 'Set your user avatar!'}</h3>
 					<div>
 						<ImageUpload id="image" onInput={inputHandler} />
 					</div>
