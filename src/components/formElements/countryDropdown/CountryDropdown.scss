@@ -16,7 +16,6 @@
 		min-height: $default-var * 2.5;
 		flex-wrap: wrap;
 		border-radius: 5px;
-		z-index: 92;
 
 		&:focus,
 		&:active {
@@ -42,6 +41,7 @@
 			margin-top: $default-var * 3.5;
 			width: 100%;
 			position: absolute;
+			z-index: 92;
 
 			li {
 				list-style-type: none;
