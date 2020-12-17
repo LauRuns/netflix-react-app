@@ -17,9 +17,10 @@ export const SearchResultsPage = () => {
 	const isMounted = useRef(null);
 	const history = useHistory();
 
-	const [searchResults, setSearchResults] = useState();
+	const [searchResults, setSearchResults] = useState(null);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
+	const [noResults, setNoResults] = useState(null);
 
 	let searchParams = {
 		query: title,
@@ -40,7 +41,13 @@ export const SearchResultsPage = () => {
 					urlEndpoint: 'search',
 					params: searchParams
 				});
-				if (isMounted.current) setSearchResults(searchResponse);
+				if (isMounted.current) {
+					if (!searchResponse) {
+						setNoResults(true);
+					} else {
+						setSearchResults(searchResponse);
+					}
+				}
 			} catch (err) {
 				// Error is handled by useNetflixClient
 			}
@@ -103,7 +110,7 @@ export const SearchResultsPage = () => {
 					>
 						{searchResults && <h2>Results for query: '{title}'</h2>}
 					</Header>
-					{searchResults && (
+					{searchResults && !noResults ? (
 						<div className="search-results-page-items">
 							<SearchFormResults
 								resultData={searchResults}
@@ -115,6 +122,23 @@ export const SearchResultsPage = () => {
 								}
 							/>
 						</div>
+					) : (
+						<Modal
+							show={noResults}
+							header="No results..."
+							footer={
+								<IconButton
+									icon="close"
+									before
+									buttonType="button"
+									noborder
+									iconStyle={{ marginRight: '0.5rem' }}
+									onClick={() => history.push('/search')}
+								>
+									Back to search
+								</IconButton>
+							}
+						/>
 					)}
 				</div>
 			)}
