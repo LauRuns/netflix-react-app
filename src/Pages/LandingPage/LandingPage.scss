@@ -29,18 +29,6 @@
 			'. expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current expiring-current .'
 			'. expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .';
 	}
-
-	@media (min-width: $breakpoint-md) {
-	}
-
-	@media (min-width: $breakpoint-xl) {
-		grid-template-columns: repeat(12, 1fr);
-
-		grid-template-areas:
-			'. homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader homepageheader .'
-			'. new-current new-current new-current new-current new-current new-nld new-nld new-nld new-nld new-nld .'
-			'. expiring-current expiring-current expiring-current expiring-current expiring-current expiring-nld expiring-nld expiring-nld expiring-nld expiring-nld .';
-	}
 }
 
 /* Grid layout */
