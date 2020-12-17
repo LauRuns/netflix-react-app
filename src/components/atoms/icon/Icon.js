@@ -5,7 +5,7 @@ import './Icon.scss';
 
 const defaultStyles = { display: 'inline-block', verticalAlign: 'middle' };
 
-export const Icon = ({ icon, size, color, className, style, onClick }) => {
+export const Icon = ({ icon, size, color, className, style, onClick, disabled }) => {
 	const defaultSvg = {
 		size: 16,
 		color: '#fff',
@@ -24,7 +24,7 @@ export const Icon = ({ icon, size, color, className, style, onClick }) => {
 			height={`${size || defaultSvg.size}px`}
 			onClick={onClick}
 		>
-			<path fill={color || defaultSvg.color} d={iconPath[icon]} />
+			<path fill={disabled ? `gray` : color || defaultSvg.color} d={iconPath[icon]} />
 		</svg>
 	);
 };
