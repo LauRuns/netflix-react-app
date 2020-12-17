@@ -60,9 +60,7 @@
 .icon-button:disabled,
 .icon-button:hover:disabled,
 .icon-button:active:disabled {
-	background: $button-disabled;
-	color: $netflix-text;
-	border-color: $button-disabled;
+	color: $shades-gray-40;
 	cursor: not-allowed;
 }
 
