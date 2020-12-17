@@ -226,7 +226,7 @@ export const AccountPage = () => {
 									icon={showChangePassword ? 'cancel' : 'edit'}
 									iconSize={20}
 									iconColor="#fff"
-									onClick={setShowChangePassword}
+									onClick={showPasswordChange}
 									noborder
 									iconStyle={{ marginLeft: '.5rem' }}
 								>
