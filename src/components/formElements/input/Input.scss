@@ -21,6 +21,8 @@
 	label {
 		font-weight: bold;
 		margin-bottom: $default-var / 2;
+		display: flex;
+		justify-self: start;
 	}
 
 	input,
@@ -31,14 +33,14 @@
 		color: $primary-black;
 		border: none;
 		border-radius: 5px;
-		background: $shades-gray-40;
+		background: $shades-gray-20;
 		padding: 0.15rem 0.25rem;
 
 		&:focus {
 			outline: none;
-			background: $shades-gray-20;
+			background: $background-white;
 			border-color: $shades-red-80;
-			color: $netflix-text;
+			color: $primary-black;
 		}
 	}
 
