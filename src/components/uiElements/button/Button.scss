@@ -11,59 +11,67 @@
 	margin-right: 1rem;
 	text-decoration: none;
 	display: inline-block;
-}
 
-.button:focus {
-	outline: none;
-}
+	&:focus {
+		outline: none;
+	}
 
-.button:hover,
-.button:active {
-	background: $secondary-red;
-	border-color: $secondary-red;
+	&:hover,
+	&:active {
+		background: $secondary-red;
+		border-color: $secondary-red;
+	}
+
+	&:disabled,
+	&:hover:disabled,
+	&:active:disabled {
+		background: $button-disabled;
+		color: $netflix-text;
+		border-color: $button-disabled;
+		cursor: not-allowed;
+	}
 }
 
 .button--inverse {
 	background: transparent;
 	color: $netflix-text;
-}
 
-.button--inverse:hover,
-.button--inverse:active {
-	color: $netflix-text;
-	background: $secondary-red;
+	&:hover,
+	&:active {
+		color: $netflix-text;
+		background: $secondary-red;
+	}
 }
 
 .button--noborder {
 	background: transparent;
 	color: $netflix-text;
 	border: none;
-}
 
-.button--noborder:hover,
-.button--noborder:active {
-	color: $netflix-text;
-	background: $secondary-red;
+	&:hover,
+	&:active {
+		color: $netflix-text;
+		background: $secondary-red;
+	}
+	&:disabled,
+	&:hover:disabled,
+	&:active:disabled {
+		background: $button-disabled;
+		color: $netflix-text;
+		border-color: $button-disabled;
+		cursor: not-allowed;
+	}
 }
 
 .button--danger {
 	background: $button-danger;
 	border-color: $button-danger;
-}
 
-.button--danger:hover,
-.button--danger:active {
-	background: $primary-red;
-	border-color: $primary-red;
-}
-
-.button:disabled,
-.button:hover:disabled,
-.button:active:disabled {
-	background: $button-disabled;
-	color: $netflix-text;
-	border-color: $button-disabled;
-	cursor: not-allowed;
+	&:hover,
+	&:active {
+		background: $primary-red;
+		border-color: $primary-red;
+	}
 }
 
 .button--small {
