@@ -12,19 +12,20 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 
 	const isMounted = useRef(null);
 
-	let searchParams = {
-		newdate: new Date('2015-01-01'),
-		start_year: 2017,
-		orderby: 'date',
-		limit: 5,
-		countrylist: `${countryIdCode}`,
-		audio: 'english',
-		offset: offset,
-		end_year: 2020
-	};
-
 	useEffect(() => {
 		isMounted.current = true;
+		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
+		console.log('new content list', storedCountry);
+		let searchParams = {
+			newdate: new Date('2015-01-01'),
+			start_year: 2017,
+			orderby: 'date',
+			limit: 5,
+			countrylist: countryIdCode ? countryIdCode : storedCountry.countryData.countryId,
+			audio: 'english',
+			offset: offset,
+			end_year: 2020
+		};
 		try {
 			const fetchNewContent = async () => {
 				const response = await fetchNetflixData({

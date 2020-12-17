@@ -3,22 +3,15 @@ import React, { useState, useContext, createContext, useCallback, useEffect } fr
 const AuthContext = createContext();
 let logoutTimer;
 
-const defaultCountry = {
-	country: 'Netherlands',
-	countryId: 67
-};
-
 export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(null);
 	const [token, setToken] = useState(null);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
 	const [userId, setUserId] = useState(null);
-	const [userCountry, setUserCountry] = useState(null);
 
-	const login = useCallback((uid, token, country = defaultCountry, expirationDate) => {
+	const login = useCallback((uid, token, expirationDate) => {
 		setToken(token);
 		setUserId(uid);
-		setUserCountry(country);
 		setIsAuthenticated(true);
 
 		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
@@ -29,7 +22,6 @@ export const AuthProvider = ({ children }) => {
 			JSON.stringify({
 				userId: uid,
 				token: token,
-				country: country,
 				expiration: tokenExpirationDate.toISOString()
 			})
 		);
@@ -40,12 +32,8 @@ export const AuthProvider = ({ children }) => {
 		setToken(null);
 		setTokenExpirationDate(null);
 		setUserId(null);
-		setUserCountry(null);
 		localStorage.removeItem('userData');
-	}, []);
-
-	const updateCountry = useCallback((country) => {
-		setUserCountry(country);
+		localStorage.removeItem('countryData');
 	}, []);
 
 	useEffect(() => {
@@ -60,12 +48,7 @@ export const AuthProvider = ({ children }) => {
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem('userData'));
 		if (storedData && storedData.token && new Date(storedData.expiration) > new Date()) {
-			login(
-				storedData.userId,
-				storedData.token,
-				storedData.country,
-				new Date(storedData.expiration)
-			);
+			login(storedData.userId, storedData.token, new Date(storedData.expiration));
 		}
 	}, [login]);
 
@@ -75,10 +58,8 @@ export const AuthProvider = ({ children }) => {
 				isAuthenticated: isAuthenticated || localStorage.getItem('userData') ? true : false,
 				token,
 				userId,
-				country: userCountry,
 				login,
-				logout,
-				updateCountry
+				logout
 			}}
 		>
 			{children}

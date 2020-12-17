@@ -79,14 +79,10 @@ export const LoginPage = () => {
 					}
 				);
 
-				const {
-					userId,
-					token,
-					user: { country }
-				} = responseData;
-				console.log(responseData);
-				await login(userId, token, country);
-				await setNewCurrentUser(responseData.user);
+				const { userId, token, user } = responseData;
+				console.log('LOGIN response data_____:', responseData);
+				await login(userId, token);
+				await setNewCurrentUser(user);
 				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
@@ -103,9 +99,13 @@ export const LoginPage = () => {
 					'POST',
 					formData
 				);
+				const { userId, token, user } = responseData;
+				console.log('SIGNUP response data_____:', responseData);
 
-				await login(responseData.userId, responseData.token);
-				history.push('/home');
+				await login(userId, token);
+				await setNewCurrentUser(user);
+
+				history.push(`/account/${userId}`);
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}

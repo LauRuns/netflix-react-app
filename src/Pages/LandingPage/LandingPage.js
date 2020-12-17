@@ -11,7 +11,7 @@ import './LandingPage.scss';
 export const LandingPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
-	const { currentUser } = useContextUser();
+	const { currentUser, countryData } = useContextUser();
 
 	const onItemClickedHandler = (data) => {
 		setSelectedItem(data);
@@ -49,20 +49,15 @@ export const LandingPage = () => {
 					<Header lg>
 						<h1>Welcome back!</h1>
 					</Header>
-					{currentUser && (
-						<h3>Here is your new &amp; expiring data for {currentUser.country.country}</h3>
-					)}
+					{countryData && <h3>Here is your new &amp; expiring data for {countryData.country}</h3>}
 				</div>
 				<div id="homepage-new-current" className="homepage__new__current">
-					<Header md>
-						{currentUser && <h2>New content for {currentUser.country.country}:</h2>}
-					</Header>
-					{currentUser && (
-						<NewContentList
-							countryIdCode={`${currentUser.country.countryId}`}
-							itemClick={onItemClickedHandler}
-						/>
-					)}
+					<Header md>{countryData && <h2>New content for {countryData.country}:</h2>}</Header>
+
+					<NewContentList
+						countryIdCode={`${currentUser?.country?.countryId}`}
+						itemClick={onItemClickedHandler}
+					/>
 				</div>
 				<div id="homepage-nld-new" className="homepage__nld__new_content">
 					<Header md>
@@ -71,15 +66,12 @@ export const LandingPage = () => {
 					<NewContentList countryIdCode="67" itemClick={onItemClickedHandler} />
 				</div>
 				<div id="homepage-current-expiring" className="homepage__current__expiring">
-					<Header md>
-						{currentUser && <h2>Expiring content for {currentUser.country.country}:</h2>}
-					</Header>
-					{currentUser && (
-						<ExpContentList
-							countryIdCode={`${currentUser.country.countryId}`}
-							itemClick={onItemClickedHandler}
-						/>
-					)}
+					<Header md>{countryData && <h2>Expiring content for {countryData.country}:</h2>}</Header>
+
+					<ExpContentList
+						countryIdCode={`${currentUser?.country?.countryId}`}
+						itemClick={onItemClickedHandler}
+					/>
 				</div>
 				<div id="homepage-nld-expiring" className="homepage__nld__expiring">
 					<Header md>

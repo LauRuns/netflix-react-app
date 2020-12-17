@@ -1,4 +1,4 @@
-import React, { useState, createContext, useCallback } from 'react';
+import React, { useState, createContext, useCallback, useEffect } from 'react';
 import { useContext } from 'react';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
@@ -12,11 +12,22 @@ export const useContextUser = () => {
 
 export const UserProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
+	const [countryData, setCountryData] = useState(null);
 	const { token, userId } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	const setNewCurrentUser = useCallback((user) => {
 		setCurrentUser(user);
+
+		if (user.country) {
+			setCountryData(user.country);
+			localStorage.setItem(
+				'countryData',
+				JSON.stringify({
+					countryData: user.country
+				})
+			);
+		}
 	}, []);
 
 	const updateUser = async (data) => {
@@ -61,8 +72,17 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	useEffect(() => {
+		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
+		if (storedCountry) {
+			setCountryData(storedCountry.countryData);
+		}
+		return () => {};
+	}, []);
+
 	const userData = {
 		currentUser,
+		countryData,
 		setNewCurrentUser,
 		updateUser,
 		updateUserImg,

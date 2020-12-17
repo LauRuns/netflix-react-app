@@ -14,13 +14,15 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 
 	useEffect(() => {
 		_isMounted.current = true;
+		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
+		console.log('exp content list', storedCountry);
 
 		const fetchIds = async () => {
 			try {
 				const response = await fetchNetflixData({
 					urlEndpoint: 'expiring',
 					params: {
-						countrylist: `${countryIdCode}`,
+						countrylist: countryIdCode ? countryIdCode : storedCountry.countryData.countryId,
 						offset: offset,
 						limit: 5
 					}
@@ -40,11 +42,9 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 	}, [offset]);
 
 	const onLoadNext = () => {
-		console.log('onLoadNext');
 		setOffset(offset + 5);
 	};
 	const onLoadPrevious = () => {
-		console.log('onLoadPrevious');
 		if (offset !== 0) setOffset(offset - 5);
 	};
 
