@@ -119,7 +119,7 @@ export const LoginPage = () => {
 
 			{isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Logging in..." />}
 			<div className="authentication__container">
-				<Card login>
+				<Card cardStyles={{ padding: '1rem 2rem', background: '#000', opacity: '0.87' }}>
 					<div className="authentication__header">
 						<h1>Login</h1>
 					</div>
@@ -133,6 +133,7 @@ export const LoginPage = () => {
 								errorText="Please enter a name"
 								onInput={inputHandler}
 								placeholder="Username"
+								label="Username"
 							/>
 						)}
 						<Input
@@ -143,6 +144,7 @@ export const LoginPage = () => {
 							errorText="Please enter a valid email address."
 							onInput={inputHandler}
 							placeholder="Email"
+							label="Email"
 						/>
 						<Input
 							element="input"
@@ -152,6 +154,7 @@ export const LoginPage = () => {
 							errorText="Please enter a valid password, min 5 characters."
 							onInput={inputHandler}
 							placeholder="Password"
+							label="Password"
 						/>
 						<Button type="submit" disabled={!formState.isValid}>
 							{isLoginMode ? 'LOGIN' : 'SIGNUP'}
