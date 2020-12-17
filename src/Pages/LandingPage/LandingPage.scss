@@ -93,16 +93,20 @@
 
 .homepage__new__current {
 	@extend .homepage__base;
+	@extend .center-column;
 }
 
 .homepage__nld__new_content {
 	@extend .homepage__base;
+	@extend .center-column;
 }
 
 .homepage__current__expiring {
 	@extend .homepage__base;
+	@extend .center-column;
 }
 
 .homepage__nld__expiring {
 	@extend .homepage__base;
+	@extend .center-column;
 }
