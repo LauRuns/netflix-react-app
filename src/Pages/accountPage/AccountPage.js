@@ -32,6 +32,7 @@ export const AccountPage = () => {
 
 	useEffect(() => {
 		closeAllInfoTabs();
+		window.scrollTo(0, 0);
 	}, [isLoading, isUpdating]);
 
 	useEffect(() => {
@@ -68,7 +69,6 @@ export const AccountPage = () => {
 	const [showCountrySetter, setShowCountrySetter] = useState(false);
 	const [showUploadImage, setShowUploadImage] = useState(false);
 	const [showChangePassword, setShowChangePassword] = useState(false);
-	const [openedDivs, setOpenedDivs] = useState(isLoading || isUpdating ? false : true);
 
 	const [displayMessage, setDisplayMessage] = useState(false);
 
@@ -84,20 +84,11 @@ export const AccountPage = () => {
 		setShowChangePassword(false);
 	};
 
-	const displayInfoHandler = () => {
-		if (!openedDivs) {
-			setShowProfileInfo(true);
-			setShowCountrySetter(true);
-			setShowUploadImage(true);
-			setShowChangePassword(true);
-			setOpenedDivs(true);
-		} else {
-			setShowProfileInfo(false);
-			setShowCountrySetter(false);
-			setShowUploadImage(false);
-			setShowChangePassword(false);
-			setOpenedDivs(false);
-		}
+	const openAllInfoTabs = () => {
+		setShowProfileInfo(true);
+		setShowCountrySetter(true);
+		setShowUploadImage(true);
+		setShowChangePassword(true);
 	};
 
 	const openModal = () => {
@@ -151,10 +142,26 @@ export const AccountPage = () => {
 								<p>SET COUNTRY: {currentUser?.country?.country}</p>
 								<p>LAST UPDATED AT: {new Date(currentUser.updatedAt).toDateString()}</p>
 							</div>
-							<Button type="button" inverse onClick={displayInfoHandler}>
-								{' '}
-								{openedDivs ? 'CLOSE ALL INFO' : 'OPEN ALL INFO'}
-							</Button>
+							<IconButton
+								icon={
+									showChangePassword || showCountrySetter || showUploadImage || showProfileInfo
+										? 'close'
+										: 'list'
+								}
+								before
+								type="button"
+								inverse
+								iconStyle={{ marginRight: '.5rem' }}
+								onClick={
+									showChangePassword || showCountrySetter || showUploadImage || showProfileInfo
+										? closeAllInfoTabs
+										: openAllInfoTabs
+								}
+							>
+								{showChangePassword || showCountrySetter || showUploadImage || showProfileInfo
+									? 'CLOSE ALL INFO'
+									: 'OPEN ALL INFO'}
+							</IconButton>
 						</div>
 
 						<div id="account-update-profile" className="account__update__profile">
@@ -196,7 +203,7 @@ export const AccountPage = () => {
 						</div>
 
 						<div id="account-update-avatar" className="account__update__avatar">
-							<div onClick={showImageUploader}>
+							<div>
 								<h3>Upload profile image</h3>
 								<IconButton
 									icon={showUploadImage ? 'cancel' : 'edit'}
@@ -213,7 +220,7 @@ export const AccountPage = () => {
 						</div>
 
 						<div id="account-change-password" className="account__change__pwd">
-							<div onClick={showPasswordChange}>
+							<div>
 								<h3>Change password</h3>
 								<IconButton
 									icon={showChangePassword ? 'cancel' : 'edit'}
