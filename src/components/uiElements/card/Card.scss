@@ -5,19 +5,7 @@
 	margin: 0;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 	border-radius: 4px;
-	// overflow: hidden;
 	background: $shades-gray-40;
-}
-
-.login-card {
-	background-color: $primary-black;
-	opacity: 1;
-	border-radius: 4px;
-	padding: 3rem 2rem;
-
-	@media (min-width: $breakpoint-sm) {
-		opacity: 0.87;
-	}
 }
 
 /* Expire card styling */
