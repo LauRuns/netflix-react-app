@@ -22,7 +22,7 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 					params: {
 						countrylist: `${countryIdCode}`,
 						offset: offset,
-						limit: 6
+						limit: 5
 					}
 				});
 				if (_isMounted.current) {
@@ -41,11 +41,11 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 
 	const onLoadNext = () => {
 		console.log('onLoadNext');
-		setOffset(offset + 6);
+		setOffset(offset + 5);
 	};
 	const onLoadPrevious = () => {
 		console.log('onLoadPrevious');
-		if (offset !== 0) setOffset(offset - 6);
+		if (offset !== 0) setOffset(offset - 5);
 	};
 
 	return (

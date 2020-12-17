@@ -16,7 +16,7 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 		newdate: new Date('2015-01-01'),
 		start_year: 2017,
 		orderby: 'date',
-		limit: 6,
+		limit: 5,
 		countrylist: `${countryIdCode}`,
 		audio: 'english',
 		offset: offset,
@@ -44,10 +44,10 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 	}, [offset]);
 
 	const onLoadNext = () => {
-		setOffset(offset + 6);
+		setOffset(offset + 5);
 	};
 	const onLoadPrevious = () => {
-		if (offset !== 0) setOffset(offset - 6);
+		if (offset !== 0) setOffset(offset - 5);
 	};
 
 	return (
