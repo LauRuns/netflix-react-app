@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { IconButton, Modal } from '../../components/uiElements';
+import { IconButton, Modal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { ExpContentList, NewContentList } from '../../components/organisms';
@@ -11,7 +11,24 @@ import './LandingPage.scss';
 export const LandingPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
+	const [storedCountry, setStoredCountry] = useState(null);
 	const { currentUser, countryData } = useContextUser();
+
+	useEffect(() => {
+		console.log('logging countrydata____>', countryData);
+
+		try {
+			const getStoredCountry = JSON.parse(localStorage.getItem('countryData'));
+			if (storedCountry) {
+				console.log('Landingpage setting getSToredCountry', getStoredCountry);
+				setStoredCountry(getStoredCountry);
+			} else {
+				console.log('There is no stored country data stored');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}, [countryData]);
 
 	const onItemClickedHandler = (data) => {
 		setSelectedItem(data);
@@ -44,6 +61,7 @@ export const LandingPage = () => {
 					<NetflixItem item={selectedItem} />
 				</Modal>
 			)}
+
 			<div className="landingpage-container">
 				<div id="homepage-header" className="homepage__header">
 					<Header lg>
@@ -55,7 +73,9 @@ export const LandingPage = () => {
 					<Header md>{countryData && <h2>New content for {countryData.country}:</h2>}</Header>
 
 					<NewContentList
-						countryIdCode={`${currentUser?.country?.countryId}`}
+						countryIdCode={
+							currentUser ? currentUser?.country?.countryId : storedCountry?.countryData?.countryId
+						}
 						itemClick={onItemClickedHandler}
 					/>
 				</div>
@@ -69,7 +89,9 @@ export const LandingPage = () => {
 					<Header md>{countryData && <h2>Expiring content for {countryData.country}:</h2>}</Header>
 
 					<ExpContentList
-						countryIdCode={`${currentUser?.country?.countryId}`}
+						countryIdCode={
+							currentUser ? currentUser?.country?.countryId : storedCountry?.countryData?.countryId
+						}
 						itemClick={onItemClickedHandler}
 					/>
 				</div>
