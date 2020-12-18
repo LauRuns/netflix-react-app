@@ -14,12 +14,11 @@ export const CountriesPage = () => {
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
 
-	let countryList = [];
-
 	useEffect(() => {
 		isMounted.current = true;
 		const fetchCountries = async () => {
 			try {
+				let countryList = [];
 				const response = await fetchNetflixData({
 					urlEndpoint: 'countries'
 				});

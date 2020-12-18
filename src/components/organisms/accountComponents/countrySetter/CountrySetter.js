@@ -15,12 +15,12 @@ export const CountrySetter = () => {
 	const [selectedCountry, setSelectedCountry] = useState(null);
 
 	const isMounted = useRef(null);
-	let countryData = [];
 
 	useEffect(() => {
 		isMounted.current = true;
 		const fetchCountries = async () => {
 			try {
+				let countryData = [];
 				const response = await fetchNetflixData({
 					urlEndpoint: 'countries'
 				});
