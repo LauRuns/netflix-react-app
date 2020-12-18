@@ -27,6 +27,12 @@ export const UserProvider = ({ children }) => {
 					countryData: user.country
 				})
 			);
+			sessionStorage.setItem(
+				'countryData',
+				JSON.stringify({
+					countryData: user.country
+				})
+			);
 		}
 	}, []);
 
@@ -74,6 +80,7 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
+		console.log('Setting the stored country in the context');
 		if (storedCountry) {
 			setCountryData(storedCountry.countryData);
 		}
