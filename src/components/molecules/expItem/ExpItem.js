@@ -4,7 +4,7 @@ import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
 
 import './ExpItem.scss';
 
-export const ExpItem = ({ netflixid, title, itemClick }) => {
+export const ExpItem = ({ netflixid, itemClick }) => {
 	const [expItem, setExpItem] = useState(null);
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 
