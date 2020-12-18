@@ -51,7 +51,6 @@ export const useHttpClient = () => {
 				},
 				(err) => {
 					// handle the error
-					console.log('Response error', err);
 					throw err;
 				}
 			);
@@ -119,10 +118,8 @@ export const useHttpClient = () => {
 			// setError(err.message); // <-- when using fetch as method
 			// setError(err.response.data.message);
 			// setError(err);
-			console.log('Catch___', err);
 			if (isMounted.current) {
-				console.log('isMounted catch___', err);
-				setError(err.message);
+				setError(err.response.data.message);
 				setIsLoading(false);
 			}
 			throw err;

@@ -15,7 +15,6 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 	useEffect(() => {
 		_isMounted.current = true;
 		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
-		console.log('exp content list', storedCountry);
 
 		const fetchIds = async () => {
 			try {

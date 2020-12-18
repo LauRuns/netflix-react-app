@@ -15,7 +15,7 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 	useEffect(() => {
 		isMounted.current = true;
 		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
-		console.log('new content list', storedCountry);
+
 		let searchParams = {
 			newdate: new Date('2015-01-01'),
 			start_year: 2017,
