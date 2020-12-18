@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { IconButton, Modal, LoadingSpinner } from '../../components/uiElements';
+import { IconButton, Modal } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { ExpContentList, NewContentList } from '../../components/organisms';
