@@ -27,33 +27,35 @@ export const useHttpClient = () => {
 		// const httpAbortController = new AbortController();
 		// activeHttpRequests.current.push(httpAbortController);
 
-		// request interceptor
-		axios.interceptors.request.use(
-			(config) => {
-				/*
-            perform a task before the request is sent
-            - Setting the Authorization token on every request?
-            */
-				return config;
-			},
-			(err) => {
-				// handle the error
-				throw err;
-			}
-		);
-
-		// response interceptor
-		axios.interceptors.response.use(
-			(response) => {
-				// perform a task before the response is received
-				return response;
-			},
-			(err) => {
-				// handle the error
-				throw err;
-			}
-		);
 		try {
+			// request interceptor
+			axios.interceptors.request.use(
+				(config) => {
+					/*
+			    perform a task before the request is sent
+			    - Setting the Authorization token on every request?
+			    */
+					return config;
+				},
+				(err) => {
+					// handle the error
+					throw err;
+				}
+			);
+
+			// response interceptor
+			axios.interceptors.response.use(
+				(response) => {
+					// perform a task before the response is received
+					return response;
+				},
+				(err) => {
+					// handle the error
+					console.log('Response error', err);
+					throw err;
+				}
+			);
+
 			if (isMounted.current) {
 				const response = await axios({
 					method: method,
@@ -116,7 +118,10 @@ export const useHttpClient = () => {
 		} catch (err) {
 			// setError(err.message); // <-- when using fetch as method
 			// setError(err.response.data.message);
+			// setError(err);
+			console.log('Catch___', err);
 			if (isMounted.current) {
+				console.log('isMounted catch___', err);
 				setError(err.message);
 				setIsLoading(false);
 			}
