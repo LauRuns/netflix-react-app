@@ -4,6 +4,8 @@ import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
 import { useContextUser } from '../../../../shared/context/user-context';
 import { useNetflixClient } from '../../../../shared/hooks/netflix-hook';
+import { useForm } from '../../../../shared/hooks/form-hook';
+import { VALIDATOR_OBJECT } from '../../../../shared/util/validators';
 
 import './CountrySetter.scss';
 
@@ -12,9 +14,18 @@ export const CountrySetter = () => {
 	const { currentUser, updateUser } = useContextUser();
 
 	const [countryList, setCountryList] = useState(null);
-	const [selectedCountry, setSelectedCountry] = useState(null);
 
 	const isMounted = useRef(null);
+
+	const [formState, inputHandler, setFormData] = useForm(
+		{
+			country: {
+				value: {},
+				isValid: false
+			}
+		},
+		false
+	);
 
 	useEffect(() => {
 		isMounted.current = true;
@@ -47,14 +58,9 @@ export const CountrySetter = () => {
 		};
 	}, []);
 
-	const countrySelectHandler = (e) => {
-		setSelectedCountry(e);
-	};
-
 	const updateUserCountryHandler = async (event) => {
 		event.preventDefault();
-		console.log(currentUser, selectedCountry);
-		updateUser({ country: selectedCountry });
+		updateUser({ country: formState.inputs.country.value });
 	};
 
 	if (isLoading) {
@@ -75,23 +81,26 @@ export const CountrySetter = () => {
 					</div>
 					<div className="country-dd-selector">
 						<CountryDropdown
+							id="country"
+							title="Select country"
+							label="Select your country of interest"
 							items={countryList}
-							label="Select country"
-							title="Select one..."
-							selected={countrySelectHandler}
+							onInput={inputHandler}
+							validators={[VALIDATOR_OBJECT()]}
+							errorText="Please select a country"
 						/>
 					</div>
 					<div className="check-save">
 						<p>
-							{selectedCountry?.country
-								? `Save ${selectedCountry.country} as your new default country?`
+							{formState.inputs.country.value
+								? `Save ${formState.inputs.country.value.country} as your new default country?`
 								: 'No country selected'}
 						</p>
 						<IconButton
 							icon="save"
 							iconSize={24}
 							iconColor="#fff"
-							disabled={!selectedCountry}
+							disabled={!formState.isValid}
 							buttonType="submit"
 							before
 							iconStyle={{ marginRight: '.5rem' }}
