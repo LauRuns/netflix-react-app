@@ -63,7 +63,7 @@ export const ProfileInfo = () => {
 							id="username"
 							element="input"
 							label="Edit username"
-							validators={[VALIDATOR_MAXLENGTH(20), VALIDATOR_MINLENGTH(5)]}
+							validators={[VALIDATOR_MAXLENGTH(30), VALIDATOR_MINLENGTH(5)]}
 							errorText="Please enter a valid namelength"
 							onInput={inputHandler}
 							initialValue={currentUser.name}
