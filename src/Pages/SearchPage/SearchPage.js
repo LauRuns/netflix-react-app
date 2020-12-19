@@ -15,9 +15,8 @@ export const SearchPage = () => {
 	const isMounted = useRef(null);
 	const history = useHistory();
 
-	let loadedCountries = [];
-
 	useEffect(() => {
+		let loadedCountries = [];
 		isMounted.current = true;
 
 		const loadCountries = async () => {
@@ -34,7 +33,9 @@ export const SearchPage = () => {
 						};
 						loadedCountries.push(newEl);
 					});
-					setCountryList(loadedCountries);
+					if (isMounted.current) {
+						setCountryList(loadedCountries);
+					}
 				}
 			} catch (err) {
 				// Error is handled by useNetflixClient
