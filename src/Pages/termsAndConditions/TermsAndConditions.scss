@@ -1,0 +1,14 @@
+@import '../../styles/2-variables/_variables-index';
+@import '../../styles/5-globals/_globals-index';
+
+.terms-conditions-container {
+	padding: 0.5rem;
+
+	.list {
+		padding: 1rem 2rem;
+	}
+
+	@media screen and (min-width: $breakpoint-md) {
+		padding: 5rem;
+	}
+}

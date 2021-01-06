@@ -9,13 +9,15 @@ import {
 	AccountPage,
 	PageNotFound,
 	LoginPage,
-	SearchResultsPage
+	SearchResultsPage,
+	TermsAndConditions
 } from '../pages';
 
 export const Routes = () => {
 	return (
 		<Switch>
 			<Route path="/login" exact component={LoginPage} />
+			<Route path="/terms_and_conditions" exact component={TermsAndConditions} />
 			<PrivateRoute path="/home" exact>
 				<LandingPage />
 			</PrivateRoute>
