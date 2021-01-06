@@ -134,8 +134,8 @@ export const LoginPage = () => {
 				);
 
 				const { userId, token, user } = responseData;
-				await login(userId, token);
 				await setNewCurrentUser(user);
+				await login(userId, token);
 				history.push('/home');
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
@@ -154,8 +154,8 @@ export const LoginPage = () => {
 					formData
 				);
 				const { userId, token, user } = responseData;
-				await login(userId, token);
 				await setNewCurrentUser(user);
+				await login(userId, token);
 
 				history.push('/home');
 			} catch (err) {
