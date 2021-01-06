@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import {
 	VALIDATOR_EMAIL,
@@ -220,6 +220,18 @@ export const LoginPage = () => {
 							placeholder="Password"
 							label="Password"
 						/>
+						{!isLoginMode && (
+							<div className="terms-conditions">
+								<Link to="/terms_and_conditions">
+									By signing up you agree to our <b>Terms of service</b> and <b>Privacy policy</b>
+								</Link>
+							</div>
+						)}
+						{isLoginMode && (
+							<div className="forgot-password">
+								<Link to="#">Forgot password?</Link>
+							</div>
+						)}
 						<Button type="submit" disabled={!formState.isValid}>
 							{isLoginMode ? 'LOGIN' : 'SIGNUP'}
 						</Button>

@@ -24,6 +24,35 @@
 	.authentication__form {
 		margin-bottom: $default-var;
 	}
+
+	.terms-conditions {
+		font-size: small;
+		margin-bottom: 1rem;
+
+		a {
+			color: $netflix-text;
+			&:hover {
+				cursor: pointer;
+				color: $shades-gray-40;
+			}
+		}
+	}
+
+	.forgot-password {
+		font-size: small;
+		margin-bottom: 1rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+
+		a {
+			color: $netflix-text;
+			&:hover {
+				cursor: pointer;
+				color: $shades-gray-40;
+			}
+		}
+	}
 }
 
 @media (min-width: $breakpoint-md) {

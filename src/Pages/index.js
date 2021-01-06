@@ -7,6 +7,7 @@ import { MainNavigation } from './mainNavigation/MainNavigation';
 import { SearchPage } from './searchPage/SearchPage';
 import { PageNotFound } from './pageNotFound/PageNotFound';
 import { SearchResultsPage } from './searchPage/searchResultsPage/SearchResultsPage';
+import { TermsAndConditions } from './termsAndConditions/TermsAndConditions';
 
 export {
 	AccountPage,
@@ -17,5 +18,6 @@ export {
 	MainNavigation,
 	SearchPage,
 	PageNotFound,
-	SearchResultsPage
+	SearchResultsPage,
+	TermsAndConditions
 };
