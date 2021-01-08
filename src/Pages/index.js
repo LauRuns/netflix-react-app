@@ -8,6 +8,8 @@ import { SearchPage } from './searchPage/SearchPage';
 import { PageNotFound } from './pageNotFound/PageNotFound';
 import { SearchResultsPage } from './searchPage/searchResultsPage/SearchResultsPage';
 import { TermsAndConditions } from './termsAndConditions/TermsAndConditions';
+import { ForgotPasswordPage } from './forgotPasswordPage/ForgotPasswordPage';
+import { PasswordResetPage } from './passwordResetPage/PasswordResetPage';
 
 export {
 	AccountPage,
@@ -19,5 +21,7 @@ export {
 	SearchPage,
 	PageNotFound,
 	SearchResultsPage,
-	TermsAndConditions
+	TermsAndConditions,
+	ForgotPasswordPage,
+	PasswordResetPage
 };
