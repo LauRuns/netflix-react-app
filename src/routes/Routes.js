@@ -10,7 +10,9 @@ import {
 	PageNotFound,
 	LoginPage,
 	SearchResultsPage,
-	TermsAndConditions
+	TermsAndConditions,
+	ForgotPasswordPage,
+	PasswordResetPage
 } from '../pages';
 
 export const Routes = () => {
@@ -18,6 +20,8 @@ export const Routes = () => {
 		<Switch>
 			<Route path="/login" exact component={LoginPage} />
 			<Route path="/terms_and_conditions" exact component={TermsAndConditions} />
+			<Route path="/reset" exact component={ForgotPasswordPage} />
+			<Route path="/reset/:token" exact component={PasswordResetPage} />
 			<PrivateRoute path="/home" exact>
 				<LandingPage />
 			</PrivateRoute>
