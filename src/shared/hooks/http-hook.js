@@ -51,6 +51,24 @@ export const useHttpClient = () => {
 				},
 				(err) => {
 					// handle the error
+					if (isMounted.current) {
+						setIsLoading(false);
+						if (axios.isCancel(err)) {
+							console.log('Axios isCancel is thrown___:', err.message);
+						} else if (err.response) {
+							console.log(
+								"Voldemort says there's an issue with your Response___:",
+								err.response.status
+							);
+							setError(err.response.data.message ? err.response.data.message : err.message);
+						} else if (err.request) {
+							console.log("Voldemort says there's an issue with your Request___:", err.message);
+							setError(err.response.data.message ? err.response.data.message : err.message);
+						} else {
+							console.log('Voldemort says Error____:', err.message);
+							setError(err.response.data.message ? err.response.data.message : err.message);
+						}
+					}
 					throw err;
 				}
 			);
@@ -118,10 +136,28 @@ export const useHttpClient = () => {
 			// setError(err.message); // <-- when using fetch as method
 			// setError(err.response.data.message);
 			// setError(err);
-			if (isMounted.current) {
-				setError(err.response.data.message);
-				setIsLoading(false);
-			}
+			setError(err.response.data.message ? err.response.data.message : err.message);
+			setIsLoading(false);
+
+			// if (isMounted.current) {
+			// 	setIsLoading(false);
+			// 	if (axios.isCancel(err)) {
+			// 		console.log('Axios isCancel is thrown___:', err.message);
+			// 	} else if (err.response) {
+			// 		console.log(
+			// 			"Voldemort says there's an issue with your Response___:",
+			// 			err.response.status
+			// 		);
+			// 		setError(err.response.data.message ? err.response.data.message : err.message);
+			// 	} else if (err.request) {
+			// 		console.log("Voldemort says there's an issue with your Request___:", err.message);
+			// 		setError(err.response.data.message ? err.response.data.message : err.message);
+			// 	} else {
+			// 		console.log('Voldemort says Error____:', err.message);
+			// 		setError(err.response.data.message ? err.response.data.message : err.message);
+			// 	}
+			// }
+
 			throw err;
 		}
 	}, []);
