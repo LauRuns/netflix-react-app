@@ -229,7 +229,7 @@ export const LoginPage = () => {
 						)}
 						{isLoginMode && (
 							<div className="forgot-password">
-								<Link to="#">Forgot password?</Link>
+								<Link to="/reset">Forgot password?</Link>
 							</div>
 						)}
 						<Button type="submit" disabled={!formState.isValid}>
