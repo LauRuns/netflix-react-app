@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useNetflixClient } from '../../shared/hooks/netflix-hook';
@@ -15,37 +15,37 @@ export const SearchPage = () => {
 	const isMounted = useRef(null);
 	const history = useHistory();
 
-	useEffect(() => {
+	const loadCountries = useCallback(async () => {
 		let loadedCountries = [];
-		isMounted.current = true;
-
-		const loadCountries = async () => {
-			try {
-				const response = await fetchNetflixData({
-					urlEndpoint: 'countries'
+		try {
+			const response = await fetchNetflixData({
+				urlEndpoint: 'countries'
+			});
+			if (isMounted.current) {
+				response.forEach((element) => {
+					const newEl = {
+						country: element.country.trim(),
+						countryId: element.id,
+						countrycode: element.countrycode
+					};
+					loadedCountries.push(newEl);
 				});
 				if (isMounted.current) {
-					response.forEach((element) => {
-						const newEl = {
-							country: element.country.trim(),
-							countryId: element.id,
-							countrycode: element.countrycode
-						};
-						loadedCountries.push(newEl);
-					});
-					if (isMounted.current) {
-						setCountryList(loadedCountries);
-					}
+					setCountryList(loadedCountries);
 				}
-			} catch (err) {
-				// Error is handled by useNetflixClient
 			}
-		};
+		} catch (err) {
+			// Error is handled by useNetflixClient
+		}
+	}, [fetchNetflixData]);
+
+	useEffect(() => {
+		isMounted.current = true;
 		loadCountries();
 		return () => {
 			isMounted.current = false;
 		};
-	}, []);
+	}, [loadCountries]);
 
 	const fetchSearchResults = ({ contentselector, countryselect, endyear, startyear, query }) => {
 		history.push({
@@ -65,7 +65,7 @@ export const SearchPage = () => {
 					</Header>
 				</div>
 				<div id="search-page-form" className="search-page__form">
-					<SearchForm countries={countryList} sendFormData={fetchSearchResults} />
+					{countryList && <SearchForm countries={countryList} sendFormData={fetchSearchResults} />}
 				</div>
 			</div>
 		</React.Fragment>

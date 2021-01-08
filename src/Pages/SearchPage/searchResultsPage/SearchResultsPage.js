@@ -57,7 +57,7 @@ export const SearchResultsPage = () => {
 		return () => {
 			isMounted.current = false;
 		};
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const openModal = () => setShowSelected(true);
 	const closeModal = () => setShowSelected(false);

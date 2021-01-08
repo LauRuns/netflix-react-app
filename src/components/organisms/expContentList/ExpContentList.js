@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { NavButtons, ExpItem } from '../../molecules';
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
@@ -12,33 +12,34 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 
 	const _isMounted = useRef(null);
 
+	const fetchIds = useCallback(async () => {
+		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
+		try {
+			const response = await fetchNetflixData({
+				urlEndpoint: 'expiring',
+				params: {
+					countrylist: countryIdCode ? countryIdCode : storedCountry.countryData.countryId,
+					offset: offset,
+					limit: 5
+				}
+			});
+			if (_isMounted.current) {
+				setIdList(response);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}, [countryIdCode, offset, fetchNetflixData]);
+
 	useEffect(() => {
 		_isMounted.current = true;
-		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
 
-		const fetchIds = async () => {
-			try {
-				const response = await fetchNetflixData({
-					urlEndpoint: 'expiring',
-					params: {
-						countrylist: countryIdCode ? countryIdCode : storedCountry.countryData.countryId,
-						offset: offset,
-						limit: 5
-					}
-				});
-				if (_isMounted.current) {
-					setIdList(response);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
 		fetchIds();
 
 		return () => {
 			_isMounted.current = false;
 		};
-	}, [offset]);
+	}, [offset, fetchIds]);
 
 	const onLoadNext = () => {
 		setOffset(offset + 5);

@@ -16,6 +16,7 @@ export const useNetflixClient = () => {
 
 	useEffect(() => {
 		_isMounted.current = true;
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		cancelToken = axios.CancelToken.source();
 
 		return () => {
@@ -31,7 +32,6 @@ export const useNetflixClient = () => {
 
 			axios.interceptors.request.use(
 				(config) => {
-					// config.headers = headersConfig;
 					return config;
 				},
 				(err) => {
@@ -43,34 +43,39 @@ export const useNetflixClient = () => {
 					return response;
 				},
 				(err) => {
+					if (_isMounted.current) {
+						setIsLoading(false);
+						if (axios.isCancel(err)) {
+							console.log('Axios isCancel is thrown___:', err.message);
+						} else if (err.response) {
+							console.log(
+								"Voldemort says there's an issue with your Response___:",
+								err.response.status
+							);
+							setError(err.response.data.message ? err.response.data.message : err.message);
+						} else if (err.request) {
+							console.log("Voldemort says there's an issue with your Request___:", err.message);
+							setError(err.response.data.message ? err.response.data.message : err.message);
+						} else {
+							console.log('Voldemort says Error____:', err.message);
+							setError(err.response.data.message ? err.response.data.message : err.message);
+						}
+					}
 					throw err;
 				}
 			);
 
 			try {
-				const response = await axios({
-					method: method,
-					url: `https://unogsng.p.rapidapi.com/${urlEndpoint}`,
-					data: body,
-					headers: headersConfig,
-					params: params,
-					cancelToken: cancelToken.token
-				}).catch((e) => {
-					if (axios.isCancel(e)) {
-						console.log('Axios CX on Netflix request');
-						setError(e.message);
-					}
-					if (e.response) {
-						console.log('There is an issue with the response', e);
-						setError(e.message);
-					} else if (e.request) {
-						console.log('There is an error with the request', e);
-					} else {
-						console.log('The colonel says: ', e.message);
-					}
-				});
-
 				if (_isMounted.current) {
+					const response = await axios({
+						method: method,
+						url: `https://unogsng.p.rapidapi.com/${urlEndpoint}`,
+						data: body,
+						headers: headersConfig,
+						params: params,
+						cancelToken: cancelToken.token
+					});
+
 					let responseData;
 					if (response?.data) {
 						responseData = response.data.results;
@@ -86,7 +91,7 @@ export const useNetflixClient = () => {
 				throw error;
 			}
 		},
-		[]
+		[] // eslint-disable-line react-hooks/exhaustive-deps
 	);
 
 	const clearError = () => {

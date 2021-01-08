@@ -28,7 +28,7 @@ export const SearchForm = ({ countries, sendFormData }) => {
 	});
 
 	return (
-		<FormProvider {...methods} register={register} watch={watch} handleSubmit={handleSubmit}>
+		<FormProvider {...methods} register={register} watch={watch}>
 			<form onSubmit={handleSubmit(sendFormData)}>
 				<div className="search-form-container">
 					<div id="search-form-dropdown">

@@ -50,7 +50,6 @@ export const CountryDropdown = ({
 	}, [id, value, isValid, onInput]);
 
 	const onChangeHandler = (selectedCountry) => {
-		console.log(selectedCountry);
 		dispatch({
 			type: 'CLICKED',
 			val: selectedCountry,

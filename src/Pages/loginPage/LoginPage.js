@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 import {
@@ -18,15 +18,19 @@ import { CountryDropdown } from '../../components/formElements/countryDropdown/C
 import './LoginPage.scss';
 
 export const LoginPage = () => {
+	/* Hooks and context */
 	const { login } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const { setNewCurrentUser } = useContext(UserContext);
 
+	/* Component state */
 	const [countryList, setCountryList] = useState();
 	const [isLoginMode, setIsLoginMode] = useState(true);
 
+	const history = useHistory();
 	const isMounted = useRef(null);
 
+	/* Dispatches the form validation to the useForm hooks */
 	const [formState, inputHandler, setFormData] = useForm(
 		{
 			email: {
@@ -41,54 +45,56 @@ export const LoginPage = () => {
 		false
 	);
 
-	const history = useHistory();
+	/* Loads a list of all available countries by the api. When a new user signs up, then this list will be presented in a dropdown. */
+	const loadCountries = useCallback(async () => {
+		let loadedCountries = [];
+		console.log('loginpage loading countries');
+		try {
+			const { results } = await sendRequest(
+				'https://unogsng.p.rapidapi.com/countries',
+				'GET',
+				null,
+				{
+					'x-rapidapi-host': 'unogsng.p.rapidapi.com',
+					'x-rapidapi-key': process.env.REACT_APP_MOVIES_KEY,
+					useQueryString: true
+				}
+			);
+			if (isMounted.current) {
+				results.forEach((element) => {
+					const newEl = {
+						country: element.country.trim(),
+						countryId: element.id,
+						countrycode: element.countrycode
+					};
+					loadedCountries.push(newEl);
+				});
+				if (isMounted.current) {
+					setCountryList(loadedCountries);
+				}
+			}
+		} catch (err) {
+			// Error is handled by useNetflixClient
+		}
+	}, [sendRequest]);
 
 	/*
-    useEffect to fetch countries needed to set as the users country of destination of interest.
-    Based on this country ID the expiring and new data on the /home - landingpage will be loaded.
-    The user has the option of changing this in the account settings when logged in.
+    useEffect to fetch countries needed to set as the users country of destination or country of interest.
+    Based on this country ID the expiring and new data on the /home (landingpage after Sign Up) will be loaded.
+    The user has the option of changing this in the account settings when Sign Up in.
     */
 	useEffect(() => {
-		let loadedCountries = [];
 		isMounted.current = true;
-
-		const loadCountries = async () => {
-			try {
-				const { results } = await sendRequest(
-					'https://unogsng.p.rapidapi.com/countries',
-					'GET',
-					null,
-					{
-						'x-rapidapi-host': 'unogsng.p.rapidapi.com',
-						'x-rapidapi-key': process.env.REACT_APP_MOVIES_KEY,
-						useQueryString: true
-					}
-				);
-				if (isMounted.current) {
-					results.forEach((element) => {
-						const newEl = {
-							country: element.country.trim(),
-							countryId: element.id,
-							countrycode: element.countrycode
-						};
-						loadedCountries.push(newEl);
-					});
-					if (isMounted.current) {
-						setCountryList(loadedCountries);
-					}
-				}
-			} catch (err) {
-				// Error is handled by useNetflixClient
-			}
-		};
-		loadCountries();
+		if (!isLoginMode) {
+			loadCountries();
+		}
 		return () => {
 			isMounted.current = false;
 		};
-	}, []);
+	}, [isLoginMode, loadCountries]);
 
+	/* Allows switching betweens Login and Sign Up. Component state (a boolean) is adjusted accordingly rendering a different form.  */
 	const switchModeHandler = () => {
-		console.log(countryList);
 		if (!isLoginMode) {
 			setFormData(
 				{
@@ -116,6 +122,7 @@ export const LoginPage = () => {
 		setIsLoginMode((prevMode) => !prevMode);
 	};
 
+	/* Submits the Login or Sign Up user data depending on the isLoginMode state. */
 	const authSubmitHandler = async (event) => {
 		event.preventDefault();
 
@@ -169,7 +176,7 @@ export const LoginPage = () => {
 			<ErrorModal error={error} onClear={clearError} />
 			<div className="backgroundContainer" />
 
-			{isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Logging in..." />}
+			{isLoading && <LoadingSpinner asOverlay loadingSpinnerMessage="Loading..." />}
 			<div className="authentication__container">
 				<Card cardStyles={{ padding: '1rem 2rem', background: '#000' }}>
 					<div className="authentication__header">

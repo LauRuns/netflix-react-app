@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-
+/* Hooks and context */
+import { useContextUser } from '../../shared/context/user-context';
+/* UI elements and components */
 import { IconButton, Modal } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { ExpContentList, NewContentList } from '../../components/organisms';
-import { useContextUser } from '../../shared/context/user-context';
-
+/* Styling */
 import './LandingPage.scss';
 
 export const LandingPage = () => {
@@ -15,16 +16,9 @@ export const LandingPage = () => {
 	const { currentUser, countryData } = useContextUser();
 
 	useEffect(() => {
-		console.log('logging countrydata____>', countryData);
-
 		try {
 			const getStoredCountry = JSON.parse(localStorage.getItem('countryData'));
-			if (storedCountry) {
-				console.log('Landingpage setting getSToredCountry', getStoredCountry);
-				setStoredCountry(getStoredCountry);
-			} else {
-				console.log('There is no stored country data stored');
-			}
+			setStoredCountry(getStoredCountry);
 		} catch (error) {
 			console.log(error);
 		}

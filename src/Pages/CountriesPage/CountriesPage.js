@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 import { useNetflixClient } from '../../shared/hooks/netflix-hook';
 import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
@@ -14,38 +14,42 @@ export const CountriesPage = () => {
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
 
-	useEffect(() => {
-		isMounted.current = true;
-		const fetchCountries = async () => {
-			try {
-				let countryList = [];
-				const response = await fetchNetflixData({
-					urlEndpoint: 'countries'
+	/* Makes a GET call to the API and fetches all the countries available */
+	const fetchCountries = useCallback(async () => {
+		try {
+			let countryList = [];
+			const response = await fetchNetflixData({
+				urlEndpoint: 'countries'
+			});
+			if (isMounted.current) {
+				response.forEach((element) => {
+					const newEl = {
+						country: element.country.trim(),
+						countryId: element.id,
+						countrycode: element.countrycode
+					};
+					countryList.push(newEl);
 				});
 				if (isMounted.current) {
-					response.forEach((element) => {
-						const newEl = {
-							country: element.country.trim(),
-							countryId: element.id,
-							countrycode: element.countrycode
-						};
-						countryList.push(newEl);
-					});
-					if (isMounted.current) {
-						setLoadedCountries(countryList);
-						setCountryListData(countryList);
-					}
+					setLoadedCountries(countryList);
+					setCountryListData(countryList);
 				}
-			} catch (err) {
-				// Error is handled by useNetflixClient
 			}
-		};
+		} catch (err) {
+			// Error is handled by useNetflixClient
+		}
+	}, [fetchNetflixData]);
+
+	/* Fetches all the countries the API is able to render data for when the page is loaded */
+	useEffect(() => {
+		isMounted.current = true;
 		fetchCountries();
 		return () => {
 			isMounted.current = false;
 		};
-	}, []);
+	}, [fetchCountries]);
 
+	/* Returns a list of countries that match the search query that was entered by the user */
 	const filteredCountriesHandler = (filteredCountries) => {
 		if (filteredCountries && filteredCountries.length !== 0) {
 			setCountryListData(filteredCountries);

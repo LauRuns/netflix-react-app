@@ -15,7 +15,6 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 	useEffect(() => {
 		isMounted.current = true;
 		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
-
 		let searchParams = {
 			newdate: new Date('2015-01-01'),
 			start_year: 2017,
@@ -26,27 +25,29 @@ export const NewContentList = ({ countryIdCode, itemClick }) => {
 			offset: offset,
 			end_year: 2020
 		};
-		try {
-			const fetchNewContent = async () => {
+		const fetchNewContent = async () => {
+			try {
 				const response = await fetchNetflixData({
 					urlEndpoint: 'search',
 					params: searchParams
 				});
 				if (isMounted.current) setNewItems(response);
-			};
-			fetchNewContent();
-		} catch (error) {
-			console.log(error);
-		}
-
+			} catch (error) {
+				// Error is handled by the useNetflixClient hook
+			}
+		};
+		fetchNewContent();
 		return () => {
 			isMounted.current = false;
 		};
-	}, [offset]);
+	}, [offset]); // eslint-disable-line react-hooks/exhaustive-deps
 
+	/* Changes the state for 'offset' and makes useEffect run again to fetch new content + 5 */
 	const onLoadNext = () => {
 		setOffset(offset + 5);
 	};
+
+	/* Changes the state for 'offset' and makes useEffect run again to fetch new content - 5 */
 	const onLoadPrevious = () => {
 		if (offset !== 0) setOffset(offset - 5);
 	};

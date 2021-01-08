@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-
+/* Hooks and context */
 import { VALIDATOR_EMAIL } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+/* UI elements and components */
 import { IconButton, ErrorModal, LoadingSpinner, Modal } from '../../components/uiElements';
 import { Input } from '../../components/formElements/input/Input';
 import { Header } from '../../components/atoms';
-
+/* Styling */
 import './ForgotPasswordPage.scss';
 
 export const ForgotPasswordPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const [response, setResponse] = useState(null);
 
+	/* Dispatch form validation to the useForm hook */
 	const [formState, inputHandler] = useForm(
 		{
 			email: {
@@ -23,9 +25,9 @@ export const ForgotPasswordPage = () => {
 		false
 	);
 
+	/* Send user a mail with a link that enables password reset */
 	const resetEmailHandler = async (event) => {
 		event.preventDefault();
-
 		try {
 			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/auth/reset`,
@@ -37,16 +39,13 @@ export const ForgotPasswordPage = () => {
 					'Content-Type': 'application/json'
 				}
 			);
-
-			console.log(responseData);
 			const { message } = responseData;
 			setResponse(message);
 		} catch (err) {
-			console.log('Pwd send email error', err);
 			// Error is handled by useHttpClient
 		}
 	};
-	// const openModal = () => setShowDetails(true);
+	/* Closes the modal when the button in the modal is clicked */
 	const closeModal = () => setResponse(null);
 
 	if (isLoading) {

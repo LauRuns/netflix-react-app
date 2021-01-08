@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
@@ -23,12 +23,26 @@ import {
 import './AccountPage.scss';
 
 export const AccountPage = () => {
-	const { isAuthenticated, updateCountry } = useAuthentication();
+	const { isAuthenticated } = useAuthentication();
 	const { currentUser, setNewCurrentUser, isUpdating, updatingError } = useContextUser();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	let { userId } = useParams();
 
 	const _isMounted = useRef(null);
+
+	const fetchUser = useCallback(async () => {
+		try {
+			const responseData = await sendRequest(
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
+			);
+			const { result } = responseData;
+			if (_isMounted.current) {
+				setNewCurrentUser(result);
+			}
+		} catch (err) {
+			// Error is handled by useHttpClient
+		}
+	}, [sendRequest, userId, setNewCurrentUser]);
 
 	useEffect(() => {
 		closeAllInfoTabs();
@@ -36,34 +50,13 @@ export const AccountPage = () => {
 	}, [isLoading, isUpdating]);
 
 	useEffect(() => {
-		if (!isAuthenticated) {
-			console.log('Not authenticated - setting current user to null');
-			setNewCurrentUser(null);
-			return;
-		}
 		_isMounted.current = true;
-
-		const fetchUser = async () => {
-			try {
-				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
-				);
-				const { result } = responseData;
-				console.log('Loaded user__>', result);
-				if (_isMounted.current) {
-					setNewCurrentUser(result);
-				}
-			} catch (err) {
-				// Error is handled by useHttpClient
-			}
-		};
 		fetchUser();
-
 		return () => {
 			console.log('AccountPage fetchUser CLEANUP');
 			_isMounted.current = false;
 		};
-	}, [isAuthenticated, userId]);
+	}, [isAuthenticated, userId, fetchUser]);
 
 	const [showProfileInfo, setShowProfileInfo] = useState(false);
 	const [showCountrySetter, setShowCountrySetter] = useState(false);

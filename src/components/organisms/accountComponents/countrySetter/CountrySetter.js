@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
@@ -11,13 +11,13 @@ import './CountrySetter.scss';
 
 export const CountrySetter = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
-	const { currentUser, updateUser } = useContextUser();
+	const { updateUser } = useContextUser();
 
 	const [countryList, setCountryList] = useState(null);
 
 	const isMounted = useRef(null);
 
-	const [formState, inputHandler, setFormData] = useForm(
+	const [formState, inputHandler] = useForm(
 		{
 			country: {
 				value: {},
@@ -27,36 +27,37 @@ export const CountrySetter = () => {
 		false
 	);
 
-	useEffect(() => {
-		isMounted.current = true;
-		const fetchCountries = async () => {
-			try {
-				let countryData = [];
-				const response = await fetchNetflixData({
-					urlEndpoint: 'countries'
+	const fetchCountries = useCallback(async () => {
+		try {
+			let countryData = [];
+			const response = await fetchNetflixData({
+				urlEndpoint: 'countries'
+			});
+			if (isMounted.current) {
+				response.forEach((element) => {
+					const newEl = {
+						country: element.country.trim(),
+						countryId: element.id,
+						countrycode: element.countrycode
+					};
+					countryData.push(newEl);
 				});
 				if (isMounted.current) {
-					response.forEach((element) => {
-						const newEl = {
-							country: element.country.trim(),
-							countryId: element.id,
-							countrycode: element.countrycode
-						};
-						countryData.push(newEl);
-					});
-					if (isMounted.current) {
-						setCountryList(countryData);
-					}
+					setCountryList(countryData);
 				}
-			} catch (err) {
-				// Error is handled by useNetflixClient
 			}
-		};
+		} catch (err) {
+			// Error is handled by useNetflixClient
+		}
+	}, [fetchNetflixData]);
+
+	useEffect(() => {
+		isMounted.current = true;
 		fetchCountries();
 		return () => {
 			isMounted.current = false;
 		};
-	}, []);
+	}, [fetchCountries]);
 
 	const updateUserCountryHandler = async (event) => {
 		event.preventDefault();
