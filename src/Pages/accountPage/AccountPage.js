@@ -23,7 +23,7 @@ import {
 import './AccountPage.scss';
 
 export const AccountPage = () => {
-	const { isAuthenticated } = useAuthentication();
+	const { isAuthenticated, token } = useAuthentication();
 	const { currentUser, setNewCurrentUser, isUpdating, updatingError } = useContextUser();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	let { userId } = useParams();
@@ -33,7 +33,13 @@ export const AccountPage = () => {
 	const fetchUser = useCallback(async () => {
 		try {
 			const responseData = await sendRequest(
-				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`
+				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
+				'GET',
+				null,
+				{
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`
+				}
 			);
 			const { result } = responseData;
 			if (_isMounted.current) {
@@ -42,7 +48,7 @@ export const AccountPage = () => {
 		} catch (err) {
 			// Error is handled by useHttpClient
 		}
-	}, [sendRequest, userId, setNewCurrentUser]);
+	}, [sendRequest, userId, setNewCurrentUser, token]);
 
 	useEffect(() => {
 		closeAllInfoTabs();
@@ -53,7 +59,6 @@ export const AccountPage = () => {
 		_isMounted.current = true;
 		fetchUser();
 		return () => {
-			console.log('AccountPage fetchUser CLEANUP');
 			_isMounted.current = false;
 		};
 	}, [isAuthenticated, userId, fetchUser]);
