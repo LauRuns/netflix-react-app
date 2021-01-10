@@ -27,7 +27,7 @@ export const ExpContentList = ({ countryIdCode, itemClick }) => {
 				setIdList(response);
 			}
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [countryIdCode, offset, fetchNetflixData]);
 

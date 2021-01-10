@@ -12,7 +12,6 @@ export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdated
 		if (cntryName) {
 			updatedName = cntryName.charAt(0).toUpperCase() + cntryName.slice(1);
 		}
-		console.log(updatedName);
 		return updatedName;
 	};
 

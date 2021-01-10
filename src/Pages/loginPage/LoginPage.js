@@ -48,7 +48,6 @@ export const LoginPage = () => {
 	/* Loads a list of all available countries by the api. When a new user signs up, then this list will be presented in a dropdown. */
 	const loadCountries = useCallback(async () => {
 		let loadedCountries = [];
-		console.log('loginpage loading countries');
 		try {
 			const { results } = await sendRequest(
 				'https://unogsng.p.rapidapi.com/countries',

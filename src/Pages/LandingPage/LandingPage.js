@@ -20,7 +20,7 @@ export const LandingPage = () => {
 			const getStoredCountry = JSON.parse(localStorage.getItem('countryData'));
 			setStoredCountry(getStoredCountry);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [countryData]);
 

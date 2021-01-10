@@ -37,8 +37,6 @@ export const UserProvider = ({ children }) => {
 	}, []);
 
 	const updateUser = async (data) => {
-		console.log('updating_____>>', data);
-
 		const { country, username, email } = data;
 		try {
 			const responseData = await sendRequest(
@@ -80,7 +78,6 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
-		console.log('Setting the stored country in the context');
 		if (storedCountry) {
 			setCountryData(storedCountry.countryData);
 		}

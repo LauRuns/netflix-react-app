@@ -22,7 +22,6 @@ fdescribe('<MainNavigation />', () => {
 	it('should render the <Navbar /> component', () => {
 		const context = { isAuthenticated: true, userId: '123abc', logout: () => {} };
 		const wrapper = shallow(<MainNavigation />, { context });
-		console.log(wrapper.debug());
 		expect(wrapper.find(Navbar));
 	});
 });

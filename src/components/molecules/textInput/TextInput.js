@@ -7,7 +7,7 @@ import './TextInput.scss';
 
 export const TextInput = ({ name, placeholder, inputSize, labelSize, label, type, fieldRef }) => {
 	const { errors } = useFormContext();
-	console.log(errors);
+
 	return (
 		<div className="text-input-container">
 			<Label name={name} size={labelSize}>

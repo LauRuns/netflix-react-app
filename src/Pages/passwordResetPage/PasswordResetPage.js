@@ -52,7 +52,6 @@ export const PasswordResetPage = () => {
 				}
 			);
 			if (responseData) {
-				console.log(responseData);
 				const { message } = responseData;
 				setResponse(message);
 			}

@@ -4,7 +4,7 @@ import './Avatar.scss';
 
 export const Avatar = (props) => {
 	const onImgErrorHandler = () => {
-		console.log('User Avatar has an error');
+		console.error('User Avatar has an error');
 	};
 
 	return (

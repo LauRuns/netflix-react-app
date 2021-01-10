@@ -20,7 +20,6 @@ export const useNetflixClient = () => {
 		cancelToken = axios.CancelToken.source();
 
 		return () => {
-			console.log('Netflix cleanup');
 			setIsLoading(false);
 			_isMounted.current = false;
 		};
@@ -46,18 +45,19 @@ export const useNetflixClient = () => {
 					if (_isMounted.current) {
 						setIsLoading(false);
 						if (axios.isCancel(err)) {
-							console.log('Axios isCancel is thrown___:', err.message);
+							// console.log('Axios isCancel is thrown___:', err.message);
+							console.error(err);
 						} else if (err.response) {
-							console.log(
-								"Voldemort says there's an issue with your Response___:",
-								err.response.status
-							);
+							// console.log(
+							// 	"Voldemort says there's an issue with your Response___:",
+							// 	err.response.status
+							// );
 							setError(err.response.data.message ? err.response.data.message : err.message);
 						} else if (err.request) {
-							console.log("Voldemort says there's an issue with your Request___:", err.message);
+							// console.log("Voldemort says there's an issue with your Request___:", err.message);
 							setError(err.response.data.message ? err.response.data.message : err.message);
 						} else {
-							console.log('Voldemort says Error____:', err.message);
+							// console.log('Voldemort says Error____:', err.message);
 							setError(err.response.data.message ? err.response.data.message : err.message);
 						}
 					}
