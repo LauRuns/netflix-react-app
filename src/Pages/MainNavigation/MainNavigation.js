@@ -5,8 +5,6 @@ import { useAuthentication } from '../../shared/hooks/authentication-hook';
 /* UI elements and components */
 import { Navbar, SideDrawer } from '../../components/navigation';
 import { Backdrop } from '../../components/uiElements';
-/* Styling */
-import './MainNavigation.scss';
 
 /*
 Holds the navigation components for the application.

@@ -3,8 +3,6 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
 /* UI elements and components */
 import { Card, ImageContainer, LoadingSpinner, ErrorModal } from '../../uiElements';
-/* Styling */
-import './ExpItem.scss';
 
 /*
 Takes in a netflix ID and returns the content belonging to that ID by making a call to the unongsNG API.

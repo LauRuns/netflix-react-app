@@ -8,8 +8,6 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 import { IconButton, ErrorModal, LoadingSpinner, Modal } from '../../components/uiElements';
 import { Input } from '../../components/formElements/input/Input';
 import { Header } from '../../components/atoms';
-/* Styling */
-import './PasswordResetPage.scss';
 
 /*
 Presents a form for resetting the forgotten password.
