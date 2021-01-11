@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './FormInput.scss';
 
 export const FormInput = ({

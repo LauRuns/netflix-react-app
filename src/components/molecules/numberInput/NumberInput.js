@@ -1,10 +1,8 @@
 import React from 'react';
-
 import { useFormContext } from 'react-hook-form';
 import { Label, FormInput, ErrorMessage } from '../../atoms';
-
 import './NumberInput.scss';
-
+/* Returns a input field for numbers only - used icw react-hook-form */
 export const NumberInput = ({ name, inputSize, labelSize, placeholder, label, fieldRef }) => {
 	const { errors } = useFormContext();
 

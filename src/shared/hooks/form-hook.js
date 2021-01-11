@@ -1,5 +1,9 @@
 import { useCallback, useReducer } from 'react';
 
+/*
+Switch method that takes in the state and an action.
+Returns if provided inputs are valid and sets form isValid | !isValid
+*/
 const formReducer = (state, action) => {
 	switch (action.type) {
 		case 'INPUT_CHANGE': {
@@ -33,12 +37,18 @@ const formReducer = (state, action) => {
 	}
 };
 
+/*
+Hook for providing form validation.
+Takes in the provided form values and initial validities.
+Returns the current formstate, an inputHandler and setFormData
+*/
 export const useForm = (initialInputs, initialFormValidity) => {
 	const [formState, dispatch] = useReducer(formReducer, {
 		inputs: initialInputs,
 		isValid: initialFormValidity
 	});
 
+	/* Takes in the changing values and runs it by the formReducer to check for validity */
 	const inputHandler = useCallback((id, value, isValid) => {
 		dispatch({
 			type: 'INPUT_CHANGE',
@@ -48,6 +58,7 @@ export const useForm = (initialInputs, initialFormValidity) => {
 		});
 	}, []);
 
+	/* Method for setting initial form values when provided */
 	const setFormData = useCallback((inputData, formValidity) => {
 		dispatch({
 			type: 'SET_DATA',

@@ -1,15 +1,18 @@
 import React from 'react';
-
+/* Hooks and context */
 import { useForm } from '../../../../shared/hooks/form-hook';
+import { useContextUser } from '../../../../shared//context/user-context';
+/* UI elements and components */
 import { IconButton } from '../../../uiElements';
 import { ImageUpload } from '../../../formElements/imageUpload/ImageUpload';
-import { useContextUser } from '../../../../shared//context/user-context';
-
+/* Styling */
 import './UploadImage.scss';
 
+/* Component for handling changing the users avatar */
 export const UploadImage = () => {
 	const { updateUserImg } = useContextUser();
 
+	/* Checks the form if an image is selected */
 	const [formState, inputHandler] = useForm(
 		{
 			image: {
@@ -20,6 +23,7 @@ export const UploadImage = () => {
 		false
 	);
 
+	/* Forwards the selected image to updateImageHandler in useContextUser (context) */
 	const userUploadImgHandler = async (event) => {
 		event.preventDefault();
 		const formData = new FormData();

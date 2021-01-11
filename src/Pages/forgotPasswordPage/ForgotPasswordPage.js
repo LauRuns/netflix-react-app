@@ -48,6 +48,10 @@ export const ForgotPasswordPage = () => {
 	/* Closes the modal when the button in the modal is clicked */
 	const closeModal = () => setResponse(null);
 
+	/*
+    Presents the user a acitivity indicator 'loadings spinner' when bussy with handling the call to the backend.
+    Spinner is shown when the isLoading is set by the useHttpClient.
+    */
 	if (isLoading) {
 		return <LoadingSpinner asOverlay loadingSpinnerMessage="Sending data..." />;
 	}

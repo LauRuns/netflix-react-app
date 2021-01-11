@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import queryString from 'query-string';
-
-import { SearchFormResults } from '../../../components/organisms';
+/* Hooks and context */
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
+/* UI elements and components */
+import { SearchFormResults } from '../../../components/organisms';
 import { Header } from '../../../components/atoms';
 import { LoadingSpinner, ErrorModal, IconButton, Modal } from '../../../components/uiElements';
 import { NetflixItem } from '../../../components/molecules';
+/* Styling */
 import './SearchResultsPage.scss';
 
+/* Returns and presents the search results based on the users search query which are passed in as parameters */
 export const SearchResultsPage = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const { search } = useLocation();
@@ -22,6 +25,7 @@ export const SearchResultsPage = () => {
 	const [showSelected, setShowSelected] = useState(false);
 	const [noResults, setNoResults] = useState(null);
 
+	/* Search parameter variable has default order by date and audio set to english */
 	let searchParams = {
 		query: title,
 		offset: 0,
@@ -33,6 +37,7 @@ export const SearchResultsPage = () => {
 		end_year
 	};
 
+	/* When component is mounted fetch the search results and set them in state */
 	useEffect(() => {
 		isMounted.current = true;
 		const fetchSearchData = async () => {
@@ -52,21 +57,23 @@ export const SearchResultsPage = () => {
 				// Error is handled by useNetflixClient
 			}
 		};
-
 		fetchSearchData();
 		return () => {
 			isMounted.current = false;
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+	/* Open the modal based on state */
 	const openModal = () => setShowSelected(true);
 	const closeModal = () => setShowSelected(false);
 
+	/* Set the selected / clicked search result item in state which triggers an action by the modal -> opening and presenting the data */
 	const onSearchItemClickHandler = (e) => {
 		setSelectedItem(e);
 		openModal();
 	};
 
+	/* On clicking this button -> navigate back to the search page to perform a new search */
 	const navigateBackToSearch = () => {
 		history.push('/search');
 	};

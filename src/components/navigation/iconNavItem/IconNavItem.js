@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { Icon } from '../../atoms';
-
 import './IconNavItem.scss';
 
+/* Returns a single IconNavItem that is customizable via different props */
 export const IconNavItem = ({
 	children,
 	link,

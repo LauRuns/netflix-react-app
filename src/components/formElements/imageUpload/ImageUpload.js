@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-
+/* UI elements and styling */
 import { IconButton } from '../../uiElements';
 import './ImageUpload.scss';
 
+/* Comonent for handling the selection of a file - image */
 export const ImageUpload = (props) => {
 	const [file, setFile] = useState();
 	const [previewUrl, setPreviewUrl] = useState();
@@ -10,6 +11,7 @@ export const ImageUpload = (props) => {
 
 	const filePickerRef = useRef();
 
+	/* Acts when a file is selected and renders a preview */
 	useEffect(() => {
 		if (!file) {
 			return;
@@ -21,6 +23,7 @@ export const ImageUpload = (props) => {
 		fileReader.readAsDataURL(file);
 	}, [file]);
 
+	/* Handles the selected file */
 	const pickedHandler = (event) => {
 		let pickedFile;
 		let fileIsValid = isValid;
@@ -37,6 +40,11 @@ export const ImageUpload = (props) => {
 		props.onInput(props.id, pickedFile, fileIsValid);
 	};
 
+	/*
+    Is a reference to the input element that is not displayed.
+    The button calling this function forwards the event to the hidden input, triggering the opening of the device files.
+    This allows the user to select an image.
+    */
 	const pickImageHandler = () => {
 		filePickerRef.current.click();
 	};
@@ -48,7 +56,7 @@ export const ImageUpload = (props) => {
 				ref={filePickerRef}
 				style={{ display: 'none' }}
 				type="file"
-				accept=".jpg,.png,.jpeg"
+				accept=".jpg,.png,.jpeg" // accept only images
 				onChange={pickedHandler}
 			/>
 			<div className={`image-upload ${props.center && 'center'}`}>
@@ -56,9 +64,6 @@ export const ImageUpload = (props) => {
 					{previewUrl && <img src={previewUrl} alt="Preview" />}
 					{!previewUrl && <p>Please select an image.</p>}
 				</div>
-				{/* <Button type="button" onClick={pickImageHandler}>
-					PICK IMAGE
-				</Button> */}
 				<IconButton
 					icon="search"
 					iconSize={24}

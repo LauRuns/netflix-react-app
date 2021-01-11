@@ -1,10 +1,8 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-
 import { Label, ErrorMessage } from '../../atoms';
-
 import './RadioButtonGroup.scss';
-
+/* Returns a group of radio buttons as children */
 export const RadioButtonGroup = ({ children, name, row, column, label, labelSize }) => {
 	const { errors } = useFormContext();
 

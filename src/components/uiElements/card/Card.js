@@ -1,7 +1,7 @@
 import React from 'react';
-
 import './Card.scss';
 
+/* Returns a styled div that takes in additional props for styling and forwards onClick events */
 export const Card = (props) => {
 	return (
 		<div

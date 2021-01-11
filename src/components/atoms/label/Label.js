@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Label.scss';
 
 export const Label = ({ name, size, children }) => {

@@ -7,6 +7,7 @@ export const useHttpClient = () => {
 	let signal;
 	let isMounted = useRef(null);
 
+	/* Set the axios cancel token and clean it when unmounting */
 	useEffect(() => {
 		isMounted.current = true;
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -18,6 +19,7 @@ export const useHttpClient = () => {
 		};
 	}, []);
 
+	/* Makes a call to the backend which is running on process.env.REACT_APP_CONNECTION_STRING */
 	const sendRequest = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
 		setIsLoading(true);
 		try {
@@ -31,7 +33,7 @@ export const useHttpClient = () => {
 				}
 			);
 
-			/* Perform a task before the response is passed on */
+			/* Perform a task before the response is passed on. If an error is set on the response body, then a check is performed what kind of error it is. */
 			axios.interceptors.response.use(
 				(response) => {
 					return response;
@@ -60,6 +62,7 @@ export const useHttpClient = () => {
 				}
 			);
 
+			/* Prior to sending the request, a check is performed if the component is still mounted */
 			if (isMounted.current) {
 				const response = await axios({
 					method: method,
@@ -82,6 +85,7 @@ export const useHttpClient = () => {
 		}
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+	/* Method for setting the error back to null */
 	const clearError = () => {
 		setError(null);
 	};

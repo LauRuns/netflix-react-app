@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-
+/* Hooks and context */
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { useContextUser } from '../../shared/context/user-context';
+/* UI elements and components */
 import {
 	Button,
 	LoadingSpinner,
@@ -19,18 +20,23 @@ import {
 	ProfileInfo,
 	UploadImage
 } from '../../components/organisms';
-
+/* Styling */
 import './AccountPage.scss';
 
+/* Presents the user with user details and enables changing them */
 export const AccountPage = () => {
 	const { isAuthenticated, token } = useAuthentication();
 	const { currentUser, setNewCurrentUser, isUpdating, updatingError } = useContextUser();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	let { userId } = useParams();
-
 	const _isMounted = useRef(null);
 
+	/*
+    Fetches the userdata based on user ID -> set in MainNavigation.
+    Alternatively the user ID can be retrevied from useAthentication context
+    */
 	const fetchUser = useCallback(async () => {
+		console.log('userID___:', userId);
 		try {
 			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
@@ -50,11 +56,13 @@ export const AccountPage = () => {
 		}
 	}, [sendRequest, userId, setNewCurrentUser, token]);
 
+	/* Scrolls to the top when alle info tabs for changing user details are being closed or when isLoading / isUpdating is true */
 	useEffect(() => {
 		closeAllInfoTabs();
 		window.scrollTo(0, 0);
 	}, [isLoading, isUpdating]);
 
+	/* Fetch the user when component is mounted */
 	useEffect(() => {
 		_isMounted.current = true;
 		fetchUser();
@@ -67,14 +75,15 @@ export const AccountPage = () => {
 	const [showCountrySetter, setShowCountrySetter] = useState(false);
 	const [showUploadImage, setShowUploadImage] = useState(false);
 	const [showChangePassword, setShowChangePassword] = useState(false);
-
 	const [displayMessage, setDisplayMessage] = useState(false);
 
+	/* Opens or closes individual sections for updating userdata */
 	const showProfileInfoHandler = () => setShowProfileInfo(!showProfileInfo);
 	const showCountrySet = () => setShowCountrySetter(!showCountrySetter);
 	const showImageUploader = () => setShowUploadImage(!showUploadImage);
 	const showPasswordChange = () => setShowChangePassword(!showChangePassword);
 
+	/* Opens all sections for changing user data */
 	const closeAllInfoTabs = () => {
 		setShowProfileInfo(false);
 		setShowCountrySetter(false);
@@ -82,6 +91,7 @@ export const AccountPage = () => {
 		setShowChangePassword(false);
 	};
 
+	/* Closes all sections for changing user data */
 	const openAllInfoTabs = () => {
 		setShowProfileInfo(true);
 		setShowCountrySetter(true);

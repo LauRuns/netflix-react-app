@@ -1,18 +1,21 @@
 import React from 'react';
-
+/* Hooks, context and validators */
 import { VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../../shared/util/validators';
 import { useForm } from '../../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
+import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
+/* UI elements and components */
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { Input } from '../../../formElements/input/Input';
-import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
-
+/* Styling */
 import './PasswordChange.scss';
 
+/* Component for handling changing the users password */
 export const PasswordChange = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const { token, userId } = useAuthentication();
 
+	/* Checks form validity based on inputs */
 	const [formState, inputHandler] = useForm(
 		{
 			oldPassword: {
@@ -31,9 +34,11 @@ export const PasswordChange = (props) => {
 		false
 	);
 
+	/* Sends a request to the backend via the useHttpClient hook */
 	const updatePwdHandler = async (event) => {
 		event.preventDefault();
 
+		/* Check is new and confirm passwords are the same */
 		if (formState.inputs.newPassword.value !== formState.inputs.confirmNewPassword.value) {
 			formState.isValid = false;
 			return alert("The new and confirm password don't match... Please try again.");
@@ -70,7 +75,6 @@ export const PasswordChange = (props) => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-
 			<div className="pwd-change-container">
 				{!isLoading && (
 					<form className="pwd-update-form" onSubmit={updatePwdHandler}>

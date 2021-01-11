@@ -1,10 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import { validate } from '../../../shared/util/validators';
-
 import { Backdrop } from '../../uiElements';
-
 import './CountryDropdown.scss';
-
+/* Checks input value and returns state for the form */
 const selectionReducer = (state, action) => {
 	switch (action.type) {
 		case 'CLICKED':
@@ -24,6 +22,10 @@ const selectionReducer = (state, action) => {
 	}
 };
 
+/*
+Returns a list of country objects selectable in a dropdown.
+The component is used on the sign up form (LoginPage) and in the account section where the user can change the country (CountrySetter).
+*/
 export const CountryDropdown = ({
 	title,
 	items,
@@ -42,13 +44,17 @@ export const CountryDropdown = ({
 	});
 	const [open, setOpen] = useState(false);
 	const [showBackDrop, setShowBackDrop] = useState(false);
-
 	const { value, isValid } = selectionState;
 
+	/*
+    Forward the id, value and if the input value is valid (boolean) to the parent component using the dropdown.
+    In the parent component these values are used to check if the overall form is valid and if can be submitted.
+    */
 	useEffect(() => {
 		onInput(id, value, isValid);
 	}, [id, value, isValid, onInput]);
 
+	/* Gets fired whenever an input value changes. Passes the action to the useReducer function. */
 	const onChangeHandler = (selectedCountry) => {
 		dispatch({
 			type: 'CLICKED',
@@ -58,12 +64,14 @@ export const CountryDropdown = ({
 		toggle();
 	};
 
+	/* Determines if the dropdown list was touched. Passes this action to the useReducer fucntion */
 	const touchHandler = () => {
 		dispatch({
 			type: 'TOUCH'
 		});
 	};
 
+	/* Opens the dropdown */
 	const toggle = () => {
 		setShowBackDrop(!showBackDrop);
 		setOpen(!open);

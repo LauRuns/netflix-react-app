@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Card, ImageContainer } from '../../uiElements';
-
 import './NewItem.scss';
 
 export const NewItem = ({ item, itemClick }) => {

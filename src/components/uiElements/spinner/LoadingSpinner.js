@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './LoadingSpinner.scss';
 
 export const LoadingSpinner = ({ asOverlay, center, loadingSpinnerMessage }) => {

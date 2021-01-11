@@ -1,8 +1,11 @@
 import React from 'react';
-import { IconNavItem } from '../iconNavItem/IconNavItem';
+/* Hook - context */
 import { useAuthentication } from '../../../shared/hooks/authentication-hook';
+/* Component and styling */
+import { IconNavItem } from '../iconNavItem/IconNavItem';
 import './IconNavItems.scss';
 
+/* Returns a list of IconNavItem for using in the SideDrawer */
 export const IconNavItems = ({ navItems }) => {
 	const { isAuthenticated } = useAuthentication();
 

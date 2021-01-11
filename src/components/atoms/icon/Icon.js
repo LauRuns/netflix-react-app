@@ -1,5 +1,4 @@
 import React from 'react';
-
 import iconPath from '../../../assets/iconslib';
 import './Icon.scss';
 

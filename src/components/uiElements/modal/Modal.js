@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
-
+/* Components and styling */
 import { Backdrop } from '../backdrop/Backdrop';
 import './Modal.scss';
 
@@ -20,6 +20,10 @@ const ModalOverlay = (props) => {
 	return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
 };
 
+/*
+Displays a modal with children passed to it using the CCS transition group:
+http://reactcommunity.org/react-transition-group/css-transition
+*/
 export const Modal = (props) => {
 	const nodeRef = React.useRef(null);
 	return (

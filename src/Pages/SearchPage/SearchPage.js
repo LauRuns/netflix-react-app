@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-
+/* Hooks and context */
 import { useNetflixClient } from '../../shared/hooks/netflix-hook';
+/* UI elemenets and components */
 import { Header } from '../../components/atoms';
 import { SearchForm } from '../../components/organisms';
 import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
-
+/* Styling */
 import './SearchPage.scss';
 
+/*
+Returns the searchpage with the searchform component.
+When loaded all countries will be fetched and passed to the searchform component that will use it in a dropdown
+*/
 export const SearchPage = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const [countryList, setCountryList] = useState();
-
 	const isMounted = useRef(null);
 	const history = useHistory();
 
+	/* Load all available countries and set in state */
 	const loadCountries = useCallback(async () => {
 		let loadedCountries = [];
 		try {
@@ -39,6 +44,7 @@ export const SearchPage = () => {
 		}
 	}, [fetchNetflixData]);
 
+	/* Load countries when component is mounted */
 	useEffect(() => {
 		isMounted.current = true;
 		loadCountries();
@@ -47,6 +53,7 @@ export const SearchPage = () => {
 		};
 	}, [loadCountries]);
 
+	/* Push to the search results page passing in the search parameters. Activated when the user clicks the 'search' button */
 	const fetchSearchResults = ({ contentselector, countryselect, endyear, startyear, query }) => {
 		history.push({
 			pathname: '/search/results',

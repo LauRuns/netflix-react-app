@@ -1,10 +1,9 @@
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-
 import { Label, FormInput, ErrorMessage } from '../../atoms';
-
 import './TextInput.scss';
 
+/* Returns a textinput that is used icw react-hook-form */
 export const TextInput = ({ name, placeholder, inputSize, labelSize, label, type, fieldRef }) => {
 	const { errors } = useFormContext();
 

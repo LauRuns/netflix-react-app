@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Logo.scss';
 
 const defaultStyles = { display: 'inline-block', verticalAlign: 'middle' };

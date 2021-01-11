@@ -1,16 +1,20 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-
+/* Hooks and context */
 import { useNetflixClient } from '../../shared/hooks/netflix-hook';
+/* UI elements and components */
 import { ErrorModal, LoadingSpinner } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { Search, CountryList } from '../../components/organisms';
-
+/* Styling */
 import './CountriesPage.scss';
 
+/*
+Presents the user a list of countries as 'chips' that are clickable -> navigating to the countryDetailsPage.
+The page alsow holds a search field that allows searching for a country from the list of countries.
+ */
 export const CountriesPage = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const isMounted = useRef(null);
-
 	const [loadedCountries, setLoadedCountries] = useState();
 	const [countryListData, setCountryListData] = useState();
 

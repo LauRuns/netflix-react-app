@@ -15,6 +15,11 @@ import {
 	PasswordResetPage
 } from '../pages';
 
+/*
+Returns all the routes available for the app.
+All routes that require authentication are wrapped in the PrivateRoute tag.
+When the url is directly manipulated by the user with no matching route, the app will fall back on the wild card '*' route, returning a 404 page.
+*/
 export const Routes = () => {
 	return (
 		<Switch>

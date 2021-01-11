@@ -11,13 +11,17 @@ import { Header } from '../../components/atoms';
 /* Styling */
 import './PasswordResetPage.scss';
 
+/*
+Presents a form for resetting the forgotten password.
+Manages the form state, validity and returns a message upon succes or error.
+*/
 export const PasswordResetPage = () => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const { token } = useParams();
 	const [response, setResponse] = useState(null);
-
 	const history = useHistory();
 
+	/* Form hook for managing the form state */
 	const [formState, inputHandler] = useForm(
 		{
 			newPassword: {
@@ -32,6 +36,7 @@ export const PasswordResetPage = () => {
 		false
 	);
 
+	/* Send the form data to the backend. Performs a check if new and confirm password match prior to sending the data. */
 	const resetPwdHandler = async (event) => {
 		event.preventDefault();
 
@@ -59,11 +64,13 @@ export const PasswordResetPage = () => {
 			// Error is handled by useHttpClient
 		}
 	};
+	/* Opens a modal with the response. On succes and error navigates back to the login component. */
 	const closeModal = () => {
 		setResponse(null);
 		history.push('/login');
 	};
 
+	/* Listens to the isLoading value returned by the useHttpClient hook. Based on this value a loading spinner is presented. */
 	if (isLoading) {
 		return <LoadingSpinner asOverlay loadingSpinnerMessage="Updating password..." />;
 	}

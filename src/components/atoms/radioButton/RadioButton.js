@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Label } from '../label/Label';
 import { FormInput } from '../formInput/FormInput';
 import './RadioButton.scss';

@@ -1,10 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-
+/* UI element */
 import { Button } from '../../components/uiElements';
-
+/* Styling */
 import './PageNotFound.scss';
 
+/*
+When the user manipulates the url directly and there is no route match, this 404 page not found is presented.
+It has a button that on click allow the user to navigate back to the /home screen.
+*/
 export const PageNotFound = () => {
 	let location = useLocation();
 	return (

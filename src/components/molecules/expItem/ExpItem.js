@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Card, ImageContainer, LoadingSpinner, ErrorModal } from '../../uiElements';
+/* Hook */
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
-
+/* UI elements and components */
+import { Card, ImageContainer, LoadingSpinner, ErrorModal } from '../../uiElements';
+/* Styling */
 import './ExpItem.scss';
 
+/*
+Takes in a netflix ID and returns the content belonging to that ID by making a call to the unongsNG API.
+*/
 export const ExpItem = ({ netflixid, itemClick }) => {
 	const [expItem, setExpItem] = useState(null);
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
-
 	const isMounted = useRef(null);
 
+	/* Fetch content for ID using the 'title' endpoint from unogsNG API */
 	const fetchExpItem = useCallback(async () => {
 		try {
 			const response = await fetchNetflixData({
@@ -24,6 +29,7 @@ export const ExpItem = ({ netflixid, itemClick }) => {
 		}
 	}, [fetchNetflixData, netflixid]);
 
+	/* Fetch content when mounted */
 	useEffect(() => {
 		isMounted.current = true;
 		fetchExpItem();

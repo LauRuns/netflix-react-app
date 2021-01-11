@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
+/* Hooks and context */
 import {
 	VALIDATOR_EMAIL,
 	VALIDATOR_MINLENGTH,
@@ -9,24 +10,22 @@ import {
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import { useAuthentication } from '../../shared/hooks/authentication-hook';
+/* UI elements and components */
 import { Button, Card, LoadingSpinner, ErrorModal } from '../../components/uiElements';
 import { Input } from '../../components/formElements/input/Input';
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import { UserContext } from '../../shared/context/user-context';
 import { CountryDropdown } from '../../components/formElements/countryDropdown/CountryDropdown';
-
+/* Styling */
 import './LoginPage.scss';
 
+/* Presents the login / sign up page */
 export const LoginPage = () => {
-	/* Hooks and context */
 	const { login } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	const { setNewCurrentUser } = useContext(UserContext);
-
-	/* Component state */
 	const [countryList, setCountryList] = useState();
 	const [isLoginMode, setIsLoginMode] = useState(true);
-
 	const history = useHistory();
 	const isMounted = useRef(null);
 
@@ -92,7 +91,10 @@ export const LoginPage = () => {
 		};
 	}, [isLoginMode, loadCountries]);
 
-	/* Allows switching betweens Login and Sign Up. Component state (a boolean) is adjusted accordingly rendering a different form.  */
+	/*
+    Allows switching betweens Login and Sign Up.
+    Component state (a boolean) is adjusted accordingly rendering a different form.
+    */
 	const switchModeHandler = () => {
 		if (!isLoginMode) {
 			setFormData(

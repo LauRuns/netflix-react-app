@@ -29,6 +29,7 @@ export const VALIDATOR_OBJECT = () => ({
 	type: VALIDATOR_TYPE_OBJECT
 });
 
+/* Apllies validation on the provided value, returns a boolean isValid | !isValid */
 export const validate = (value, validators) => {
 	let isValid = true;
 

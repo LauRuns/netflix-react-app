@@ -1,10 +1,10 @@
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
-
+/* UI elements and components */
 import { TextInput, NumberInput, RadioButtonGroup, Dropdown } from '../../molecules';
 import { RadioButton } from '../../atoms';
 import { IconButton } from '../../uiElements';
-
+/* Styling */
 import './SearchForm.scss';
 
 const contentTypes = [
@@ -22,6 +22,10 @@ const contentTypes = [
 	}
 ];
 
+/*
+Returns a searchform used on the SearchPage.
+Formwards the form submitting to the parent component - SearchPage
+*/
 export const SearchForm = ({ countries, sendFormData }) => {
 	const { register, unregister, watch, handleSubmit, ...methods } = useForm({
 		mode: 'onChange'

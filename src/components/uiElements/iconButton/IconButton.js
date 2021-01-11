@@ -1,8 +1,13 @@
 import React from 'react';
-
+/* Components and styling */
 import { Icon } from '../../atoms';
 import './IconButton.scss';
 
+/*
+Returns a button that holds a Icon.
+Based on the 'before' prop, the icon is set before or after the button text.
+Takes in additional styling properties and forwards the onClick action
+*/
 export const IconButton = ({
 	children,
 	icon,

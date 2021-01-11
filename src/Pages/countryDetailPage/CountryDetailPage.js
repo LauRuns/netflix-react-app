@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+/* UI elements and components */
 import { IconButton, Modal } from '../../components/uiElements';
 import { IconNavItem } from '../../components/navigation';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { NewContentList, ExpContentList } from '../../components/organisms';
+/* Styling */
 import './CountryDetailPage.scss';
 
+/*
+Presents a list of new and expiring items for the selected country.
+The list can be navigated [see components > oragnisms > new & expContentList]
+*/
 export const CountryDetailPage = () => {
 	const [showDetails, setShowDetails] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
-
 	const { countryId, countryName } = useParams();
 
+	/* Opens modal and present the selected item details */
 	const openModal = () => setShowDetails(true);
 	const closeModal = () => setShowDetails(false);
 
+	/* Sets the currents selected item and opens the modal */
 	const detailItemClicked = (data) => {
 		setSelectedItem(data);
 		openModal();

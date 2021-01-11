@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react';
-
+/* Hooks, context and validators */
 import {
 	VALIDATOR_MAXLENGTH,
 	VALIDATOR_MINLENGTH,
 	VALIDATOR_EMAIL
 } from '../../../../shared/util/validators.js';
 import { useForm } from '../../../../shared/hooks/form-hook';
+import { useContextUser } from '../../../../shared/context/user-context';
+/* UI elemensts and omponents */
 import { IconButton } from '../../../../components/uiElements';
 import { Input } from '../../../formElements/input/Input';
-import { useContextUser } from '../../../../shared/context/user-context';
-
+/* Styling */
 import './ProfileInfo.scss';
 
+/* Component for handling changing the user email and username */
 export const ProfileInfo = () => {
 	const { currentUser, updateUser } = useContextUser();
 
+	/* Checks form validity based on inputs */
 	const [formState, inputHandler, setFormData] = useForm(
 		{
 			username: {
@@ -29,6 +32,7 @@ export const ProfileInfo = () => {
 		false
 	);
 
+	/* Sets the initial form values to the current email and username */
 	useEffect(() => {
 		setFormData(
 			{
@@ -45,13 +49,14 @@ export const ProfileInfo = () => {
 		);
 	}, [currentUser, setFormData]);
 
+	/* Forwards the values for updating to the user context */
 	const userProfileUpdateSubmitHandler = async (event) => {
 		event.preventDefault();
 		const newValues = {
 			username: formState.inputs.username.value,
 			email: formState.inputs.email.value
 		};
-		updateUser(newValues);
+		await updateUser(newValues);
 	};
 
 	return (

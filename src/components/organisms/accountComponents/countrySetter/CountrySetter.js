@@ -1,22 +1,23 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-
-import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
-import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
+/* Hooks, context and validators */
+import { VALIDATOR_OBJECT } from '../../../../shared/util/validators';
 import { useContextUser } from '../../../../shared/context/user-context';
 import { useNetflixClient } from '../../../../shared/hooks/netflix-hook';
 import { useForm } from '../../../../shared/hooks/form-hook';
-import { VALIDATOR_OBJECT } from '../../../../shared/util/validators';
-
+/* UI elements and components */
+import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
+import { CountryDropdown } from '../../../formElements/countryDropdown/CountryDropdown';
+/* Styling */
 import './CountrySetter.scss';
 
+/* Component for changing the user country - based on this country data is loaded on the landing page after login or sign up */
 export const CountrySetter = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const { updateUser } = useContextUser();
-
 	const [countryList, setCountryList] = useState(null);
-
 	const isMounted = useRef(null);
 
+	/* Checks the formstate based on inputs - useForm hook */
 	const [formState, inputHandler] = useForm(
 		{
 			country: {
@@ -27,6 +28,7 @@ export const CountrySetter = () => {
 		false
 	);
 
+	/* Fetch a list of all countries that will be set in a dropdown */
 	const fetchCountries = useCallback(async () => {
 		try {
 			let countryData = [];
@@ -51,6 +53,7 @@ export const CountrySetter = () => {
 		}
 	}, [fetchNetflixData]);
 
+	/* Fetch all the countries available by the API when the component is mounted */
 	useEffect(() => {
 		isMounted.current = true;
 		fetchCountries();
@@ -59,6 +62,7 @@ export const CountrySetter = () => {
 		};
 	}, [fetchCountries]);
 
+	/* Forwards the selected country to the user context method for updating the country */
 	const updateUserCountryHandler = async (event) => {
 		event.preventDefault();
 		updateUser({ country: formState.inputs.country.value });
@@ -71,7 +75,6 @@ export const CountrySetter = () => {
 	return (
 		<React.Fragment>
 			<ErrorModal error={error} onClear={clearError} />
-
 			<div className="country-set-container">
 				<form className="set-country-form" onSubmit={updateUserCountryHandler}>
 					<div className="country-dsply-info">

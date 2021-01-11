@@ -1,14 +1,15 @@
 import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
-
+/* Create the AuthContext */
 const AuthContext = createContext();
 let logoutTimer;
-
+/* Set up AuthProvider that wraps its children. It holds the authentication context for the app */
 export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(null);
 	const [token, setToken] = useState(null);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
 	const [userId, setUserId] = useState(null);
 
+	/* Set login and store user ID and token in the local storage */
 	const login = useCallback((uid, token, expirationDate) => {
 		setToken(token);
 		setUserId(uid);
@@ -27,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 		);
 	}, []);
 
+	/* On logout set all state back to null and remove objects from localstorage */
 	const logout = useCallback(() => {
 		setIsAuthenticated(false);
 		setToken(null);
@@ -36,6 +38,7 @@ export const AuthProvider = ({ children }) => {
 		localStorage.removeItem('countryData');
 	}, []);
 
+	/* Check if token and token expiration date are available set the current logout timer based on those values */
 	useEffect(() => {
 		if (token && tokenExpirationDate) {
 			const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
@@ -45,6 +48,7 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [token, logout, tokenExpirationDate]);
 
+	/* Allows for reload automatic login when the token expiration date has not yet expired */
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem('userData'));
 		if (storedData && storedData.token && new Date(storedData.expiration) > new Date()) {
@@ -52,6 +56,7 @@ export const AuthProvider = ({ children }) => {
 		}
 	}, [login]);
 
+	/* Return all data and methods so they are accessible by the rest of the application  */
 	return (
 		<AuthContext.Provider
 			value={{

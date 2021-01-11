@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { Header } from '../../components/atoms/index';
 import './TermsAndConditions.scss';
 
+/* Return a dummy text about terms and conditions. Navigating to this page is done from the sign up card. */
 export const TermsAndConditions = () => {
 	return (
 		<div className="terms-conditions-container">

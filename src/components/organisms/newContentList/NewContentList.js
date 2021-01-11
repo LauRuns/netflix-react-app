@@ -1,10 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-import { NavButtons, NewItem } from '../../molecules';
+/* Hooks and context */
 import { useNetflixClient } from '../../../shared/hooks/netflix-hook';
+/* UI elements and components */
+import { NavButtons, NewItem } from '../../molecules';
 import { LoadingSpinner, ErrorModal } from '../../uiElements';
+/* Styling */
 import './NewContentList.scss';
 
+/*
+Returns a list of NewItem(s). Takes in a countrycode for which it will fetch the new Netflix items.
+When a NewItem is clicked then the onClick is returned to the parent component.
+
+Holds a NavButtons component that allows for updating the search offset and returning the next set of NewItem(s)
+*/
 export const NewContentList = ({ countryIdCode, itemClick }) => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
 	const [offset, setOffset] = useState(0);

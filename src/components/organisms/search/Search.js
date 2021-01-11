@@ -1,13 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+/* Components and styling */
 import { Icon } from '../../atoms';
 import './Search.scss';
 
+/*
+Returns a search field used in the CountriesPage for searching the list of countries.
+*/
 export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdatedCountryData }) => {
 	const [enteredFilter, setEnteredFilter] = useState('');
 	const inputRef = useRef();
 
-	const firstLetterTpUppercase = (cntryName) => {
+	/*
+    Sets the first letter of the searched country to uppercase to match the countries in the list - which also start with an uppercase.
+    Otherwise no country search would match the search query
+    */
+	const firstLetterToUppercase = (cntryName) => {
 		let updatedName;
 		if (cntryName) {
 			updatedName = cntryName.charAt(0).toUpperCase() + cntryName.slice(1);
@@ -17,10 +24,12 @@ export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdated
 
 	useEffect(() => {
 		let searchedCountry;
+		/* Forwards the search reult to the CountriesPage */
 		const onUpdate = (event) => {
 			setUpdatedCountryData(event);
 		};
 
+		/* Uses a timeout of 500ms - when the user stops typing a search of the list is performed */
 		const timer = setTimeout(() => {
 			if (enteredFilter === inputRef.current.value) {
 				const newEnteredFilter = enteredFilter.toLowerCase();
@@ -41,7 +50,7 @@ export const Search = React.memo(({ onLoadCountryFilter, countryList, setUpdated
 			}
 
 			if (searchedCountry.length !== 0) {
-				searchedCountry[0].country = firstLetterTpUppercase(searchedCountry[0].country);
+				searchedCountry[0].country = firstLetterToUppercase(searchedCountry[0].country);
 			}
 
 			return onUpdate(searchedCountry);

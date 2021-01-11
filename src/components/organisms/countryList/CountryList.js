@@ -1,8 +1,11 @@
 import React from 'react';
-
 import { Chip, Card } from '../../uiElements';
 import './CountryList.scss';
 
+/*
+Returns a list of 'Chips' with country names.
+Takes in a list of countries via props as 'items'.
+*/
 export const CountryList = ({ items }) => {
 	if (items.length === 0) {
 		return (

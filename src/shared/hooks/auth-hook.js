@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 let logoutTimer;
-
+/* Initial authentication of login implementation */
 const useAuth = () => {
 	const [token, setToken] = useState(false);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();

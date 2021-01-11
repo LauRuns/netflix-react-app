@@ -9,12 +9,18 @@ import { ExpContentList, NewContentList } from '../../components/organisms';
 /* Styling */
 import './LandingPage.scss';
 
+/*
+Presents the user with data after login / sign up.
+Based on the set country, data for that country will be loaded.
+Default data for the Netherlands will always be loaded.
+*/
 export const LandingPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [showSelected, setShowSelected] = useState(false);
 	const [storedCountry, setStoredCountry] = useState(null);
 	const { currentUser, countryData } = useContextUser();
 
+	/* Read the countryData object from local storage and set it in state */
 	useEffect(() => {
 		try {
 			const getStoredCountry = JSON.parse(localStorage.getItem('countryData'));
@@ -24,11 +30,13 @@ export const LandingPage = () => {
 		}
 	}, [countryData]);
 
+	/* Open the modal presenting the selected item data */
 	const onItemClickedHandler = (data) => {
-		setSelectedItem(data);
+		setSelectedItem(data); // can be simlified
 		openModal();
 	};
 
+	/* Openenig and closing the modal */
 	const openModal = () => setShowSelected(true);
 	const closeModal = () => setShowSelected(false);
 

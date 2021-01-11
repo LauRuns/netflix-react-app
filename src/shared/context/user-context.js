@@ -1,21 +1,21 @@
 import React, { useState, createContext, useCallback, useEffect } from 'react';
 import { useContext } from 'react';
-
+/* Hooks imports */
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { useAuthentication } from '../../shared/hooks/authentication-hook';
-
+/* Create context */
 export const UserContext = createContext();
-
 export const useContextUser = () => {
 	return useContext(UserContext);
 };
-
+/* Create provider that wraps it children */
 export const UserProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [countryData, setCountryData] = useState(null);
 	const { token, userId } = useAuthentication();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
+	/* Set the logged in user in the context */
 	const setNewCurrentUser = useCallback((user) => {
 		setCurrentUser(user);
 
@@ -27,18 +27,21 @@ export const UserProvider = ({ children }) => {
 					countryData: user.country
 				})
 			);
-			sessionStorage.setItem(
-				'countryData',
-				JSON.stringify({
-					countryData: user.country
-				})
-			);
+			/* Using session iso local storage - optional */
+			// sessionStorage.setItem(
+			// 	'countryData',
+			// 	JSON.stringify({
+			// 		countryData: user.country
+			// 	})
+			// );
 		}
 	}, []);
 
+	/* Make PATCH call to the backend for updating the user */
 	const updateUser = async (data) => {
 		const { country, username, email } = data;
 		try {
+			/* sendRequest is method provided by the useHttpClient hook */
 			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
 				'PATCH',
@@ -58,6 +61,7 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	/* Make PATCH call to the backend and update only the user avatar (image) */
 	const updateUserImg = async (data) => {
 		try {
 			const responseData = await sendRequest(
@@ -76,6 +80,7 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	/* Takes the country data object from the local storage and sets it in state */
 	useEffect(() => {
 		const storedCountry = JSON.parse(localStorage.getItem('countryData'));
 		if (storedCountry) {

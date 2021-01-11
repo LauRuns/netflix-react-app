@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import './Button.scss';
 
+/*
+Returns a button and takes in addiotional props to set the type and styling for the button.
+*/
 export const Button = (props) => {
 	if (props.href) {
 		return (

@@ -1,10 +1,11 @@
 import React from 'react';
-
+/* UI elements and components */
 import { Header } from '../../atoms';
 import { NetflixItem, NewItem } from '../../molecules';
-
+/* Styling */
 import './SearchFormResults.scss';
 
+/* Presents the user the results from the search query. Takes in the result data and renders that into NetflixItems */
 export const SearchFormResults = ({ resultData, header, onClick }) => {
 	if (resultData.length > 4) {
 		return (
