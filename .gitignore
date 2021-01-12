@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 .gitignore
-.gitattributes
 
 # dependencies
 /node_modules
@@ -29,8 +28,6 @@ build/
 tmp/
 temp/
 
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-.gitignore
 
 # Editor
 .idea/
