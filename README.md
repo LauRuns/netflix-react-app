@@ -45,7 +45,7 @@ Create a `.env` and a `.env.production` file in the root folder and enter all en
 
 - You will need to set a connection string at which the app will reach out to the API that is part of this overall project. Make sure that the `CONNECTION_STRING` in both the API and Webapp use the same address and port.
 - Next you will need to set the `ASSET_URL` which is used to fetch and set the user images/avatar. The `ASSET_URL` does <b>NOT</b> end with `/api`!!<br />
-  <img src="./src/assets/setting-env-rjs.gif" alt='Set .env' />
+  <img src="https://github.com/LauRuns/readme-gifs/blob/main/rjs/setting-env-rjs.gif?raw=true" alt='Set .env' />
 
 ! When building the app, the environment variables from the `.env.production` are used.
 
@@ -69,7 +69,7 @@ npm run start
 
 The app is now up and running in the development environment. A confirmation should be presented in the console:
 <br />
-<img src="./src/assets/run-rjs.gif" alt='Run start for Rjs' width='500'/>
+<img src="https://github.com/LauRuns/readme-gifs/blob/main/rjs/run-rjs.gif?raw=true" alt='Run start for Rjs' width='500'/>
 
 The address that the app is using is presented in the terminal:
 
@@ -82,12 +82,12 @@ On Your Network:  http://192.168.2.30:3000
 
 A browser should be opened automatically, if not open one and navigate to the local or network address that was set by the application. The login page for the app should now be open:<br />
 
-<img src="./src/assets/rjs-login.gif" alt='Login' width='450'/>
+<img src="https://github.com/LauRuns/readme-gifs/blob/main/rjs/rjs-login.gif?raw=true" alt='Login' width='450'/>
 <br />
 
 ### ...or Sign Up
 
-<img src="./src/assets/rjs-signup.gif" alt='Signup' width='450'/>
+<img src="https://github.com/LauRuns/readme-gifs/blob/main/rjs/rjs-signup.gif?raw=true" alt='Signup' width='450'/>
 <br />
 ! <i>You can either sign up with a <b>fake</b> or <b>real</b> email address. If an actual email address is used, a notification will be send informing the user of the succesful sign up. This must be configured correctly using the project API with the SaaS transactional email sending set up. (See the included README.md in the API Github repo)</i><br />
 
