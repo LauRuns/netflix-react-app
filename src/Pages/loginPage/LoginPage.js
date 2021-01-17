@@ -149,6 +149,9 @@ export const LoginPage = () => {
 				// Error is handled by the useHttpClient hook
 			}
 		} else {
+			if (formState.inputs.password.value !== formState.inputs.confirmpassword.value) {
+				return alert('Password and the confirm password do not match!');
+			}
 			try {
 				const formData = new FormData();
 				formData.append('name', formState.inputs.name.value);
@@ -228,6 +231,18 @@ export const LoginPage = () => {
 							placeholder="Password"
 							label="Password"
 						/>
+						{!isLoginMode && !isLoading && (
+							<Input
+								element="input"
+								id="confirmpassword"
+								type="password"
+								validators={[VALIDATOR_MINLENGTH(5)]}
+								errorText="Please confirm your password."
+								onInput={inputHandler}
+								placeholder="Confirm password"
+								label="Confirm password"
+							/>
+						)}
 						{!isLoginMode && (
 							<div className="terms-conditions">
 								<Link to="/terms_and_conditions">
