@@ -63,7 +63,6 @@ export const LandingPage = () => {
 					<NetflixItem item={selectedItem} />
 				</Modal>
 			)}
-
 			<div className="landingpage-container">
 				<div id="homepage-header" className="homepage__header">
 					<Header lg>
@@ -73,7 +72,6 @@ export const LandingPage = () => {
 				</div>
 				<div id="homepage-new-current" className="homepage__new__current">
 					<Header md>{countryData && <h2>New content for {countryData.country}:</h2>}</Header>
-
 					<NewContentList
 						countryIdCode={
 							currentUser ? currentUser?.country?.countryId : storedCountry?.countryData?.countryId
@@ -89,7 +87,6 @@ export const LandingPage = () => {
 				</div>
 				<div id="homepage-current-expiring" className="homepage__current__expiring">
 					<Header md>{countryData && <h2>Expiring content for {countryData.country}:</h2>}</Header>
-
 					<ExpContentList
 						countryIdCode={
 							currentUser ? currentUser?.country?.countryId : storedCountry?.countryData?.countryId
