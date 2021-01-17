@@ -1,13 +1,15 @@
 import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 /* Create the AuthContext */
 const AuthContext = createContext();
 let logoutTimer;
 /* Set up AuthProvider that wraps its children. It holds the authentication context for the app */
 export const AuthProvider = ({ children }) => {
-	const [isAuthenticated, setIsAuthenticated] = useState(null);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [token, setToken] = useState(null);
-	const [tokenExpirationDate, setTokenExpirationDate] = useState();
+	const [tokenExpirationDate, setTokenExpirationDate] = useState(null);
 	const [userId, setUserId] = useState(null);
+	const history = useHistory();
 
 	/* Set login and store user ID and token in the local storage */
 	const login = useCallback((uid, token, expirationDate) => {
@@ -36,7 +38,8 @@ export const AuthProvider = ({ children }) => {
 		setUserId(null);
 		localStorage.removeItem('userData');
 		localStorage.removeItem('countryData');
-	}, []);
+		history.push('/login');
+	}, [history]);
 
 	/* Check if token and token expiration date are available set the current logout timer based on those values */
 	useEffect(() => {
@@ -60,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 	return (
 		<AuthContext.Provider
 			value={{
-				isAuthenticated: isAuthenticated || localStorage.getItem('userData') ? true : false,
+				isAuthenticated: isAuthenticated, //|| localStorage.getItem('userData') ? true : false,
 				token,
 				userId,
 				login,
