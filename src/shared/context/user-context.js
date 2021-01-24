@@ -1,44 +1,56 @@
 import React, { useState, createContext, useCallback, useEffect } from 'react';
 import { useContext } from 'react';
-/* Hooks imports */
+/* Hooks and context imports */
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
+import { useAuthState } from '../../shared/context/auth-context';
 /* Create context */
 export const UserContext = createContext();
 export const useContextUser = () => {
 	return useContext(UserContext);
 };
 /* Create provider that wraps it children */
-export const UserProvider = ({ children }) => {
-	const [currentUser, setCurrentUser] = useState(null);
+export const UserContextProvider = ({ children }) => {
+	const [activeUser, setActiveUser] = useState({
+		user: null
+	});
 	const [countryData, setCountryData] = useState(null);
-	const { token, userId } = useAuthentication();
+	const { token, userId } = useAuthState();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 	/* Set the logged in user in the context */
-	const setNewCurrentUser = useCallback((user) => {
-		setCurrentUser(user);
+	const setActiveUserHandler = useCallback((data) => {
+		setActiveUser({
+			...activeUser,
+			user: {
+				userId: data._id,
+				userName: data.name,
+				email: data.email,
+				avatar: data.image,
+				country: data.country,
+				updatedAt: data.updatedAt
+			}
+		});
 
-		if (user.country) {
-			setCountryData(user.country);
+		if (data.country) {
+			setCountryData(data.country);
 			localStorage.setItem(
 				'countryData',
 				JSON.stringify({
-					countryData: user.country
+					countryData: data.country
 				})
 			);
-			/* Using session iso local storage - optional */
-			// sessionStorage.setItem(
-			// 	'countryData',
-			// 	JSON.stringify({
-			// 		countryData: user.country
-			// 	})
-			// );
 		}
 	}, []);
 
+	/* Clears the activeUser */
+	const clearActiveUserHandler = () => {
+		setActiveUser({
+			user: null
+		});
+	};
+
 	/* Make PATCH call to the backend for updating the user */
-	const updateUser = async (data) => {
+	const updateUserHandler = async (data) => {
 		const { country, username, email } = data;
 		try {
 			/* sendRequest is method provided by the useHttpClient hook */
@@ -46,23 +58,25 @@ export const UserProvider = ({ children }) => {
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
 				'PATCH',
 				JSON.stringify({
-					username: username || currentUser.name,
-					email: email || currentUser.email,
-					country: country ? { ...country } : currentUser.country
+					username: username || activeUser.user.userName,
+					email: email || activeUser.user.email,
+					country: country ? { ...country } : activeUser.user.country
 				}),
 				{
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${token}`
 				}
 			);
-			setNewCurrentUser(responseData.updatedUser);
+			if (responseData) {
+				setActiveUserHandler(responseData.updatedUser);
+			}
 		} catch (err) {
 			// Error is handled by the useHttpClient
 		}
 	};
 
 	/* Make PATCH call to the backend and update only the user avatar (image) */
-	const updateUserImg = async (data) => {
+	const updateUserImgHandler = async (data) => {
 		try {
 			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
@@ -73,7 +87,7 @@ export const UserProvider = ({ children }) => {
 				}
 			);
 			if (responseData) {
-				setNewCurrentUser(responseData.updatedUser);
+				setActiveUserHandler(responseData.updatedUser);
 			}
 		} catch (err) {
 			// Errors are handled by the useHttpClient method
@@ -90,14 +104,15 @@ export const UserProvider = ({ children }) => {
 	}, []);
 
 	const userData = {
-		currentUser,
+		activeUser,
 		countryData,
-		setNewCurrentUser,
-		updateUser,
-		updateUserImg,
+		setActiveUserHandler,
+		updateUserHandler,
+		updateUserImgHandler,
 		isUpdating: isLoading,
 		updatingError: error,
-		clearError
+		clearError,
+		clearActiveUserHandler
 	};
 
 	return <UserContext.Provider value={userData}>{children}</UserContext.Provider>;

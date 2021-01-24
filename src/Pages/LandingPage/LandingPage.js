@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-/* Hooks and context */
-import { useContextUser } from '../../shared/context/user-context';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 /* UI elements and components */
 import { IconButton, Modal } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
@@ -16,35 +15,21 @@ Default data for the Netherlands will always be loaded.
 */
 export const LandingPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null);
-	const [showSelected, setShowSelected] = useState(false);
-	const [storedCountry, setStoredCountry] = useState(null);
-	const { currentUser, countryData } = useContextUser();
-
-	/* Read the countryData object from local storage and set it in state */
-	useEffect(() => {
-		try {
-			const getStoredCountry = JSON.parse(localStorage.getItem('countryData'));
-			setStoredCountry(getStoredCountry);
-		} catch (error) {
-			console.error(error);
-		}
-	}, [countryData]);
+	const { country, countryId } = useParams();
 
 	/* Open the modal presenting the selected item data */
 	const onItemClickedHandler = (data) => {
-		setSelectedItem(data); // can be simlified
-		openModal();
+		setSelectedItem(data);
 	};
 
-	/* Openenig and closing the modal */
-	const openModal = () => setShowSelected(true);
-	const closeModal = () => setShowSelected(false);
+	/* Closing the modal */
+	const closeModal = () => setSelectedItem(null);
 
 	return (
 		<React.Fragment>
 			{selectedItem && (
 				<Modal
-					show={showSelected}
+					show={selectedItem ? true : false} // needs a boolean value and not a Object
 					header={selectedItem.title}
 					onCancel={closeModal}
 					footer={
@@ -63,44 +48,43 @@ export const LandingPage = () => {
 					<NetflixItem item={selectedItem} />
 				</Modal>
 			)}
-			<div className="landingpage-container">
-				<div id="homepage-header" className="homepage__header">
-					<Header lg>
-						<h1>Welcome back!</h1>
-					</Header>
-					{countryData && <h3>Here is your new &amp; expiring data for {countryData.country}</h3>}
+
+			{country && countryId ? (
+				<div className="landingpage-container">
+					<div id="homepage-header" className="homepage__header">
+						<Header lg>
+							<h1>Welcome back!</h1>
+						</Header>
+						{country && <h3>Here is your new &amp; expiring data for {country}</h3>}
+					</div>
+					<div id="homepage-new-current" className="homepage__new__current">
+						<Header md>{country && <h2>New content for {country}:</h2>}</Header>
+						<NewContentList countryIdCode={countryId} itemClick={onItemClickedHandler} />
+					</div>
+					<div id="homepage-nld-new" className="homepage__nld__new_content">
+						<Header md>
+							<h2>New content for the Netherlands:</h2>
+						</Header>
+						<NewContentList countryIdCode="67" itemClick={onItemClickedHandler} />
+					</div>
+					<div id="homepage-current-expiring" className="homepage__current__expiring">
+						<Header md>{country && <h2>Expiring content for {country}:</h2>}</Header>
+						<ExpContentList countryIdCode={countryId} itemClick={onItemClickedHandler} />
+					</div>
+					<div id="homepage-nld-expiring" className="homepage__nld__expiring">
+						<Header md>
+							<h2>Netherlands expiring content:</h2>
+						</Header>
+						<ExpContentList countryIdCode="67" itemClick={onItemClickedHandler} />
+					</div>
 				</div>
-				<div id="homepage-new-current" className="homepage__new__current">
-					<Header md>{countryData && <h2>New content for {countryData.country}:</h2>}</Header>
-					<NewContentList
-						countryIdCode={
-							currentUser ? currentUser?.country?.countryId : storedCountry?.countryData?.countryId
-						}
-						itemClick={onItemClickedHandler}
-					/>
+			) : (
+				<div>
+					<h3>
+						Looks like an incorrect country ID was provided for which we have no data available!
+					</h3>
 				</div>
-				<div id="homepage-nld-new" className="homepage__nld__new_content">
-					<Header md>
-						<h2>New content for the Netherlands:</h2>
-					</Header>
-					<NewContentList countryIdCode="67" itemClick={onItemClickedHandler} />
-				</div>
-				<div id="homepage-current-expiring" className="homepage__current__expiring">
-					<Header md>{countryData && <h2>Expiring content for {countryData.country}:</h2>}</Header>
-					<ExpContentList
-						countryIdCode={
-							currentUser ? currentUser?.country?.countryId : storedCountry?.countryData?.countryId
-						}
-						itemClick={onItemClickedHandler}
-					/>
-				</div>
-				<div id="homepage-nld-expiring" className="homepage__nld__expiring">
-					<Header md>
-						<h2>Netherlands expiring content:</h2>
-					</Header>
-					<ExpContentList countryIdCode="67" itemClick={onItemClickedHandler} />
-				</div>
-			</div>
+			)}
 		</React.Fragment>
 	);
 };

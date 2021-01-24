@@ -3,7 +3,7 @@ import React from 'react';
 import { VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../../shared/util/validators';
 import { useForm } from '../../../../shared/hooks/form-hook';
 import { useHttpClient } from '../../../../shared/hooks/http-hook';
-import { useAuthentication } from '../../../../shared/hooks/authentication-hook';
+import { useAuthState } from '../../../../shared/context/auth-context';
 /* UI elements and components */
 import { IconButton, ErrorModal, LoadingSpinner } from '../../../uiElements';
 import { Input } from '../../../formElements/input/Input';
@@ -13,7 +13,7 @@ import './PasswordChange.scss';
 /* Component for handling changing the users password */
 export const PasswordChange = (props) => {
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const { token, userId } = useAuthentication();
+	const { token, userId } = useAuthState();
 
 	/* Checks form validity based on inputs */
 	const [formState, inputHandler] = useForm(

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useContextUser } from '../../shared/context/user-context';
 /* UI element */
 import { Button } from '../../components/uiElements';
 /* Styling */
@@ -11,6 +12,7 @@ It has a button that on click allow the user to navigate back to the /home scree
 */
 export const PageNotFound = () => {
 	let location = useLocation();
+	const { countryData } = useContextUser();
 	return (
 		<>
 			<div className="page-not-found-container">
@@ -21,9 +23,15 @@ export const PageNotFound = () => {
 					<h3>
 						No match for <code>{location.pathname}</code>
 					</h3>
-					<Button to="/home" inverse exact="true">
-						HOME
-					</Button>
+					{countryData && (
+						<Button
+							to={`/home/${countryData.countryId}/${countryData.country}`}
+							inverse
+							exact="true"
+						>
+							HOME
+						</Button>
+					)}
 				</div>
 			</div>
 		</>
