@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 
 /* Hooks and context */
@@ -10,20 +10,20 @@ import {
 } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
+import { useAuthState } from '../../shared/context/auth-context';
 /* UI elements and components */
 import { Button, Card, LoadingSpinner, ErrorModal } from '../../components/uiElements';
 import { Input } from '../../components/formElements/input/Input';
-import { UserContext } from '../../shared/context/user-context';
+import { useContextUser } from '../../shared/context/user-context';
 import { CountryDropdown } from '../../components/formElements/countryDropdown/CountryDropdown';
 /* Styling */
 import './LoginPage.scss';
 
 /* Presents the login / sign up page */
 export const LoginPage = () => {
-	const { login } = useAuthentication();
+	const { login } = useAuthState();
+	const { setActiveUserHandler } = useContextUser();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
-	const { setNewCurrentUser } = useContext(UserContext);
 	const [countryList, setCountryList] = useState();
 	const [isLoginMode, setIsLoginMode] = useState(true);
 	const history = useHistory();
@@ -142,9 +142,9 @@ export const LoginPage = () => {
 				);
 
 				const { userId, token, user } = responseData;
-				await setNewCurrentUser(user);
+				await setActiveUserHandler(user);
 				await login(userId, token);
-				history.push('/home');
+				history.push(`/home/${user.country.countryId}/${user.country.country}`);
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}
@@ -165,10 +165,9 @@ export const LoginPage = () => {
 					formData
 				);
 				const { userId, token, user } = responseData;
-				await setNewCurrentUser(user);
+				await setActiveUserHandler(user);
 				await login(userId, token);
-
-				history.push('/home');
+				history.push(`/home/${user.country.countryId}/${user.country.country}`);
 			} catch (err) {
 				// Error is handled by the useHttpClient hook
 			}
