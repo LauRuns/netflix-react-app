@@ -13,7 +13,7 @@ import './CountrySetter.scss';
 /* Component for changing the user country - based on this country data is loaded on the landing page after login or sign up */
 export const CountrySetter = () => {
 	const { isLoading, error, fetchNetflixData, clearError } = useNetflixClient();
-	const { updateUser } = useContextUser();
+	const { updateUserHandler } = useContextUser();
 	const [countryList, setCountryList] = useState(null);
 	const isMounted = useRef(null);
 
@@ -65,7 +65,7 @@ export const CountrySetter = () => {
 	/* Forwards the selected country to the user context method for updating the country */
 	const updateUserCountryHandler = async (event) => {
 		event.preventDefault();
-		updateUser({ country: formState.inputs.country.value });
+		updateUserHandler({ country: formState.inputs.country.value });
 	};
 
 	if (isLoading) {
