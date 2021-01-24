@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 /* Hook and context */
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
+import { useContextUser } from '../../shared/context/user-context';
+import { useAuthState } from '../../shared/context/auth-context';
 /* UI elements and components */
 import { Navbar, SideDrawer } from '../../components/navigation';
 import { Backdrop } from '../../components/uiElements';
@@ -11,7 +12,8 @@ Holds the navigation components for the application.
 When screen size is reduced to x width, the sidedrawer is used for navigating the app.
 */
 export const MainNavigation = () => {
-	const { isAuthenticated, userId, logout } = useAuthentication();
+	const { isAuthenticated, userId, logout } = useAuthState();
+	const { countryData, clearActiveUserHandler } = useContextUser();
 	const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 	const history = useHistory();
 
@@ -19,13 +21,15 @@ export const MainNavigation = () => {
 	const openDrawerHandler = () => setDrawerIsOpen(true);
 	const closeDrawerHandler = () => setDrawerIsOpen(!drawerIsOpen);
 
-	/* Logs the user out from the app. Calls the logout() function in the useAuthentication hook. Navigates back to the /login screen */
+	/* Logs the user out from the app. Calls the logout() and clearActiveUserHandler() function in the auth context and user context. Navigates back to the /login screen */
 	const logOut = () => {
 		logout();
+		clearActiveUserHandler();
 		history.push('/login');
 	};
-	/* Enabled navigation when the logo in the top left of the screen is pressed / clicked. Navigates to the home screen. */
-	const navigateOnLogo = () => history.push('/home');
+	/* Enabled navigation when the logo in the top left of the screen is pressed/clicked. Navigates to the home screen. */
+	const navigateOnLogo = () =>
+		history.push(`/home/${countryData?.countryId}/${countryData?.country}`);
 
 	const defaultNavStyling = {
 		iconSize: 32,
@@ -36,7 +40,7 @@ export const MainNavigation = () => {
 
 	const navItemsList = [
 		{
-			linkTo: '/home',
+			linkTo: `/home/${countryData?.countryId}/${countryData?.country}`,
 			linkName: 'Home',
 			iconName: 'home',
 			...defaultNavStyling
