@@ -10,7 +10,7 @@ import './UploadImage.scss';
 
 /* Component for handling changing the users avatar */
 export const UploadImage = () => {
-	const { updateUserImg } = useContextUser();
+	const { updateUserImgHandler } = useContextUser();
 
 	/* Checks the form if an image is selected */
 	const [formState, inputHandler] = useForm(
@@ -28,7 +28,7 @@ export const UploadImage = () => {
 		event.preventDefault();
 		const formData = new FormData();
 		formData.append('image', formState.inputs.image.value);
-		updateUserImg(formData);
+		updateUserImgHandler(formData);
 	};
 
 	return (

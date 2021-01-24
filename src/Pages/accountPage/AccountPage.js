@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 /* Hooks and context */
-import { useAuthentication } from '../../shared/hooks/authentication-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { useContextUser } from '../../shared/context/user-context';
+import { useAuthState } from '../../shared/context/auth-context';
 /* UI elements and components */
 import {
 	Button,
@@ -25,8 +25,8 @@ import './AccountPage.scss';
 
 /* Presents the user with user details and enables changing them */
 export const AccountPage = () => {
-	const { isAuthenticated, token } = useAuthentication();
-	const { currentUser, setNewCurrentUser, isUpdating, updatingError } = useContextUser();
+	const { isAuthenticated, token } = useAuthState();
+	const { setActiveUserHandler, activeUser, isUpdating, updatingError } = useContextUser();
 	const { isLoading, error, sendRequest, clearError } = useHttpClient();
 	let { userId } = useParams();
 	const _isMounted = useRef(null);
@@ -49,12 +49,12 @@ export const AccountPage = () => {
 			);
 			const { result } = responseData;
 			if (_isMounted.current) {
-				setNewCurrentUser(result);
+				setActiveUserHandler(result);
 			}
 		} catch (err) {
 			// Error is handled by useHttpClient
 		}
-	}, [sendRequest, userId, setNewCurrentUser, token]);
+	}, [sendRequest, userId, setActiveUserHandler, token]);
 
 	/* Scrolls to the top when alle info tabs for changing user details are being closed or when isLoading / isUpdating is true */
 	useEffect(() => {
@@ -107,7 +107,7 @@ export const AccountPage = () => {
 		setDisplayMessage(false);
 	};
 
-	if (userId && isAuthenticated) {
+	if (userId && isAuthenticated && activeUser) {
 		return (
 			<React.Fragment>
 				<ErrorModal error={error || updatingError} onClear={clearError} />
@@ -123,17 +123,17 @@ export const AccountPage = () => {
 				{isLoading ||
 					(isUpdating && <LoadingSpinner asOverlay loadingSpinnerMessage="Updating userdata..." />)}
 
-				{currentUser && (
+				{activeUser.user && (
 					<div id="account__container">
 						<div id="account-header" className="account__header">
-							<h2>Useraccount for {currentUser.name.toUpperCase()}</h2>
+							<h2>Useraccount for {activeUser.user.userName.toUpperCase()}</h2>
 						</div>
 
 						<div id="account-avatar" className="account__avatar">
-							{currentUser && (
+							{activeUser && (
 								<Avatar
-									image={currentUser.image}
-									alt={currentUser.name || 'Default img'}
+									image={activeUser.user.avatar}
+									alt={activeUser.user.userName || 'Default img'}
 									style={{ width: '200px', height: '200px' }}
 									width="200px"
 									height="200px"
@@ -144,11 +144,11 @@ export const AccountPage = () => {
 
 						<div id="account-user-info" className="account__user__info">
 							<div>
-								<p>NAME: {currentUser.name}</p>
-								<p>EMAIL: {currentUser.email}</p>
-								<p>ID: {currentUser.id}</p>
-								<p>SET COUNTRY: {currentUser?.country?.country}</p>
-								<p>LAST UPDATED AT: {new Date(currentUser.updatedAt).toDateString()}</p>
+								<p>NAME: {activeUser.user.userName}</p>
+								<p>EMAIL: {activeUser.user.email}</p>
+								<p>ID: {activeUser.user.userId}</p>
+								<p>SET COUNTRY: {activeUser.user.country.country}</p>
+								<p>LAST UPDATED AT: {new Date(activeUser.user.updatedAt).toDateString()}</p>
 							</div>
 							<IconButton
 								icon={
@@ -192,8 +192,8 @@ export const AccountPage = () => {
 						<div id="account-set-country" className="account__country__setter">
 							<div>
 								<h3>
-									{currentUser.country
-										? `Current country: ${currentUser.country.country}`
+									{activeUser.country
+										? `Current country: ${activeUser.user.country.country}`
 										: 'Set your country'}
 								</h3>
 								<IconButton
@@ -243,8 +243,8 @@ export const AccountPage = () => {
 							</div>
 							{showChangePassword && (
 								<PasswordChange
-									username={currentUser.name}
-									email={currentUser.email}
+									username={activeUser.user.name}
+									email={activeUser.user.email}
 									closeSection={openModal}
 								/>
 							)}
@@ -257,7 +257,7 @@ export const AccountPage = () => {
 	return (
 		<div className="container">
 			<div className="item" id="item-1">
-				<h2>NO DATA</h2>
+				<h2>Nop data was provided. Please login again</h2>
 			</div>
 		</div>
 	);

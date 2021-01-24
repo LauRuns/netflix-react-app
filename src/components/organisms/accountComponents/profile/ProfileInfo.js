@@ -15,7 +15,7 @@ import './ProfileInfo.scss';
 
 /* Component for handling changing the user email and username */
 export const ProfileInfo = () => {
-	const { currentUser, updateUser } = useContextUser();
+	const { activeUser, updateUserHandler } = useContextUser();
 
 	/* Checks form validity based on inputs */
 	const [formState, inputHandler, setFormData] = useForm(
@@ -37,17 +37,17 @@ export const ProfileInfo = () => {
 		setFormData(
 			{
 				username: {
-					value: currentUser.name,
+					value: activeUser.user.userName,
 					isValid: true
 				},
 				email: {
-					value: currentUser.email,
+					value: activeUser.user.email,
 					isValid: true
 				}
 			},
 			true
 		);
-	}, [currentUser, setFormData]);
+	}, [activeUser, setFormData]);
 
 	/* Forwards the values for updating to the user context */
 	const userProfileUpdateSubmitHandler = async (event) => {
@@ -56,7 +56,7 @@ export const ProfileInfo = () => {
 			username: formState.inputs.username.value,
 			email: formState.inputs.email.value
 		};
-		await updateUser(newValues);
+		await updateUserHandler(newValues);
 	};
 
 	return (
@@ -71,7 +71,7 @@ export const ProfileInfo = () => {
 							validators={[VALIDATOR_MAXLENGTH(30), VALIDATOR_MINLENGTH(5)]}
 							errorText="Please enter a valid namelength"
 							onInput={inputHandler}
-							initialValue={currentUser.name}
+							initialValue={activeUser.user.userName}
 							initialValid
 						/>
 					</div>
@@ -83,7 +83,7 @@ export const ProfileInfo = () => {
 							validators={[VALIDATOR_EMAIL]}
 							errorText="Please enter a valid email"
 							onInput={inputHandler}
-							initialValue={currentUser.email}
+							initialValue={activeUser.user.email}
 							initialValid
 						/>
 					</div>

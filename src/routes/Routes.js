@@ -27,7 +27,7 @@ export const Routes = () => {
 			<Route path="/terms_and_conditions" exact component={TermsAndConditions} />
 			<Route path="/reset" exact component={ForgotPasswordPage} />
 			<Route path="/reset/:token" exact component={PasswordResetPage} />
-			<PrivateRoute path="/home" exact>
+			<PrivateRoute path="/home/:countryId/:country" exact>
 				<LandingPage />
 			</PrivateRoute>
 			<PrivateRoute path="/countries" exact>
@@ -45,9 +45,7 @@ export const Routes = () => {
 			<PrivateRoute path="/account/:userId" exact>
 				<AccountPage />
 			</PrivateRoute>
-			<PrivateRoute path="*">
-				<PageNotFound />
-			</PrivateRoute>
+			<Route path="*" component={PageNotFound} />
 		</Switch>
 	);
 };
