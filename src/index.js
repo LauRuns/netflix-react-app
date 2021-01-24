@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { App } from './App';
 import * as serviceWorker from './serviceWorker';
-import { AuthProvider } from './shared/hooks/authentication-hook';
-import { UserProvider } from './shared/context/user-context';
+import { AuthContextProvider } from './shared/context/auth-context';
+import { UserContextProvider } from './shared/context/user-context';
 
 import './index.scss';
 
@@ -13,11 +13,11 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
 	<React.StrictMode>
 		<Router>
-			<AuthProvider>
-				<UserProvider>
+			<AuthContextProvider>
+				<UserContextProvider>
 					<App />
-				</UserProvider>
-			</AuthProvider>
+				</UserContextProvider>
+			</AuthContextProvider>
 		</Router>
 	</React.StrictMode>,
 	rootElement
