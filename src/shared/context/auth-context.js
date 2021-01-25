@@ -1,5 +1,7 @@
 import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
 /* Create the AuthContext */
 const AuthContext = createContext();
 let logoutTimer;
@@ -10,11 +12,16 @@ export const AuthContextProvider = ({ children }) => {
 		userId: null,
 		token: null
 	});
+	const [cookies, setCookie, removeCookie] = useCookies(['token', 'userId', 'expDate']);
 	const [token, setToken] = useState(null);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState(null);
 	const history = useHistory();
 
-	/* Set login and store user ID and token in the local storage */
+	const setCookieHandler = (cookieName, cookieValue, cookieOptions) => {
+		return setCookie(cookieName, cookieValue, cookieOptions);
+	};
+
+	/* Set login and store user ID and token in the local storage and set cookies */
 	const login = useCallback((uid, token, expirationDate) => {
 		setAuthState({
 			...authState,
@@ -27,6 +34,10 @@ export const AuthContextProvider = ({ children }) => {
 		const tokenExpirationDate = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
 		setTokenExpirationDate(tokenExpirationDate);
 
+		setCookieHandler('token', token, { path: '/', expires: tokenExpirationDate });
+		setCookieHandler('userId', uid, { path: '/', expires: tokenExpirationDate });
+		setCookieHandler('expDate', tokenExpirationDate, { path: '/', expires: tokenExpirationDate });
+
 		localStorage.setItem(
 			'tokenData',
 			JSON.stringify({
@@ -37,7 +48,7 @@ export const AuthContextProvider = ({ children }) => {
 		);
 	}, []);
 
-	/* On logout set all state back to null and remove objects from localstorage */
+	/* On logout set all state back to null, remove objects from localstorage and clear cookies */
 	const logout = useCallback(() => {
 		setAuthState({
 			...authState,
@@ -47,6 +58,11 @@ export const AuthContextProvider = ({ children }) => {
 		});
 		setTokenExpirationDate(null);
 		setToken(null);
+
+		removeCookie('token', { path: '/' });
+		removeCookie('userId', { path: '/' });
+		removeCookie('expDate', { path: '/' });
+
 		localStorage.removeItem('tokenData');
 		localStorage.removeItem('countryData');
 		history.push('/login');
