@@ -36,7 +36,6 @@ export const AccountPage = () => {
     Alternatively the user ID can be retrevied from useAthentication context
     */
 	const fetchUser = useCallback(async () => {
-		console.log('userID___:', userId);
 		try {
 			const responseData = await sendRequest(
 				`${process.env.REACT_APP_CONNECTION_STRING}/users/${userId}`,
