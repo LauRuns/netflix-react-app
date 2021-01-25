@@ -5,6 +5,8 @@ import { App } from './App';
 import * as serviceWorker from './serviceWorker';
 import { AuthContextProvider } from './shared/context/auth-context';
 import { UserContextProvider } from './shared/context/user-context';
+import { CookiesProvider } from 'react-cookie';
+import SnackbarProvider from 'react-simple-snackbar';
 
 import './index.scss';
 
@@ -15,7 +17,11 @@ ReactDOM.render(
 		<Router>
 			<AuthContextProvider>
 				<UserContextProvider>
-					<App />
+					<CookiesProvider>
+						<SnackbarProvider>
+							<App />
+						</SnackbarProvider>
+					</CookiesProvider>
 				</UserContextProvider>
 			</AuthContextProvider>
 		</Router>
