@@ -86,23 +86,23 @@ export const LandingPage = () => {
 					</div>
 					<div id="homepage-new-current" className="homepage__new__current">
 						<Header md>{country && <h2>New content for {country}:</h2>}</Header>
-						{/* <NewContentList countryIdCode={countryId} itemClick={onItemClickedHandler} /> */}
+						<NewContentList countryIdCode={countryId} itemClick={onItemClickedHandler} />
 					</div>
 					<div id="homepage-nld-new" className="homepage__nld__new_content">
 						<Header md>
 							<h2>New content for the Netherlands:</h2>
 						</Header>
-						{/* <NewContentList countryIdCode="67" itemClick={onItemClickedHandler} /> */}
+						<NewContentList countryIdCode="67" itemClick={onItemClickedHandler} />
 					</div>
 					<div id="homepage-current-expiring" className="homepage__current__expiring">
 						<Header md>{country && <h2>Expiring content for {country}:</h2>}</Header>
-						{/* <ExpContentList countryIdCode={countryId} itemClick={onItemClickedHandler} /> */}
+						<ExpContentList countryIdCode={countryId} itemClick={onItemClickedHandler} />
 					</div>
 					<div id="homepage-nld-expiring" className="homepage__nld__expiring">
 						<Header md>
 							<h2>Netherlands expiring content:</h2>
 						</Header>
-						{/* <ExpContentList countryIdCode="67" itemClick={onItemClickedHandler} /> */}
+						<ExpContentList countryIdCode="67" itemClick={onItemClickedHandler} />
 					</div>
 				</div>
 			) : (
