@@ -45,7 +45,9 @@ export const Routes = () => {
 			<PrivateRoute path="/account/:userId" exact>
 				<AccountPage />
 			</PrivateRoute>
-			<Route path="*" component={PageNotFound} />
+			<PrivateRoute>
+				<Route path="*" component={PageNotFound} />
+			</PrivateRoute>
 		</Switch>
 	);
 };
