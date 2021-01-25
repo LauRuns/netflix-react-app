@@ -8,12 +8,13 @@ If the user !authenticated then redirect to the /login page
 If the user is authenticated then continue to the requested page
 */
 export const PrivateRoute = ({ children, ...rest }) => {
-	const { isAuthenticated } = useAuthState();
+	const data = localStorage.getItem('tokenData');
+
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				isAuthenticated ? (
+				data ? (
 					children
 				) : (
 					<Redirect
