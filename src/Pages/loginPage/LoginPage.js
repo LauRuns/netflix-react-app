@@ -130,7 +130,7 @@ export const LoginPage = () => {
 		if (isLoginMode) {
 			try {
 				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/users/login`,
+					`${process.env.REACT_APP_CONNECTION_STRING}/auth/login`,
 					'POST',
 					JSON.stringify({
 						email: formState.inputs.email.value,
@@ -140,7 +140,6 @@ export const LoginPage = () => {
 						'Content-Type': 'application/json'
 					}
 				);
-
 				const { userId, token, user } = responseData;
 				await setActiveUserHandler(user);
 				await login(userId, token);
@@ -160,7 +159,7 @@ export const LoginPage = () => {
 				formData.append('password', formState.inputs.password.value);
 
 				const responseData = await sendRequest(
-					`${process.env.REACT_APP_CONNECTION_STRING}/users/signup`,
+					`${process.env.REACT_APP_CONNECTION_STRING}/auth/signup`,
 					'POST',
 					formData
 				);
