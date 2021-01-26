@@ -8,13 +8,12 @@ If the user !authenticated then redirect to the /login page
 If the user is authenticated then continue to the requested page
 */
 export const PrivateRoute = ({ children, ...rest }) => {
-	const [cookies] = useCookies(['token', 'userId', 'expDate']);
-
+	const [cookies] = useCookies(['accessToken']);
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				cookies.token ? (
+				cookies.accessToken ? (
 					children
 				) : (
 					<Redirect
