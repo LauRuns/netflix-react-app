@@ -53,6 +53,7 @@ export const AuthContextProvider = ({ children }) => {
 		removeCookie('accessToken');
 		localStorage.removeItem('tokenData');
 		localStorage.removeItem('countryData');
+		localStorage.removeItem('cookieCply');
 		history.push('/login');
 	}, [history]);
 

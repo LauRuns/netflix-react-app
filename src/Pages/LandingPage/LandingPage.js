@@ -36,12 +36,15 @@ export const LandingPage = () => {
 	const [openSnackbar, closeSnackbar] = useSnackbar(options);
 
 	useEffect(() => {
-		openSnackbar(
-			<p>
-				This webpage uses cookies. By using this webpage you <strong>consent</strong> to the use of
-				cookies.
-			</p>
-		);
+		const cookieRule = localStorage.getItem('cookieCply');
+		if (!cookieRule) {
+			openSnackbar(
+				<p>
+					By using this webpage you <strong>consent</strong> to the use of cookies.
+				</p>
+			);
+			localStorage.setItem('cookieCply', true);
+		}
 	}, []);
 
 	/* Open the modal presenting the selected item data */
