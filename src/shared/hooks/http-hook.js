@@ -69,7 +69,8 @@ export const useHttpClient = () => {
 					url: url,
 					data: body,
 					headers: headers,
-					cancelToken: signal.token
+					cancelToken: signal.token,
+					withCredentials: true
 				});
 				let responseData;
 				if (response?.data) {
