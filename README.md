@@ -2,14 +2,30 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Contents
+
+- [Description](##description)
+- [This is a study project](##this-is-a-study-project)
+- [Prerequisites](##prerequisites)
+- [How to check if Node is installed?](###how-to-check-if-Node-is-installed?)
+- [Set-up guide](##set-up-guide)
+- [Environment variables](###environment-variables)
+- [Installation](#installation)
+- [Demo](##demo)
+  - [Login](###login)
+  - [...or Sign Up](###...-or-sign-up)
+- [Available scripts](##available-cripts)
+- [Project state](##project-status)
+- [License](##license)
+
 ## Description
 
-This React webapp is part of a school/study project. It uses an API, which is part of the project, for user authentication and persisting userdata. The API can be found on this Github as well.
+This React webapp is part of a school/study project. It uses an API, which is part of the project, for user authentication and persisting userdata. The API can be found [here](https://github.com/LauRuns/netflix-api) on this Github.
 The app focusses on presenting the user which Netflix content will be deleted and which new content has been added. For this, the app uses a third party API from [Rapidapi](https://rapidapi.com/unogs/api/unogsng) to search and fetch all the content. The user is able to query the API through this app.
 
 ## This is a study project
 
-This is just a project for my study. Therefore teachers/instructors will receive a seperate file containing all API-keys and will not need to go through the section: Set-up guide.
+This is just a project for my study. Therefore teachers/instructors will receive a seperate file containing all API-keys and will not need to go through the section: [Set-up guide](##set-up-guide).
 
 ## Prerequisites
 
@@ -49,7 +65,7 @@ Create a `.env` and a `.env.production` file in the root folder and enter all en
 
 ! When building the app, the environment variables from the `.env.production` are used.
 
-## Installation
+# Installation
 
 Clone the project to your designated folder and run
 
