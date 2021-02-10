@@ -1,17 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.gitignore
-
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
+# Test coverage
 /coverage
-
-# production
-/build
 
 # misc
 .DS_Store
@@ -24,10 +19,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+/build
 build/
 tmp/
 temp/
-
 
 # Editor
 .idea/
@@ -35,6 +30,7 @@ temp/
 .editorconfig
 .eslintrc.json
 .eslintignore
+.prettierrc
 
 # ORM files
 ormconfig.json
