@@ -7,7 +7,7 @@ import './ImageUpload.scss';
 export const ImageUpload = (props) => {
 	const [file, setFile] = useState();
 	const [previewUrl, setPreviewUrl] = useState();
-	const [isValid, setIsValid] = useState(false);
+	const [size, setSize] = useState(null);
 
 	const filePickerRef = useRef();
 
@@ -23,21 +23,27 @@ export const ImageUpload = (props) => {
 		fileReader.readAsDataURL(file);
 	}, [file]);
 
-	/* Handles the selected file */
+	/* Handles the selected file and checks if file size is not too large */
 	const pickedHandler = (event) => {
 		let pickedFile;
-		let fileIsValid = isValid;
+		let fileSize;
+		let fileRounded;
 
 		if (event.target.files && event.target.files.length === 1) {
-			pickedFile = event.target.files[0];
-			setFile(pickedFile);
-			setIsValid(true);
-			fileIsValid = true;
-		} else {
-			setIsValid(false);
-			fileIsValid = false;
+			for (let i = 0; i <= event.target.files.length - 1; i++) {
+				fileSize = event.target.files.item(i).size;
+				fileRounded = Math.round(fileSize / 1024);
+
+				if (fileRounded >= 2096) {
+					setSize(Math.round(fileRounded / 1000));
+					setPreviewUrl(null);
+				} else if (fileRounded < 2048) {
+					pickedFile = event.target.files[0];
+					setFile(pickedFile);
+					props.onInput(props.id, pickedFile, true);
+				}
+			}
 		}
-		props.onInput(props.id, pickedFile, fileIsValid);
 	};
 
 	/*
@@ -62,7 +68,8 @@ export const ImageUpload = (props) => {
 			<div className={`image-upload ${props.center && 'center'}`}>
 				<div className="image-upload__preview">
 					{previewUrl && <img src={previewUrl} alt="Preview" />}
-					{!previewUrl && <p>Please select an image.</p>}
+					{!previewUrl && !size && <p>Please select an image.</p>}
+					{!previewUrl && size && <p>File too large: {size} MB - max: 2</p>}
 				</div>
 				<IconButton
 					icon="search"
@@ -75,7 +82,6 @@ export const ImageUpload = (props) => {
 					SELECT IMAGE
 				</IconButton>
 			</div>
-			{!isValid && <p>{props.errorText}</p>}
 		</div>
 	);
 };

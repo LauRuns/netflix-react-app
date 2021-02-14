@@ -1,5 +1,7 @@
 import React, { useState, useContext, createContext, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
 /* Create the AuthContext */
 const AuthContext = createContext();
 let logoutTimer;
@@ -10,6 +12,7 @@ export const AuthContextProvider = ({ children }) => {
 		userId: null,
 		token: null
 	});
+	const [cookies, setCookie, removeCookie] = useCookies(['accessToken']);
 	const [token, setToken] = useState(null);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState(null);
 	const history = useHistory();
@@ -37,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
 		);
 	}, []);
 
-	/* On logout set all state back to null and remove objects from localstorage */
+	/* On logout set all state back to null, remove objects from localstorage and delete cookie */
 	const logout = useCallback(() => {
 		setAuthState({
 			...authState,
@@ -47,8 +50,10 @@ export const AuthContextProvider = ({ children }) => {
 		});
 		setTokenExpirationDate(null);
 		setToken(null);
+		removeCookie('accessToken');
 		localStorage.removeItem('tokenData');
 		localStorage.removeItem('countryData');
+		localStorage.removeItem('cookieCply');
 		history.push('/login');
 	}, [history]);
 

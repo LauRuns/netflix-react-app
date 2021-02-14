@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 /* UI elements and components */
 import { IconButton, Modal } from '../../components/uiElements';
 import { Header } from '../../components/atoms';
 import { NetflixItem } from '../../components/molecules';
 import { ExpContentList, NewContentList } from '../../components/organisms';
+import { useSnackbar } from 'react-simple-snackbar';
 /* Styling */
 import './LandingPage.scss';
 
@@ -16,6 +17,35 @@ Default data for the Netherlands will always be loaded.
 export const LandingPage = () => {
 	const [selectedItem, setSelectedItem] = useState(null);
 	const { country, countryId } = useParams();
+
+	const options = {
+		position: 'bottom-right',
+		style: {
+			backgroundColor: '#132743',
+			border: '1px solid #DB1D4B',
+			color: '#DB1D4B',
+			fontFamily: 'Menlo, monospace',
+			fontSize: '14px',
+			textAlign: 'center'
+		},
+		closeStyle: {
+			color: 'lightcoral',
+			fontSize: '16px'
+		}
+	};
+	const [openSnackbar, closeSnackbar] = useSnackbar(options);
+
+	useEffect(() => {
+		const cookieRule = localStorage.getItem('cookieCply');
+		if (!cookieRule) {
+			openSnackbar(
+				<p>
+					By using this webpage you <strong>consent</strong> to the use of cookies.
+				</p>
+			);
+			localStorage.setItem('cookieCply', true);
+		}
+	}, []);
 
 	/* Open the modal presenting the selected item data */
 	const onItemClickedHandler = (data) => {
