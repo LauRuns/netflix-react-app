@@ -13,7 +13,7 @@ import './index.scss';
 const rootElement = document.getElementById('root');
 
 ReactDOM.render(
-	<React.StrictMode>
+	<>
 		<Router>
 			<AuthContextProvider>
 				<UserContextProvider>
@@ -25,7 +25,7 @@ ReactDOM.render(
 				</UserContextProvider>
 			</AuthContextProvider>
 		</Router>
-	</React.StrictMode>,
+	</>,
 	rootElement
 );
 
