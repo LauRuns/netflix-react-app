@@ -4,19 +4,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Contents
 
-- [Description](##description)
-- [This is a study project](##this-is-a-study-project)
-- [Prerequisites](##prerequisites)
-- [How to check if Node is installed?](###how-to-check-if-Node-is-installed?)
-- [Set-up guide](##set-up-guide)
-- [Environment variables](###environment-variables)
+- [Description](#description)
+- [This is a study project](#this-is-a-study-project)
+- [Prerequisites](#prerequisites)
+- [How to check if Node is installed?](#how-to-check-if-Node-is-installed?)
+- [Set-up guide](#set-up-guide)
+- [Environment variables](#environment-variables)
 - [Installation](#installation)
-- [Demo](##demo)
-  - [Login](###login)
-  - [...or Sign Up](###...-or-sign-up)
-- [Available scripts](##available-cripts)
-- [Project state](##project-status)
-- [License](##license)
+- [Demo](#demo)
+  - [Login](#login)
+  - [...or Sign Up](#...-or-sign-up)
+- [Available scripts](#available-cripts)
+- [Project state](#project-status)
+- [License](#license)
 
 ## Description
 
